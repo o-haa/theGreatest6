@@ -1,3 +1,3 @@
 exports.mainController = (req,res)=>{
-    res.send('front@')
+    res.render('index')
 }
