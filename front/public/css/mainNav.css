@@ -1,0 +1,145 @@
+/* main_nav style sheet */
+*{margin:0; padding:0;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+input:focus{outline: none;}
+input{border: none;}
+
+/* 영어폰트 */
+@font-face {
+    font-family: 'engFont';
+    src: url('../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype'); 
+    unicode-range: U+0041-005A, U+0061-007A;
+    font-style: normal;
+}
+/* 한글폰트 */
+@font-face {
+    font-family: 'korFont';
+    /* 대표폰트 : 첫번째 폰트 */
+    src: url('../font/NanumSquareL.ttf') format('truetype'); 
+    src: url('../font/NanumSquare_acL.ttf') format('truetype'); 
+    src: url('../font/NanumSquareB.ttf') format('truetype'); 
+    font-style: normal;
+}
+/*
+view에서 사용할 폰트
+<span style="font-family: '글꼴명' !important;">텍스트</span>
+이렇게 선언해줄것
+*/
+@font-face {
+    font-family: 'viewFont';
+    src: url('../font/NanumMyeongjo.ttf') format('truetype');
+}
+
+
+body{
+    font-family: 'engFont','korFont';
+}
+
+/* 헤더시작 */
+#header{
+    width:100vw;
+    height: 146px;
+    box-sizing: border-box;
+    /* background: green   ; */
+}
+
+#header > #nav{
+    margin-top:51px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+
+/*
+로고가 들어가는 위치
+이 width만큼 캘린더에서 바로 아래에 달력박스가 생김.
+*/
+#nav > #logoBox {
+    width:25%;
+    height: 100%;
+}
+
+/* 메인메뉴바 시작 */
+#nav > ul#mainMenu {
+    position: relative;
+    width:75%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+#nav > ul#mainMenu > li {
+    text-align: center;
+    width:20%;
+}
+#nav > ul#mainMenu > li:last-child {
+    margin-right: 50px;
+    margin-left:20px;
+    padding-top: 10px;
+}
+#nav > ul#mainMenu > li > a{
+    /* 자동 줄넘김 막는 코드 */
+    white-space:nowrap;
+    position: relative;
+}
+
+
+/* 소메뉴 시작 */
+input[id*="check"]{
+    display: none;
+}
+input[id*="check"]+label{
+    display: block;
+    padding:10px 40px;
+    cursor: pointer;
+    white-space:nowrap;
+}
+
+input[id*="check"]+label+ul{
+    display: none;
+}
+
+/* 클릭시 일어나는 이벤트 */
+input[id*="check"]:checked+label+ul{
+    display: block;
+}
+
+input[id*="check"]:checked+label{
+    display: block;
+    padding:10px 40px;
+    background: #080C31;
+    cursor: pointer;
+    white-space:nowrap;
+    color: #fff;
+}
+input[id*="check"]:checked+label+ul>li:first-child{
+    padding-top:7px;
+}
+input[id*="check"]:checked+label+ul>li{
+    padding:10px;
+    background: #080C31;
+    border-radius: 8px;
+}
+input[id*="check"]:checked+label+ul>li>a{
+    color: #fff;
+    white-space:nowrap;
+}
+
+
+/* 메인 검색창 */
+#mainSearch{
+        width: 140px;
+        height: 60px;
+        box-sizing: border-box;
+        /*검색입력창과 검색아이콘을 한 줄에 꽉채우려고 넣은 flex*/
+        display: flex;
+}
+#mainSearch > #searchInput{
+    height: 23px;
+    border-bottom: 1.2px solid #000;
+    margin-right: 2px;
+}
+#mainSearch > #searchIcon{
+    width: 22px;
+    height: 22px;
+}
