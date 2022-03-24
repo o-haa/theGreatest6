@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { mainController } = require('./mainController')
-const boardRouter = require('./board')
+const boardRouter = require('./board/index')
 const accountRouter = require('./account')
 const showRouter = require('./show')
 const adminRouter = require('./admin')
