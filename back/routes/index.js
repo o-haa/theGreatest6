@@ -7,7 +7,6 @@ const showRouter = require('./show')
 
 
 router.get('/', mainController)
-
 router.use('/board', boardRouter)
 router.use('/show', showRouter)
 router.use('/account', accountRouter)

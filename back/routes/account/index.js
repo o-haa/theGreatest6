@@ -1,11 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const accountMngRouter = require('./management')
-const accountController = require('./accountController')
+const memberRouter = require('./member')
 
-
-router.post('/signup', accountController.signUp)
-router.post('/signin', accountController.signIn)
+router.use('/member', memberRouter)
 router.use('/management', accountMngRouter)
 
 
