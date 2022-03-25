@@ -38,7 +38,7 @@ view에서 사용할 폰트
 
 
 body{
-    font-family:'basicReg'
+    font-family:'basicReg','basicMid','basicBold','basicBoldStrong','basicLight';
 }
 
 /* 헤더시작 */
@@ -240,7 +240,6 @@ input[id*="check"]:checked+label+ul>li>a{
     width: 28px;
     height: 28px;
 }
-
 #listSearchForm > #listSearchInput{
     margin-left: 16px;
     font-size: 33px;
@@ -250,31 +249,55 @@ input[id*="check"]:checked+label+ul>li>a{
     box-sizing: border-box;
     color: #465D59;
 }
-
 #listSearchForm > #listSearchInput::placeholder{
     color: #A8BEBF;
     font-family: 'basicMid';
-    /* background: #465D59; */
+}
+
+#mainContent > #listEventBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+#mainContent > #listEventBox>#mainContentTitleIcon > button>img{
+    width: 20px;
+    height: 20px;
+}
+.miniBtn{
+    width: 22px;
+    height: 22px;
+    border: 1px solid #080C31;
+    border-radius: 3px;
+    box-sizing: border-box;
 }
 
 /* 리스트 테이블 */
 .listTable{
     margin-top: 20px;
     width: 100%;
-    /* height: 65%; */
+    /* 테두리 선이 끊기지 않게 연결해주는 코드 */
+    border-collapse: collapse;
 }
-tr{
-    height: 50px;
-}
+/* 제목 줄 */
 tr:first-child{
-    border-top: 1px solid #465D59;
-    height: 50px;
+    height: 40px;
 }
-
 th{
+    height: 40px;
     color: #465D59;
+    border-top: 1.5px solid #465D59;
+    border-bottom: 1.5px solid #465D59;
 }
 
+/* 컨텐츠 줄 */
+tr:not(:first-child){
+    font-family: 'basicLight';
+    height: 50px;
+    border-bottom: 1px solid #A8BEBF;
+}
+td{
+    padding:16px;
+}
 td:not(:nth-child(3)){
     text-align: center;
 }
