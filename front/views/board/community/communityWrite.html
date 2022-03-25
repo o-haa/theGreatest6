@@ -37,31 +37,30 @@
         const writeFrm = document.querySelector('#writeFrm')
         writeFrm.addEventListener('submit',async (e)=>{
             e.preventDefault()
+            const {communitySubject,communityContent,upload1} = e.target
+            console.log(upload1.files[0])
 
-            const subject = document.querySelector('#communitySubject')
-            const content = document.querySelector('#communityContent')
-            const file = document.querySelector('#communityFile')
+            // const subject = document.querySelector('#communitySubject')
+            // const content = document.querySelector('#communityContent')
+            // const file = document.querySelector('#communityFile')
 
             
-            const body = {
-                subject:subject.value,
-                content:content.value,
-
-            }
+            const formData = new FormData()
+            formData.append('upload',upload1.files[0])
+            formData.append('subject',communitySubject.value)
+            formData.append('content',communityContent.value)
             
 
-            const response = await axios.post(`http://localhost:4001/board/community/write`,body,{
-                "Content-type":"application/json",
-                withCredentials:false
-            })
+            const response = await axios.post(`http://localhost:4001/board/community/write`,formData)
 
-            console.log(response.data)
+            console.log(response)
             if(response.data.errno === 0){
+               
                 location.href=`/board/community/view`
             }else{
-                subject.value=''
-                content.value=''
-                file.value=''
+                // subject.value=''
+                // content.value=''
+                // file.value=''
                 alert('try again')
             }
 
