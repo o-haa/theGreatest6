@@ -18,7 +18,7 @@ exports.showList = (req,res)=>{
 
 //그리드 메뉴
 exports.showGrid = (req,res)=>{
-    res.render('./show/showGrid')
+    res.render('./show/showCard')
 }
 
 //티켓 예매까지만! 결제기능은 payment로 빠짐   

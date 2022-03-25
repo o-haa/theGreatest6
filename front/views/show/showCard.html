@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/show/showCalendar.css">
+    <link rel="stylesheet" href="/css/show/showCard.css">
     <!-- <link rel="stylesheet" href="/css/subNav.css"> -->
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded',()=>{
@@ -24,10 +24,7 @@
                 <!-- 메인 메뉴 -->
                 <ul id="mainMenu">
                     <li id="home">
-                        <!-- <input type="radio" name="menuCheck" id="check01">
-                        <label for="check01"> -->
-                            <a href="#">HOME</a>
-                        <!-- </label> -->
+                        <a href="#">HOME</a>
                     </li>
                     <li id="show">
                         <!-- click 이벤트를 만들어주는 체크박스 -->
@@ -96,7 +93,7 @@
 
         <div id="content">
             <div id="calContent">
-                 <h1 id="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
+                 <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                  
                 <div id="calSmall">
                 </div>
@@ -111,6 +108,9 @@
             </div>
             
             <div id="mainContent">
+                <!-- 타이틀 컨텐츠 -->
+                <h1 style="font-family: 'korFontBold' !important;">카드뉴스</h1>
+                
                 <div id="mainContentTitle">
                     <div id="mainContentTitleMonth">
                         <span>MAR 2022</span>
@@ -134,9 +134,42 @@
                     </div>
                 </div>
 
-                <div id="mainCal">
-
+                <div id="scrollBox">
+                    <ul class="ulCard">
+                        <li>
+                            <div class="textBox">
+                                <span class="cardTag"></span>
+                                <span class="cardTitle"></span>
+                            </div>
+                            <div class="imgBox"></div>
+                        </li>
+                        <li>
+                            <div class="textBox">
+                                <span class="cardTag"></span>
+                                <span class="cardTitle"></span>
+                            </div>
+                            <div class="imgBox"></div>
+                        </li>
+                        <li>
+                            <div class="textBox">
+                                <span class="cardTag"></span>
+                                <span class="cardTitle"></span>
+                            </div>
+                            <div class="imgBox"></div>
+                        </li>
+                        <li>
+                            <div class="textBox">
+                                <span class="cardTag"></span>
+                                <span class="cardTitle"></span>
+                            </div>
+                            <div class="imgBox"></div>
+                        </li>
+                    </ul>
                 </div>
+                <div class="infoCard">
+                    <!-- 연극장 정보 -->
+                </div>
+
             </div>
         </div>
     </div>
