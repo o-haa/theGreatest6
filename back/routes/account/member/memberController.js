@@ -20,19 +20,20 @@ exports.signUp = async(req,res) => {
   }
   try{
     const { userId,userPw,userNickName } = req.body
-    const prepare = [userId,userPw,userNickName]
+    const prepare = [userId, userPw, userNickName]
     const sql = 'INSERT INTO user (user_id,user_password,user_nickname) VALUES (?,?,?)'
-    const [result] = await pool.execute(sql,prepare)
+    const result = await pool.execute(sql, prepare)
+
     console.log(result)
     response = {
       ...response,
-      result:result,
+      result: result,
       errno: 0
     }
   } catch(e){
-    console.log(e.message, '에러 발생')
+    console.log(e, '에러 발생')
   }
-  res.send(response)
+  res.json(response)
 }
 
 exports.signIn = (req,res)=>{
