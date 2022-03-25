@@ -9,7 +9,9 @@ app.set('view engine', 'html')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.use(cors({
+    origin:true,
+}))
 
 app.use(router)
 

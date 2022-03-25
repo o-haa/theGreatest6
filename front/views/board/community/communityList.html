@@ -11,11 +11,32 @@
         
         ul li {list-style: none;}
         
-        #wrap > ul {
+        #category > ul {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
         }
+
+        #communityBoard{
+            width:80%;
+            margin:0 auto;
+        }
+
+        td,th{
+            padding:7px 14px;
+            border-bottom:1px solid #eee;
+            text-align: center;
+        }
+
+        th{
+            background-color: #eee;
+            border-bottom: 2px solid #333;
+        }
+
+        th:nth-child(2){
+            width:30%;
+        }
+
 
     </style>
     <script type="text/javascript">
@@ -26,24 +47,131 @@
 <body>
     <h3>Community List</h3>
     <div id="wrap">
-        <ul>
-            <li>
-                <h3>Classic</h3>
-                {% include "./cmtyListNun.html" %}
-            </li>
-            <li>
-                <h3>Musical</h3>
-                {% include "./cmtyListNun.html" %}
-            </li>
-            <li>
-                <h3>Opera</h3>
-                {% include "./cmtyListNun.html" %}
-            </li>
-            <li>
-                <h3>Ballet</h3>
-                {% include "./cmtyListNun.html" %}
-            </li>
-        </ul>
+        <div id="category">
+            <ul>
+                <li>
+                    <input type="checkbox" id="classic">
+                    <label for ="classic">Classic</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="musical">
+                    <label for ="musical">Musical</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="opera">
+                    <label for ="opera">Opera</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="ballet">
+                    <label for ="ballet">Ballet</label>
+                </li>
+            </ul>
+        </div>
+        <table cellspacing="0" cellpadding="0" id="communityBoard">
+            <thead>
+                <tr>
+                    <th>num</th>
+                    <th>subject</th>
+                    <th>writer</th>
+                    <th>date</th>
+                    <th>hit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>hello</td>
+                    <td>good</td>
+                    <td>2022-03-22</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="paging">
+            <ul>
+        
+            </ul>
+        </div>
+        <template id="communityBoard_row">
+            <tr>
+                <td>{idx}</td>
+                <td></td>
+                <td>{nickname}</td>
+                <td>{date}</td>
+                <td>{hit}</td>
+            </tr>
+        </template>
     </div>
+    
 </body>
 </html>
