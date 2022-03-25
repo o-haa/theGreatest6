@@ -7,109 +7,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/index.css" rel="stylesheet" type="text/css">
+    <script src="/script/signUp.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+
+    <!-- Content-Security-Policy
+	default-src 'none' -->
 </head>
 
 <body>
     <div class="wh100 center">
         <main class="center memberBox">
-                <form method="post" action="*" id="signUpFrm">
-                    <table class="w100 h100 signUpBox ">
-                        <tbody class="flexCol" id="signUpTable">
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userId" placeholder="id" autofocus>
-                                </td>
-                                <td>
-                                    <input type="button" value="중복체크">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="w80 inputs">
-                                    <input type="password" id="userPw" placeholder="password">
-                                </td>
-                                <td class="inputs">
-                                    <input type="password" id="userPw" placeholder="password">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userName" placeholder="name">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userNickName" placeholder="nickname">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <select name="userYearOfBirth" id="userYearOfBirth">
-                                        <option>Year</option>
-                                    </select>
-                                    <select name="userMonthOfBirth" id="userMonthOfBirth">
-                                        <option>Month</option>
-                                    </select>
-                                    <select name="userDayOfBirth" id="userDayOfBirth">
-                                        <option>Day</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <label for="female">Female</label>
-                                    <input type="radio" name="gender" id="female" checked>
-                                    <label for ="male">Male</label>
-                                    <input type="radio" name="gender" id="male" >
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userMobile1" placeholder="mobile">
-                                    <input type="text" id="userMobile2" >
-                                    <input type="text" id="userMobile3" >
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userEmail" placeholder="email">
-                                    <select name="mail">mail
-                                        <option value="gmail">@gmail.com</option>
-                                        <option value="naver">@naver.com</option>
-                                        <option value="daum">@daum.net</option>
-                                        <option value="typing">직접 입력</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userAddress1" placeholder="address1">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userAddress2" placeholder="addresss2">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userCity" placeholder="state">
-                                </td>
-                                <td class="inputs">
-                                    <input type="text" id="userCity" placeholder="city">
-                                </td>
-                            </tr>
-                            <tr class="signUpTr">
-                                <td class="inputs">
-                                    <input type="text" id="userPostalCode" placeholder="postalcode">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+            <form method="post" action="*" id="signUpFrm">
+                <table class="w100 signUpBox ">
+                    <h3 class ="accountFrmHead">
+                        sign up
+                    </h3>
+                    <tbody class="flexCol" id="signUpTable">
+                        <tr class="signUpTr">
+                            <td class="inputs">
+                                <input type="text" id="userId" placeholder="ID">
+                                <select name="mail" id="mail">mail
+                                    <option value="@gmail.com">@gmail.com</option>
+                                    <option value="@naver.com">@naver.com</option>
+                                    <option value="@daum.net">@daum.net</option>
+                                    <option value="">직접 입력</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="w80 inputs">
+                                <input type="button" value="중복체크" id="idCheck">
+                            </td>
+                        </tr>
+                        <tr class="signUpTr">
+                            <td class="w80 inputs">
+                                <input type="password" id="userPw" placeholder="password">
+                            </td>
+                        </tr>
+                        <tr class="signUpTr">
+                            <td class="w80 inputs">
+                                <input type="password" id="userPwCheck" placeholder="password check">
+                            </td>
+                        </tr>                        
+                        <tr class="signUpTr">
+                            <td class="inputs">
+                                <input type="text" class="w80" id="userNickName" placeholder="nickname">
+                            </td>
+                        </tr>
+                        <tr>
+                            <input type="submit" value="sign up">
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </main>
-    </div>
-
 </body>
 
 </html>

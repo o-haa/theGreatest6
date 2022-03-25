@@ -123,15 +123,10 @@ li{
 
 
 .signInBox{
-    height:60%;
+    height:70%;
     width: 90%;
     margin: 0 auto;
 }
-
-.signUpBox{
-    margin: 0 auto;
-}
-
 
 .inputBox{
     display: flex;
@@ -164,6 +159,31 @@ li{
     background: url(./image/index/pw.png) no-repeat center 24px;
 }
 
+#userId{
+    width: 70%;
+}
+
+.inputs > select{
+    border-style: none;
+    height: 100%;
+    width: 95%;
+    border-radius: 5px;
+    font-size: 20px;
+    background: #efefef;
+    color: rgba(0,0,0,0.5);
+}
+
+.inputs > input[type=button]{
+    border-style: none;
+    height: 15px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+    background: #efefef;
+    color: rgba(0,0,0,0.5);
+}
+
+
 .inputs > input[type=text]{
     border-style: none;
     height: 100%;
@@ -173,6 +193,18 @@ li{
     background: #efefef;
     color: rgba(0,0,0,0.5);
 }
+
+.inputs > input[type=password]{
+    border-style: none;
+    height: 100%;
+    width: 95%;
+    border-radius: 5px;
+    font-size: 20px;
+    background: #efefef;
+    color: rgba(0,0,0,0.5);
+}
+
+
 
 .whBtn{
     width: 95%;
@@ -205,15 +237,21 @@ li{
     font-family: Roboto;
 }
 
+/*signup*/
+
+
 
 #signUpFrm{
     width: 100%;
     height: 90%;
+    margin: 0 auto;
+
 }
+
 
 .signUpTr{
     width: 80%;
-    height: 20%;
+    height: 15%;
     display: flex;
     justify-content: space-between;
 }
@@ -228,6 +266,19 @@ li{
     width: 20%;
 }
 
+.signUpBox{
+    display: flex;
+    align-items: center;
+    height: 50vh;
+}
+
 #signUpTable{
-    height: 60vh;
+    height: 80%;
+    width: 100%;
+}
+
+.accountFrmHead {
+    font-family: roboto;
+    font-size: 50px;
+    margin-bottom: 5vh;
 }
