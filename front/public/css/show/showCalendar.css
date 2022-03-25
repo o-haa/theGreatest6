@@ -210,7 +210,6 @@ input[id*="check"]:checked+label+ul>li>a{
 }
 #content > #calContent > #monthly > #monthlyTitle{
     font-family: 'engFontSemiBold';
-    font-size:30px;
     margin-bottom: 12px;
 }
 #content > #calContent > #monthly > #monthTitleSmall{
@@ -230,47 +229,54 @@ input[id*="check"]:checked+label+ul>li>a{
 
 #content > #mainContent{
     width: 75%;
-    padding: 105px 59px 50px 53px;
+    padding: 33px 59px 50px 53px;
     font-family: 'engFontSemiBold';
     box-sizing: border-box;
+}
+#content > #mainContent>h1{
+    margin-bottom: 40px;
 }
 
 #content > #mainContent > #mainContentTitle{
     width: 100%;
     height: 55px;
-    margin-bottom: 50px;
-    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    /* background: cornflowerblue; */
+    align-items: flex-end;
+    padding-bottom: 10px;
+    box-sizing: border-box;
 }
 
 #content > #mainContent > #mainContentTitle > #mainContentTitleMonth{
     display: flex;
-    align-items: center;
     box-sizing: border-box;
+    align-items: flex-end;
 }
 #content > #mainContent > #mainContentTitle > #mainContentTitleMonth > span{
-    font-size: 40px;
+    font-size: 28px;
     margin-right: 15px;
+    vertical-align: bottom;
+    /*글자 내부적인 여백때문에 혼자 들뜸
+    그걸 없애주기 위해 line-height사용*/
+    line-height: 60%; 
 }
 #content > #mainContent > #mainContentTitle > #mainContentTitleIcon {
     display: flex;
 } 
 
 .miniBtn{
-    width: 47px;
-    height: 47px;
-    border: 1.5px solid #080C31;
-    border-radius: 7px;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #080C31;
+    border-radius: 3px;
     margin-right: 7px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
 }
 .miniBtn > img{
-    width: 43px;
-    height: 43px;
+    width: 22px;
+    height: 22px;
 }
 
 #content > #mainContent > #mainCal {
