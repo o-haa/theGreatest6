@@ -1,0 +1,201 @@
+/* main_nav style sheet */
+*{margin:0; padding:0;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+input:focus{outline: none;}
+input{border: none;}
+button{border:none; background: none;}
+/* 영어폰트 */
+@font-face {
+    font-family: 'engFont';
+    src: url('../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype'); 
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'engFontBold';
+    src: url('../font/OpenSans-Bold.ttf') format('truetype'); 
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'engFontSemiBold';
+    src: url('../font/OpenSans-SemiBold.ttf') format('truetype'); 
+    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
+    font-style: normal;
+}
+/* 한글폰트 */
+@font-face {
+    font-family: 'korFont';
+    /* 대표폰트 : 두번째 폰트 */
+    src: url('../font/NanumSquareL.ttf') format('truetype'); 
+    unicode-range: U+AC00-D7A3, U+0030-0039;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'korFontBold';
+    src: url('../font/NanumSquareB.ttf') format('truetype'); 
+    unicode-range: U+AC00-D7A3, U+0030-0039;
+    font-style: normal;
+}
+/*
+view에서 사용할 폰트
+<span style="font-family: '글꼴명' !important;">텍스트</span>
+이렇게 선언해줄것
+*/
+@font-face {
+    font-family: 'viewFont';
+    src: url('../font/NanumMyeongjo.ttf') format('truetype');
+}
+
+
+body{
+    font-family: 'engFont','korFont';
+}
+
+#wrap{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+#wrap::before{
+    /* view background */
+    width: 100vw;
+    height: 100vh;
+    top:0px;
+    left: 0px;
+    content: "";
+    background-image: url("../../img/poster/park.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    opacity: 0.9;
+    position: absolute;
+}
+
+/* 헤더시작 */
+#header{
+    width:100vw;
+    height: 55px;
+    box-sizing: border-box;
+    /* background: green   ; */
+}
+
+#header > #nav{
+    margin-top:51px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    font-size: 22px;
+}
+
+/*
+로고가 들어가는 위치
+이 width만큼 캘린더에서 바로 아래에 달력박스가 생김.
+*/
+#nav > #logoBox {
+    width:25%;
+    height: 100%;
+    padding-left: 85px;
+    box-sizing: border-box;
+}
+#nav > #logoBox > h1{
+    font-family: 'engFontBold';
+    font-size: 26px;
+}
+
+/* 메인메뉴바 시작 */
+#nav > ul#mainMenu {
+    position: relative;
+    width:75%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+#nav > ul#mainMenu > li {
+    text-align: center;
+    width:20%;
+}
+#nav > ul#mainMenu > li:nth-child(1) {
+    padding:10px 20px;
+}
+#nav > ul#mainMenu > li:nth-child(6) {
+    padding:10px 20px;
+}
+#nav > ul#mainMenu > li:last-child {
+    margin-right: 50px;
+    margin-left:20px;
+    padding-top: 10px;
+}
+#nav > ul#mainMenu > li > a{
+    /* 자동 줄넘김 막는 코드 */
+    white-space:nowrap;
+    position: relative;
+}
+
+
+/* 소메뉴 시작 */
+input[id*="check"]{
+    display: none;
+}
+input[id*="check"]+label{
+    display: block;
+    padding:10px 40px;
+    cursor: pointer;
+    white-space:nowrap;
+}
+
+input[id*="check"]+label+ul{
+    display: none;
+}
+
+/* 클릭시 일어나는 이벤트 */
+input[id*="check"]:checked+label+ul{
+    display: block;
+}
+
+input[id*="check"]:checked+label{
+    display: block;
+    padding:10px 40px;
+    background: #080C31;
+    cursor: pointer;
+    white-space:nowrap;
+    color: #fff;
+}
+
+input[id*="check"]:checked+label+ul>li:first-child{
+    padding-top:7px;
+}
+input[id*="check"]:checked+label+ul>li{
+    padding:10px;
+    background: #080C31;
+    border-radius: 8px;
+}
+input[id*="check"]:checked+label+ul>li>a{
+    color: #fff;
+    white-space:nowrap;
+}
+
+
+/* 메인 검색창 */
+#mainSearch{
+        width: 140px;
+        height: 60px;
+        box-sizing: border-box;
+        /*검색입력창과 검색아이콘을 한 줄에 꽉채우려고 넣은 flex*/
+        display: flex;
+}
+#mainSearch > #searchInput{
+    height: 23px;
+    border-bottom: 1.2px solid #000;
+    margin-right: 2px;
+}
+#mainSearch > #searchIcon{
+    width: 22px;
+    height: 22px;
+}
+
+
+/* 본문 */
+#content{
+}
