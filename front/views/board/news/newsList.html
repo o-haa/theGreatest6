@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News List</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        #newsBoard{
+            width:80%;
+            margin:0 auto;
+        }
+
+        td,th{
+            padding:7px 14px;
+            border-bottom:1px solid #eee;
+            text-align: center;
+        }
+
+        th{
+            background-color: #eee;
+            border-bottom: 2px solid #333;
+        }
+
+        th:nth-child(2){
+            width:30%;
+        }
+
+    </style>
+    <script type="text/javascript">
+
+    </script>
+    
+</head>
+<body>
+    <h3>News List</h3>
+    <table cellspacing="0" cellpadding="0" id="communityBoard">
+        <thead>
+            <tr>
+                <th>num</th>
+                <th>subject</th>
+                <th>writer</th>
+                <th>date</th>
+                <th>hit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>hello</td>
+                <td>good</td>
+                <td>2022-03-22</td>
+                <td>0</td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="paging">
+        <ul>
+
+        </ul>
+    </div>
+    <template id="newsBoard_row">
+        <tr>
+            <td>{idx}</td>
+            <td></td>
+            <td>{nickname}</td>
+            <td>{date}</td>
+            <td>{hit}</td>
+        </tr>
+    </template>
+</body>
+</html>

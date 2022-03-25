@@ -23,4 +23,3 @@ app.listen(port,_=>{
     console.log(`front server running on localhost:${port}`)
 })
 
-// Content-Security-Policy: default-src 'self' trusted.com *.trusted.com

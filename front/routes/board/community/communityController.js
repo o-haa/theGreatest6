@@ -1,11 +1,11 @@
 exports.communityList = (req,res) =>{
-    res.render('./board/communityList')
+    res.render('./board/community/communityList')
 }
 
 exports.communityWrite = (req,res) =>{
-    res.render('./board/communityWrite')
+    res.render('./board/community/communityWrite')
 }
 
 exports.communityView = (req,res) =>{
-    res.render('./board/communityView')
+    res.render('./board/community/communityView')
 }

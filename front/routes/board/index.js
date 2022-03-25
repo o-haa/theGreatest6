@@ -1,16 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const newsRouter = require('./news')
-const recruitRouter = require('./recruit')
 const aboutRouter = require('./about')
 const communityRouter = require('./community')
-const qnaRouter = require('./qna')
+const reviewRouter = require('./review')
+
 
 router.use('/news', newsRouter)
-router.use('/recruit', recruitRouter)
 router.use('/about', aboutRouter)
 router.use('/community', communityRouter)
-router.use('/qna', qnaRouter)
+router.use('/review', reviewRouter)
 
 
 module.exports = router
