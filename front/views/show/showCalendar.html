@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/mainNav.css">
+    <link rel="stylesheet" href="/css/show/showCalendar.css">
     <!-- <link rel="stylesheet" href="/css/subNav.css"> -->
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded',()=>{
@@ -19,15 +19,15 @@
             <div id="nav">
                 <!-- Logo -->
                 <div id="logoBox">
-                    <h1>Team^</h1>
+                    <h1>Team6</h1>
                 </div>
                 <!-- 메인 메뉴 -->
                 <ul id="mainMenu">
                     <li id="home">
-                        <input type="radio" name="menuCheck" id="check01">
-                        <label for="check01">
+                        <!-- <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01"> -->
                             <a href="#">HOME</a>
-                        </label>
+                        <!-- </label> -->
                     </li>
                     <li id="show">
                         <!-- click 이벤트를 만들어주는 체크박스 -->
@@ -79,10 +79,10 @@
                         <!-- admin 서브메뉴 끝 -->
                     </li>
                     <li id="about">
-                        <input type="radio" name="menuCheck" id="check06">
-                        <label for="check06">
+                        <!-- <input type="radio" name="menuCheck" id="check06"> -->
+                        <!-- <label for="check06"> -->
                             <a href="#">ABOUT</a>
-                        </label>
+                        <!-- </label> -->
                     </li>
                     <li>
                         <span id="mainSearch">
@@ -94,34 +94,45 @@
             </div>
         </div>
 
-        <!-- height:990 -->
         <div id="content">
-            <!-- 왼쪽 달력 컨텐츠 width:480-->
             <div id="calContent">
-                 <!-- boarder-bottom:25px -->
-                 <h1 id="title">이달의 공연 목록</h1>
+                 <h1 id="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                  
-                 <!-- cal 127*388 -->
-                 <!-- boarder-bottom:25px -->
-                <div id="cal_sm">
+                <div id="calSmall">
                 </div>
 
-                <!-- monthly : 127*275 -->
                 <div id="monthly">
-
-                    <!-- 소제목이 들어갈 공간 1440*55 -->
-                    <!-- boarder-bottom:25px -->
-                    <div id="menu_sm">
-                        
+                    <div id="monthlyTitle">Monthly</div>
+                    <div id="monthTitleSmall">MAR</div>
+                    <div id="menuSmall">
+                        <!-- 카드뉴스 생성 -->
                     </div>
                 </div>
             </div>
             
-            <!-- 오른쪽 본 내용 컨텐츠 width:1440-->
-            <!-- boarder-top:25px -->
             <div id="mainContent">
-                <!-- margin-bottom:50px left:48; right:38px-->
-                <div id="mainContent_title"></div>
+                <div id="mainContentTitle">
+                    <div id="mainContentTitleMonth">
+                        <span>MAR 2022</span>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_next_2x.png" style="transform: rotate(180deg);" id="prev_arrow">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_next_2x.png" id="next_arrow">
+                        </button>
+                    </div>
+                    <div id="mainContentTitleIcon">
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_list_2x.png" id="List">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_grid_2x.png" id="grid">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_cal_2x.png" id="calBtn">
+                        </button>
+                    </div>
+                </div>
 
                 <div id="mainCal">
 
