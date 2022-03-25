@@ -3,40 +3,28 @@
 ul,li{list-style: none;}
 a{text-decoration: none;}
 input:focus{outline: none;}
-input{border: none;}
+input{border: none; background: none;}
 button{border:none; background: none;}
 /* 영어폰트 */
 @font-face {
-    font-family: 'engFont';
-    src: url('../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype'); 
-    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
-    font-style: normal;
+    font-family: 'basicBoldStrong';
+    src: url('../srcs/NotoSansKR-Black.otf') format('truetype');
 }
 @font-face {
-    font-family: 'engFontBold';
-    src: url('../font/OpenSans-Bold.ttf') format('truetype'); 
-    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
-    font-style: normal;
+    font-family: 'basicBold';
+    src: url('../srcs/NotoSansKR-Bold.otf') format('truetype');
 }
 @font-face {
-    font-family: 'engFontSemiBold';
-    src: url('../font/OpenSans-SemiBold.ttf') format('truetype'); 
-    unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
-    font-style: normal;
-}
-/* 한글폰트 */
-@font-face {
-    font-family: 'korFont';
-    /* 대표폰트 : 두번째 폰트 */
-    src: url('../font/NanumSquareL.ttf') format('truetype'); 
-    unicode-range: U+AC00-D7A3, U+0030-0039;
-    font-style: normal;
+    font-family: 'basicLight';
+    src: url('../srcs/NotoSansKR-Light.otf') format('truetype');
 }
 @font-face {
-    font-family: 'korFontBold';
-    src: url('../font/NanumSquareB.ttf') format('truetype'); 
-    unicode-range: U+AC00-D7A3, U+0030-0039;
-    font-style: normal;
+    font-family: 'basicMid';
+    src: url('../srcs/NotoSansKR-Medium.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicReg';
+    src: url('../srcs/NotoSansKR-Regular.otf') format('truetype');
 }
 /*
 view에서 사용할 폰트
@@ -50,7 +38,7 @@ view에서 사용할 폰트
 
 
 body{
-    font-family: 'engFont','korFont';
+    font-family:'basicReg'
 }
 
 /* 헤더시작 */
@@ -67,6 +55,7 @@ body{
     height: 40px;
     display: flex;
     font-size: 22px;
+    /* 사이즈 em으로 바꾸기 */
 }
 
 /*
@@ -230,14 +219,20 @@ input[id*="check"]:checked+label+ul>li>a{
 
 #content > #mainContent{
     width: 75%;
-    padding: 33px 59px 50px 53px;
+    padding: 33px 60px 50px 60px;
     font-family: 'engFontSemiBold';
     box-sizing: border-box;
 }
 
-#listSearchForm{
-    margin-top: 60px;
+/* 무엇이든 물어보세요 검색창 */
+#listSearchBox{
+    display: flex;
+    align-items: center;
+    width: 100%;
     height: 57px;
+    border-bottom: 1px solid #A8BEBF;
+    box-sizing: border-box;
+    margin: 60px 0px;
 }
 
 /* 돋보기 아이콘 */
@@ -246,6 +241,45 @@ input[id*="check"]:checked+label+ul>li>a{
     height: 28px;
 }
 
-#listSearchForm > input{
-    
+#listSearchForm > #listSearchInput{
+    margin-left: 16px;
+    font-size: 33px;
+    padding: 0px 10px 0px 0px;
+    height: 100%;
+    width:230%;
+    box-sizing: border-box;
+    color: #465D59;
+}
+
+#listSearchForm > #listSearchInput::placeholder{
+    color: #A8BEBF;
+    font-family: 'basicMid';
+    /* background: #465D59; */
+}
+
+/* 리스트 테이블 */
+.listTable{
+    margin-top: 20px;
+    width: 100%;
+    /* height: 65%; */
+}
+tr{
+    height: 50px;
+}
+tr:first-child{
+    border-top: 1px solid #465D59;
+    height: 50px;
+}
+
+th{
+    color: #465D59;
+}
+
+td:not(:nth-child(3)){
+    text-align: center;
+}
+
+td:nth-child(3){
+    box-sizing: border-box;
+    padding-left: 20px;
 }
