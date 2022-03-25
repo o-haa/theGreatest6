@@ -53,6 +53,26 @@ body{
     font-family: 'engFont','korFont';
 }
 
+#wrap{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+#wrap::before{
+    /* view background */
+    width: 100vw;
+    height: 100vh;
+    top:0px;
+    left: 0px;
+    content: "";
+    background-image: url("../../img/poster/park.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    opacity: 0.9;
+    position: absolute;
+}
+
 /* 헤더시작 */
 #header{
     width:100vw;
@@ -178,74 +198,4 @@ input[id*="check"]:checked+label+ul>li>a{
 
 /* 본문 */
 #content{
-    display: flex;
-    height: 998px;
-}
-
-#content > #calContent{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 25%;
-    padding:33px;
-    border-right:1px solid #E3E7EA;
-}
-#content > #calContent > title{
-    margin-bottom: 27px;
-}
-
-#content > #calContent > #calSmall{
-    width: 365px;
-    height: 332px;
-    border-radius: 25px;
-    box-shadow: 0px 25px 37px #F2F2F2;
-    margin-bottom: 42px;
-}
-
-#content > #calContent > #monthly{
-    width: 366px;
-    height: 500px;
-    padding:0px 20px;
-    box-sizing: border-box;
-}
-#content > #calContent > #monthly > #monthlyTitle{
-    font-family: 'engFontSemiBold';
-    font-size:30px;
-    margin-bottom: 12px;
-}
-#content > #calContent > #monthly > #monthTitleSmall{
-    font-family: 'engFontSemiBold';
-    font-size:20px;
-    color: #A5A5A5;
-    margin-bottom: 12px;
-}
-
-
-
-#content > #calContent > #monthly > #menuSmall{
-    width:100%;
-}
-
-
-
-#content > #mainContent{
-    width: 75%;
-    padding: 33px 59px 50px 53px;
-    font-family: 'engFontSemiBold';
-    box-sizing: border-box;
-}
-
-#listSearchForm{
-    margin-top: 60px;
-    height: 57px;
-}
-
-/* 돋보기 아이콘 */
-.line-icon{
-    width: 28px;
-    height: 28px;
-}
-
-#listSearchForm > input{
-    
 }
