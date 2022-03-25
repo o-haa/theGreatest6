@@ -1,11 +1,13 @@
-exports.newsList = (req,res) =>{
-    res.render('./board/newsList')
+exports.newsList = (req,res)=>{
+    res.render('./board/news/newsList')
 }
 
-exports.newsWrite = (req,res) =>{
-    res.render('./board/newsWrite')
+exports.newsWrite = (req,res)=>{
+    res.render('./board/news/newsWrite')
+
 }
 
-exports.newsView = (req,res) =>{
-    res.render('./board/newsView')
+exports.newsView = (req,res)=>{
+    res.render('./board/news/newsView')
+
 }

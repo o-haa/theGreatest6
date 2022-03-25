@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Write</title>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
+</head>
+<body>
+    <h3>Community Write</h3>
+    <form method="post" action="/board/community/write" enctype="multipart/form-data" id="writeFrm"> 
+        <table>
+            <tr>
+                <td>subject : </td>
+                <td>
+                    <input type="text" name="communitySubject" id="communitySubject">
+                </td>
+            </tr>
+            <tr>
+                <td>content : </td>
+                <td>
+                    <textarea type="text" name="communityContent" id="communityContent"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>file : </td>
+                <td>
+                    <input type="file" name="upload1" id="communityFile">
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+    <script type="text/javascript">
+
+        const writeFrm = document.querySelector('#writeFrm')
+        writeFrm.addEventListener('submit',async (e)=>{
+            e.preventDefault()
+            const {communitySubject,communityContent,upload1} = e.target
+            console.log(upload1.files[0])
+
+            // const subject = document.querySelector('#communitySubject')
+            // const content = document.querySelector('#communityContent')
+            // const file = document.querySelector('#communityFile')
+
+            
+            const formData = new FormData()
+            formData.append('upload',upload1.files[0])
+            formData.append('subject',communitySubject.value)
+            formData.append('content',communityContent.value)
+            
+
+            const response = await axios.post(`http://localhost:4001/board/community/write`,formData)
+
+            console.log(response)
+            if(response.data.errno === 0){
+               
+                location.href=`/board/community/view`
+            }else{
+                // subject.value=''
+                // content.value=''
+                // file.value=''
+                alert('try again')
+            }
+
+
+
+            
+
+
+        })
+
+    </script>
+</body>
+</html>

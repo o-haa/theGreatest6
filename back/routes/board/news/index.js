@@ -8,3 +8,4 @@ router.post('/view',newsController.newsView)
 
 
 module.exports = router
+
