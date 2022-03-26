@@ -24,6 +24,10 @@
     src: url('../../font/NanumMyeongjo.woff') format('truetype');
     src: url('../../font/NanumMyeongjo.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'MADE';
+    src: url('../../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype');
+}
 
 /* class처럼 사용된댔는데 적용 안되는데 왜 그런지 모르겠음
 .REG{ font-family:'basicReg'; }
@@ -35,6 +39,6 @@
 */
 
 body{
-    font-family:'basicReg';
+    font-family:'MADE';
 }
 /* 폰트끝 */
