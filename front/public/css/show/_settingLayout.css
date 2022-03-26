@@ -7,12 +7,17 @@ input{border: none;}
 button{border:none; background: none;}
 
 /* 배경 이미지 시작 */
+/* margin, padding까지 계산해서 vh를 만들어주는 것을 막아주는 코드 */
+:root {
+    --vh: 100%;
+}
 body{
     font-family: 'engFont','korFont';
+    height: 100vh;
+    height: var(--vh);
 }
 
 #wrap{
     width: 100vw;
-    height: 100vh;
 }
 /* 배경 이미지 끝 */

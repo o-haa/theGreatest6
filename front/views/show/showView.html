@@ -7,12 +7,30 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/show/showView.css">
     <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded',()=>{
+            let vh = 0;
+
+            useEffect(() => {
+            vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }, []);
+
+            const setVh = () => {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
+            };
+            window.addEventListener('resize', setVh);
+            setVh();
+        })
     </script>
 </head>
 <body>
     <div id="wrap">
-        <!-- 여기가 공통된 헤더! ajax로 빼나요?
-            show/_layout.html로 따로 빼놨습니다!-->
+        <!--
+            소메뉴가 없는 대메뉴 클릭 -> 링크 이동
+            소메뉴가 있는 대메뉴 클릭 -> 링크 이동 없음
+            기존 메뉴가 이런 통일성을 갖고있는데
+            다른 메뉴들 사이에서 조금 튀는 감이 있어 home에 있는게 나을것 같아요
+        -->
         <div id="header">
             <!-- nav 시작 -->
             <div id="nav">
@@ -94,10 +112,28 @@
         </div>
 
         <div id="content">
-            <!-- 스크롤해서 나오는 상세페이지
-            1페이지 : 요약보기
-            2페이지 : 상세보기
-            3페이지 : 예약버튼 달린 페이지-->
+            <div class="contentBox">
+                <div class="summaryBox">
+                    <div class="summaryImg">
+                        <div class="img"></div>
+                    </div>
+                    <div class="summaryTextBox">
+                        <div class="summaryText VIEW">
+                            <p>1923년, 관동대지진으로 붕괴된 도쿄에 괴소문이 퍼진다.</p>
+                            <p>"조선인이 지진을 틈타 폭동을 일으키고 있다!"</p>
+                            <p>그로인해 조선인 6천명이 학살되자 도쿄재판소 검사국장 류지에게 특명이 떨어진다.</p>
+                            <p>"조선인 대학살 사건을 덮을 사건을 찾아라!"</p>
+                            <p>그 계략에 들어온 건, 조선인 아나키스트 박열과 그의 일본인 아내 가네코 후미코.</p>
+                            <p>류지가 박열의 폭탄 계획을 과장하려 들자 계략을 눈치챈 두 사람은 황태자 저격 의도를 자백하며 대역죄인을 자처한다.
+                            </p>
+                        </div>
+                        <button class="goViewLink">View More</button>
+                    </div>
+                </div>
+                <div class="slideBox">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </body>
