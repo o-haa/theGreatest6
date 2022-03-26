@@ -1,0 +1,18 @@
+/* main_nav style sheet */
+*{margin:0; padding:0;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+input:focus{outline: none;}
+input{border: none;}
+button{border:none; background: none;}
+
+/* 배경 이미지 시작 */
+body{
+    font-family: 'engFont','korFont';
+}
+
+#wrap{
+    width: 100vw;
+    height: 100vh;
+}
+/* 배경 이미지 끝 */

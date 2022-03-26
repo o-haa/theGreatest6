@@ -1,0 +1,233 @@
+@import url('../show/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../show/_fontLayout.css'); /* 폰트 import */
+@import url('../show/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../show/_mainContentLayout.css'); /* 본문 레이아웃 */
+/* 개별 왼쪽 달력 박스를 가지고 있음. */
+@import url('../show/_contentLayer.css'); /* 본문 오른쪽 박스 틀 */
+
+/*
+    현진 작성 CSS 읽는 방법!
+    가로세로 -> 여백 -> 정렬순 -> 그 외 꾸밈(box-sixing, 선굵기 등)
+    이 순서대로 작성하기 때문에 만약 여백이 먼저 작성되었다면 가로세로 값은 없다는 뜻이에요!
+*/
+
+#wrap{
+    /* overflow: hidden; */
+    margin: 0 auto;
+}
+/* 헤더 */
+/* 본문 왼쪽 달력 박스  : calContent */
+#content > #calContent{
+    width: 25%;
+    padding: 33px 33px 33px 33px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-right:1px solid #E3E7EA;
+}
+/* 사용자명, level이 표시되는 뱃지 div */
+#content > #calContent > #userBadge{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+/* level 표시 icon */
+#content > #calContent > #userBadge > #userLevel{
+    width: 52px;
+    height: 52px;
+    margin-right: 16px;
+    padding: 8px;
+    border-radius: 5px;
+    font-family: 'basicMid';
+    font-size: 35px;
+    text-align: center;
+    color: #fff;
+    background: #465D59;
+    display: inline-block;
+    box-sizing: border-box;
+}
+#content > #calContent > #userBadge > #username{
+    color: #465D58;
+    font-size: 40px;
+}
+
+/* 일정 생성 버튼 */
+#content > #calContent > #createEventBtn{
+    width: 100%;
+    height: 65px;
+    margin: 25px 0 70px 0;
+    border: 2px solid #465D58;
+    border-radius: 5px;
+    font-size: 25px;
+    color: #465D58;
+}
+
+/* 소형 캘린더 */
+#content > #calContent > #calSmall{
+    width: 365px;
+    height: 332px;
+    margin-bottom: 42px;
+    border-radius: 25px;
+    box-shadow: 0px 25px 37px #F2F2F2;
+}
+
+/* 위클리 카드 뉴스 */
+#content > #calContent > #monthly{
+    width: 366px;
+    height: 500px;
+    box-sizing: border-box;
+}
+#content > #calContent > #monthly > #monthlyTitle{
+    padding:0px 20px;
+    margin-bottom: 12px;
+    font-size:30px;
+}
+#content > #calContent > #monthly > #monthTitleSmall{
+    padding:0px 20px;
+    margin-bottom: 12px;
+    color: #A5A5A5;
+}
+
+/* 일정 카드 리스트 박스 */
+#content > #calContent > #monthly > #menuSmall{
+    width:100%;
+}
+#content > #calContent > #monthly > #menuSmall> #menuSmallCards{
+    width: 100%;
+    white-space: nowrap;
+    overflow: auto;
+}
+/* 일정 카드 공통 속성 */
+#content > #calContent > #monthly > #menuSmall> #menuSmallCards > .menuSmallCard{  
+    width: 100%;
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 9px;
+    display: flex;
+    justify-content: space-between;
+    background:#232323;
+    font-size:20px;
+    color: #fff;
+    box-sizing: border-box;
+}
+/* 월일 표시 박스 */
+.menuSmallCard > .calBox{
+    width:33%;
+    height: 100%;
+    padding: auto 35px;
+    vertical-align: bottom;
+    box-sizing: border-box;
+}
+.menuSmallCard > .calBox>.calBoxDate{
+    padding:17px 30px 0px 30px;
+    height:45px;
+    font-size: 45px;
+    font-family: 'basicBoldStrong';
+    text-align: center;
+}
+.menuSmallCard > .calBox>.calBoxMonth{
+    font-size: 18px;
+    font-family: 'basicBoldStrong';
+    text-align: center;
+}
+/* 일정 표시  */
+.menuSmallCard > .listBox{
+    width: 66%;
+    height: 100%;
+    padding: 10px 0px 10px 60px;
+    box-sizing: border-box;
+}
+.menuSmallCard > .listBox > .listBox {
+    display: flex;
+    align-items: center;
+    height: 50%;
+    box-sizing: border-box;
+}
+.menuSmallCard > .listBox > .listBox > .Post{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 13px;
+    background: brown;
+}
+
+.menuSmallCard > .listBox > .listBox > .Memo{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.menuSmallCard > .listBox > .listBox > .Memo > .memoTitle{
+    font-size: 12px;
+}
+.menuSmallCard > .listBox > .listBox > .Memo > .memoContent{
+    font-size: 8px;
+}
+
+
+/* 본문 오른쪽 카드 컨텐츠 박스 */
+#content > #mainContent{
+    width: 75%;
+    padding: 33px 59px 50px 53px;
+    font-family: 'engFontSemiBold';
+    box-sizing: border-box;
+}
+#content > #mainContent>h1{
+    margin-bottom: 20px;
+}
+
+/* 카드 컨텐츠 타이틀 */
+#content > #mainContent > #mainContentTitle{
+    width: 100%;
+    height: 55px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+#content > #mainContent > #mainContentTitle > #mainContentTitleMonth{
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+/* 카드 컨텐츠 연월 표시 span */
+#content > #mainContent > #mainContentTitle > #mainContentTitleMonth > span{
+    margin-right: 15px;
+    vertical-align: bottom;
+    font-size: 28px;
+    /*글자 내부적인 여백때문에 혼자 들뜸
+    그걸 없애주기 위해 line-height사용*/
+    line-height: 60%; 
+}
+
+/* 보기 형태 선택 아이콘 : 리스트 or 앨범 or 캘린더 버튼 */
+#content > #mainContent > #mainContentTitle > #mainContentTitleIcon {
+    display: flex;
+}
+/* 버튼 공통 속성 */
+.miniBtn{
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #080C31;
+    box-sizing: border-box;
+}
+/* 버튼 이미지 공통 속성 */
+.miniBtn > img{
+    width: 22px;
+    height: 22px;
+}
+/* 여기까지 showCard와 동일
+타이틀 h1의 margin-bottom만 다름. (line 28)*/
+
+#content > #mainContent > #mainCal {
+    width: 100%;
+    height: 790px;
+    border: 3px solid #E3E7EA;
+}

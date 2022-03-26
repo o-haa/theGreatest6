@@ -1,0 +1,36 @@
+/* 영어폰트 */
+@font-face {
+    font-family: 'basicBoldStrong';
+    src: url('../srcs/NotoSansKR-Black.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicBold';
+    src: url('../srcs/NotoSansKR-Bold.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicLight';
+    src: url('../srcs/NotoSansKR-Light.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicMid';
+    src: url('../srcs/NotoSansKR-Medium.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicReg';
+    src: url('../srcs/NotoSansKR-Regular.otf') format('truetype');
+}
+/*
+view에서 사용할 폰트
+<span style="font-family: '글꼴명' !important;">텍스트</span>
+이렇게 선언해줄것
+*/
+@font-face {
+    font-family: 'viewFont';
+    src: url('../font/NanumMyeongjo.ttf') format('truetype');
+}
+
+
+body{
+    font-family:'basicReg','basicMid','basicBold','basicBoldStrong','basicLight';
+}
+/* 폰트끝 */
