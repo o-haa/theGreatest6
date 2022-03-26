@@ -7,7 +7,7 @@
         _calBoxLayer.css (line 14) padding-top:23px로 같이 수정
         같은 높이임.
     */
-    padding: 33px 59px 50px 53px;
+    padding: 23px 59px 50px 53px;
     font-family: 'engFontSemiBold';
     box-sizing: border-box;
 }
