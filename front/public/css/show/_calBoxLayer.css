@@ -1,0 +1,46 @@
+/* 본문 왼쪽 달력 박스  : calContent */
+#content > #calContent{
+    width: 25%;
+    /*
+        top 23px할지 33px할지 고민중
+        수정시
+        _contentLayer.css (line 4) padding-top:23px로 같이 수정
+        같은 높이임.
+    */
+    padding: 33px 33px 33px 33px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-right:1px solid #E3E7EA;
+    box-sizing: border-box;
+}
+
+/* 소형 캘린더 */
+#content > #calContent > #calSmall{
+    width: 365px;
+    height: 332px;
+    margin-top: 27px;
+    margin-bottom: 42px;
+    border-radius: 25px;
+    box-shadow: 0px 25px 37px #F2F2F2;
+}
+
+/* 위클리 카드 뉴스 */
+#content > #calContent > #monthly{
+    width: 366px;
+    height: 500px;
+    padding:0px 20px;
+    box-sizing: border-box;
+}
+#content > #calContent > #monthly > #monthlyTitle{
+    margin-bottom: 20px;
+    font-size:30px;
+}
+#content > #calContent > #monthly > #monthTitleSmall{
+    margin-bottom: 12px;
+    font-size:20px;
+    color: #A5A5A5;
+}
+#content > #calContent > #monthly > #menuSmall{
+    width:100%;
+}
