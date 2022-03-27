@@ -1,30 +1,23 @@
 document.addEventListener('DOMContentLoaded', init)
 
 
-//인잇
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/account/member/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    //1. 변수 선언 및 값 할당
-
-    //(1) 아이디 확인 관련
     const idCheckBtn = document.querySelector('#idCheckBtn')
 
-    //(2) 비밀번호 확인 관련
-    const pwCheck1 = document.querySelector('#pwCheck1')    //스판
-    const pwCheck2 = document.querySelector('#pwCheck2')    //스판
+    const pwCheck1 = document.querySelector('#pwCheck1')
+    const pwCheck2 = document.querySelector('#pwCheck2')
     const userPw = document.querySelector('#userPw')
     const userPwCheck = document.querySelector('#userPwCheck')
     pwCheck1.innerHTML = 'Use 8 - 25 characters with a mix of letters, numbers & symbols'
 
-    //(3) 닉네임 확인 관련
     const userNickName = document.querySelector('#userNickName')
     const nickNameCheckResult = document.querySelector('#nickNameCheckResult')
 
 
-    //2. 이벤트
-    // (1) 아이디 중복체크 관련 클릭 이벤트
+
     await idCheckBtn.addEventListener('click', clickHandler)
 
     async function clickHandler() {
@@ -55,8 +48,6 @@ async function init() {
     }
 
 
-
-    // (2) 비밀번호 유효성 검사관련 이벤트1
     await userPw.addEventListener('keyup', pwHandler)
 
     function pwHandler(e) {
@@ -68,7 +59,6 @@ async function init() {
     }
 
 
-    // (3) 비밀번호 유효성 검사관련 이벤트2
     await userPwCheck.addEventListener('keyup', pwCheckHandler)
 
     function pwCheckHandler() {
@@ -77,7 +67,6 @@ async function init() {
     }
 
 
-    // (4-1) 닉네임 중복 체크 관련 이벤트 - 실시간 체크
     await userNickName.addEventListener('keyup', nickNameCheckHandler)
 
     async function nickNameCheckHandler() {
@@ -100,8 +89,6 @@ async function init() {
         }
     }
 
-
-    //폼 제출 이벤트
     const signUpFrm = document.querySelector('#signUpFrm')
     signUpFrm.addEventListener('submit', submitHanlder)
     async function submitHanlder(e) {
