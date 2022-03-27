@@ -11,6 +11,6 @@ const config ={
     queueLimit: 0
 }
 
-const pool = mysql.createPool(config)
-const promisePool = pool.promise()
-module.exports = promisePool
+const pool = mysql.createPool(config).promise()
+module.exports = pool
+

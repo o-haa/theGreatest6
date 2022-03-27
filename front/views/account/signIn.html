@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/index.css" rel="stylesheet" type="text/css">
-
+    <script src="/script/account/signIn.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -25,11 +26,11 @@
                         <ul class="inputBox flexCol">
                             <li class="inputs">
                                 <span id ="userIcon"></span>
-                                <input type="text" placeholder ="Name" name="signInId" autofocus>
+                                <input type="text" placeholder ="Name" id="signInId" autofocus>
                             </li>
                             <li class="inputs">
                                 <span id ="passwordIcon"> </span>
-                                <input type="text" placeholder="Password" name="signInPw">
+                                <input type="password" placeholder="Password" id="signInPw">
                             </li>
                             <li class="whBtn">
                                 <input type="submit" value="sign in">
@@ -37,7 +38,9 @@
                         </ul>
                     </form>
                 </section>
-            
+                <span id ="signUpLink">
+                    <a href="/account/member/signup">wanna join us?</a>
+                </span>
             </article>
             <article>
 
