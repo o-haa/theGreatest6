@@ -11,8 +11,11 @@ function init() {
     signInFrm.addEventListener('submit', signUpHandler)
     async function signUpHandler(e) {
         e.preventDefault()
-        const userId = document.querySelector('#signInId').value
+        const tempId = document.querySelector('#tempId').value
+        const usermail = document.querySelector('#mail').value
         const userPw = document.querySelector('#signInPw').value
+
+        const userId = tempId+usermail
 
         const data = {
             userId,
