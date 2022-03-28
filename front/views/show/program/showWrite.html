@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Write</title>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
+</head>
+<body>
+    <!-- 관리자만 사용할 수 있는 게시판 작성 -->
+    <form method="post" action="/show/program/showWrite" name="writeForm" id="writeForm">
+        <table>
+            <input type="hidden" name="idx" id="idx">
+            <tr>
+                <th>공연 분류</th>
+                <td>
+                    <select name="카테고리" id="category">
+                        <option value="공지">notice</option>
+                        <option value="이벤트">event</option>
+                        <option value="공연">event</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>관람 등급</th>
+                <td>
+                    <select name="xrated" id="xrated">
+                        <option value="공지">notice</option>
+                        <option value="이벤트">event</option>
+                        <option value="공연">event</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>공연 제목</th>
+                <td></td>
+                <td><input type="text" name="title" id="title"></td>
+            </tr>
+            <tr>
+                <th>예매 시작일</th>
+                <td><input type="text" name="ticketStart" id="ticketStart"></td>
+            </tr>
+            <th>공연 시작일</th>
+            <td><input type="text" name="showStart" id="showStart"></td>
+            <th>공연 종료일</th>
+            <td><input type="text" name="showEnd" id="showEnd"></td>
+            <th>공연 장소</th>
+            <td><input type="text" name="showPlace" id="showPlace"></td>
+            <th>공연 출연진</th>
+            <td><input type="text" name="showMain" id="showMain"></td>
+            <th>공연 보조출연진</th>
+            <td><input type="text" name="showSub" id="showSub"></td>
+            <th>공연 감독</th>
+            <td><input type="text" name="showDirector" id="showDirector"></td>
+            <th>공연 주최측</th>
+            <td><input type="text" name="showCompany" id="showCompany"></td>
+            <th>글 내용</th>
+            <td><input type="text" name="subject" id="subject"></td>
+            <th>프리뷰 글내용</th>
+            <td><input type="text" name="prevSub" id="prevSub"></td>
+            <th>prv_date???</th>
+            <th>문의</th> <!-- 사이트 고정글 -->
+            <!-- <th>파일업로드</th> -->
+        </table>
+
+            <template id="showList_row">
+                
+                <tr>
+                    <th>공연 제목</th>
+
+                    <td><input type="text" name="title" id="title"></td>
+                </tr>
+                <th>예매 시작일</th>
+                <td><input type="text" name="ticketStart" id="ticketStart"></td>
+                <th>공연 시작일</th>
+                <td><input type="text" name="showStart" id="showStart"></td>
+                <th>공연 종료일</th>
+                <td><input type="text" name="showEnd" id="showEnd"></td>
+                <th>공연 장소</th>
+                <td><input type="text" name="showPlace" id="showPlace"></td>
+                <th>공연 출연진</th>
+                <td><input type="text" name="showMain" id="showMain"></td>
+                <th>공연 보조출연진</th>
+                <td><input type="text" name="showSub" id="showSub"></td>
+                <th>공연 감독</th>
+                <td><input type="text" name="showDirector" id="showDirector"></td>
+                <th>공연 주최측</th>
+                <td><input type="text" name="showCompany" id="showCompany"></td>
+                <th>글 내용</th>
+                <td><input type="text" name="subject" id="subject"></td>
+                <th>프리뷰 글내용</th>
+                <td><input type="text" name="prevSub" id="prevSub"></td>
+                <th>prv_date???</th>
+                <th>문의</th>
+            </template>
+        </table>
+        <input type="submit" value="작성하기">
+    </form>
+</body>
+</html>

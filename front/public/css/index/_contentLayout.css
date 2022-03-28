@@ -1,0 +1,26 @@
+/* 
+  오른쪽 박스를 이루는 mainContent의 css입니다.
+  _calBoxLayer.css와 같이 사용할 수 있습니다.
+  
+  index와 같은 depth로 있는 폴더 안에 있는 css에서 사용할 경우,
+  예) public > css > account > index.css 에서 사용.
+
+  @import url('../index/_contentLayout.css');
+  로 삽입하시면 됩니다.
+*/
+
+#content > #mainContent{
+    width: 75%;
+    /*
+        top 23px할지 33px할지 고민중
+        수정시
+        _calBoxLayer.css (line 14) padding-top:23px로 같이 수정
+        같은 높이임.
+    */
+    padding: 23px 59px 50px 53px;
+    font-family: 'engFontSemiBold';
+    box-sizing: border-box;
+}
+#content > #mainContent > h1{
+    margin-bottom: 20px;
+}
