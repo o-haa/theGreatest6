@@ -27,8 +27,13 @@ async function init() {
     const homeBtn = document.querySelector('#home');
     const aboutBtn = document.querySelector('#about');
 
-    function moveHome(){ window.location.href = 'http://localhost:3001/'; }
-    function moveAbout(){ window.location.href = 'http://localhost:3001/about'; }
+    function moveHome(){ 
+        window.location.href = 'http://localhost:3001/'; 
+    }
+    function moveAbout(){
+        window.location.href = 'http://localhost:3001/about';
+    }
+    
     homeBtn.addEventListener('click', moveHome)
     aboutBtn.addEventListener('click', moveAbout)
 
