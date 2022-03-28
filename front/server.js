@@ -5,6 +5,7 @@ require('dotenv').config()
 const port = process.env.PORT
 const router = require('./routes')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 app.set('view engine','html')
 nunjucks.configure('views',{
@@ -12,6 +13,7 @@ nunjucks.configure('views',{
     watch:true
 })
 
+app.use(cookieParser())
 app.use(cors({
     origin:true,
     credentials:true 

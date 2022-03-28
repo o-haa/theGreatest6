@@ -3,18 +3,18 @@ require('dotenv').config();
 const salt = process.env.salt || 'blackTea'
 
 
-const createToken = function(status){
+const createToken = async function(status){
 
     const header = {
         typ: "JWT",
-        alt: "HS256"
+        alg: "HS256"
     };
     const payload = {
         ...status
     };
 
-    const encodingHeader = encoding(header);
-    const encodingPayload = encoding(payload);
+    const encodingHeader = await encoding(header);
+    const encodingPayload = await encoding(payload);
     const signature = createSignature(encodingHeader,encodingPayload);
 
     const jwt = `${encodingHeader}.${encodingPayload}.${signature}`
@@ -24,7 +24,7 @@ const createToken = function(status){
 
 
 function encoding(v){
-    Buffer.from(JSON.stringify(v)).toString('base64').replace(/[=]/g,'');
+    return Buffer.from(JSON.stringify(v)).toString('base64').replace(/[=]/g,'');
 }
 
 function createSignature(header, payload){
