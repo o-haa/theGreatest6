@@ -28,6 +28,7 @@ a:link, a:visited{
 
 #signin {
     width: 30vw;
+
     height: 20vh;
 }
 
@@ -44,9 +45,6 @@ header {
     height: 10vh;
 }
 
-#logo{
-
-}
 
 ul{
     display: flex;
@@ -66,9 +64,9 @@ li{
 }
 
 
-.wh100{
+.w100h90{
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
 }
 
 .w80{
@@ -119,25 +117,46 @@ li{
 
 .memberBox{
     background: #fff;
-    border-radius: 5%;
+    border-radius: 20px;
     width: 30vw;
     height: 75vh;
     margin: 0 auto;
+    margin-top: 50px;
 }
 
 
 .signInBox{
-    height:70%;
-    width: 90%;
+    height:480px;
+    width: 360px;
     margin: 0 auto;
+    position: relative;
 }
+
+.signInBox:nth-child(1){
+    margin-top: 70px;
+}
+
+#signUpLink > a {
+    bottom: 20px;
+    position: absolute;
+    left: 40%;
+    font-size: 20px;
+}
+
+
+
+#signInFrm{
+    height: 90%;
+    width: 100%;
+}
+
 
 .inputBox{
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
     width: 100%;
-    height: 30vh;
+    height: 25%;
 }
 
 
@@ -146,7 +165,7 @@ li{
     flex-direction: row;
     justify-content: space-between;
     width: 95%;
-    height: 25%;
+    height: 90%;
     border-radius: 5px;
     background: #efefef;
 }    
@@ -155,16 +174,16 @@ li{
 #userIcon{
     display: inline-block;
     width: 20%;
-    background: url(./image/index/user.png) no-repeat center 24px;
+    background: url(/img/icon/icon_person.png) no-repeat 15px;
 }
 #passwordIcon{
     display: inline-block;
     width: 20%;
-    background: url(./image/index/pw.png) no-repeat center 24px;
+    background: url(/img/icon/icon_lock.png) no-repeat center 15px;
 }
 
-#userId{
-    width: 70%;
+#tempId{
+    width: 60%;
 }
 
 .inputs > select{
@@ -177,7 +196,7 @@ li{
     color: rgba(0,0,0,0.5);
 }
 
-.inputs > input[type=button]{
+/* .inputs > input[type=button]{
     border-style: none;
     height: 15px;
     width: 100%;
@@ -185,7 +204,7 @@ li{
     font-size: 20px;
     background: #efefef;
     color: rgba(0,0,0,0.5);
-}
+} */
 
 
 .inputs > input[type=text]{
@@ -201,7 +220,7 @@ li{
 .inputs > input[type=password]{
     border-style: none;
     height: 100%;
-    width: 95%;
+    width: 100%;
     border-radius: 5px;
     font-size: 20px;
     background: #efefef;
@@ -212,24 +231,25 @@ li{
 
 .whBtn{
     width: 95%;
-    height: 25%;
+    height: 80%;
     background: rgba(0,0,0,0.800000011920929);
+    border-radius: 5px;
 }
 
 .whBtn > input{
     border-style: none;
     background: none;
     font-size: 26px;
-    line-height: 220%;
+    line-height: 320%;
     color:#fff;
 }
 
 .kakaoBox{
-    height: 20%;
+    height: 15%;
     width: 95%;
     padding: 5%;
     border: solid 2px darkgray;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
 }
 
@@ -249,7 +269,7 @@ li{
     width: 100%;
     height: 90%;
     margin: 0 auto;
-
+    padding-top: 50px;
 }
 
 
@@ -285,4 +305,95 @@ li{
     font-family: roboto;
     font-size: 50px;
     margin-bottom: 5vh;
+}
+
+#signUpBtn{
+    width: 80%;
+}
+
+.inputBox2{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    width: 85%;
+    height: 25%;
+}
+
+.whBtn{
+    width: 95%;
+    height: 80%;
+    background: rgba(0,0,0,0.800000011920929);
+    border-radius: 5px;
+}
+
+.whBtn > input{
+    border-style: none;
+    background: none;
+    font-size: 26px;
+    line-height: 320%;
+    color:#fff;
+}
+
+
+
+/**/
+
+#header{
+    width:90vw;
+    height: 10%;
+    margin: 0 auto;
+    /* background: green   ; */
+}
+
+#header > #nav{
+    margin: 0 auto;
+    margin-top:51px;
+    width: 90%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#nav > #logoBox {
+    width:25%;
+    height: 100%;
+}
+
+
+@font-face {
+    font-family: 'basicBold';
+    src: url('../srcs/NotoSansKR-Bold.otf') format('truetype');
+}
+
+#nav > #logoBox > h1 > a{
+    font-family: 'basicBold';
+    font-size: 26px;
+    color: #efefef;
+}
+
+#nav > ul#mainMenu {
+    position: relative;
+    width:75%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+#nav > ul#mainMenu > li {
+    text-align: center;
+    width: 20%;
+}
+
+#nav > ul#mainMenu > li > a{
+    /* 자동 줄넘김 막는 코드 */
+    white-space: nowrap;
+    position: relative;
+    color: #efefef;
+}
+
+
+#msg {
+    font-size: 16px;
+    position: absolute;
+    top: 240px;
+    left: 35%;
 }
