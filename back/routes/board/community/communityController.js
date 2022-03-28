@@ -1,6 +1,11 @@
 
 const { pool } = require("../../../db")
 
+let response = {
+    result:[],
+    errno:1
+}
+
 exports.communityList = async (req,res) =>{
     console.log('hello')
     const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`
@@ -9,18 +14,15 @@ exports.communityList = async (req,res) =>{
         const [result] = await pool.execute(sql)
         console.log(result)
 
-        const response = {
-            
+        response = {
+            ...response,
             result,
             errno:0
         }
         res.json(response)
     } catch (e){
         console.log(e.message)
-        const response = {
-            errno:1
-        }
-        res.json(response)
+
     }
 }
 
@@ -42,7 +44,7 @@ exports.communityWrite = async (req,res) =>{
 
     try{
         const [result] = await pool.execute(sql2,prepare2)
-        const response = {
+        response = {
             result:{
                 row:result.affectedRows,
                 insertId:result.insertId
@@ -76,7 +78,7 @@ exports.communityWrite = async (req,res) =>{
 
 
             const [result] = await pool.execute(fSql,fPrepare,sql3,prepare3,)
-            const response = {
+            response = {
                 result:{
                     row:result.affectedRows,
                     insertId:result.insertId
@@ -88,14 +90,6 @@ exports.communityWrite = async (req,res) =>{
 
     }catch(e){
         console.log(e.message)
-        const response = {
-            result:{
-                row:0,
-                inserId:0
-            },
-            errno:1,
-        }
-        res.json(response)
     }
 }
 
@@ -108,17 +102,13 @@ exports.communityView = async (req,res) => {
    
     try{
         const [result] = await pool.execute(sql,prepare)
-        const response = {
+        response = {
             result,
             errno:0
         }
         res.json(response)
     } catch (e) {
         console.log(e.message)
-        const response = {
-            errno:1
-        }
-        res.json(response)
     }
 
 }
@@ -129,7 +119,7 @@ exports.communityDelete = async (req,res) =>{
     const prepare = [idx]
     try{
         const [result] = await pool.execute(sql,prepare)
-        const response = {
+        response = {
                 result,
                 errno:0
             }
@@ -137,10 +127,6 @@ exports.communityDelete = async (req,res) =>{
        
     } catch (e) {
         console.log(e.message)
-        const response = {
-            errno:1
-        }
-        res.json(response)
         
     }
    

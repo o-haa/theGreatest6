@@ -15,7 +15,8 @@ async function init() {
     
 
     const file = document.querySelector('#updateFile')
-    updateFrm.addEventListener('submit',async (e)=>{
+    updateFrm.addEventListener('submit',
+    async function updateSubmit (e){
         e.preventDefault()
         const {updateSubject,updateContent,select} = e.target 
         console.log(file.files[0])

@@ -31,7 +31,8 @@ async function init() {
 
     //delete form
     const deleteFrm = document.querySelector('#deleteFrm')
-    deleteFrm.addEventListener('submit',async(e)=>{
+    deleteFrm.addEventListener('submit',
+    async function deleteSubmit (e){
         e.preventDefault()
 
         try{

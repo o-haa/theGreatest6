@@ -8,7 +8,8 @@ async function init() {
     //write form
     const writeFrm = document.querySelector('#writeFrm')
     const file = document.querySelector('#communityFile')
-    writeFrm.addEventListener('submit',async (e)=>{
+    writeFrm.addEventListener('submit',
+    async function writeSubmit (e){
         e.preventDefault()
         const {communitySubject,communityContent,select} = e.target 
         console.log(file.files[0])
