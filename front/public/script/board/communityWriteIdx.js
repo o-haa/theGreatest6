@@ -5,22 +5,29 @@ async function init() {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     
 
-    //write form
-    const writeFrm = document.querySelector('#writeFrm')
-    const file = document.querySelector('#communityFile')
-    writeFrm.addEventListener('submit',async (e)=>{
+    //update form
+    const updateFrm = document.querySelector('#updateFrm')
+    const select = document.querySelector('select')
+    const updateSub = document.querySelector('#communitySubject')
+    const updateCon = document.querySelector('#communityContent')
+
+ 
+    
+
+    const file = document.querySelector('#updateFile')
+    updateFrm.addEventListener('submit',async (e)=>{
         e.preventDefault()
-        const {communitySubject,communityContent,select} = e.target 
+        const {updateSubject,updateContent,select} = e.target 
         console.log(file.files[0])
 
         const formData = new FormData()
         formData.append('upload',file.files[0])
         formData.append('select',select.value)
-        formData.append('subject',communitySubject.value)
-        formData.append('content',communityContent.value)
+        formData.append('subject',updateSubject.value)
+        formData.append('content',updateContent.value)
     
         try {
-            const response = await axios.post(`/write`,formData)
+            const response = await axios.post(`/write:idx`,formData)
             
             const{insertId} = response.data.result
             location.href=`/board/community/view/${insertId}`
@@ -28,7 +35,6 @@ async function init() {
             console.log(e.message)
             alert('try again')
         }
-    
         
 
     })
