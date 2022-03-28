@@ -1,4 +1,15 @@
-/* 헤더시작 */
+/* 
+  nav를 만드는 css입니다.
+  필수적으로 적용해 주세요.
+  
+  index와 같은 depth로 있는 폴더 안에 있는 css에서 사용할 경우,
+  예) public > css > account > index.css 에서 사용.
+
+  @import url('../index/_headerLayout.css');
+  로 삽입하시면 됩니다.
+*/
+
+
 #header{
     width:100vw;
     height: 55px; /*8vh*/

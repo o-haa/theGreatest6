@@ -1,4 +1,15 @@
-/* main_nav style sheet */
+/* 
+  html 전체 틀을 만드는 css입니다.
+  필수적으로 적용해주세요.
+  
+  index와 같은 depth로 있는 폴더 안에 있는 css에서 사용할 경우,
+  예) public > css > account > index.css 에서 사용.
+
+  @import url('../index/_settingLayout.css');
+  로 삽입하시면 됩니다.
+*/
+
+
 *{margin:0; padding:0;}
 ul,li{list-style: none;}
 a{text-decoration: none;}
@@ -12,7 +23,6 @@ button{border:none; background: none;}
     --vh: 100%;
 }
 body{
-    font-family: 'engFont','korFont';
     height: 100vh;
     height: var(--vh);
 }
@@ -20,4 +30,3 @@ body{
 #wrap{
     width: 100vw;
 }
-/* 배경 이미지 끝 */

@@ -1,7 +1,7 @@
-@import url('../show/_settingLayout.css'); /* html 기본 세팅 */
-@import url('../show/_fontLayout.css'); /* 폰트 import */
-@import url('../show/_headerLayout.css'); /* 헤더 세팅(nav 포함) */
-@import url('../show/_mainContentLayout.css'); /* 본문 레이아웃 */
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 세팅(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
 
 /*
     현진 작성 CSS 읽는 방법!
