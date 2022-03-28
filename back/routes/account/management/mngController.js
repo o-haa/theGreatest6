@@ -1,4 +1,4 @@
-const { pool } = require('../../../db')
+const pool = require('../../../db');
 
 exports.info = (req, res) => {
     res.send('info페이지')

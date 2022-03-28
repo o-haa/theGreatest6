@@ -1,4 +1,4 @@
-const {pool} = require('../../../db')
+const pool = require('../../../db');
 
 exports.main = (req,res, next) =>{
     res.send('일정 리스트 형태로 보여줄거임')
