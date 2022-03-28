@@ -3,31 +3,31 @@ exports.main = (req,res, next) =>{
 }
 
 exports.showHome = (req,res)=>{
-    res.render('./show/showHome')
+    res.render('./show/home/showHome')
 }
 
 exports.showList = (req,res)=>{
-    res.render('./show/showList')
+    res.render('./show/list/showList')
 }
 
 exports.showCard = (req,res)=>{
-    res.render('./show/showCard')
+    res.render('./show/list/showCard')
 }
 
 exports.showCalendar = (req,res)=>{
-    res.render('./show/showCalendar')
+    res.render('./show/list/showCalendar')
 }
 
 exports.showView = (req,res)=>{
-    res.render('./show/showView')
+    res.render('./show/crud/showView')
 }
 
 exports.showWrite = (req,res)=>{
-    res.render('./show/showWrite')
+    res.render('./show/crud/showWrite')
 }
 
 exports.showModify = (req,res)=>{
-    res.render('./show/showModify')
+    res.render('./show/crud/showModify')
 }
 
 exports.ticketopen = (req,res)=>{
