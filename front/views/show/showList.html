@@ -4,9 +4,61 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Show listSearchBox</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/css/show/showList.css">
     <script type="text/javascript">
+        const data= {
+                list: [
+                    {
+                        idx:'1',
+                        subject:'제목1',
+                        title:'졸리다',
+                        userid:'hancoco',
+                        content:'졸려요'
+                    },
+                    {
+                        idx:'2',
+                        subject:'제목1',
+                        title:'타코 맛있다',
+                        userid:'Joshy',
+                        content:'대니 더 타코 맛있다'
+                    }
+                ]
+            }
+
+        document.addEventListener('DOMContentLoaded',async() => {
+
+            // 헤더 nav home, admin 이동
+            const homeBtn = document.querySelector('#home');
+            const aboutBtn = document.querySelector('#about');
+
+            homeBtn.addEventListener('click',() => {
+                window.location.href = 'http://localhost:3001/';
+            })
+            aboutBtn.addEventListener('click',() => {
+                window.location.href = 'http://localhost:3001/about';
+            })
+
+            //이건 비동기로 안되나.
+            // const {response} = await axios.get('http://localhost:4001/show/program/showwrite',data)
+            // console.log(response)
+            const Nodes = data.list;
+            const trElement = document.querySelector('#showList_row').innerHTML;
+            let template=''
+
+            //교수님 코드
+            Nodes.forEach(v=>{
+                template += trElement.replace('{idx}',v.idx)
+                                .replace('{subject}',v.subject)
+                                .replace('{title}',v.title)
+                                .replace('{userid}',v.userid)
+                                .replace('{content}',v.content);
+            })
+            const thead = document.querySelector('.listTable thead');
+            const tbody = document.querySelector('.listTable tbody');
+            tbody.innerHTML = template;
+        })
     </script>
 </head>
 <body>
@@ -21,10 +73,8 @@
                 <!-- 메인 메뉴 -->
                 <ul id="mainMenu">
                     <li id="home">
-                        <!-- <input type="radio" name="menuCheck" id="check01">
-                        <label for="check01"> -->
-                            <a href="#">HOME</a>
-                        <!-- </label> -->
+                        <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01">HOME</label>
                     </li>
                     <li id="show">
                         <!-- click 이벤트를 만들어주는 체크박스 -->
@@ -37,7 +87,6 @@
                         </ul>
                         <!-- show 서브메뉴 끝 -->
                     </li>
-
                     <li id="board">
                         <input type="radio" name="menuCheck" id="check03">
                         <label for="check03">BOARD</label>
@@ -76,10 +125,8 @@
                         <!-- admin 서브메뉴 끝 -->
                     </li>
                     <li id="about">
-                        <!-- <input type="radio" name="menuCheck" id="check06"> -->
-                        <!-- <label for="check06"> -->
-                            <a href="#">ABOUT</a>
-                        <!-- </label> -->
+                        <input type="radio" name="menuCheck" id="check06">
+                        <label for="check06">ABOUT</label>
                     </li>
                     <li>
                         <span id="mainSearch">
@@ -112,11 +159,11 @@
 
                 <!-- 리스트 검색창 -->
                 <div id="listSearchBox">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon" id="searchIcon">
                         <path d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z" fill="#A8BEBF"></path>
                     </svg>
-                    <form action="#" id="listSearchForm">
-                        <input type="text" placeholder="봄바람 살랑일땐 연극이죠" id="listSearchInput">            
+                    <form method="post" action="#" id="listSearchForm">
+                        <input type="text" onkeyup="enterkey()" placeholder="봄바람 살랑일땐 연극이죠" id="listSearchInput">            
                     </form>
                 </div>
                 <div id="listEventBox">
@@ -136,53 +183,30 @@
 
                 <!-- 리스트 테이블 시작 -->
                 <table class="listTable">
-                   <tr>
-                       <th>글번호</th>
-                       <th>구분</th>
-                       <th>제목</th>
-                       <th>등록일</th>
-                       <th>조회수</th>
-                   </tr>
+                    <thead>
+                        <tr>
+                            <th>글번호</th>
+                            <th>구분</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
 
-                   <tr>
-                       <td>공지</td>
-                       <td>안내</td>
-                       <td><라투시카> 공연취소 안내</td>
-                       <td>22-04-08</td>
-                       <td>300</td>
-                   </tr>
-                   <tr>
-                       <td>공지</td>
-                       <td>안내</td>
-                       <td><라투시카> 공연취소 안내</td>
-                       <td>22-04-08</td>
-                       <td>300</td>
-                   </tr> 
-                   <tr>
-                        <td>03</td>
-                        <td>안내</td>
-                        <td><라투시카> 공연취소 안내</td>
-                        <td>22-04-08</td>
-                        <td>300</td>
-                    </tr> 
-                   <tr>
-                        <td>02</td>
-                        <td>안내</td>
-                        <td><시티 보드 더 정글> 내한 팬사인회 안내</td>
-                        <td>22-04-08</td>
-                        <td>300</td>
-                    </tr> 
-                   <tr>
-                        <td>01</td>
-                        <td>안내</td>
-                        <td><마리 : 조용한 승자> 30주년 연극 공연 안내</td>
-                        <td>22-04-08</td>
-                        <td>300</td>
-                    </tr> 
-               </table>
-               <div id="writeBtn">
-                글쓰기
-               </div>
+                <template id="showList_row">
+                    <tr>
+                        <td>{idx}</td>
+                        <td>{subject}</td>
+                        <td>{title}</td>
+                        <td>{userid}</td>
+                        <td>{content}</td>
+                    </tr>
+                </template>
+
+               <a href="/show/program/showwrite">글쓰기</a>
+               </script>
             </div>
         </div>
     </div>
