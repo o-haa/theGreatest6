@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', init);
 function init() {
     axios.defaults.baseURL = 'http://localhost:4001/account/member/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.withCredentials= true;
 
     const signInFrm = document.querySelector('#signInFrm');
 
@@ -20,6 +21,7 @@ function init() {
             userId,
             userPw
         };
+
         if (!tempId) { 
             msg.innerHTML = 'please enter a valid email.';
             throw new Error('아이디 공란');
