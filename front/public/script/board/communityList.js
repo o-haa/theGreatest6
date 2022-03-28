@@ -11,6 +11,31 @@ async function init() {
 
     console.log(response)
 
+    // const {totalRows} = response.data
+    // const viewRows = 10
+    // const pagingBlock = 5
+
+    // const totalPage = Math.ceil(totalRows/viewRows)
+    // const totalBlock = Math.ceil(totalPage/pagingBlock)
+
+    // let page = 1;
+    // const currentBlock = Math.ceil(page/pagingBlock)
+    // const block = ((currentBlock-1) * pagingBlock)
+
+    // let endBlock = block + pagingBlock
+    // if(endBlock > totalPage) endBlock = totalPage
+
+    // const paging = document.querySelector('#paging')
+    // for (let i = block + 1; i<endBlock; i++){
+    //     const liElement = document.createElement('li')
+    //     const aElement = document.createElement('a')
+
+    //     aElement.setAttribute('onClick',`pagemove(${i})`)
+    //     aElement.innerHTML = `[${i}]`
+    //     liElement.appendChild(aElement)
+    //     paging.appendChild(liElement)
+    // }
+
     const trElement = document.querySelector('#communityBoardRow').innerHTML
     const tr = document.querySelector('#communityBoardRow')
     const tbody = document.querySelector('table > tbody')
@@ -21,11 +46,11 @@ async function init() {
     Nodes.forEach(v=>{
         const clone = document.importNode(tr.content,true)
         console.log(clone)
-        const td = document.querySelectorAll('td')
+        const td = clone.querySelectorAll('td')
         const aElement = document.createElement('a')
         aElement.href = 'board/community/view/'+ v.board_idx
         aElement.innerHTML = v.subject
-        console.log(Nodes.length)
+        console.log(td)
 
         td[0].innerHTML = v.board_idx
         td[1].appendChild(aElement)
@@ -47,5 +72,7 @@ async function init() {
     })
 
     
+
+
 
 }
