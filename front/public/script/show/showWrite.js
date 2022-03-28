@@ -19,11 +19,11 @@ async function init() {
         }
 
         console.log(data);
-        const response = await axios.post('http://localhost:4001/show/program/showwrite',data);
+        const response = await axios.post('showwrite',data);
 
         if(response!==undefined){
-            // const { idx } = response.data.result
-            location.href=`http://localhost:4001/show/program/showview/${idx.value}`,{
+            // const { idx } = response.data.result;
+            location.href=`http://localhost:3001/show/program/showview/${idx.value}`,{
                 withCredentials:true,
             }
         }else{
