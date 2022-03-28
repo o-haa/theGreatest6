@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community view</title>
+    <script src="/script/board/communityView.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <h3>Community View</h3>
@@ -22,10 +24,19 @@
             <td id="date"></td>
         </tr>
         <tr>
+            <td>view : </td>
+            <td id="hit"></td>
+        </tr>
+        <tr>
             <td>content : </td>
             <td id="content"></td>
         </tr>
     </table>
-    <a href="/board/community/list">List</a>
+    <a href = "/board/community/list">List</a>
+    <a href = "/board/community/write:idx"></a>
+    <form method = "post" action = "/board/community/delete" id="deleteFrm">
+        <input type="hidden" name = "idx" value=`req.params`>
+        <button type="submit" value="Delete">Delete</button>
+    </form>
 </body>
 </html>
