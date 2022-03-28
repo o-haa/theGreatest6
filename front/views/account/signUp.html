@@ -6,18 +6,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/index.css" rel="stylesheet" type="text/css">
+    <link href="/css/account/member.css" rel="stylesheet" type="text/css">
     <script src="/script/account/signUp.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
 
 <body>
-    <div class="wh100 center">
+    <div class="wrap">
+        <div id="header">
+            <div id="nav">
+                <div id="logoBox">
+                    <h1>
+                        <a href="/">Team6</a>
+                    </h1>
+                </div>
+                <ul id="mainMenu">
+                    <li id="show">
+                        <a href="/show/program/showcard">show</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <main class="center memberBox">
             <form method="post" action="*" id="signUpFrm">
                 <table class="w100 signUpBox ">
-                    <h3 class ="accountFrmHead">
+                    <h3 class="accountFrmHead">
                         sign up
                     </h3>
                     <tbody class="flexCol" id="signUpTable">
@@ -28,18 +42,18 @@
                                     <option value="@gmail.com">@gmail.com</option>
                                     <option value="@naver.com">@naver.com</option>
                                     <option value="@daum.net">@daum.net</option>
-                                    <option value="">직접 입력</option>
+                                    <!-- <option value="">직접 입력</option> -->
                                 </select>
                             </td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td class="w80 inputs">
                                 <input type="button" value="중복체크" id="idCheckBtn">
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr>
                             <td>
-                                <span id ="idCheckResult"></span>
+                                <span id="idCheckResult"></span>
                             </td>
                         </tr>
                         <tr class="signUpTr">
@@ -62,19 +76,21 @@
                             <td>
                                 <sapn id="pwCheck1"></sapn>
                             </td>
-                        </tr>    
+                        </tr>
                         <tr class="signUpTr">
                             <td class="w80 inputs">
                                 <input type="password" id="userPwCheck" placeholder="confirm">
                             </td>
-                        </tr>           
+                        </tr>
                         <tr>
                             <td>
-                                <sapn id="pwCheck2"></sapn>
+                                <sapn id = "pwCheck2"></sapn>
                             </td>
-                        </tr>             
-                        <tr>
-                            <input type="submit" value="sign up">
+                        </tr>
+                        <tr class="inputBox2 flexCol">
+                            <td class = "whBtn">
+                                <input type="submit" value="sign up" id="signUpBtn">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
