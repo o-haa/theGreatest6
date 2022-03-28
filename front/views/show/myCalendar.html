@@ -5,11 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/userCal.css">
-    <!-- <link rel="stylesheet" href="/css/subNav.css"> -->
+    <link rel="stylesheet" href="/css/show/myCalendar.css">
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded',()=>{
-        })
     </script>
 </head>
 <body>
@@ -97,7 +94,7 @@
         <div id="content">
             <div id="calContent">
                 <div id="userBadge">
-                    <div id="userLevel">3</div>
+                    <span id="userLevel">3</span>
                     <span id="username">Ingoo Kwak</span>
                 </div>
                  <button id="createEventBtn">+ Create Event</button>
@@ -109,24 +106,30 @@
                 <div id="monthly">
                     <div id="monthlyTitle">Weakly</div>
                     <div id="monthTitleSmall">First Week</div>
+                    <!-- 일정 카드 리스트 박스 -->
                     <div id="menuSmall">
-                        <!-- 일정 카드 리스트 생성 -->
-                        <!-- 3월의 일정리스트 -->
                             <ul id="menuSmallCards">
+                                <!-- 일정 카드 생성 -->
                                 <li class="menuSmallCard">
+                                    <!-- 좌측 : 일월 표시 -->
                                     <div class="calBox">
                                         <div class="calBoxDate">22</div>
                                         <div class="calBoxMonth">MAR</div>
                                     </div>
+                                    <!-- 우측 : 일정 표시 -->
                                     <div class="listBox">
+                                        <!-- 노란색 : 사용자 -->
                                         <div class="listBox User">
+                                            <!-- 점 -->
                                             <div class="Post User"></div>
                                             <div class="Memo User">
                                                 <span class="memoTitle">타이틀을 길게 써볼까나</span>
                                                 <span class="memoContent">메모</span>
                                             </div>
                                         </div>
+                                        <!-- 하늘색 : 관리자 -->
                                         <div class="listBox Admin">
+                                            <!-- 점 -->
                                             <div class="Post Admin"></div>
                                             <div class="Memo Admin">
                                                 <span class="memoTitle">타이틀</span>
@@ -163,6 +166,9 @@
             </div>
             
             <div id="mainContent">
+                <!-- 타이틀 캘린더 -->
+                <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
+                
                 <div id="mainContentTitle">
                     <div id="mainContentTitleMonth">
                         <span>MAR 2022</span>

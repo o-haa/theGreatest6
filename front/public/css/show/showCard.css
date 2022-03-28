@@ -67,11 +67,43 @@
     width: 22px;
     height: 22px;
 }
-/* 여기까지 showCard와 동일
-타이틀 h1의 margin-bottom만 다름. (line 28)*/
 
-#content > #mainContent > #mainCal {
+/* 카드 컨텐츠 박스 */
+#content > #mainContent > #scrollBox{
+    width:100%;
+    white-space: nowrap;
+    overflow: auto;
+}
+/* 카드 컨텐츠 ul list */
+#content > #mainContent > #scrollBox > .ulCard {
+    height: 550px;
+}
+.ulCard > li {
+    width: 400px;
+    height: 520px;
+    padding-top:10px;
+    margin-right:20px;
+    display: inline-block;
+    box-sizing: border-box;
+    box-shadow: 0px 25px 37px #F2F2F2;
+    border-radius: 25px;
+}
+
+/* 카드 개별 상세정보 보기 */
+.ulCard > li > .imgBox{
     width: 100%;
-    height: 740px;
-    border: 3px solid #E3E7EA;
+    height: 100%;
+    border-radius: 25px;
+    background-image: url('/img/poster/park.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+#content > #mainContent > .infoCard{
+    width: 96%;
+    height: 200px;
+    padding:20px;
+    border: 1.5px solid #A8BEBF; 
+    border-radius: 10px;  
 }

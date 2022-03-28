@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/show/showList.css">
-    <!-- <link rel="stylesheet" href="/css/subNav.css"> -->
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded',()=>{
-        })
     </script>
 </head>
 <body>
@@ -113,29 +110,75 @@
             <div id="mainContent">
                 <h1 style="font-family: 'korFontBold' !important;">이달의 공연 소식</h1>
 
-                <form action="#" id="listSearchForm">
+                <!-- 리스트 검색창 -->
+                <div id="listSearchBox">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon">
-                        <path d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z" fill="#A5A5A5"></path>
+                        <path d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z" fill="#A8BEBF"></path>
                     </svg>
-                    <input type="text" placeholder="무엇이든 찾아보세요">            
-                </form>
-                <span>총 3개의 공지사항이 있습니다</span>
-               <table>
+                    <form action="#" id="listSearchForm">
+                        <input type="text" placeholder="봄바람 살랑일땐 연극이죠" id="listSearchInput">            
+                    </form>
+                </div>
+                <div id="listEventBox">
+                    <span id="totalNotice">총 3개의 공지사항이 있습니다</span>
+                    <div id="mainContentTitleIcon">
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_list_2x.png" id="List">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_grid_2x.png" id="grid">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_cal_2x.png" id="calBtn">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 리스트 테이블 시작 -->
+                <table class="listTable">
                    <tr>
-                       <td>글번호</td>
-                       <td>구분</td>
-                       <td>제목</td>
-                       <td>등록일</td>
-                       <td>조회수</td>
+                       <th>글번호</th>
+                       <th>구분</th>
+                       <th>제목</th>
+                       <th>등록일</th>
+                       <th>조회수</th>
+                   </tr>
+
+                   <tr>
+                       <td>공지</td>
+                       <td>안내</td>
+                       <td><라투시카> 공연취소 안내</td>
+                       <td>22-04-08</td>
+                       <td>300</td>
                    </tr>
                    <tr>
-                       <td>{{idx}}</td>
-                       <td>{{subject}}</td>
-                       <td>{{title}}</td>
-                       <td>{{wrtieDate}}</td>
-                       <td>{{hitNum}}</td>
-                   </tr>
-                   
+                       <td>공지</td>
+                       <td>안내</td>
+                       <td><라투시카> 공연취소 안내</td>
+                       <td>22-04-08</td>
+                       <td>300</td>
+                   </tr> 
+                   <tr>
+                        <td>03</td>
+                        <td>안내</td>
+                        <td><라투시카> 공연취소 안내</td>
+                        <td>22-04-08</td>
+                        <td>300</td>
+                    </tr> 
+                   <tr>
+                        <td>02</td>
+                        <td>안내</td>
+                        <td><시티 보드 더 정글> 내한 팬사인회 안내</td>
+                        <td>22-04-08</td>
+                        <td>300</td>
+                    </tr> 
+                   <tr>
+                        <td>01</td>
+                        <td>안내</td>
+                        <td><마리 : 조용한 승자> 30주년 연극 공연 안내</td>
+                        <td>22-04-08</td>
+                        <td>300</td>
+                    </tr> 
                </table>
             </div>
         </div>

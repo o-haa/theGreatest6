@@ -6,12 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/index.css" rel="stylesheet" type="text/css">
-
+    <link href="/css/account/member.css" rel="stylesheet" type="text/css">
+    <script src="/script/account/signIn.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-    <div class="wh100 center">
+    <div class="wrap">
+        <div id="header">
+            <div id="nav">
+                <div id="logoBox">
+                    <h1>
+                        <a href="/">Team6</a>
+                    </h1>
+                </div>
+                <ul id="mainMenu">
+                    <li id="show">
+                        <a href="/show/program/showcard">show</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <main class="center memberBox">
             <article class="flexCol signInBox rad5">
                 <section class="w100">
@@ -21,23 +36,36 @@
                     <span class="kakao">Kakao Talk</span>
                 </section>
                 <section class="w100 h100 marginAuto">
-                    <form method="post" action="*" id="signInFrm" class="w100">
+                    <form method="post" action="*" id="signInFrm" class="flexCol w100">
                         <ul class="inputBox flexCol">
                             <li class="inputs">
-                                <span id ="userIcon"></span>
-                                <input type="text" placeholder ="Name" name="signInId" autofocus>
+                                <span id="userIcon"></span>
+                                <input type="text" id="tempId" placeholder="signInId" autofocus>
+                                <select name="mail" id="mail">mail
+                                    <option value="@gmail.com">@gmail.com</option>
+                                    <option value="@naver.com">@naver.com</option>
+                                    <option value="@daum.net">@daum.net</option>
+                                    <!-- <option value="">직접 입력</option> -->
+                                </select>
+                                <span id ="msg"></span>
                             </li>
+                        </ul>
+                        <ul class="inputBox flexCol">
                             <li class="inputs">
-                                <span id ="passwordIcon"> </span>
-                                <input type="text" placeholder="Password" name="signInPw">
+                                <span id="passwordIcon"> </span>
+                                <input type="password" placeholder="Password" id="signInPw">
                             </li>
+                        </ul>
+                        <ul class="inputBox flexCol">
                             <li class="whBtn">
                                 <input type="submit" value="sign in">
                             </li>
                         </ul>
                     </form>
                 </section>
-            
+                <section id ="signUpLink">
+                    <a href="/account/member/signup">create account</a>
+                </section>
             </article>
             <article>
 
