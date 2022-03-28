@@ -23,7 +23,7 @@ async function init() {
 
         if(response!==undefined){
             // const { idx } = response.data.result
-            location.href=`http://localhost:4001/show/program/showview/${idx.value}`,{
+            location.href=`http://localhost:3001/show/program/showview/${idx.value}`,{
                 withCredentials:true,
             }
         }else{
