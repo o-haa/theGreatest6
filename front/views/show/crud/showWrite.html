@@ -22,8 +22,10 @@
                     <option value="공연">event</option>
                 </select>
             </td>
-            <th>공연 제목</th>
-            <td><input type="text" name="title" id="title"></td>
+            <tr>
+                <th>공연 제목</th>
+                <td><input type="text" name="title" id="title"></td>
+            </tr>
             <th>예매 시작일</th>
             <td><input type="text" name="ticketStart" id="ticketStart"></td>
             <th>공연 시작일</th>
@@ -97,31 +99,5 @@
         </table>
         <input type="submit" value="작성하기">
     </form>
-
-    <script type="text/javascript">
-        const writeForm = document.querySelector('#writeForm');
-        writeForm.addEventListener('submit',async (e)=>{
-            e.preventDefault();
-            const data = {
-                idx: document.querySelector('#idx').value,
-                subject: document.querySelector('#subject').value,
-                userid: document.querySelector('#userid').value,
-                title: document.querySelector('#title').value,
-                content: document.querySelector('#content').value
-            };
-            console.log(data);
-            const response = await axios.post('http://localhost:4001/show/program/showwrite',data);
-
-            if(response!==undefined){
-                // const { idx } = response.data.result
-                location.href=`http://localhost:4001/show/program/showview/${idx.value}`,{
-                    withCredentials:true,
-                }
-            }else{
-                alert('에러!');
-            }
-        });
-        
-    </script>
 </body>
 </html>
