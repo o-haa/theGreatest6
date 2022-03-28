@@ -4,16 +4,33 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/promgram/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+    const data= {
+        list: [
+            {
+                idx:'1',
+                subject:'제목1',
+                title:'졸리다',
+                userid:'hancoco',
+                content:'졸려요'
+            },
+            {
+                idx:'2',
+                subject:'제목1',
+                title:'타코 맛있다',
+                userid:'Joshy',
+                content:'대니 더 타코 맛있다'
+            }
+        ]
+    }
+
     // 헤더 nav home, admin 이동
     const homeBtn = document.querySelector('#home');
     const aboutBtn = document.querySelector('#about');
 
-    homeBtn.addEventListener('click',() => {
-        window.location.href = 'http://localhost:3001/';
-    })
-    aboutBtn.addEventListener('click',() => {
-        window.location.href = 'http://localhost:3001/about';
-    })
+    function moveHome(){ window.location.href = 'http://localhost:3001/'; }
+    function moveAbout(){ window.location.href = 'http://localhost:3001/about'; }
+    homeBtn.addEventListener('click', moveHome)
+    aboutBtn.addEventListener('click', moveAbout)
 
     const Nodes = data.list;
     const trElement = document.querySelector('#showList_row').innerHTML;
