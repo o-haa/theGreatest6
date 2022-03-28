@@ -1,36 +1,44 @@
 /* 영어폰트 */
 @font-face {
     font-family: 'basicBoldStrong';
-    src: url('../srcs/NotoSansKR-Black.otf') format('truetype');
+    src: url('../../font/NotoSansKR-Black.otf') format('truetype');
 }
 @font-face {
     font-family: 'basicBold';
-    src: url('../srcs/NotoSansKR-Bold.otf') format('truetype');
+    src: url('../../font/NotoSansKR-Bold.otf') format('truetype');
 }
 @font-face {
     font-family: 'basicLight';
-    src: url('../srcs/NotoSansKR-Light.otf') format('truetype');
+    src: url('../../font/NotoSansKR-Light.otf') format('truetype');
 }
 @font-face {
     font-family: 'basicMid';
-    src: url('../srcs/NotoSansKR-Medium.otf') format('truetype');
+    src: url('../../font/NotoSansKR-Medium.otf') format('truetype');
 }
 @font-face {
     font-family: 'basicReg';
-    src: url('../srcs/NotoSansKR-Regular.otf') format('truetype');
+    src: url('../../font/NotoSansKR-Regular.otf') format('truetype');
 }
-/*
-view에서 사용할 폰트
-<span style="font-family: '글꼴명' !important;">텍스트</span>
-이렇게 선언해줄것
-*/
 @font-face {
     font-family: 'viewFont';
-    src: url('../font/NanumMyeongjo.ttf') format('truetype');
+    src: url('../../font/NanumMyeongjo.woff') format('truetype');
+    src: url('../../font/NanumMyeongjo.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'MADE';
+    src: url('../../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype');
 }
 
+/* class처럼 사용된댔는데 적용 안되는데 왜 그런지 모르겠음
+.REG{ font-family:'basicReg'; }
+.BOLDSTRONG{ font-family:'basicBoldStrong'; }
+.BOLD{ font-family:'basicBold'; }
+.LiGHT{ font-family:'basicLight'; }
+.MID{ font-family:'basicReg'; }
+.VIEW{ font-family:'basicReg'; }
+*/
 
 body{
-    font-family:'basicReg','basicMid','basicBold','basicBoldStrong','basicLight';
+    font-family:'MADE';
 }
 /* 폰트끝 */

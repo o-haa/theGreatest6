@@ -19,11 +19,16 @@
 /* 본문 왼쪽 달력 박스  : calContent */
 #content > #calContent{
     width: 25%;
-    padding: 33px 33px 33px 33px;
+    height: 100%;
+    padding: 23px 33px 33px 33px;
     display: flex;
     align-items: center;
     flex-direction: column;
     border-right:1px solid #E3E7EA;
+    white-space: nowrap;
+    overflow: auto;
+    box-sizing: border-box;
+    box-sizing: border-box;
 }
 /* 사용자명, level이 표시되는 뱃지 div */
 #content > #calContent > #userBadge{
@@ -31,7 +36,6 @@
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
 }
 /* level 표시 icon */
@@ -41,7 +45,6 @@
     margin-right: 16px;
     padding: 8px;
     border-radius: 5px;
-    font-family: 'basicMid';
     font-size: 35px;
     text-align: center;
     color: #fff;
@@ -51,42 +54,49 @@
 }
 #content > #calContent > #userBadge > #username{
     color: #465D58;
-    font-size: 40px;
+    font-size: 39px;
 }
 
 /* 일정 생성 버튼 */
 #content > #calContent > #createEventBtn{
     width: 100%;
-    height: 65px;
-    margin: 25px 0 70px 0;
-    border: 2px solid #465D58;
+    height: 20%;
+    min-height: 48px;
+    max-height: 55px;
+    margin: 3% 0 0 0;
     border-radius: 5px;
-    font-size: 25px;
-    color: #465D58;
+    font-size: 23px;
+    font-family: 'basicLight';
+    text-align: center;
+    color: #FFF;
+    background: #465D58;
 }
 
 /* 소형 캘린더 */
 #content > #calContent > #calSmall{
-    width: 365px;
-    height: 332px;
-    margin-bottom: 42px;
+    width: 100%;
+    /* height : clamp (520px,68%,800px); */
+    height: 68%;
+    min-height: 280px;
+    /* min-height: 260px; */
+    margin-top: 40px;
+    margin-bottom: 30px;
     border-radius: 25px;
+    background: brown;
     box-shadow: 0px 25px 37px #F2F2F2;
+    box-sizing: border-box;
 }
 
 /* 위클리 카드 뉴스 */
 #content > #calContent > #monthly{
-    width: 366px;
-    height: 500px;
+    width: 100%;
     box-sizing: border-box;
 }
 #content > #calContent > #monthly > #monthlyTitle{
-    padding:0px 20px;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
     font-size:30px;
 }
 #content > #calContent > #monthly > #monthTitleSmall{
-    padding:0px 20px;
     margin-bottom: 12px;
     color: #A5A5A5;
 }
@@ -97,56 +107,57 @@
 }
 #content > #calContent > #monthly > #menuSmall> #menuSmallCards{
     width: 100%;
-    white-space: nowrap;
-    overflow: auto;
+    height: 300px;
 }
 /* 일정 카드 공통 속성 */
 #content > #calContent > #monthly > #menuSmall> #menuSmallCards > .menuSmallCard{  
     width: 100%;
     height: 100px;
-    border-radius: 10px;
     margin-bottom: 9px;
+    padding: 8px;
     display: flex;
     justify-content: space-between;
-    background:#232323;
     font-size:20px;
     color: #fff;
+    border-radius: 10px;
+    background:#232323;
     box-sizing: border-box;
 }
 /* 월일 표시 박스 */
 .menuSmallCard > .calBox{
-    width:33%;
+    width: 33%;
     height: 100%;
-    padding: auto 35px;
+    /* padding: 0px 12px 2px 25px; */
     vertical-align: bottom;
     box-sizing: border-box;
 }
 .menuSmallCard > .calBox>.calBoxDate{
-    padding:17px 30px 0px 30px;
-    height:45px;
+    height: 45px;
+    margin-bottom: 5px;
     font-size: 45px;
-    font-family: 'basicBoldStrong';
+    font-family: 'basicBold';
     text-align: center;
+    line-height: 120%;
 }
 .menuSmallCard > .calBox>.calBoxMonth{
     font-size: 18px;
-    font-family: 'basicBoldStrong';
+    font-family: 'basicBold';
     text-align: center;
 }
 /* 일정 표시  */
 .menuSmallCard > .listBox{
     width: 66%;
     height: 100%;
-    padding: 10px 0px 10px 60px;
+    padding-left: 8px;
     box-sizing: border-box;
 }
-.menuSmallCard > .listBox > .listBox {
+.menuSmallCard > .listBox > .listBoxIn {
     display: flex;
     align-items: center;
     height: 50%;
     box-sizing: border-box;
 }
-.menuSmallCard > .listBox > .listBox > .Post{
+.menuSmallCard > .listBox > .listBoxIn > .Post{
     width: 8px;
     height: 8px;
     border-radius: 50%;
@@ -154,23 +165,23 @@
     background: brown;
 }
 
-.menuSmallCard > .listBox > .listBox > .Memo{
+.menuSmallCard > .listBox > .listBoxIn > .Memo{
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
+    justify-content: space-between;
 }
-.menuSmallCard > .listBox > .listBox > .Memo > .memoTitle{
-    font-size: 12px;
+.menuSmallCard > .listBox > .listBoxIn > .Memo > .memoTitle{
+    font-size: 14px;
 }
-.menuSmallCard > .listBox > .listBox > .Memo > .memoContent{
-    font-size: 8px;
+.menuSmallCard > .listBox > .listBoxIn > .Memo > .memoContent{
+    font-size: 10px;
 }
 
 
 /* 본문 오른쪽 카드 컨텐츠 박스 */
 #content > #mainContent{
     width: 75%;
-    padding: 33px 59px 50px 53px;
+    padding: 23px 59px 50px 53px;
     font-family: 'engFontSemiBold';
     box-sizing: border-box;
 }
@@ -228,6 +239,6 @@
 
 #content > #mainContent > #mainCal {
     width: 100%;
-    height: 790px;
+    height: 85%;
     border: 3px solid #E3E7EA;
 }

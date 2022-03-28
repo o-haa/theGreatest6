@@ -2,31 +2,39 @@ exports.main = (req,res, next) =>{
     next()
 }
 
-//달력 기능
-exports.calendar = (req,res)=>{
-    res.render('./show/showCalendar')
-}
-//상세피이지 보여주는 기능
-exports.showView = (req,res)=>{
-    res.render('./show/showView')
+exports.showHome = (req,res)=>{
+    res.render('./show/program/showHome')
 }
 
-//리스트 메뉴
 exports.showList = (req,res)=>{
-    res.render('./show/showList')
+    res.render('./show/program/showList')
 }
 
-//그리드 메뉴
-exports.showGrid = (req,res)=>{
-    res.render('./show/showCard')
+exports.showCard = (req,res)=>{
+    res.render('./show/program/showCard')
 }
 
-//티켓 예매까지만! 결제기능은 payment로 빠짐   
+exports.showCalendar = (req,res)=>{
+    res.render('./show/program/showCalendar')
+}
+
+exports.showView = (req,res)=>{
+    res.render('./show/program/showView')
+}
+
+exports.showWrite = (req,res)=>{
+    res.render('./show/program/showWrite')
+}
+
+exports.showModify = (req,res)=>{
+    res.render('./show/program/showModify')
+}
+
 exports.ticketopen = (req,res)=>{
 
 }
 
 exports.test = (req,res)=>{
-    res.render('./show/myCalendar')
+    res.render('./show/program/myCalendar')
 }
 
