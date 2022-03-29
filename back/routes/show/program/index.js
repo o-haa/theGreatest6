@@ -7,6 +7,7 @@ router.post('/showlist', programController.showList)
 router.post('/showcard', programController.showCard)
 router.post('/showcalendar', programController.showCalendar)
 
+router.post('/showview/:idx', programController.showWrite)
 router.post('/showwrite', programController.showWrite)
 router.post('/showmodify', programController.showModify)
 
