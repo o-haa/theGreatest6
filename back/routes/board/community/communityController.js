@@ -37,7 +37,6 @@ exports.communityWrite = async (req,res) =>{
     const {subject,content}=req.body
     const categoryIdx = idx.show_category_id
     const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)'
-    // const sql3 = `INSERT INTO b_file(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)`
     
     const prepare2 = ['117',subject,content,categoryIdx]
     console.log(prepare2)

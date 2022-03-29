@@ -18,7 +18,7 @@ async function init() {
     const totalPage = Math.ceil(totalRows/viewRows) 
     const blockBox = Math.ceil(totalPage/pagingBlock)
 
-    let page = 1; 
+    let page = 2; 
     const currentBlock = Math.ceil(page/pagingBlock)
     const block = ((currentBlock-1) * pagingBlock)
 
@@ -82,7 +82,7 @@ async function init() {
         tbody.innerHTML = template
     }
     
-    // pages(2)
+    pages(2)
     
     // function getcheckboxvalue() {
     //     const query = 'input [#classic]:checked'
