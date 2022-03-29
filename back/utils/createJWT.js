@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 require('dotenv').config();
-const salt = process.env.salt || 'blackTea'
+const salt = process.env.salt || 'blackTea';
 
 
 const createToken = async function(status){
@@ -17,7 +17,7 @@ const createToken = async function(status){
     const encodingPayload = await encoding(payload);
     const signature = createSignature(encodingHeader,encodingPayload);
 
-    const jwt = `${encodingHeader}.${encodingPayload}.${signature}`
+    const jwt = `${encodingHeader}.${encodingPayload}.${signature}`;
     return jwt;
 }
 

@@ -22,5 +22,5 @@ app.use(cors(options));
 app.use(router);
 
 app.listen(port, _ => {
-    console.log(`back server running on localhost:${port}`)
+    console.log(`back server running on localhost:${port}`);
 })
