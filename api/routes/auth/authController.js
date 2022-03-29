@@ -26,7 +26,8 @@ exports.kakao = async (req, res) => {
                 'Authorization': `Bearer ${access_token}`,
             }
         })
-        console.log(user.data)
+        console.log(user.data);
+        //유저 데이터 가져와서 처리해야함-내일 할 예정
         // const user = await axios.post('http://localhost:3001',)
     } catch (e) {
         console.log(e.message);

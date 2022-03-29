@@ -85,8 +85,8 @@ exports.signIn = async (req, res) => {
     const [[result]] = await pool.execute(sql, prepare);
     if (userPw == result.user_password && userId == result.user_id) {
       delete result.user_password;
-      const token = await createToken(result)
-      console.log(token)
+      const token = await createToken(result);
+
       res.cookie('AccessToken', token, {
         path: '/',
         httpOnly: true,
@@ -99,6 +99,7 @@ exports.signIn = async (req, res) => {
         errno: 0
       };
     } else throw new Error('로그인 오류');
+    
   } catch (e) {
     console.log(e);
   }

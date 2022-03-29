@@ -11,7 +11,7 @@ function init() {
 
     signInFrm.addEventListener('submit', signUpHandler);
     async function signUpHandler(e) {
-        e.preventDefault()
+        e.preventDefault();
         const tempId = document.querySelector('#tempId').value;
         const usermail = document.querySelector('#mail').value;
         const userPw = document.querySelector('#signInPw').value;
@@ -36,9 +36,4 @@ function init() {
             }
         }
     }
-
-    const kaka = document.querySelector('#kakao')
-
-
-
 }

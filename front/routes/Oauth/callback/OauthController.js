@@ -7,22 +7,21 @@ exports.kakao = async (req, res) => {
   axios.defaults.headers.post['Content-Type'] = 'application/json';
   axios.defaults.withCredentials = true;
 
-  const { code } = req.query
+  const { code } = req.query;
   const data = {
     code
-  }
+  };
   try {
-    const response = await axios.post('/kakao', data,)
-    console.log(response.data)
+    const response = await axios.post('/kakao', data,);
   } catch (e) {
     console.log(e)
   }
-  res.send('kakao login')
+  res.send('kakao login');
 }
 
 
 
-
+//구글 로그인....??
 // exports.google = async(req,res) => {
 
 // }
