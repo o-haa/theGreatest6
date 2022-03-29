@@ -10,9 +10,8 @@ exports.communityList = async (req,res) =>{
     const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`
 
     try{
-        console.log('aa')
         const [result] = await pool.execute(sql)
-        console.log('aa',result)
+        // console.log('aa',result)
 
         response = {
             ...response,
@@ -129,21 +128,21 @@ exports.communityDelete = async (req,res) =>{
 }
 
 exports.communityUpdate = async (req,res)=>{
+    const{idx}=req.params
+    const boardIdxPre = idx
+
     const {select}=req.body
     const sql = "SELECT * FROM s_category WHERE show_category = ?"
-    const prepare = [select]
+    const selectPre = [select]
 
-    const result = await pool.execute(sql,prepare)
+    const result = await pool.execute(sql,selectPre)
 
-    const [idx] = result[0]
+    const [selectidx] = result[0]
     const {subject,content}=req.body
-    const categoryIdx = idx.show_category_id
-    // const sql2 = `UPDATE board SET board_subject='${subject}', board_content='${content}', show_category_idx='${categoryIdx} WHERE board_idx='${board_idx}'`
-    // const sql3 = `UPDATE board SET board_subject='${subject}', board_content='${content}', ,show_category_idx='${categoryIdx}, board_file_idx='${board_file_index}' WHERE board_idx='${board_idx}'`
+    const categoryIdx = selectidx.show_category_id
     const sql2 = `UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?`
-    const sql3 = `UPDATE board SET board_subject=?, board_content=?, ,show_category_idx=? WHERE board_idx=?`
 
-    const prepare2 = [subject,content,categoryIdx]
+    const prepare2 = [subject,content,categoryIdx,boardIdxPre]
     console.log(prepare2)
 
     try{
@@ -161,42 +160,31 @@ exports.communityUpdate = async (req,res)=>{
         const fileStoredname = req.file.filename
         const fileSize = req.file.size
         const fileDate = new Date()
-        const fileDltF = '0'
-        const fSql = `UPDATE b_file file_originalname = ?,
+        const fSql = `UPDATE b_file SET 
+                                    file_originalname = ?,
                                     file_storedname = ?,
                                     file_size = ?,
                                     file_date = ?,
-                                    file_dlt_flag
+                                    WHERE
+                                    board_idx = ?
                                     `
 
-        const boardIdx = result.insertId
-        const fileIdx = `SELECT * FROM b_file WHERE board_file_idx = ?`
-        const prepare3 = [subject,content,categoryIdx,fileIdx]
-        const fPrepare = [fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF]                           
+        const fPrepare = [fileOriginalname,fileStoredname,fileSize,fileDate,idxPrepare]                           
 
         if(req.file.size > 0){
 
-
-            const [result] = await pool.execute(fSql,fPrepare,sql3,prepare3,)
-            const response = {
+            const [result] = await pool.execute(fSql,fPrepare)
+            response = {
                 result:{
                     row:result.affectedRows,
                     insertId:result.insertId
                 },
                 errno:0    
             } 
-            res.json(response)
+            
         } 
 
     }catch(e){
         console.log(e.message)
-        const response = {
-            result:{
-                row:0,
-                inserId:0
-            },
-            errno:1,
-        }
-        res.json(response)
     }
 }

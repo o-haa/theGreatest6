@@ -10,6 +10,12 @@ async function init() {
     const date = document.querySelector('#date')
     const content = document.querySelector('#content')
     const hit = document.querySelector('#hit')
+
+    const upElement = document.querySelector('#update')
+    const aElement = document.createElement('a')
+    aElement.href = `/board/community/update/` + `${idx}`
+    aElement.innerHTML = 'Edit'
+    upElement.appendChild(aElement)
     
     const response = await axios.post(`/view/${idx}`,{
         withCredentials:true,
