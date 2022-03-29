@@ -8,8 +8,8 @@ exports.myTicket = (req, res) => {
 
 }
 
-exports.myPic = (req, res) => {
-    res.render('./account/myPic')
+exports.myPick = (req, res) => {
+    res.render('./account/myPick')
 
 }
 

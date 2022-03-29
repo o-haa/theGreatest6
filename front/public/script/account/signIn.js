@@ -36,4 +36,9 @@ function init() {
             }
         }
     }
+
+    const kaka = document.querySelector('#kakao')
+
+
+
 }
