@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show listSearchBox</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/css/show/showList.css">
+    <script src="/script/show/showList.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -133,26 +134,31 @@
                     <thead>
                         <tr>
                             <th>글번호</th>
-                            <th>구분</th>
+                            <th>분류</th>
+                            <th>제한</th>
                             <th>제목</th>
                             <th>작성자</th>
-                            <th>조회수</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+    
+                    <tbody>
+                        <tr id="newShowList">
+                            <!-- 반복될 부분 -->
+                        </tr>
+                    </tbody>
                 </table>
 
                 <template id="showList_row">
                     <tr>
-                        <td>{idx}</td>
-                        <td>{subject}</td>
-                        <td>{title}</td>
-                        <td>{userid}</td>
-                        <td>{content}</td>
+                        <td>{show_idx}</td>
+                        <td>{show_category_idx}</td>
+                        <td>{show_xrated}</td>
+                        <td>{show_title}</td>
+                        <td>관리자</td>
                     </tr>
                 </template>
 
-               <a href="/show/program/showwrite">글쓰기</a>
+               <a href="/show/program/showwrite/${id}">글쓰기</a>
                </script>
             </div>
         </div>

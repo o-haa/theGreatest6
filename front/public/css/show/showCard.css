@@ -1,9 +1,9 @@
-@import url('../show/_settingLayout.css'); /* html 기본 세팅 */
-@import url('../show/_fontLayout.css'); /* 폰트 import */
-@import url('../show/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
-@import url('../show/_mainContentLayout.css'); /* 본문 레이아웃 */
-@import url('../show/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
-@import url('../show/_contentLayout.css'); /* 본문 오른쪽 메인박스 틀 */
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
+@import url('../index/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
+@import url('../index/_contentLayout.css'); /* 본문 오른쪽 메인박스 틀 */
 
 /*
     현진 작성 CSS 읽는 방법!

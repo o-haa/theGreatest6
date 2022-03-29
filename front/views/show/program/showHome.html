@@ -6,22 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/show/showHome.css">
-    <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded',()=>{
-            let vh = 0;
-
-            useEffect(() => {
-            vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-            }, []);
-
-            const setVh = () => {
-            document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
-            };
-            window.addEventListener('resize', setVh);
-            setVh();
-        })
-    </script>
 </head>
 <body>
     <div id="wrap">
