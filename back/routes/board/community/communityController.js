@@ -1,5 +1,5 @@
 
-const { pool } = require("../../../db")
+const  pool  = require("../../../db")
 
 let response = {
     result:[],
@@ -7,12 +7,12 @@ let response = {
 }
 
 exports.communityList = async (req,res) =>{
-    console.log('hello')
     const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`
 
     try{
+        console.log('aa')
         const [result] = await pool.execute(sql)
-        console.log(result)
+        console.log('aa',result)
 
         response = {
             ...response,
@@ -21,7 +21,7 @@ exports.communityList = async (req,res) =>{
         }
         res.json(response)
     } catch (e){
-        console.log(e.message)
+        console.log('에러메세지',e.message)
 
     }
 }
@@ -32,14 +32,14 @@ exports.communityWrite = async (req,res) =>{
     const prepare = [select]
 
     const result = await pool.execute(sql,prepare)
-
+    
     const [idx] = result[0]
     const {subject,content}=req.body
     const categoryIdx = idx.show_category_id
     const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)'
-    const sql3 = `INSERT INTO board(user_idx,board_subject,board_content,show_category_idx,board_file_idx) VALUES(?,?,?,?,?)`
+    // const sql3 = `INSERT INTO b_file(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)`
     
-    const prepare2 = ['1',subject,content,categoryIdx]
+    const prepare2 = ['117',subject,content,categoryIdx]
     console.log(prepare2)
 
     try{
@@ -59,7 +59,6 @@ exports.communityWrite = async (req,res) =>{
         const fileDate = new Date()
         const fileDltF = '0'
         const fSql = `INSERT INTO b_file (
-                                            board_file_idx,
                                             board_idx,
                                             file_originalname,
                                             file_storedname,
@@ -67,17 +66,15 @@ exports.communityWrite = async (req,res) =>{
                                             file_date,
                                             file_dlt_flag
                                             )
-                                    VALUES(?,?,?,?,?,?,?)`
+                                    VALUES(?,?,?,?,?,?)`
 
         const boardIdx = result.insertId
-        const fileIdx = `SELECT * FROM b_file WHERE board_file_idx = ?`
-        const prepare3 = ['1',subject,content,categoryIdx,fileIdx]
-        const fPrepare = ['8',boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF]                           
+        const fPrepare = [boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF]                           
 
         if(req.file.size > 0){
 
 
-            const [result] = await pool.execute(fSql,fPrepare,sql3,prepare3,)
+            const [result] = await pool.execute(fSql,fPrepare)
             response = {
                 result:{
                     row:result.affectedRows,
@@ -85,7 +82,7 @@ exports.communityWrite = async (req,res) =>{
                 },
                 errno:0    
             } 
-            res.json(response)
+            
         } 
 
     }catch(e){
@@ -145,7 +142,7 @@ exports.communityUpdate = async (req,res)=>{
     // const sql2 = `UPDATE board SET board_subject='${subject}', board_content='${content}', show_category_idx='${categoryIdx} WHERE board_idx='${board_idx}'`
     // const sql3 = `UPDATE board SET board_subject='${subject}', board_content='${content}', ,show_category_idx='${categoryIdx}, board_file_idx='${board_file_index}' WHERE board_idx='${board_idx}'`
     const sql2 = `UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?`
-    const sql3 = `UPDATE board SET board_subject=?, board_content=?, ,show_category_idx=?, board_file_idx=? WHERE board_idx=?`
+    const sql3 = `UPDATE board SET board_subject=?, board_content=?, ,show_category_idx=? WHERE board_idx=?`
 
     const prepare2 = [subject,content,categoryIdx]
     console.log(prepare2)

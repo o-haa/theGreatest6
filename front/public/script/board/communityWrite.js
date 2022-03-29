@@ -22,9 +22,9 @@ async function init() {
     
         try {
             const response = await axios.post(`/write`,formData)
-            
             const{insertId} = response.data.result
             location.href=`/board/community/view/${insertId}`
+            
         } catch(e){
             console.log(e.message)
             alert('try again')
@@ -33,5 +33,6 @@ async function init() {
         
 
     })
+    
 
 }

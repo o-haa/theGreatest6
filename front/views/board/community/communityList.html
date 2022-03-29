@@ -18,6 +18,16 @@
             align-items: center;
         }
 
+        #paging {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* #paging > li {
+            margin:0 auto;
+        } */
+
         #communityBoard{
             width:80%;
             margin:0 auto;
@@ -92,13 +102,13 @@
         <template id="communityBoardRow">
             <tr>
                 <td>{idx}</td>
-                <td><a class="a"></a>{subject}</td>
+                <td></td>
                 <td>{nickname}</td>
                 <td>{date}</td>
                 <td>{hit}</td>
             </tr>
         </template>
     </div>
-    
+    <a href="write">write</a>
 </body>
 </html>
