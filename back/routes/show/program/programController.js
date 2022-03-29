@@ -37,6 +37,20 @@ exports.showCalendar = (req,res)=>{
     console.log('showCalendark call!')
 }
 
+exports.showView = async (req,res)=>{
+    console.log('view니?')
+    console.log('hey : ',req.params)
+    // 이게 show_idx니까 이걸로 값 찾아야지
+    const sql = 'SELECT shows WHERE show_idx=`${idx}`'
+
+    try{
+        const [result] = await pool.execute(sql)
+        console.log(result)
+    }catch(e){
+
+    }
+}
+
 exports.showModify = (req,res)=>{
     console.log('글수정하냐')
 }
