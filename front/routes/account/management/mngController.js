@@ -1,11 +1,4 @@
-const {decodingToken} = require('../../../utils/token')
-
-
 exports.myInfo = (req, res) => {
-
-    const { AccessToken} = req.cookies
-    decodingToken(AccessToken)
-
     res.render('./account/myInfo');
 }
 
