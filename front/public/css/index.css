@@ -10,7 +10,7 @@ a:link, :active, :visited{
 }
 
 body{
-    background: black;
+    background: url('../img/index/index.png');
     font-family: 'MADE';
 }
 
