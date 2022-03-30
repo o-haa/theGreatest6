@@ -5,9 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show View</title>
+    <script src="/script/show/showView.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
-    상세보기
+    <ul id="viewList">
+        <li>
+            <span class="title">번호 : </span>
+            <span>{show_idx}</span>
+        </li> 
+        <li>
+            <span class="title">분류 : </span>
+            <span>{show_category}</span>
+        </li> 
+        <li>
+            <span class="title">제한 : </span>
+            <span> {show_xrated}</span>
+        </li> 
+        <li>
+            <span class="title">제목 : </span>
+            <span>{show_title}</span>
+        </li> 
+        <li>
+            <span class="title">회사 : </span>
+            <span>{show_company}</span>
+        </li> 
+        <li>
+            <span class="title">감독 : </span>
+            <span>{show_director}</span>
+        </li> 
+    </ul>
+    <button id="leftBtn"><</button>  
+    <button id="rightBtn">></button>  
+    <button id="modifyBtn">수정</button>  
+    <button id="deleteBtn">삭제</button>  
+
+    <template>
+
+    </template>
 </body>
 </html>

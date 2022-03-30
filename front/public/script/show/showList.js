@@ -1,29 +1,40 @@
 document.addEventListener('DOMContentLoaded', init)
 
 async function init() {
-    axios.defaults.baseURL = 'http://localhost:4001/show/promgram/';
+    axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    
+    const response = await axios.post('showlist')
+    console.log('도착')
+    
+    const Nodes = response.data.result
+    let trElement = document.querySelector('#showList_row');
+    let trInner = document.querySelector('#showList_row').innerHTML;
+    const tbody = document.querySelector("table > tbody")
 
-    const data= {
-        list: [
-            {
-                idx:'1',
-                subject:'제목1',
-                title:'졸리다',
-                userid:'hancoco',
-                content:'졸려요'
-            },
-            {
-                idx:'2',
-                subject:'제목1',
-                title:'타코 맛있다',
-                userid:'Joshy',
-                content:'대니 더 타코 맛있다'
-            }
-        ]
-    }
+    let template=''
+    Nodes.forEach(v=>{
+        const clone = document.importNode(trElement.content,true)
+        let tdElement = clone.querySelectorAll('td')
+        const aElement = document.createElement('a')
+        aElement.setAttribute(`href`,`showview/${v.show_idx}`)
+        aElement.innerHTML = v.show_title
 
-    // 헤더 nav home, admin 이동
+        tdElement[0].innerHTML = v.show_idx
+        tdElement[1].innerHTML = v.show_category_idx
+        tdElement[2].innerHTML = v.show_xrated
+        tdElement[3].innerHTML = ''
+        tdElement[3].append(aElement)
+        tdElement[4].innerHTML = "관리자"
+        
+        tbody.append(clone)
+        
+        template += trInner.replace('{show_idx}',v.show_idx)
+                            .replace('{show_title}',v.show_title)
+                            .replace('{show_category_idx}',v.show_category_idx)
+                            .replace('{show_xrated}',v.show_xrated)
+    })
+
     const homeBtn = document.querySelector('#home');
     const aboutBtn = document.querySelector('#about');
 
@@ -33,23 +44,6 @@ async function init() {
     function moveAbout(){
         window.location.href = 'http://localhost:3001/about';
     }
-    
     homeBtn.addEventListener('click', moveHome)
     aboutBtn.addEventListener('click', moveAbout)
-
-    const Nodes = data.list;
-    const trElement = document.querySelector('#showList_row').innerHTML;
-    let template=''
-
-    //교수님 코드
-    Nodes.forEach(v=>{
-        template += trElement.replace('{idx}',v.idx)
-                        .replace('{subject}',v.subject)
-                        .replace('{title}',v.title)
-                        .replace('{userid}',v.userid)
-                        .replace('{content}',v.content);
-    })
-    const thead = document.querySelector('.listTable thead');
-    const tbody = document.querySelector('.listTable tbody');
-    tbody.innerHTML = template;
 }

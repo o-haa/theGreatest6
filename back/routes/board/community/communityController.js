@@ -1,5 +1,4 @@
-
-const  pool  = require("../../../db");
+const pool = require('../../../db');
 
 let response = {
     result:[],

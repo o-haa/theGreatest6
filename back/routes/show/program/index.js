@@ -8,7 +8,9 @@ router.post('/showcard', programController.showCard)
 router.post('/showcalendar', programController.showCalendar)
 
 router.post('/showwrite', programController.showWrite)
-router.post('/showmodify', programController.showModify)
+router.post('/showview/:idx', programController.showView)
+router.post('/showmodify/:idx', programController.showModify)
+router.post('/showdelete/:idx', programController.showDelete)
 
 
 module.exports = router

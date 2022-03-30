@@ -1,0 +1,17 @@
+/* 
+  header 밑에 자리하는 content div 전체 구성 css입니다.
+  필수적으로 적용해주세요.
+  
+  index와 같은 depth로 있는 폴더 안에 있는 css에서 사용할 경우,
+  예) public > css > account > index.css 에서 사용.
+
+  @import url('../index/_mainContentLayout.css');
+  로 삽입하시면 됩니다.
+*/
+
+
+#content{
+    height: 90vh;
+    display: flex;
+    box-sizing: border-box;
+}
