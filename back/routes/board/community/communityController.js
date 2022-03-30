@@ -7,52 +7,55 @@ let response = {
 
 exports.communityList = async (req,res) =>{
     const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`;
+    
     const classicSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`;
     const musicalSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 2 ORDER BY board_idx DESC`;
     const operaSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 3 ORDER BY board_idx DESC`;
     const balletSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 4 ORDER BY board_idx DESC`;
 
-    const {category} = req.body;
-    console.log(category)
+    
+    const data = `board_idx,board_subject,user_idx,board_date,board_hit`
+    const {category}= req.body;
+    console.log(req.body)
+    
+    const categorySql = `SELECT ${data} FROM board LEFT OUTER JOIN s_category ON board.show_category_idx = s_category.show_category_id`;
 
+    
     try{
-        if(category === 'classic'){
-            const [result] = await pool.execute(classicSql);
+        // if(category === 0){
+        //     const [result] = await pool.execute(classicSql)
+        //     response = {
+        //         ...response,
+        //         result,
+        //         errno:0
+        //     }
+        // }else if(category === 1){
+        //     const [result] = await pool.execute(musicalSql)
+        //     response = {
+        //         ...response,
+        //         result,
+        //         errno:0
+        //     }
+        // }else if(category === 2){
+        //     const [result] = await pool.execute(operaSql)
+        //     response = {
+        //         ...response,
+        //         result,
+        //         errno:0
+        //     }
+        // }else if(category === 3){
+        //     const [result] = await pool.execute(balletSql)
+        //     response = {
+        //         ...response,
+        //         result,
+        //         errno:0
+        //     }
+            const [result] = await pool.execute(categorySql)
             response = {
                 ...response,
                 result,
                 errno:0
-            };
-           
-        } else if (category === 'musical'){
-            const [result] = await pool.execute(musicalSql);
-            response = {
-                ...response,
-                result,
-                errno:0
-            };
-        } else if (category === 'opera'){
-            const [result] = await pool.execute(operaSql);
-            response = {
-                ...response,
-                result,
-                errno:0
-            };
-        } else if (category === 'ballet'){
-            const [result] = await pool.execute(balletSql);
-            response = {
-                ...response,
-                result,
-                errno:0
-            };
-        };
-
-        // const [result] = await pool.execute(sql)
-        // response = {
-        //     ...response,
-        //     result,
-        //     errno:0
-        // }
+            }
         
         res.json(response);
     } catch (e){

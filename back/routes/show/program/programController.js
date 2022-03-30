@@ -3,7 +3,7 @@ const pool = require('../../../db.js')
 let response = {
     result:[],
     errno:1
-
+}
 
 exports.showWrite = async (req,res)=>{
     console.log('back / showWrite 라우터 접속!')
