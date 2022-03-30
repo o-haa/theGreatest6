@@ -1,6 +1,3 @@
-const {decodingToken} = require('../../../utils/token')
-
-
 exports.myInfo = (req, res) => {
     res.render('./account/myInfo');
 }
