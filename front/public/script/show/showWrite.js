@@ -25,13 +25,23 @@ async function init() {
         }
         
         try{
-            const response = await axios.post('http://localhost:4001/show/program/showwrite',data)
+            const response = await axios.post('/showwrite',data)
             
             let idx = response.data.result.insertId
             location.href = `http://localhost:3001/show/program/showview/${idx}`
         }
         catch(e){
 
+        console.log(data);
+        const response = await axios.post('showwrite',data);
+
+        if(response!==undefined){
+            // const { idx } = response.data.result;
+            location.href=`http://localhost:3001/show/program/showview/${idx.value}`,{
+                withCredentials:true,
+            }
+        }else{
+            alert('에러!');
         }
     }
 }

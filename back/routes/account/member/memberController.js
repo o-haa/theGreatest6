@@ -1,4 +1,6 @@
 const pool = require('../../../db');
+const { createToken } = require('../../../utils/createJWT')
+
 
 exports.idCheck = async (req, res) => {
   let response = {
@@ -78,20 +80,28 @@ exports.signIn = async (req, res) => {
   };
   const { userPw, userId } = req.body;
   const prepare = [userId, userPw];
-  const sql = 'SELECT * from USER WHERE user_id = ? AND user_password = ?';;
+  const sql = 'SELECT * from USER WHERE user_id = ? AND user_password = ?';
   try {
     const [[result]] = await pool.execute(sql, prepare);
     if (userPw == result.user_password && userId == result.user_id) {
       delete result.user_password;
-      req.cookies = result;
+      const token = await createToken(result);
+
+      res.cookie('AccessToken', token, {
+        path: '/',
+        httpOnly: true,
+        secure: true,
+        domain: 'localhost'
+      })
       response = {
         ...response,
         result,
         errno: 0
       };
     } else throw new Error('로그인 오류');
+    
   } catch (e) {
-    console.log(e.message);
+    console.log(e);
   }
   res.json(response);
 }
