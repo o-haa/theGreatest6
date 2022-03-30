@@ -1,43 +1,42 @@
-let test = {}
-document.addEventListener('DOMContentLoaded', init)
+let test = {};
+document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
 axios.defaults.baseURL = 'http://localhost:4001/board/community';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-const response = await axios.post('/list')
+const response = await axios.post('/list');
 
-    let check = document.querySelectorAll('#category ul li input')
-    check[0].addEventListener('click',classicH)
-    check[1].addEventListener('click',classicH)
-    check[2].addEventListener('click',classicH)
-    check[3].addEventListener('click',classicH)
-
+    let check = document.querySelectorAll('#category ul li input');
+    check[0].addEventListener('click',classicH);
+    check[1].addEventListener('click',classicH);
+    check[2].addEventListener('click',classicH);
+    check[3].addEventListener('click',classicH);
     async function classicH(e){
-        let check = document.querySelectorAll('#category ul li input')
+        let check = document.querySelectorAll('#category ul li input');
         if(check[0].checked==true){
             const classicData = {
                 category: check[0].name
-            }
-            const response = await axios.post('/list',classicData)
+            };
+            const response = await axios.post('/list',classicData);
         } else if (check[1].checked==true){
             const musicalData = {
                 category: check[1].name
-            }
-            const response = await axios.post('/list',musicalData)
+            };
+            const response = await axios.post('/list',musicalData);
             
         } else if(check[2].checked==true){
             const operaData = {
                 category: check[2].name
-            }
-            const response = await axios.post('/list',operaData)
+            };
+            const response = await axios.post('/list',operaData);
             
         } else if(check[3].checked==true){
             const balletData = {
                 category: check[3].name
-            }
-            const response = await axios.post('/list',balletData)
+            };
+            const response = await axios.post('/list',balletData);
             
-        }
+        };
     }
     // async function musicalH(){
     //     let check = document.querySelectorAll('#category ul li input')
@@ -75,99 +74,98 @@ const response = await axios.post('/list')
 
     test = {
         ...response
-    }
+    };
 
-    const totalRows = response.data.result.length 
-    console.log(totalRows)
-    const viewRows = 10
-    const pagingBlock = 10
+    const totalRows = response.data.result.length ;
+    console.log(totalRows);
+    const viewRows = 10;
+    const pagingBlock = 10;
 
 
-    const totalPage = Math.ceil(totalRows / viewRows)
-    console.log(totalPage)
-    const blockBox = Math.ceil(totalPage / pagingBlock)
-    console.log(blockBox)
+    const totalPage = Math.ceil(totalRows / viewRows);
+    console.log(totalPage);
+    const blockBox = Math.ceil(totalPage / pagingBlock);
+    console.log(blockBox);
 
     let page = 3;
-    const currentBlock = Math.ceil(page / pagingBlock) 
-    const block = ((currentBlock - 1) * pagingBlock) 
+    const currentBlock = Math.ceil(page / pagingBlock);
+    const block = ((currentBlock - 1) * pagingBlock);
 
-    let endBlock = block + pagingBlock 
-    if (endBlock > totalPage) endBlock = totalPage
+    let endBlock = block + pagingBlock; 
+    if (endBlock > totalPage) endBlock = totalPage;
 
-    const paging = document.querySelector('#paging')
+    const paging = document.querySelector('#paging');
 
     for (let i = block + 1; i <= endBlock; i++) { 
-        const liElement = document.createElement('li')
-        const aElement = document.createElement('a')
+        const liElement = document.createElement('li');
+        const aElement = document.createElement('a');
 
-        aElement.setAttribute(`onClick`, `pages(${i})`)
-        aElement.innerHTML = `[${i}]`
-        liElement.appendChild(aElement)
-        paging.appendChild(liElement)
+        aElement.setAttribute(`onClick`, `pages(${i})`);
+        aElement.innerHTML = `[${i}]`;
+        liElement.appendChild(aElement);
+        paging.appendChild(liElement);
     }
     
 
-    const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows)
-    const tr = document.querySelector('#communityBoardRow')
-    const tbody = document.querySelector('table > tbody')
+    const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
+    const tr = document.querySelector('#communityBoardRow');
+    const tbody = document.querySelector('table > tbody');
 
     Nodes.forEach(v => { 
 
-        const clone = document.importNode(tr.content, true)
-        const td = clone.querySelectorAll('td')
-        const aElement = document.createElement('a')
-        aElement.href = '/board/community/view/' + v.board_idx
-        aElement.innerHTML = v.board_subject
+        const clone = document.importNode(tr.content, true);
+        const td = clone.querySelectorAll('td');
+        const aElement = document.createElement('a');
+        aElement.href = '/board/community/view/' + v.board_idx;
+        aElement.innerHTML = v.board_subject;
 
-        td[0].innerHTML = v.board_idx
-        td[1].appendChild(aElement)
-        td[2].innerHTML = v.user_idx
-        td[3].innerHTML = v.board_date
-        td[4].innerHTML = v.board_hit
+        td[0].innerHTML = v.board_idx;
+        td[1].appendChild(aElement);
+        td[2].innerHTML = v.user_idx;
+        td[3].innerHTML = v.board_date;
+        td[4].innerHTML = v.board_hit;
 
-        tbody.appendChild(clone)
+        tbody.appendChild(clone);
     })
 
 }
 
 async function pages(num) { 
     console.log('num',num)
-    const tr = document.querySelector('#communityBoardRow')
-    const value = test.data.result
-    const clone = document.importNode(tr.content, true)
+    const tr = document.querySelector('#communityBoardRow');
+    const value = test.data.result;
+    // const clone = document.importNode(tr.content, true);
 
-    const aElement = document.createElement('a')
-    aElement.href = '/board/community//view' + value.board_idx
-    aElement.innerHTML = value.board_subject
+    const aElement = document.createElement('a');
+    aElement.href = '/board/community//view' + value.board_idx;
+    aElement.innerHTML = value.board_subject;
 
-    const trElement = document.querySelector('#communityBoardRow').innerHTML
-    const viewRows = 10
-    const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows)
-    const tbody = document.querySelector('table > tbody')
+    // const trElement = document.querySelector('#communityBoardRow').innerHTML;
+    const viewRows = 10;
+    const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows);
+    const tbody = document.querySelector('table > tbody');
 
    
-    let template = ''
-    await Nodes.forEach(v => {})
-    tbody.innerHTML = template
+    let template = '';
+    await Nodes.forEach(v => {});
+    tbody.innerHTML = template;
     
 
     await Nodes.forEach(v => { 
 
-        const clone = document.importNode(tr.content, true)
-        const td = clone.querySelectorAll('td')
-        const aElement = document.createElement('a')
-        aElement.href = '/board/community/view/' + v.board_idx
-        aElement.innerHTML = v.board_subject
+        const clone = document.importNode(tr.content, true);
+        const td = clone.querySelectorAll('td');
+        const aElement = document.createElement('a');
+        aElement.href = '/board/community/view/' + v.board_idx;
+        aElement.innerHTML = v.board_subject;
 
-        td[0].innerHTML = v.board_idx
-        td[1].appendChild(aElement)
-        td[2].innerHTML = v.user_idx
-        td[3].innerHTML = v.board_date
-        td[4].innerHTML = v.board_hit
+        td[0].innerHTML = v.board_idx;
+        td[1].appendChild(aElement);
+        td[2].innerHTML = v.user_idx;
+        td[3].innerHTML = v.board_date;
+        td[4].innerHTML = v.board_hit;
 
-        const tbody = document.querySelector('table > tbody')
-        tbody.appendChild(clone)
-        
+        const tbody = document.querySelector('table > tbody');
+        tbody.appendChild(clone);
     })
 }
