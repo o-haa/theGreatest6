@@ -3,15 +3,23 @@ document.addEventListener('DOMContentLoaded', init)
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
-    console.log('front 도착!')
 
-    let [,,,,idx]=location.pathname.split('/') // /show/program/showview/2
+    const leftBtn = document.querySelector('#leftBtn')
+    const rightBtn = document.querySelector('#rightBtn')
+    const modifyBtn = document.querySelector('#modifyBtn')
+    const deleteBtn = document.querySelector('#deleteBtn')
+
+    leftBtn.addEventListener('click',leftBtnHandler)
+    rightBtn.addEventListener('click',rightBtnHandler)
+    modifyBtn.addEventListener('click',modifyBtnHandler)
+    deleteBtn.addEventListener('click',deleteBtnHandler)
+
+    let [,,,,idx] = location.pathname.split('/')
     const response = await axios.post(`showview/${idx}`)
-    //1)요청전달 4) 값을 받음
-    let result= response.data.result
+    let result = response.data.result
 
     const ul = document.querySelector('#viewList')
-    const span = ul.querySelectorAll('li span:nth-child(2)') //배열
+    const span = ul.querySelectorAll('li span:nth-child(2)')
 
     showViewList(result)
 
@@ -26,14 +34,6 @@ async function init() {
             span[i+5].innerHTML = v.show_director
         })
     }
-
-
-    // 한 화면에 보이는 값은 idx=1 작품
-    // 화살표를 누를때마다 url은 변한다
-    const leftBtn = document.querySelector('#leftBtn')
-    const rightBtn = document.querySelector('#rightBtn')
-    leftBtn.addEventListener('click',leftBtnHandler)
-    rightBtn.addEventListener('click',rightBtnHandler)
     
     async function leftBtnHandler(){
         console.log('left')
@@ -59,4 +59,20 @@ async function init() {
         }
     }
 
+    async function modifyBtnHandler(){
+        location.href = `http://localhost:3001/show/program/showmodify/${idx}`
+    }
+
+    async function deleteBtnHandler(){
+        try{
+            let deleteConfirm = confirm('정말 삭제하시겠습니까? 삭제 후 게시글은 다시 복구할 수 없습니다.')
+            if(deleteConfirm!==true) throw new Error('삭제 취소')
+            location.href = `http://localhost:3001/show/program/showlist`
+            const response = await axios.post(`showdelete/${idx}`)
+        }
+        catch(e){
+            console.log('게시글 삭제 취소')
+            location.href = `http://localhost:3001/show/program/showview/${idx}`
+        }
+    }
 }
