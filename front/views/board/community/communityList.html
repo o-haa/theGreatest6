@@ -18,6 +18,16 @@
             align-items: center;
         }
 
+        #paging {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* #paging > li {
+            margin:0 auto;
+        } */
+
         #communityBoard{
             width:80%;
             margin:0 auto;
@@ -48,19 +58,19 @@
         <div id="category">
             <ul>
                 <li>
-                    <input type="checkbox" id="classic">
+                    <input type="checkbox" name="classic">
                     <label for ="classic">Classic</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="musical">
+                    <input type="checkbox" name="musical">
                     <label for ="musical">Musical</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="opera">
+                    <input type="checkbox" name="opera">
                     <label for ="opera">Opera</label>
                 </li>
                 <li>
-                    <input type="checkbox" id="ballet">
+                    <input type="checkbox" name="ballet">
                     <label for ="ballet">Ballet</label>
                 </li>
             </ul>
@@ -89,13 +99,13 @@
         <template id="communityBoardRow">
             <tr>
                 <td>{idx}</td>
-                <td><a class="a"></a>{subject}</td>
+                <td id="td1"></td>
                 <td>{nickname}</td>
                 <td>{date}</td>
                 <td>{hit}</td>
             </tr>
         </template>
     </div>
-    
+    <a href="write">write</a>
 </body>
 </html>
