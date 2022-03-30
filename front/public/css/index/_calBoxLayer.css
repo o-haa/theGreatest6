@@ -1,4 +1,14 @@
-/* 본문 왼쪽 달력 박스  : calContent */
+/* 
+  왼쪽 박스를 이루는 calContent css입니다.
+  _mainContent.css와 같이 사용할 수 있습니다.
+  
+  index와 같은 depth로 있는 폴더 안에 있는 css에서 사용할 경우,
+  예) public > css > account > index.css 에서 사용.
+
+  @import url('../index/_contentLayout.css');
+  로 삽입하시면 됩니다.
+*/
+
 #content > #calContent{
     width: 25%;
     /*

@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', init)
 
-
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/promgram/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
