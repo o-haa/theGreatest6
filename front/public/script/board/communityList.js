@@ -2,28 +2,57 @@ let test = {};
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-    axios.defaults.baseURL = 'http://localhost:4001/board/community';
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
-    const response = await axios.post('/list');
+axios.defaults.baseURL = 'http://localhost:4001/board/community';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+const response = await axios.post('/list');
 
-    let check = document.querySelectorAll('#category ul li input');
-    check[0].addEventListener('click',checks);
-    check[1].addEventListener('click',checks);
-    check[2].addEventListener('click',checks);
-    check[3].addEventListener('click',checks);
+const classicC = document.querySelector('#classic');
+const musicalC = document.querySelector('#musical');
+const operaC = document.querySelector('#opera');
+const balletC = document.querySelector('#ballet');
+
+musicalC.addEventListener('click',checks);
+// check[1].addEventListener('click',checks);
+// check[2].addEventListener('click',checks);
+// check[3].addEventListener('click',checks);
 
     async function checks () {
-        for(let i=0; i < check.length; i++){
-            if(check[i].checked == true){
-                const categoryData = {
-                    category: i
-                };
-                const response = await axios.post('/list',categoryData);
-                console.log(response)
-                location.href='/board/community/list';
-            }
+    console.log(musicalC.hasAttribute('checked'))
+    // for(let i=0; i < check.length; i++){
+    //     if(check[i].checked == true){
+    //         const categoryData = {
+    //             category: i
+    //         };
+            const response = await axios.post('/list',categoryData);
+            location.href='/board/community/list';
         }
-    }
+        // if(check[0].checked==true){
+        //     const classicData = {
+        //         category: check[0].name
+        //     };
+        //     const response = await axios.post('/list',classicData);
+        //     location.href='/board/community/list';
+        // } else if (check[1].checked==true){
+        //     const musicalData = {
+        //         category: check[1].name
+        //     };
+        //     const response = await axios.post('/list',musicalData);
+        //     location.href='/board/community/list';
+        // } else if(check[2].checked==true){
+        //     const operaData = {
+        //         category: check[2].name
+        //     };
+        //     const response = await axios.post('/list',operaData);
+        //     location.href='/board/community/list';
+        // } else if(check[3].checked==true){
+        //     const balletData = {
+        //         category: check[3].name
+        //     };
+        //     const response = await axios.post('/list',balletData);
+        //     location.href='/board/community/list';
+        // };
+    
+
 
     
     test = {
