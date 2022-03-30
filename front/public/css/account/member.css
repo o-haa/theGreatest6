@@ -1,4 +1,8 @@
-@import url('../index/_fontLayout.css'); /*폰트 import*/
+@import url('/css/index/_fontLayout.css'); /*폰트 import*/
+@import url('/css/index/_settingLayout.css');
+@import url('/css/index/_headerLayout.css');
+@import url('/css/index/_mainContentLayout.css');
+
 
 * {
     box-sizing: border-box;
@@ -9,9 +13,8 @@
   }
 
 body {
+    font-family: 'MADE';
     font-size: 14px;
-    /* font-family: Roboto; 수정하면서 지워진 폰트 같아요ㅠㅠ 지금은 전체적으로 MADE 폰트 적용중입니다.
-    나머지 폰트들 등록해놓았습니다! 꺼내쓰셔요!!*/
     font-weight: ExtraBold;
     background: black;
     color:darkgrey;
@@ -25,15 +28,10 @@ a {
     text-decoration: none;
 }
 
-a:link, a:visited{
-    color: black;
+a:link, :active, :visited{
+    color: #A5A5A5;
 }
 
-#signin {
-    width: 30vw;
-
-    height: 20vh;
-}
 
 #wrap{
     background: url("../public/image/index/index.png") no-repeat;
@@ -61,10 +59,6 @@ li{
 
 
 /* width height */
-.wrap{
-    width: 100vw;
-    height: 100%;
-}
 
 
 .w100h90{
@@ -80,9 +74,6 @@ li{
     width: 100%;
 }
 
-.h20{
-    height: 20%;
-}
 
 .h80{
     height: 80%;
@@ -97,12 +88,6 @@ li{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-}
-
-.center{
-    display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -124,7 +109,10 @@ li{
     width: 30vw;
     height: 75vh;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -132,17 +120,19 @@ li{
     height:480px;
     width: 360px;
     margin: 0 auto;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 10px;
 }
 
 .signInBox:nth-child(1){
-    margin-top: 70px;
+    margin-top: 50px;
 }
 
 #signUpLink > a {
-    bottom: 20px;
-    position: absolute;
-    left: 40%;
+    margin: 0 auto;
     font-size: 20px;
 }
 
@@ -151,6 +141,10 @@ li{
 #signInFrm{
     height: 90%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 
@@ -199,16 +193,6 @@ li{
     color: rgba(0,0,0,0.5);
 }
 
-/* .inputs > input[type=button]{
-    border-style: none;
-    height: 15px;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 20px;
-    background: #efefef;
-    color: rgba(0,0,0,0.5);
-} */
-
 
 .inputs > input[type=text]{
     border-style: none;
@@ -243,7 +227,7 @@ li{
     border-style: none;
     background: none;
     font-size: 26px;
-    line-height: 320%;
+    line-height: 300%;
     color:#fff;
 }
 
@@ -252,8 +236,7 @@ li{
     width: 95%;
     padding: 5%;
     border: solid 2px darkgray;
-    margin-bottom: 30px;
-
+    margin: 30px 0px 20px 0;
 }
 
 
@@ -265,8 +248,6 @@ li{
 }
 
 /*signup*/
-
-
 
 #signUpFrm{
     width: 100%;
@@ -294,24 +275,38 @@ li{
 }
 
 .signUpBox{
+    padding-top: 20px;
     display: flex;
     align-items: center;
-    height: 50vh;
+    justify-content: space-between;
+    height: 95%;
 }
 
 #signUpTable{
-    height: 80%;
+    height: 100%;
     width: 100%;
 }
 
 .accountFrmHead {
-    /* font-family: roboto; */
     font-size: 50px;
-    margin-bottom: 5vh;
 }
 
 #signUpBtn{
     width: 80%;
+    height: 100%;
+    background: none;
+    font-size: 26px;
+    color:#fff;
+
+}
+
+
+#signUpSbm{
+    width: 95%;
+    height: 60%;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.800000011920929);
+
 }
 
 .inputBox2{
@@ -338,59 +333,56 @@ li{
 }
 
 
-
-/**/
-
-#header{
-    width:90vw;
-    height: 10%;
-    margin: 0 auto;
-    /* background: green   ; */
+.msg {
+    display: block;
+    font-size: 16px;
+    margin: 3px 0px 10px 0px;
 }
 
+
+
+/* 기본 */
+
+
+#header{
+    width:100vw;
+    height: 55px; /*8vh*/
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    font-family:'MADE';
+}
 #header > #nav{
-    margin: 0 auto;
-    margin-top:51px;
-    width: 90%;
+    width: 80%;
     height: 40px;
+    padding-top:20px;
     display: flex;
     justify-content: space-between;
+    margin: 0 auto;
+    font-size: 22px;
+    /* 사이즈 em으로 바꾸기 */
 }
 
 #nav > #logoBox {
     width:25%;
     height: 100%;
+    padding-left: 85px;
+    box-sizing: border-box;
+}
+#nav > #logoBox > a{
+    font-size: 35px;
+    /* 추후 폰트수정 */
 }
 
-#nav > #logoBox > h1 > a{
-    font-family: 'basicBold';
-    font-size: 26px;
-    color: #efefef;
-}
 
-#nav > ul#mainMenu {
-    position: relative;
-    width:75%;
+/* 메인메뉴바 시작 */
+#nav > ul {
+    width:30%;
     height: 100%;
-    display: flex;
-    justify-content: flex-end;
-}
-#nav > ul#mainMenu > li {
-    text-align: center;
-    width: 20%;
-}
-
-#nav > ul#mainMenu > li > a{
-    /* 자동 줄넘김 막는 코드 */
-    white-space: nowrap;
     position: relative;
-    color: #efefef;
+    display: flex;
+    justify-content: space-between;
 }
-
-
-#msg {
-    font-size: 16px;
-    position: absolute;
-    top: 240px;
-    left: 35%;
+#nav > ul > li {
+    width:20%;
+    text-align: center;
 }

@@ -12,14 +12,12 @@
 </head>
 
 <body>
-    <div class="wrap">
+    <div id="wrap">
         <div id="header">
             <div id="nav">
-                <div id="logoBox">
-                    <h1>
-                        <a href="/">Team6</a>
-                    </h1>
-                </div>
+                <h1 id="logoBox">
+                    <a href="/">Team6</a>
+                </h1>
                 <ul id="mainMenu">
                     <li id="show">
                         <a href="/show/program/showcard">show</a>
@@ -27,8 +25,8 @@
                 </ul>
             </div>
         </div>
-        <main class="center memberBox">
-            <article class="flexCol signInBox rad5">
+        <main class="memberBox">
+            <article class=" signInBox rad5">
                 <section class="w100">
                     <h3 class="accountFrmHead">sign in</h3>
                 </section>
@@ -40,7 +38,7 @@
                     </span>
                 </section>
                 <section class="w100 h100 marginAuto">
-                    <form method="post" action="*" id="signInFrm" class="flexCol w100">
+                    <form method="post" action="*" id="signInFrm" class="w100">
                         <ul class="inputBox flexCol">
                             <li class="inputs">
                                 <span id="userIcon"></span>
@@ -51,9 +49,9 @@
                                     <option value="@daum.net">@daum.net</option>
                                     <!-- <option value="">직접 입력</option> -->
                                 </select>
-                                <span id ="msg"></span>
                             </li>
                         </ul>
+                        <div id ="msgEmptyId"></div>
                         <ul class="inputBox flexCol">
                             <li class="inputs">
                                 <span id="passwordIcon"> </span>

@@ -16,11 +16,9 @@
     <div class="wrap">
         <div id="header">
             <div id="nav">
-                <div id="logoBox">
-                    <h1>
-                        <a href="/">Team6</a>
-                    </h1>
-                </div>
+                <h1 id="logoBox">
+                    <a href="/">Team6</a>
+                </h1>
                 <ul id="mainMenu">
                     <li id="show">
                         <a href="/show/program/showcard">show</a>
@@ -28,7 +26,7 @@
                 </ul>
             </div>
         </div>
-        <main class="center memberBox">
+        <main class="memberBox">
             <form method="post" action="*" id="signUpFrm">
                 <table class="w100 signUpBox ">
                     <h3 class="accountFrmHead">
@@ -46,14 +44,9 @@
                                 </select>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td class="w80 inputs">
-                                <input type="button" value="중복체크" id="idCheckBtn">
-                            </td>
-                        </tr> -->
                         <tr>
                             <td>
-                                <span id="idCheckResult"></span>
+                                <span id="msgIdCheck" class ="msg"></span>
                             </td>
                         </tr>
                         <tr class="signUpTr">
@@ -63,7 +56,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <sapn id="nickNameCheckResult"></sapn>
+                                <span id="msgNicknameCheck" class="msg"></span>
                             </td>
                         </tr>
 
@@ -74,7 +67,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <sapn id="pwCheck1"></sapn>
+                                <span id="msgPwCheck1" class="msg"></span>
                             </td>
                         </tr>
                         <tr class="signUpTr">
@@ -84,11 +77,11 @@
                         </tr>
                         <tr>
                             <td>
-                                <sapn id = "pwCheck2"></sapn>
+                                <span id = "msgPwCheck2" class="msg"></span>
                             </td>
                         </tr>
                         <tr class="inputBox2 flexCol">
-                            <td class = "whBtn">
+                            <td id = "signUpSbm">
                                 <input type="submit" value="sign up" id="signUpBtn">
                             </td>
                         </tr>

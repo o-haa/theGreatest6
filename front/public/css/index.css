@@ -4,17 +4,14 @@
 @import url('../css/index/_fontLayout.css');
 @import url('../css/mainNav.css');
 
-@font-face {
-    font-family: 'MADE';
-    src: url('../../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype');
-}
+
 a:link, :active, :visited{
     color: #A5A5A5;
 }
 
 body{
-    font-family:'MADE';
     background: black;
+    font-family: 'MADE';
 }
 
 #header{
@@ -22,6 +19,7 @@ body{
     height: 55px; /*8vh*/
     margin-bottom: 30px;
     box-sizing: border-box;
+    font-family:'MADE';
 }
 #header > #nav{
     width: 80%;
@@ -48,7 +46,7 @@ body{
 
 /* 메인메뉴바 시작 */
 #nav > ul {
-    width:50%;
+    width:30%;
     height: 100%;
     position: relative;
     display: flex;
@@ -58,11 +56,11 @@ body{
     width:20%;
     text-align: center;
 }
-#nav > ul > li:last-child {
+/* #nav > ul > li:last-child {
     margin-right: 50px;
     margin-left:20px;
     padding-top: 10px;
-}
+} */
 #nav > ul > li > a{
     /* 자동 줄넘김 막는 코드 */
     white-space:nowrap;
