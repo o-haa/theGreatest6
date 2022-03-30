@@ -1,11 +1,11 @@
 exports.aboutList = (req,res) =>{
-    res.render('./board/aboutList')
+    res.render('./about/aboutList')
 }
 
 exports.aboutWrite = (req,res) =>{
-    res.render('./board/aboutWrite')
+    res.render('./about/aboutWrite')
 }
 
 exports.aboutView = (req,res) =>{
-    res.render('./board/aboutView')
+    res.render('./about/aboutView')
 }
