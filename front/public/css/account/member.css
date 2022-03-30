@@ -12,12 +12,11 @@
     border-style: none;
   }
 
-body {
+body{
     font-family: 'MADE';
     font-size: 14px;
     font-weight: ExtraBold;
-    background: black;
-    color:darkgrey;
+    color:#232323;
   }
 
 li {
@@ -34,8 +33,23 @@ a:link, :active, :visited{
 
 
 #wrap{
-    background: url("../public/image/index/index.png") no-repeat;
+    /* background: url('../img/index/index.png') no-repeat; */
 }
+
+
+
+.backGround{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0%;
+    content: "";
+    position: absolute;
+    background: url('/img/index/index.png') no-repeat;
+    background-position: 100%;
+    opacity: 0.8;
+}
+
 
 header {
     margin: 0 auto;
@@ -113,6 +127,7 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
+    opacity: 1;
 }
 
 
@@ -287,6 +302,7 @@ li{
 
 .accountFrmHead {
     font-size: 50px;
+    color:#232323;
 }
 
 #signUpBtn{
@@ -335,6 +351,7 @@ li{
     display: block;
     font-size: 16px;
     margin: 3px 0px 10px 0px;
+    color:#232323;
 }
 
 
