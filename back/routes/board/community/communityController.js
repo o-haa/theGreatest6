@@ -24,7 +24,7 @@ exports.communityList = async (req,res) =>{
                 result,
                 errno:0
             };
-            
+           
         } else if (category === 'musical'){
             const [result] = await pool.execute(musicalSql);
             response = {

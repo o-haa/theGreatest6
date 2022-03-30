@@ -18,56 +18,57 @@ const response = await axios.post('/list');
                 category: check[0].name
             };
             const response = await axios.post('/list',classicData);
-        } else if (check[1].checked==true){
+            location.href='/board/community/list';
+        // } else if (check[1].checked==true){
+        //     const musicalData = {
+        //         category: check[1].name
+        //     };
+        //     const response = await axios.post('/list',musicalData);
+        //     location.href='/board/community/list';
+        // } else if(check[2].checked==true){
+        //     const operaData = {
+        //         category: check[2].name
+        //     };
+        //     const response = await axios.post('/list',operaData);
+        //     location.href='/board/community/list';
+        // } else if(check[3].checked==true){
+        //     const balletData = {
+        //         category: check[3].name
+        //     };
+        //     const response = await axios.post('/list',balletData);
+        //     location.href='/board/community/list';
+        // };
+    }
+    async function musicalH(){
+        let check = document.querySelectorAll('#category ul li input')
+        if(check[1].checked==true){
             const musicalData = {
                 category: check[1].name
-            };
-            const response = await axios.post('/list',musicalData);
+            }
+            const response = await axios.post('/list',musicalData)
             
-        } else if(check[2].checked==true){
+        }
+    }
+    async function operaH(){
+        let check = document.querySelectorAll('#category ul li input')
+        if(check[2].checked==true){
             const operaData = {
                 category: check[2].name
-            };
-            const response = await axios.post('/list',operaData);
+            }
+            const response = await axios.post('/list',operaData)
             
-        } else if(check[3].checked==true){
+        }
+    }
+    async function balletH(){
+        let check = document.querySelectorAll('#category ul li input')
+        if(check[3].checked==true){
             const balletData = {
                 category: check[3].name
-            };
-            const response = await axios.post('/list',balletData);
+            }
+            const response = await axios.post('/list',balletData)
             
-        };
+        }
     }
-    // async function musicalH(){
-    //     let check = document.querySelectorAll('#category ul li input')
-    //     if(check[1].checked==true){
-    //         const musicalData = {
-    //             category: check[1].name
-    //         }
-    //         const response = await axios.post('/list',musicalData)
-            
-    //     }
-    // }
-    // async function operaH(){
-    //     let check = document.querySelectorAll('#category ul li input')
-    //     if(check[2].checked==true){
-    //         const operaData = {
-    //             category: check[2].name
-    //         }
-    //         const response = await axios.post('/list',operaData)
-            
-    //     }
-    // }
-    // async function balletH(){
-    //     let check = document.querySelectorAll('#category ul li input')
-    //     if(check[3].checked==true){
-    //         const balletData = {
-    //             category: check[3].name
-    //         }
-    //         const response = await axios.post('/list',balletData)
-            
-    //     }
-    // }
     
         
     
