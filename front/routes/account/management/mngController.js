@@ -1,4 +1,3 @@
-
 exports.myInfo = (req, res) => {
     res.render('./account/myInfo');
 }
