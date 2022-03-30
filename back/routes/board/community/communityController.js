@@ -8,21 +8,59 @@ let response = {
 
 exports.communityList = async (req,res) =>{
     const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`
+    const classicSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`
+    const musicalSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 2 ORDER BY board_idx DESC`
+    const operaSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 3 ORDER BY board_idx DESC`
+    const balletSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 4 ORDER BY board_idx DESC`
+
+    const {category} = req.body
+    console.log(category)
 
     try{
-        const [result] = await pool.execute(sql)
-        // console.log('aa',result)
-
-        response = {
-            ...response,
-            result,
-            errno:0
+        if(category === 'classic'){
+            const [result] = await pool.execute(classicSql)
+            response = {
+                ...response,
+                result,
+                errno:0
+            }
+            
+        } else if (category === 'musical'){
+            const [result] = await pool.execute(musicalSql)
+            response = {
+                ...response,
+                result,
+                errno:0
+            }
+        } else if (category === 'opera'){
+            const [result] = await pool.execute(operaSql)
+            response = {
+                ...response,
+                result,
+                errno:0
+            }
+        } else if (category === 'ballet'){
+            const [result] = await pool.execute(balletSql)
+            response = {
+                ...response,
+                result,
+                errno:0
+            }
         }
+
+        // const [result] = await pool.execute(sql)
+        // response = {
+        //     ...response,
+        //     result,
+        //     errno:0
+        // }
+        
         res.json(response)
     } catch (e){
-        console.log('에러메세지',e.message)
+        console.log('에러메세지',e)
 
     }
+
 }
 
 exports.communityWrite = async (req,res) =>{                                
@@ -38,7 +76,6 @@ exports.communityWrite = async (req,res) =>{
     const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)'
     
     const prepare2 = ['117',subject,content,categoryIdx]
-    console.log(prepare2)
 
     try{
         const [result] = await pool.execute(sql2,prepare2)
@@ -70,7 +107,6 @@ exports.communityWrite = async (req,res) =>{
         const fPrepare = [boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF]                           
 
         if(req.file.size > 0){
-
 
             const [result] = await pool.execute(fSql,fPrepare)
             response = {
@@ -143,7 +179,6 @@ exports.communityUpdate = async (req,res)=>{
     const sql2 = `UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?`
 
     const prepare2 = [subject,content,categoryIdx,boardIdxPre]
-    console.log(prepare2)
 
     try{
         const [result] = await pool.execute(sql2,prepare2)

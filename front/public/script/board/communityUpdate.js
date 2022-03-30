@@ -15,7 +15,6 @@ async function init() {
     async function updateSubmit (e){
         e.preventDefault()
         const {updateSubject,updateContent,select} = e.target 
-        console.log(file.files[0])
 
         const formData = {
             upload: file.files[0],

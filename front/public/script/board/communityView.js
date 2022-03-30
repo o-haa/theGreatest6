@@ -23,7 +23,7 @@ async function init() {
 
     if(response.data.errno === 0){
         const [{user_nickname,board_subject,board_date,board_hit,board_content}]=response.data.result
-        console.log(response.data.result)
+      
         subject.innerHTML = board_subject
         nickname.innerHTML = nickname
         date.innerHTML = board_date
@@ -35,7 +35,7 @@ async function init() {
 
     }
 
-    //delete form
+  
     const deleteFrm = document.querySelector('#deleteFrm')
     deleteFrm.addEventListener('submit',
     async function deleteSubmit (e){

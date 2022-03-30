@@ -6,11 +6,78 @@ axios.defaults.baseURL = 'http://localhost:4001/board/community';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const response = await axios.post('/list')
 
+    let check = document.querySelectorAll('#category ul li input')
+    check[0].addEventListener('click',classicH)
+    check[1].addEventListener('click',classicH)
+    check[2].addEventListener('click',classicH)
+    check[3].addEventListener('click',classicH)
+
+    async function classicH(e){
+        let check = document.querySelectorAll('#category ul li input')
+        if(check[0].checked==true){
+            const classicData = {
+                category: check[0].name
+            }
+            const response = await axios.post('/list',classicData)
+        } else if (check[1].checked==true){
+            const musicalData = {
+                category: check[1].name
+            }
+            const response = await axios.post('/list',musicalData)
+            
+        } else if(check[2].checked==true){
+            const operaData = {
+                category: check[2].name
+            }
+            const response = await axios.post('/list',operaData)
+            
+        } else if(check[3].checked==true){
+            const balletData = {
+                category: check[3].name
+            }
+            const response = await axios.post('/list',balletData)
+            
+        }
+    }
+    // async function musicalH(){
+    //     let check = document.querySelectorAll('#category ul li input')
+    //     if(check[1].checked==true){
+    //         const musicalData = {
+    //             category: check[1].name
+    //         }
+    //         const response = await axios.post('/list',musicalData)
+            
+    //     }
+    // }
+    // async function operaH(){
+    //     let check = document.querySelectorAll('#category ul li input')
+    //     if(check[2].checked==true){
+    //         const operaData = {
+    //             category: check[2].name
+    //         }
+    //         const response = await axios.post('/list',operaData)
+            
+    //     }
+    // }
+    // async function balletH(){
+    //     let check = document.querySelectorAll('#category ul li input')
+    //     if(check[3].checked==true){
+    //         const balletData = {
+    //             category: check[3].name
+    //         }
+    //         const response = await axios.post('/list',balletData)
+            
+    //     }
+    // }
+    
+        
+    
+
     test = {
         ...response
     }
 
-    const totalRows = response.data.result.length //56
+    const totalRows = response.data.result.length 
     console.log(totalRows)
     const viewRows = 10
     const pagingBlock = 10
@@ -30,7 +97,7 @@ const response = await axios.post('/list')
 
     const paging = document.querySelector('#paging')
 
-    for (let i = block + 1; i <= endBlock; i++) { //6
+    for (let i = block + 1; i <= endBlock; i++) { 
         const liElement = document.createElement('li')
         const aElement = document.createElement('a')
 
@@ -45,7 +112,7 @@ const response = await axios.post('/list')
     const tr = document.querySelector('#communityBoardRow')
     const tbody = document.querySelector('table > tbody')
 
-    Nodes.forEach(v => { //처음 랜더 화면.
+    Nodes.forEach(v => { 
 
         const clone = document.importNode(tr.content, true)
         const td = clone.querySelectorAll('td')
@@ -61,9 +128,10 @@ const response = await axios.post('/list')
 
         tbody.appendChild(clone)
     })
+
 }
-//페이징 클릭하면 나오는 곳.
- async function pages(num) { 
+
+async function pages(num) { 
     console.log('num',num)
     const tr = document.querySelector('#communityBoardRow')
     const value = test.data.result
@@ -78,12 +146,12 @@ const response = await axios.post('/list')
     const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows)
     const tbody = document.querySelector('table > tbody')
 
-    //화면 잘라주기 위해서 필요.
+   
     let template = ''
     await Nodes.forEach(v => {})
     tbody.innerHTML = template
     
-    //각 row에 값 넣어줌.
+
     await Nodes.forEach(v => { 
 
         const clone = document.importNode(tr.content, true)
@@ -102,7 +170,4 @@ const response = await axios.post('/list')
         tbody.appendChild(clone)
         
     })
-
-
 }
-
