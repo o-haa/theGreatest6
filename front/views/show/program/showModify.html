@@ -4,30 +4,139 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Modify</title>
+    <title>Document</title>
+    <script src="/script/show/showWrite.js"></script>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
-    <!-- 관리자만 사용할 수 있는 게시판 작성 -->
-    <form method="post" action="#" name="writeForm" id="writeForm">
+    <form method="post" action="/show/program/showModify/:idx" name="modifyForm" id="modifyForm">
         <table>
-            <!-- <tr>
-                <input type="text" id="tag" placeholder="태그">
-            </tr> -->
             <tr>
-                <th>제목</th>
+                <th>공연 분류 *</th>
                 <td>
-                    <input type="text" name="title" id="title" placeholder="타이틀">
+                    <select name="category" id="category">
+                        <!-- 제일 선택한 값을 배열 0번으로 -->
+                        <option value="1">musical</option>
+                        <option value="2">concert
+                        </option>
+                        <option value="3">classic</option>
+                        <option value="4">ballet</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>관람 등급 *</th>
+                <td>
+                    <select name="xrated" id="xrated">
+                        <!-- 제일 선택한 값을 배열 0번으로 -->
+                        <option value="1">전체관람가</option>
+                        <option value="2">청소년</option>
+                        <option value="3">청소년 불가</option>
+                    </select>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <th>공연 제목 *</th>
+                <td><input type="text" name="title" id="title" value=""></td>
+            </tr>
+            <tr>
+                <th>예매 시작일 *</th>
+                <td>
+                    <select name="ticketMonth" id="ticketMonth" value="">
+                        <option value="01">1</option>
+                        <option value="02">2</option>
+                        <option value="03">3</option>
+                    </select>
+                    월
+                    <select name="ticketDate" id="ticketDate" value="">
+                        <option value="11">1</option>
+                        <option value="12">2</option>
+                        <option value="13">3</option>
+                    </select>
+                    일
+                    <select name="hour" id="ticketHour" value="">
+                        <option value="03">3</option>
+                        <option value="04">4</option>
+                        <option value="18">6</option>
+                    </select>
+                    시
+                </td>
+            </tr>
+            <!--
+            <tr>
+                <th>공연 시작일 *</th>
+                <td>
+                    <select name="showStartMonth" id="showStartMonth">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    월
+                    <select name="showStartDate" id="showStartDate">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    일
+                    <select name="showStartHour" id="showStartHour">
+                        <option value="1">10</option>
+                        <option value="2">11</option>
+                        <option value="3">12</option>
+                    </select>
+                    시
                 </td>
             </tr>
             <tr>
-                <th>내용</th>
+                <th>공연 종료일 *</th>
                 <td>
-                    <textarea type="text" name="content" id="content"></textarea>
+                    <select name="showEndMonth" id="showEndMonth">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    월
+                    <select name="showEndDate" id="showEndDate">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                    일
+                    <select name="showEndHour" id="showEndHour">
+                        <option value="1">10</option>
+                        <option value="2">11</option>
+                        <option value="3">12</option>
+                    </select>
+                    시
                 </td>
             </tr>
-            <input type="hidden" name="idx" id="idx">
+            -->
+            <tr>
+                <th>공연 장소 *</th>
+                <td><input type="text" name="place" id="place" value=""></td>
+            </tr>
+            <tr>
+                <th>공연 출연진 *</th>
+                <td><input type="text" name="showMain" id="showMain" value=""></td>
+            </tr>
+            <tr>
+                <th>공연 보조출연진</th>
+                <td><input type="text" name="showSub" id="showSub" value=""></td>
+            </tr>
+            <tr>
+                <th>공연 감독 *</th>
+                <td><input type="text" name="showDirector" id="showDirector" value=""></td>
+            </tr>
+            <tr>
+                <th>공연 주최측 *</th>
+                <td><input type="text" name="showCompany" id="showCompany" value=""></td>
+            </tr>
+            <!-- <th>파일업로드</th> -->
         </table>
-        <input type="submit" value="작성하기">
+        <div> * 별표가 있는 항목은 필수 항목 입니다</div>
+        <input type="submit" value="수정하기">
+        <button id="cancle">취소하기</button>
     </form>
 </body>
 </html>

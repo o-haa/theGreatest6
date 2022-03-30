@@ -5,10 +5,12 @@ const programController = require('./programController')
 router.use('/', programController.main)
 router.get('/showlist',programController.showList)
 router.get('/showcard',programController.showCard)
-router.get('/showview',programController.showView)
+
+router.get('/showwrite/', programController.showWrite)
+router.get('/showview/:idx',programController.showView)
+router.get('/showmodify/:idx', programController.showModify)
+
 router.get('/showcalendar', programController.showCalendar)
-router.get('/showwrite', programController.showWrite)
-router.get('/showmodify', programController.showModify)
 
 router.get('/showhome', programController.showHome)
 
