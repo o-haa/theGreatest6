@@ -10,7 +10,7 @@
 </head>
 <body>
     <!-- 관리자만 사용할 수 있는 게시판 작성 -->
-    <form method="post" action="/show/program/showWrite" name="writeForm" id="writeForm">
+    <form method="post" action="/show/program/showWrite" name="writeForm" id="writeForm" ectype="multipart/form-data">
         <table>
             <tr>
                 <th>공연 분류 *</th>
@@ -94,6 +94,7 @@
             <!-- <th>파일업로드</th> -->
         </table>
         <div> * 별표가 있는 항목은 필수 항목 입니다</div>
+        <input type="file" name="upload" multiple>
         <input type="submit" value="작성하기">
     </form>
 </body>

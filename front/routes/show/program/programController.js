@@ -1,33 +1,31 @@
-exports.main = (req,res, next) =>{
-    next()
-}
-
 exports.showHome = (req,res)=>{
-    res.render('./show/program/showHome')
+res.render('./show/program/showHome')
 }
 
 exports.showList = (req,res)=>{
-    res.render('./show/program/showList')
+res.render('./show/program/showList')
 }
 
 exports.showCard = (req,res)=>{
-    res.render('./show/program/showCard')
+res.render('./show/program/showCard')
 }
 
 exports.showCalendar = (req,res)=>{
-    res.render('./show/program/showCalendar')
+res.render('./show/program/showCalendar')
 }
 
 exports.showView = (req,res)=>{
-    res.render('./show/program/showView')
+res.render('./show/program/showView')
 }
 
 exports.showWrite = (req,res)=>{
-    res.render('./show/program/showWrite')
+res.render('./show/program/showWrite')
+//파일 업로드 포함
 }
 
 exports.showModify = (req,res)=>{
-    res.render('./show/program/showModify')
+res.render('./show/program/showModify')
+//파일 업로드 포함
 }
 
 exports.ticketopen = (req,res)=>{
@@ -35,6 +33,6 @@ exports.ticketopen = (req,res)=>{
 }
 
 exports.test = (req,res)=>{
-    res.render('./show/program/myCalendar')
+res.render('./show/program/myCalendar')
 }
 
