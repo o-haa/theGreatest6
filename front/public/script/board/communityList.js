@@ -1,5 +1,5 @@
 let test = {};
-let tbody, liElement, aElement, i;
+let tbody, tr, liElement, aElement, i;
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
