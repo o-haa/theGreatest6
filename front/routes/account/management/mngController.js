@@ -48,3 +48,7 @@ exports.myCalendar = (req, res) => {
 exports.myAct = (req, res) => {
     res.render('./account/myAct');
 }
+
+exports.myBenefit = (req, res) => {
+    res.render('./account/myBenefit');
+}

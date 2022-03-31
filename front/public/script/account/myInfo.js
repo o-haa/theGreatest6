@@ -10,10 +10,16 @@ async function init() {
     const userInfo = document.querySelectorAll('.userInfo');
     console.log(userInfo);
     try {
-        const response = await axios.post('http://localhost:3001/account/management/getuserinfo',null)
-        console.log(response.data)
+        const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+        const { user } = response.data.result;
+        console.log(user);
+
+
+        // userInfo.forEach(v => {
+        //     const clone = a
+        // }
     }
-    catch (e) { 
+    catch (e) {
         console.log(e);
     }
 

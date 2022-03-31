@@ -30,7 +30,7 @@ exports.showModify = (req,res)=>{
     res.render('./show/program/showModify')
 }
 
-exports.ticketopen = (req,res)=>{
+exports.ticketOpen = (req,res)=>{
 
 }
 
