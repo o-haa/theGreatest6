@@ -122,22 +122,24 @@ async function clickHanlder() {
         if (endBlock > totalPage) endBlock = totalPage;
     
         const paging = document.querySelector('#paging');
-        const emptyArr = []
+        const arr = []
         for (let i = block + 1; i <= endBlock; i++) {
             paging.innerHTML = '';
             const liElement = document.createElement('li');
             const aElement = document.createElement('a');
             liElement.appendChild(aElement);
             paging.appendChild(liElement);
-            // paging.innerHTML = '';
+
             pages(i)
             // aElement.setAttribute(`onClick`, `pages(${i})`);//
-            aElement.innerHTML = `[${i}]`
-            console.log(aElement)
-            
-        }
+            arr.push(i)
+            console.log(arr)
+            for (let j = 1; j <= arr.length; j++) {
+                aElement.innerHTML = `[${arr}]`
+            }
+            }
     
-    
+
         const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
         const tr = document.querySelector('#communityBoardRow');
         const tbody = document.querySelector('table > tbody');
