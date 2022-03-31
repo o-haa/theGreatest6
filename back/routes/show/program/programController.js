@@ -7,25 +7,44 @@ let response = {
 
 exports.showWrite = async (req,res)=>{
     console.log('back / showWrite 라우터 접속!')
+    const today = new Date()
+    const thisYear = today.getFullYear()
 
-    const {category, xrated, title, ticketMonth, ticketDate, ticketHour, place, showMain, showSub, showDirector, showCompany} = req.body
-    
-    const sql = `INSERT INTO shows(show_title,show_category_idx,show_xrated,show_company,show_director,show_like,show_open_flag,show_content) VALUES (?,?,?,?,?,10,20,'40');`
+    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,ticketMonth,ticketDate,ticketHour,showMonth,showDate,showHour} = req.body
 
-    const prepare = [title,category,xrated,showCompany,showDirector]
-    
     try{
-        const [result] = await pool.execute(sql,prepare)
-        const response = {
-            result,
+        const sqlShow = `INSERT INTO shows(
+            show_title,
+            show_category_idx,
+            show_xrated,
+            show_company,
+            show_director,
+            show_like,
+            show_content,
+            show_open_flag
+        )VALUES(?,?,?,?,?,'0',?,'0')`
+        const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
+        const [resultShow] = await pool.execute(sqlShow,prespareShow)
+    
+        const timestamp = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
+        const newIdx = resultShow.insertId
+
+        const prespareOption = [newIdx, timestamp, place, showCast1, showCast2]
+        const sqlOption = `INSERT
+        INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
+        VALUES (?,?,?,?,?)`
+        const [resultOption] = await pool.execute(sqlOption,prespareOption)
+ 
+        response = {
+            resultShow,
+            resultOption,
             error:0,
         }
         res.json(response)
     }
     catch(e){
-        console.log("showWrite 에러발생")
+        console.log(e)
     }
-
 }
 
 exports.showList = async (req,res)=>{
@@ -36,7 +55,6 @@ exports.showList = async (req,res)=>{
     try{
         const [result] = await pool.execute(sql)
         response = {
-            // ...response,
             result,
             error:0,
         }
@@ -75,8 +93,21 @@ exports.showView = async (req,res)=>{
     }
 }
 
-exports.showModify = (req,res)=>{
+exports.showModify = async (req,res)=>{
     console.log('back / showModify 라우터 접속!')
+    const {idx} = req.params
+    
+    const sqlGetShows = `
+    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
+    WHERE s.show_idx=${idx}`
+    const [result] = await pool.execute(sqlGetShows)
+
+    response ={
+        result,
+        error:0
+    }
+    res.json(response)
 }
 
 exports.showDelete = async (req,res)=>{

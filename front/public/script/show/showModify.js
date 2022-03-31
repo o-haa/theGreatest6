@@ -1,42 +1,100 @@
 document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('keydown',noEnterkey)
+
+async function noEnterkey(e){
+    if (e.keyCode === 13) {
+        e.preventDefault();
+      };
+}
 
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    makeOption()
 
-    const modifyForm = document.querySelector('#modifyForm');
-    modifyForm.addEventListener('submit',makeData)
+    let [,,,,idx] = location.pathname.split('/')
+    const response = await axios.post(`showmodify/${idx}`)
+    const {show_idx, show_title, show_category_idx, show_xrated, show_company, show_director, show_content, show_date, show_place, show_cast1, show_cast2 } = response.data.result[0]
 
-    async function makeData(e){
-        e.preventDefault();
-        console.log(location.href)
-        const data = {
-            idx:idx.value,
-            category : document.querySelector('#category').value,
-            xrated : document.querySelector('#category').value,
-            title : document.querySelector('#title').value,
-            ticketMonth : document.querySelector('#ticketMonth option').value,
-            ticketDate : document.querySelector('#ticketDate option').value,
-            ticketHour : document.querySelector('#ticketHour option').value,
-            place : document.querySelector('#place').value,
-            showMain : document.querySelector('#showMain').value,
-            showSub : document.querySelector('#showSub').value,
-            showDirector : document.querySelector('#showDirector').value,
-            showCompany : document.querySelector('#showCompany').value
-        }
-        console.log(data);
+    console.log(typeof(show_date.slice(5,7)))
+    console.log(show_date.slice(8,10))
+    console.log(show_date.slice(11,13))
+    //2022-01-01T01:00:00.000Z
+
+    document.querySelector('#category').value = show_category_idx
+    document.querySelector('#title').value = show_title
+    document.querySelector('#place').value = show_place
+    document.querySelector('#showCast1').value = show_cast1
+    document.querySelector('#showCast2').value = show_cast2
+    document.querySelector('#showDirector').value = show_director
+    document.querySelector('#showCompany').value = show_company
+    document.querySelector('#showContent').value = show_content
+    console.log(document.querySelector('#ticketMonth').value)  
+    document.querySelector('#ticketDate').value  
+    document.querySelector('#ticketHour').value 
+    document.querySelector('#showMonth').value = show_date.slice(5,7)
+    document.querySelector('#showDate').value = show_date.slice(8,10)
+    document.querySelector('#showHour').value = show_date.slice(11,13)
+
+    function makeOption(){
+        const ticketMonth = document.querySelector('#ticketMonth')
+        const ticketDate = document.querySelector('#ticketDate')
+        const ticketHour = document.querySelector('#ticketHour')
+        const showMonth = document.querySelector('#showMonth')
+        const showDate = document.querySelector('#showDate')
+        const showHour = document.querySelector('#showHour')
+        const timestamp = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
+
+        let monthlist=[] 
+        let datelist=[]
+        let timelist=[]
+
+        for(let i=1; i<=12; i++){ monthlist.push(`${i}`) ;}
+        for(let i=1; i<=31; i++){ datelist.push(`${i}`) ;}
+        timelist = ['10','13','18']
+
+        monthlist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            if(v<10){ newOption.value = `${v}` }
+            else { newOption.value = `${v}` }
+            ticketMonth.options.add(newOption)
+        })
+
+        datelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`    
+            ticketDate.options.add(newOption)
+        })
+
+        timelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`    
+            ticketHour.options.add(newOption)
+        })
         
-        try{
-            //입력받은 값을 가지고 백엔드에 axios로 요청 보내기
-            const response = await axios.post('http://localhost:4001/show/program/showmodify',data)
-            //body 속성값이 담긴 data : 잘 도착함
-            // console.log('response : ',response.data.result.insertId)
-            let idx = response.data.result.insertId
-            location.href = `http://localhost:3001/show/program/showview/${idx}`
-        }catch(e){
-
-        }
+        monthlist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            if(v<10){ newOption.value = `${v}` }
+            else { newOption.value = `${v}` }
+            showMonth.options.add(newOption)
+        })
+    
+        datelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`    
+            showDate.options.add(newOption)
+        })
+    
+        timelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`    
+            showHour.options.add(newOption)
+        })
     }
 }
-// testUser localhost
-//password
