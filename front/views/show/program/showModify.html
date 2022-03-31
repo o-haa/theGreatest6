@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/script/show/showWrite.js"></script>
+    <script src="/script/show/showModify.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
@@ -15,10 +15,8 @@
                 <th>공연 분류 *</th>
                 <td>
                     <select name="category" id="category">
-                        <!-- 제일 선택한 값을 배열 0번으로 -->
                         <option value="1">musical</option>
-                        <option value="2">concert
-                        </option>
+                        <option value="2">concert</option>
                         <option value="3">classic</option>
                         <option value="4">ballet</option>
                     </select>
@@ -29,7 +27,6 @@
                 <th>관람 등급 *</th>
                 <td>
                     <select name="xrated" id="xrated">
-                        <!-- 제일 선택한 값을 배열 0번으로 -->
                         <option value="1">전체관람가</option>
                         <option value="2">청소년</option>
                         <option value="3">청소년 불가</option>
@@ -39,98 +36,59 @@
             </tr>
             <tr>
                 <th>공연 제목 *</th>
-                <td><input type="text" name="title" id="title" value=""></td>
+                <td><input type="text" name="title" id="title"></td>
             </tr>
             <tr>
-                <th>예매 시작일 *</th>
+                <th>예매일 *</th>
                 <td>
-                    <select name="ticketMonth" id="ticketMonth" value="">
-                        <option value="01">1</option>
-                        <option value="02">2</option>
-                        <option value="03">3</option>
+                    <select name="ticketMonth" id="ticketMonth">
                     </select>
                     월
-                    <select name="ticketDate" id="ticketDate" value="">
-                        <option value="11">1</option>
-                        <option value="12">2</option>
-                        <option value="13">3</option>
+                    <select name="ticketDate" id="ticketDate">
                     </select>
                     일
-                    <select name="hour" id="ticketHour" value="">
-                        <option value="03">3</option>
-                        <option value="04">4</option>
-                        <option value="18">6</option>
-                    </select>
-                    시
-                </td>
-            </tr>
-            <!--
-            <tr>
-                <th>공연 시작일 *</th>
-                <td>
-                    <select name="showStartMonth" id="showStartMonth">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    월
-                    <select name="showStartDate" id="showStartDate">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                    일
-                    <select name="showStartHour" id="showStartHour">
-                        <option value="1">10</option>
-                        <option value="2">11</option>
-                        <option value="3">12</option>
+                    <select name="ticketHour" id="ticketHour">
                     </select>
                     시
                 </td>
             </tr>
             <tr>
-                <th>공연 종료일 *</th>
+                <th>공연일 *</th>
                 <td>
-                    <select name="showEndMonth" id="showEndMonth">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                    <select name="showMonth" id="showMonth">
                     </select>
                     월
-                    <select name="showEndDate" id="showEndDate">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                    <select name="showDate" id="showDate">
                     </select>
                     일
-                    <select name="showEndHour" id="showEndHour">
-                        <option value="1">10</option>
-                        <option value="2">11</option>
-                        <option value="3">12</option>
+                    <select name="showHour" id="showHour">
                     </select>
                     시
                 </td>
             </tr>
-            -->
+            <tr>
+                <th>내용 작성 *</th>
+                <td><input type="text" name="showContent" id="showContent"></td>
+            </tr>
             <tr>
                 <th>공연 장소 *</th>
-                <td><input type="text" name="place" id="place" value=""></td>
+                <td><input type="text" name="place" id="place"></td>
             </tr>
             <tr>
                 <th>공연 출연진 *</th>
-                <td><input type="text" name="showMain" id="showMain" value=""></td>
+                <td><input type="text" name="showCast1" id="showCast1"></td>
             </tr>
             <tr>
                 <th>공연 보조출연진</th>
-                <td><input type="text" name="showSub" id="showSub" value=""></td>
+                <td><input type="text" name="showCast2" id="showCast2"></td>
             </tr>
             <tr>
                 <th>공연 감독 *</th>
-                <td><input type="text" name="showDirector" id="showDirector" value=""></td>
+                <td><input type="text" name="showDirector" id="showDirector"></td>
             </tr>
             <tr>
                 <th>공연 주최측 *</th>
-                <td><input type="text" name="showCompany" id="showCompany" value=""></td>
+                <td><input type="text" name="showCompany" id="showCompany"></td>
             </tr>
             <!-- <th>파일업로드</th> -->
         </table>

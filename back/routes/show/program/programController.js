@@ -60,7 +60,6 @@ exports.showList = async (req,res)=>{
     try{
         const [result] = await pool.execute(sql)
         response = {
-            // ...response,
             result,
             error:0,
         }
@@ -99,8 +98,21 @@ exports.showView = async (req,res)=>{
     }
 }
 
-exports.showModify = (req,res)=>{
+exports.showModify = async (req,res)=>{
     console.log('back / showModify 라우터 접속!')
+    const {idx} = req.params
+    
+    const sqlGetShows = `
+    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
+    WHERE s.show_idx=${idx}`
+    const [result] = await pool.execute(sqlGetShows)
+
+    response ={
+        result,
+        error:0
+    }
+    res.json(response)
 }
 
 exports.showDelete = async (req,res)=>{
