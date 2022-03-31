@@ -10,7 +10,6 @@ const param = `board_idx,show_category_idx, board_subject, board_content, board_
 
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
-    console.log(prepare)
     let sql ='';
     switch (prepare.length) {
         case 1:
