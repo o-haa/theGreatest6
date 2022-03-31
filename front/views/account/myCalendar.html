@@ -1,1 +1,236 @@
-내 달력
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/show/myCalendar.css">
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <!-- nav 시작 -->
+            <div id="nav">
+                <!-- Logo -->
+                <div id="logoBox">
+                    <h1>Team6</h1>
+                </div>
+                <!-- 메인 메뉴 -->
+                <ul id="mainMenu">
+                    <li id="home">
+                        <!-- <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01"> -->
+                            <a href="#">HOME</a>
+                        <!-- </label> -->
+                    </li>
+                    <li id="show">
+                        <!-- click 이벤트를 만들어주는 체크박스 -->
+                        <input type="radio" name="menuCheck" id="check02">
+                        <label for="check02">SHOW</label>
+                        <!-- show 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">Show List</a></li>
+                            <li><a href="javascript">Ticket Open Date</a></li>
+                        </ul>
+                        <!-- show 서브메뉴 끝 -->
+                    </li>
+
+                    <li id="board">
+                        <input type="radio" name="menuCheck" id="check03">
+                        <label for="check03">BOARD</label>
+                        <!-- board 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">Review</a></li>
+                            <li><a href="javascript">Community</a></li>
+                            <li><a href="javascript">News</a></li>
+                        </ul>
+                        <!-- board 서브메뉴 끝 -->
+                    </li>
+                    <li id="my page">
+                        <input type="radio" name="menuCheck" id="check04">
+                        <label for="check04">MY PAGE</label>
+                        <!-- my page 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">My Calendar</a></li>
+                            <li><a href="javascript">My Profile</a></li>
+                            <li><a href="javascript">My Ticket</a></li>
+                            <li><a href="javascript">My Pick</a></li>
+                            <li><a href="javascript">My Point</a></li>
+                        </ul>
+                        <!-- my page 서브메뉴 끝 -->
+                    </li>
+                    <li id="admin">
+                        <input type="radio" name="menuCheck" id="check05">
+                        <label for="check05">ADMIN</label>
+                        <!-- admin 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">공연관리</a></li>
+                            <li><a href="javascript">회원관리</a></li>
+                            <li><a href="javascript">포인트관리</a></li>
+                            <li><a href="javascript">보드관리</a></li>
+                            <li><a href="javascript">통계</a></li>
+                        </ul>
+                        <!-- admin 서브메뉴 끝 -->
+                    </li>
+                    <li id="about">
+                        <!-- <input type="radio" name="menuCheck" id="check06"> -->
+                        <!-- <label for="check06"> -->
+                            <a href="#">ABOUT</a>
+                        <!-- </label> -->
+                    </li>
+                    <li>
+                        <span id="mainSearch">
+                            <input type="text" name="searchInput" id="searchInput">
+                            <img src="/img/icon/icon_search_2x.png" name="searchIcon" id="searchIcon">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="content">
+            <div id="calContent">
+                <div id="userBadge">
+                    <span id="userLevel">3</span>
+                    <span id="username">Ingoo Kwak</span>
+                </div>
+                 <button id="createEventBtn">+ Create Event</button>
+                 
+                <div id="calSmall">
+                </div>
+
+                <!-- weekly로 변수명 아직 못 고침 -->
+                <div id="monthly">
+                    <div id="monthlyTitle">Weakly</div>
+                    <div id="monthTitleSmall">First Week</div>
+                    <!-- 일정 카드 리스트 박스 -->
+                    <div id="menuSmall">
+                            <ul id="menuSmallCards">
+                                <!-- 일정 카드 생성 -->
+                                <li class="menuSmallCard">
+                                    <!-- 좌측 : 일월 표시 -->
+                                    <div class="calBox">
+                                        <div class="calBoxDate">22</div>
+                                        <div class="calBoxMonth">MAR</div>
+                                    </div>
+                                    <!-- 우측 : 일정 표시 -->
+                                    <div class="listBox">
+                                        <!-- 노란색 : 사용자 -->
+                                        <div class="listBoxIn User">
+                                            <!-- 점 -->
+                                            <div class="Post User"></div>
+                                            <div class="Memo User">
+                                                <span class="memoTitle">타이틀을 길게 써볼까나</span>
+                                                <span class="memoContent">메모</span>
+                                            </div>
+                                        </div>
+                                        <!-- 하늘색 : 관리자 -->
+                                        <div class="listBoxIn Admin">
+                                            <!-- 점 -->
+                                            <div class="Post Admin"></div>
+                                            <div class="Memo Admin">
+                                                <span class="memoTitle">타이틀</span>
+                                                <span class="memoContent">메모를 길게 써보자</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="menuSmallCard">
+                                    <!-- 좌측 : 일월 표시 -->
+                                    <div class="calBox">
+                                        <div class="calBoxDate">22</div>
+                                        <div class="calBoxMonth">MAR</div>
+                                    </div>
+                                    <!-- 우측 : 일정 표시 -->
+                                    <div class="listBox">
+                                        <!-- 노란색 : 사용자 -->
+                                        <div class="listBoxIn User">
+                                            <!-- 점 -->
+                                            <div class="Post User"></div>
+                                            <div class="Memo User">
+                                                <span class="memoTitle">타이틀을 길게 써볼까나</span>
+                                                <span class="memoContent">메모</span>
+                                            </div>
+                                        </div>
+                                        <!-- 하늘색 : 관리자 -->
+                                        <div class="listBoxIn Admin">
+                                            <!-- 점 -->
+                                            <div class="Post Admin"></div>
+                                            <div class="Memo Admin">
+                                                <span class="memoTitle">타이틀</span>
+                                                <span class="memoContent">메모를 길게 써보자</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="menuSmallCard">
+                                    <!-- 좌측 : 일월 표시 -->
+                                    <div class="calBox">
+                                        <div class="calBoxDate">22</div>
+                                        <div class="calBoxMonth">MAR</div>
+                                    </div>
+                                    <!-- 우측 : 일정 표시 -->
+                                    <div class="listBox">
+                                        <!-- 노란색 : 사용자 -->
+                                        <div class="listBoxIn User">
+                                            <!-- 점 -->
+                                            <div class="Post User"></div>
+                                            <div class="Memo User">
+                                                <span class="memoTitle">타이틀을 길게 써볼까나</span>
+                                                <span class="memoContent">메모</span>
+                                            </div>
+                                        </div>
+                                        <!-- 하늘색 : 관리자 -->
+                                        <div class="listBoxIn Admin">
+                                            <!-- 점 -->
+                                            <div class="Post Admin"></div>
+                                            <div class="Memo Admin">
+                                                <span class="memoTitle">타이틀</span>
+                                                <span class="memoContent">메모를 길게 써보자</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>                              
+                            </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="mainContent">
+                <!-- 타이틀 캘린더 -->
+                <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
+                
+                <div id="mainContentTitle">
+                    <div id="mainContentTitleMonth">
+                        <span>MAR 2022</span>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_next_2x.png" style="transform: rotate(180deg);" id="prev_arrow">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_next_2x.png" id="next_arrow">
+                        </button>
+                    </div>
+                    <div id="mainContentTitleIcon">
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_list_2x.png" id="List">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_grid_2x.png" id="grid">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_cal_2x.png" id="calBtn">
+                        </button>
+                    </div>
+                </div>
+
+                <div id="mainCal">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

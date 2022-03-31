@@ -6,7 +6,7 @@ router.post('/idcheck', memberController.idCheck);
 router.post('/nicknamecheck', memberController.nickNameCheck);
 router.post('/signup', memberController.signUp);
 router.post('/signin', memberController.signIn);
-
+router.post('/auth',memberController.auth)
 
 
 module.exports = router;

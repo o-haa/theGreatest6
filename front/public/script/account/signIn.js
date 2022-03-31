@@ -16,23 +16,26 @@ function init() {
         const usermail = document.querySelector('#mail').value;
         const userPw = document.querySelector('#signInPw').value;
         const userId = tempId+usermail;
-        const msg = document.querySelector('#msg');
+        const msgEmptyId = document.querySelector('#msgEmptyId');
         const data = {
             userId,
             userPw
         };
 
         if (!tempId) { 
-            msg.innerHTML = 'please enter a valid email.';
+            msgEmptyId.innerHTML = 'please enter a valid email.';
             throw new Error('아이디 공란');
         } else {
             try {
                 const response = await axios.post('/signIn', data);
                 const errno = response.data.errno;
-                if (errno !== 0) throw new Error;
+                if (errno !== 0) throw new Error ('로그인 정보 불일치');
                 console.log('로그인됨');
+                alert('welcome!')
+                location.href = '/'
             } catch (e) {
                 console.log(e.message);
+                alert('check your signin information.')
             }
         }
     }

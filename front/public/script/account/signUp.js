@@ -7,17 +7,17 @@ async function init() {
 
     const tempId = document.querySelector('#userId');
     const mail = document.querySelector('#mail').value;
-    const idCheckResult = document.querySelector('#idCheckResult');
-    idCheckResult.innerHTML = 'Use 5 - 20 characters with a mix of lowercase letters, numbers & symbols.';
+    const msgIdCheck = document.querySelector('#msgIdCheck');
+    msgIdCheck.innerHTML = 'Use 5 - 20 characters with a mix of lowercase letters, numbers & symbols.';
 
-    const pwCheck1 = document.querySelector('#pwCheck1');
-    const pwCheck2 = document.querySelector('#pwCheck2');
+    const msgPwCheck1 = document.querySelector('#msgPwCheck1');
+    const msgPwCheck2 = document.querySelector('#msgPwCheck2');
     const userPw = document.querySelector('#userPw');
     const userPwCheck = document.querySelector('#userPwCheck');
-    pwCheck1.innerHTML = 'Use 8 - 25 characters with a mix of letters, numbers & symbols.';
+    msgPwCheck1.innerHTML = 'Use 8 - 25 characters with a mix of letters, numbers & symbols.';
 
     const userNickName = document.querySelector('#userNickName');
-    const nickNameCheckResult = document.querySelector('#nickNameCheckResult');
+    const msgNicknameCheck = document.querySelector('#msgNicknameCheck');
 
 
     await tempId.addEventListener('keyup',idCheckHanlder);
@@ -29,17 +29,17 @@ async function init() {
         };
 
         if (tempId.value.length < 5) {
-            idCheckResult.innerHTML = 'Use 5 - 20 characters for you ID.';
+            msgIdCheck.innerHTML = 'Use 5 - 20 characters for you ID.';
             throw new Error('아이디 미입력');
 
         } else {
             try {
                 const response = await axios.post('/idcheck', data);
                 if (response.data.errno !== 0) {
-                    idCheckResult.innerHTML = 'That userID is taken. Try another.';
+                    msgIdCheck.innerHTML = 'That userID is taken. Try another.';
                     throw new Error('아이디 중복,');
                 };
-                idCheckResult.innerHTML = `${userId} is available ! WELCOME!`;
+                msgIdCheck.innerHTML = `${userId} is available ! WELCOME!`;
             } catch (e) {
                 console.log(e.message, 'idcheck 에러');
             }
@@ -50,18 +50,18 @@ async function init() {
 
     function pwHandler() {
         const length = userPw.value.length;
-        if (length >= 1) pwCheck1.innerHTML = '';
-        if (length < 8) pwCheck1.innerHTML = 'Use 8 - 25 characters for your password.';
+        if (length >= 1) msgPwCheck1.innerHTML = '';
+        if (length < 8) msgPwCheck1.innerHTML = 'Use 8 - 25 characters for your password.';
 
-        if (userPw.value !== userPwCheck.value) pwCheck2.innerHTML = 'Confirm your password.';
+        if (userPw.value !== userPwCheck.value) msgPwCheck2.innerHTML = 'Confirm your password.';
     }
 
 
     await userPwCheck.addEventListener('keyup', pwCheckHandler);
 
     function pwCheckHandler() {
-        if (userPw.value !== userPwCheck.value) pwCheck2.innerHTML = 'Confirm your password.';
-        else pwCheck2.innerHTML = '';
+        if (userPw.value !== userPwCheck.value) msgPwCheck2.innerHTML = 'Confirm your password.';
+        else msgPwCheck2.innerHTML = '';
     }
 
 
@@ -71,16 +71,16 @@ async function init() {
         data = {
             userNickName: userNickName.value
         };
-        if (data.userNickName.length < 4) nickNameCheckResult.innerHTML = 'Use 4 - 20 characters for your nickname.';
+        if (data.userNickName.length < 4) msgNicknameCheck.innerHTML = 'Use 4 - 20 characters for your nickname.';
         else {
             try {
                 const response = await axios.post('/nicknamecheck', data);
                 const { errno } = response.data;
                 if (errno !== 0) throw new Error;
-                nickNameCheckResult.innerHTML = `${userNickName.value} is available.`;
+                msgNicknameCheck.innerHTML = `${userNickName.value} is available.`;
             } catch (e) {
                 console.log(e.message);
-                nickNameCheckResult.innerHTML = 'That usernickname is taken. Try another.';
+                msgNicknameCheck.innerHTML = 'That usernickname is taken. Try another.';
             }
         }
     }
@@ -101,9 +101,9 @@ async function init() {
 
 
         if (!expPw.test(userPw)) {
-            pwCheck1.innerHTML = 'Please choose a stronger password. Try a mix of letters, numbers, and symbols.';
+            msgPwCheck1.innerHTML = 'Please choose a stronger password. Try a mix of letters, numbers, and symbols.';
         if (!expId.test(tempId)){
-            idCheckResult.innerHTML = 'Use 5 - 20 characters with a mix of lowercase letters, numbers & symbols.';
+            msgIdCheck.innerHTML = 'Use 5 - 20 characters with a mix of lowercase letters, numbers & symbols.';
         }
         } else {
             const data = {
