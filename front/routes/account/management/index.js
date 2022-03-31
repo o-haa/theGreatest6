@@ -8,7 +8,7 @@ router.get('/myticket',mngController.myTicket);
 router.get('/mypick',mngController.myPick);
 router.get('/mycalendar',mngController.myCalendar);
 router.get('/myact',mngController.myAct);
-
+router.get('/mybenefit',mngController.myBenefit)
 
 module.exports = router;
 

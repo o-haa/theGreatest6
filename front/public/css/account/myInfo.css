@@ -1,0 +1,15 @@
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
+@import url('../index/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
+
+#header{
+    margin: 0 auto;
+}
+
+
+#wrap{
+    /* overflow: hidden; */
+    margin: 0 auto;
+}
