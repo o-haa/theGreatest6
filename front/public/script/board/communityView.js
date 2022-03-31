@@ -1,8 +1,11 @@
+const { default: axios } = require("axios");
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.withCredentials = true;
     
     
     const [,,,,idx]=location.pathname.split('/');
@@ -31,13 +34,15 @@ async function init() {
     // image.setAttribute('class','img')
     // image.src = URL.createObjectURL(file)
     // file.appendChild(image)
+    const auth = await axios.post('/auth')
 
-    
+    console.log(auth.data)
+   
     if(response.data.errno === 0){
-        const [{user_nickname,board_subject,board_date,board_hit,board_content}]=response.data.result;
+        const [{board_subject,board_date,board_hit,board_content}]=response.data.result;
       
         subject.innerHTML = board_subject;
-        nickname.innerHTML = nickname;
+        nickname.innerHTML = 'hello'
         date.innerHTML = board_date;
         hit.innerHTML = board_hit;
         content.innerHTML = board_content;

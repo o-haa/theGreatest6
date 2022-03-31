@@ -4,7 +4,6 @@ const newsRouter = require('./news')
 const communityRouter = require('./community')
 const reviewRouter = require('./review')
 const { auth } = require('../account/member/auth')
-const multer = require('multer');
 
 router.use('/news', newsRouter)
 router.use('/community', auth, communityRouter)
