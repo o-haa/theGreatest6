@@ -6,10 +6,6 @@ let response = {
 };
 
 exports.communityList = async (req, res) => {
-    let response = {
-        result: [],
-        errno: 1
-    };
     const { prepare } = req.body;
     console.log(prepare)
     let sql ='';
@@ -31,7 +27,6 @@ exports.communityList = async (req, res) => {
     }
     try {
         const [result] = await pool.execute(sql, prepare);
-        // console.log(result);
         response = {
             ...response,
             result,

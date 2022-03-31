@@ -9,18 +9,23 @@ async function init() {
     const checked = document.querySelectorAll('#category ul li input:checked');
     const prepare = [];
 
-    for (i = 0; i < checked.length; i++) {
-        await prepare.push(checked[i].value);
+    let response;
+    try {
+        for (i = 0; i < checked.length; i++) {
+            await prepare.push(checked[i].value);
+        }
+        const data = {
+            prepare
+        };
+        console.log(prepare, 'all categories');
+        response = await axios.post('/list', data);
+    } catch (e) {
+        console.log(e.message);
     }
-    const data = {
-        prepare
-    };
 
-    console.log(prepare,'1')
-    if (document.onload) response = await axios.post('/list', data);
 
     for (i = 0; i < check.length; i++) {
-        check[i].addEventListener('click', clickHanlder)
+        check[i].addEventListener('click', clickHanlder);
     }
     async function clickHanlder() {
         try {
@@ -32,16 +37,13 @@ async function init() {
             const data = {
                 prepare
             };
-            console.log(prepare,'2')
+            console.log(prepare,'clicked')
             response = await axios.post('/list', data);
-            return response;
+            return response.data;
         } catch (e) {
-            console.log(e)
+            console.log(e.message);
         }
     }
-}
-
-console.log(response.data)
 
 test = {
         ...response
@@ -99,7 +101,7 @@ test = {
         tbody.appendChild(clone);
     })
 
-
+}
 async function pages(num) {
     console.log('num', num)
     const tr = document.querySelector('#communityBoardRow');
