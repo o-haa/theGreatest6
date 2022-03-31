@@ -8,6 +8,20 @@
     <script src="/script/board/communityWrite.js"></script>
     <script src="/script/board/communityUpdate.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        #fileBox{
+            width:500px;
+            min-height: 150px;
+            padding:10px;
+            border: 1px dotted #f1f1f1;
+        }
+
+        #fileBox:empty:before{
+            content: attr(data-placeholder);
+            color:#999;
+            font-size: 12px;
+        }
+    </style>
 </head>
 <body>
     <h3>Community Write</h3>

@@ -5,23 +5,26 @@ let response = {
     errno: 1
 };
 
+const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
+
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
     let sql ='';
     switch (prepare.length) {
         case 1:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
 
         case 2:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
 
         case 3:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
             break;
         case 4:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
             break;
     }
     try {
@@ -30,7 +33,8 @@ exports.communityList = async (req, res) => {
             ...response,
             result,
             errno: 0
-        }
+        } 
+        console.log(response.result)
     } catch (e) {
         console.log(e.message);
     }
@@ -103,7 +107,6 @@ exports.communityWrite = async (req,res) =>{
     const prepare = [select];
 
     const result = await pool.execute(sql,prepare);
-    
     const [idx] = result[0];
     const {subject,content}=req.body;
     const categoryIdx = idx.show_category_id;
@@ -122,6 +125,7 @@ exports.communityWrite = async (req,res) =>{
         };
         res.json(response)
 
+        
         const fileOriginalname = req.file.originalname;
         const fileStoredname = req.file.filename;
         const fileSize = req.file.size;
@@ -163,7 +167,13 @@ exports.communityView = async (req,res) => {
     const prepare = [idx];
 
 
-    const sql = `SELECT * FROM board WHERE board_idx = ? `;
+    const sql = `SELECT ${param},${date} FROM board WHERE board_idx = ? `;
+    const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
+    const imgPrepare = [idx]
+
+    // const imgIdx = await pool.execute(imgSql,imgPrepare)
+    // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
+
    
     try{
         const [result] = await pool.execute(sql,prepare);
@@ -171,6 +181,8 @@ exports.communityView = async (req,res) => {
             result,
             errno:0
         };
+
+        
         res.json(response);
     } catch (e) {
         console.log(e.message);
