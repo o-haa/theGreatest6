@@ -1,8 +1,12 @@
+
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.withCredentials = true;
+    
     
     const [,,,,idx]=location.pathname.split('/');
     const subject = document.querySelector('#subject');
@@ -10,6 +14,7 @@ async function init() {
     const date = document.querySelector('#date');
     const content = document.querySelector('#content');
     const hit = document.querySelector('#hit');
+    const file = document.querySelector('#imgView');
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
@@ -21,15 +26,26 @@ async function init() {
         withCredentials:true,
     });
 
+
+    // const uploadedFile = file.files[0];
+    // console.log(uploadedFile)
+    // const image = document.createElement('img');
+    // console.log(image)
+    // image.setAttribute('class','img')
+    // image.src = URL.createObjectURL(file)
+    // file.appendChild(image)
+    // const auth = await axios.post('/auth')
+
+    // console.log(auth.data)
+   
     if(response.data.errno === 0){
-        const [{user_nickname,board_subject,board_date,board_hit,board_content}]=response.data.result;
+        const [{board_subject,board_date,board_hit,board_content}]=response.data.result;
       
         subject.innerHTML = board_subject;
-        nickname.innerHTML = nickname;
+        nickname.innerHTML = 'hello'
         date.innerHTML = board_date;
         hit.innerHTML = board_hit;
         content.innerHTML = board_content;
-        
 
     } else {
 

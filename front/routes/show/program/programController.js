@@ -28,7 +28,7 @@ res.render('./show/program/showModify')
 //파일 업로드 포함
 }
 
-exports.ticketopen = (req,res)=>{
+exports.ticketOpen = (req,res)=>{
 
 }
 

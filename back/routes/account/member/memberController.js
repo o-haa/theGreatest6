@@ -1,5 +1,5 @@
 const pool = require('../../../db');
-const { createToken } = require('../../../utils/createJWT')
+const { createToken, createSignature } = require('../../../utils/createJWT')
 
 
 exports.idCheck = async (req, res) => {
@@ -101,6 +101,29 @@ exports.signIn = async (req, res) => {
     } else throw new Error('로그인 오류');
     
   } catch (e) {
+    console.log(e);
+  }
+  res.json(response);
+}
+
+
+exports.auth = async (req, res) => {
+  const { AccessToken } = req.body;
+  let response = {
+    errno: 1,
+    user: {},
+  };
+  try {
+    const [header, payload, sign] = await AccessToken.split('.');
+    const signature = await createSignature(header, payload);
+    if (sign !== signature) throw new Error('토큰 불일치');
+    const user = await JSON.parse(Buffer.from(payload, 'base64').toString('utf-8'));
+    response = {
+      errno: 0,
+      user,
+    }
+  }
+  catch (e) {
     console.log(e);
   }
   res.json(response);
