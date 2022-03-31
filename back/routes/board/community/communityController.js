@@ -34,7 +34,7 @@ exports.communityList = async (req, res) => {
             result,
             errno: 0
         } 
-        console.log(response.result)
+        // console.log(response.result)
     } catch (e) {
         console.log(e.message);
     }
@@ -165,8 +165,7 @@ exports.communityWrite = async (req,res) =>{
 exports.communityView = async (req,res) => {
     const{idx}=req.params;
     const prepare = [idx];
-
-
+ 
     const sql = `SELECT ${param},${date} FROM board WHERE board_idx = ? `;
     const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
     const imgPrepare = [idx]

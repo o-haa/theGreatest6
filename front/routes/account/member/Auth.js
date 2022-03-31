@@ -7,7 +7,7 @@ exports.auth = async (req, res, next) => {
 
     const { AccessToken } = req.cookies;
     const data = {
-        AccessToken
+        AccessToken,
     };
     try {
         if (AccessToken === undefined) throw new Error('토큰 없음, 로그인 페이지로 가랏');

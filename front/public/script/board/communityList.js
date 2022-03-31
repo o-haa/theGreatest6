@@ -5,6 +5,10 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+    const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+    const { user } = response1.data.result;
+    const user_nickname = user.user_nickname;
+
     const check = document.querySelectorAll('#category ul li input');
     const checked = document.querySelectorAll('#category ul li input:checked');
     const prepare = [];
@@ -36,7 +40,7 @@ async function init() {
             const data = {
                 prepare
             };
-            console.log(prepare,'clicked')
+            // console.log(prepare,'clicked')
             response = await axios.post('/list', data);
             // return response.data;
 
@@ -93,7 +97,7 @@ async function init() {
         
                 td[0].innerHTML = v.board_idx;
                 td[1].appendChild(aElement);
-                td[2].innerHTML = v.user_idx;
+                td[2].innerHTML = user_nickname
                 td[3].innerHTML = v.board_date;
                 td[4].innerHTML = v.board_hit;
         
@@ -129,7 +133,7 @@ async function init() {
             
                     td[0].innerHTML = v.board_idx;
                     td[1].appendChild(aElement);
-                    td[2].innerHTML = v.user_idx;
+                    td[2].innerHTML = user_nickname
                     td[3].innerHTML = v.board_date;
                     td[4].innerHTML = v.board_hit;
             
@@ -192,7 +196,7 @@ async function init() {
 
         td[0].innerHTML = v.board_idx;
         td[1].appendChild(aElement);
-        td[2].innerHTML = v.user_idx;
+        td[2].innerHTML = user_nickname
         td[3].innerHTML = v.board_date;
         td[4].innerHTML = v.board_hit;
 
@@ -200,7 +204,12 @@ async function init() {
     })
 
 }
+
 async function pagess(num) {
+    const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+    const { user } = response1.data.result;
+    const user_nickname = user.user_nickname;
+
     console.log('num', num)
     const tr = document.querySelector('#communityBoardRow');
     const value = test.data.result;
@@ -229,7 +238,7 @@ async function pagess(num) {
 
         td[0].innerHTML = v.board_idx;
         td[1].appendChild(aElement);
-        td[2].innerHTML = v.user_idx;
+        td[2].innerHTML = user_nickname
         td[3].innerHTML = v.board_date;
         td[4].innerHTML = v.board_hit;
 
