@@ -8,15 +8,30 @@ async function noEnterkey(e){
 }
 
 async function init() {
+    console.log('front 도착')
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     makeOption()
 
     const writeForm = document.querySelector('#writeForm');
+    const files = document.querySelector('#showFile');
     writeForm.addEventListener('submit',makeData)
 
     async function makeData(e){
         e.preventDefault();
+
+        const {upload} = e.target
+        console.log(upload.files[0])
+
+        const formData = new FormData()
+        
+        formData.append('upload', upload.files[0])
+        
+        const response = await axios.post('showwrite', formData)
+        console.log(response)
+        
+
+
         const data = {
             category : document.querySelector('#category').value,
             xrated : document.querySelector('#category').value,
@@ -32,12 +47,16 @@ async function init() {
             ticketHour : document.querySelector('#ticketHour').value,
             showMonth : document.querySelector('#showMonth').value,
             showDate : document.querySelector('#showDate').value,
-            showHour : document.querySelector('#showHour').value
+            showHour : document.querySelector('#showHour').value,
+            // upload : files.files[0]
         }
-<<<<<<< HEAD
-        const response = await axios.post('showwrite',data)
-        const show_idx = response.data.resultShow.insertId
-        location.href = `showview/${show_idx}`
+        try{
+            const response = await axios.post('showwrite',data)
+            const show_idx = response.data.resultShow.insertId
+            // location.href = `showview/${show_idx}`
+        } catch(e){
+            console.log(e)
+        }
     }
 
     function makeOption(){

@@ -3,13 +3,13 @@ const pool = require('../../../db.js')
 let response = {
     result:[],
     errno:1
+}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3b308fc64249383215db5fef02aaf0f06df8e8d6
 exports.showWrite = async (req,res)=>{
     console.log('back / showWrite 라우터 접속!')
+    console.log(req.files)
+
+
     const today = new Date()
     const thisYear = today.getFullYear()
 
