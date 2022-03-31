@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Write</title>
     <script src="/script/show/showWrite.js"></script>
+    <script src="/script/show/showUpload.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
@@ -94,7 +95,8 @@
             <!-- <th>파일업로드</th> -->
         </table>
         <div> * 별표가 있는 항목은 필수 항목 입니다</div>
-        <input type="file" name="upload" multiple>
+        <div> 첨부파일 </div>
+        <input type="file" name="upload" id="showUpload" multiple>
         <input type="submit" value="작성하기">
     </form>
 </body>

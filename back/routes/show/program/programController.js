@@ -42,9 +42,6 @@ exports.showWrite = async (req,res)=>{
             error:0,
         }
         res.json(response)
-
-
-        //파일 보내기
     }
     catch(e){
         console.log(e)
@@ -95,8 +92,6 @@ exports.showView = async (req,res)=>{
     catch(e){
         console.log("showView 에러발생")
     }
-
-    console.log(__dirname)
 }
 
 exports.showModify = async (req,res)=>{
