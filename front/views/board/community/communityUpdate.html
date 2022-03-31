@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Update</title>
+    <script src="/script/board/communityUpdate.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h3>Community Update</h3>
+    <form method="post" action="/board/community/update" enctype="multipart/form-data" id="updateFrm"> 
+        <table>
+            <tr>
+                <td>category : </td>
+                <td>
+                    <select name="select" form="updateFrm" >
+                        <option value="Classic">Classic</option>
+                        <option value="Musical">Musical</option>
+                        <option value="Opera">Opera</option>
+                        <option value="Ballet">Ballet</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>subject : </td>
+                <td>
+                    <input type="text" name="updateSubject" id="updateSubject">
+                </td>
+            </tr>
+            <tr>
+                <td>content : </td>
+                <td>
+                    <textarea type="text" name="updateContent" id="updateContent"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>file : </td>
+                <td>
+                    <input type="file" name="upload" id="updateFile">
+                </td>
+            </tr>
+            <input type="hidden" name="idx" id={idx}>
+        </table>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+</body>
+</html>

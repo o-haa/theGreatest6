@@ -34,6 +34,7 @@ async function init() {
             showDate : document.querySelector('#showDate').value,
             showHour : document.querySelector('#showHour').value
         }
+<<<<<<< HEAD
         const response = await axios.post('showwrite',data)
         const show_idx = response.data.resultShow.insertId
         location.href = `showview/${show_idx}`

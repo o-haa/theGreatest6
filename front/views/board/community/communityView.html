@@ -33,7 +33,9 @@
         </tr>
     </table>
     <a href = "/board/community/list">List</a>
-    <a href = "/board/community/write:idx"></a>
+    
+    <button id="update"></button>
+    
     <form method = "post" action = "/board/community/delete" id="deleteFrm">
         <input type="hidden" name = "idx" value=`req.params`>
         <button type="submit" value="Delete">Delete</button>
