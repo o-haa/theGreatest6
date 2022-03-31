@@ -7,7 +7,6 @@ let response = {
 
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
-    console.log(prepare)
     let sql ='';
     switch (prepare.length) {
         case 1:

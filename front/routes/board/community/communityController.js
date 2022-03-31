@@ -7,7 +7,6 @@ exports.communityWrite = (req,res) =>{
 }
 
 exports.communityView = (req,res) =>{
-    console.log(req.cookies)
     res.render('./board/community/communityView')
 }
 
