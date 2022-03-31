@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -34,9 +34,9 @@ async function init() {
     // image.setAttribute('class','img')
     // image.src = URL.createObjectURL(file)
     // file.appendChild(image)
-    const auth = await axios.post('/auth')
+    // const auth = await axios.post('/auth')
 
-    console.log(auth.data)
+    // console.log(auth.data)
    
     if(response.data.errno === 0){
         const [{board_subject,board_date,board_hit,board_content}]=response.data.result;

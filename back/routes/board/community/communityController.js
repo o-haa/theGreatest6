@@ -5,24 +5,27 @@ let response = {
     errno: 1
 };
 
+const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
+
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
     console.log(prepare)
     let sql ='';
     switch (prepare.length) {
         case 1:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
 
         case 2:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
 
         case 3:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
             break;
         case 4:
-            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC';
+            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
             break;
     }
     try {
@@ -31,7 +34,8 @@ exports.communityList = async (req, res) => {
             ...response,
             result,
             errno: 0
-        }
+        } 
+        console.log(response.result)
     } catch (e) {
         console.log(e.message);
     }

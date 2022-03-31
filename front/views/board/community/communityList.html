@@ -5,52 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community List</title>
-    <script src="/script/board/communityList.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <style>
-        h3{text-align: center;}
-        
-        ul li {list-style: none;}
-        
-        #category > ul {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-
-        #paging {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* #paging > li {
-            margin:0 auto;
-        } */
-
-        #communityBoard{
-            width:80%;
-            margin:0 auto;
-        }
-
-        td,th{
-            padding:7px 14px;
-            border-bottom:1px solid #eee;
-            text-align: center;
-        }
-
-        th{
-            background-color: #eee;
-            border-bottom: 2px solid #333;
-        }
-
-        th:nth-child(2){
-            width:30%;
-        }
-
-
-    </style>
-    
+    <script src="/script/board/community.js"></script>
+    <link href="/css/board/boardList.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
 </head>
 <body>
     <h3>Community List</h3>
@@ -58,15 +15,15 @@
         <div id="category">
             <ul>
                 <li>
-                    <input type="checkbox" name="classic" value="1" checked>
+                    <input type="checkbox" name="classic" value="1" >
                     <label for ="classic">Classic</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="musical" value="2" checked>
+                    <input type="checkbox" name="musical" value="2" >
                     <label for ="musical">Musical</label>
                 </li>
                 <li>
-                    <input type="checkbox" name="opera" value="3" checked>
+                    <input type="checkbox" name="opera" value="3" >
                     <label for ="opera">Opera</label>
                 </li>
                 <li>
@@ -91,7 +48,10 @@
                 </tr>
             </tbody>
         </table>
-        <div >
+        <div id="box">
+            <button type="button" id="bBtn"><a href="write" >write</a></button>
+        </div>
+        <div id="pagingDiv">
             <ul id="paging">
         
             </ul>
@@ -106,6 +66,7 @@
             </tr>
         </template>
     </div>
-    <a href="write">write</a>
+    
+    
 </body>
 </html>

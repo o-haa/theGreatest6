@@ -44,7 +44,7 @@ async function init() {
             console.log(e.message);
         }
     }
-
+console.log(response.data)
 test = {
         ...response
     };
@@ -73,7 +73,7 @@ test = {
         const liElement = document.createElement('li');
         const aElement = document.createElement('a');
 
-        aElement.setAttribute(`onClick`, `pages(${i})`);
+        aElement.setAttribute(`onClick`, `pages(${i})`);//
         aElement.innerHTML = `[${i}]`;
         liElement.appendChild(aElement);
         paging.appendChild(liElement);
