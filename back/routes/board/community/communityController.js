@@ -1,77 +1,102 @@
 const pool = require('../../../db');
 
 let response = {
-    result:[],
-    errno:1
+    result: [],
+    errno: 1
 };
 
-const param = `board_idx,board_subject,board_hit,board_content`
-const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+exports.communityList = async (req, res) => {
+    const { prepare } = req.body;
+    console.log(prepare)
+    let sql ='';
+    switch (prepare.length) {
+        case 1:
+            sql = 'SELECT * FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC';
+            break;
 
-exports.communityList = async (req,res) =>{
-    const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`;
-    
-    const classicSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`;
-    const musicalSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 2 ORDER BY board_idx DESC`;
-    const operaSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 3 ORDER BY board_idx DESC`;
-    const balletSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 4 ORDER BY board_idx DESC`;
+        case 2:
+            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC';
+            break;
 
-    
-    const data = `board_idx,board_subject,user_idx,board_date,board_hit`
-    const {category}= req.body;
-    // console.log(req.body)
-    
-    const categorySql = `SELECT ${data} FROM board LEFT OUTER JOIN s_category ON board.show_category_idx = s_category.show_category_id`;
-
-    const cSql = `SELECT ${param},${date} FROM board  AS board LEFT OUTER JOIN s_category AS s  ON board.show_category_idx = s.show_category_id`;
-    const prepare = [category+1];
-    // console.log(prepare)
-   
-
-    
-    try{
-        // if(category === 0){
-        //     const [result] = await pool.execute(classicSql)
-        //     response = {
-        //         ...response,
-        //         result,
-        //         errno:0
-        //     }
-        // }else if(category === 1){
-        //     const [result] = await pool.execute(musicalSql)
-        //     response = {
-        //         ...response,
-        //         result,
-        //         errno:0
-        //     }
-        // }else if(category === 2){
-        //     const [result] = await pool.execute(operaSql)
-        //     response = {
-        //         ...response,
-        //         result,
-        //         errno:0
-        //     }
-        // }else if(category === 3){
-        //     const [result] = await pool.execute(balletSql)
-        //     response = {
-        //         ...response,
-        //         result,
-        //         errno:0
-        //     }
-            const [result] = await pool.execute(cSql)
-            response = {
-                ...response,
-                result,
-                errno:0
-            }
-        
-        res.json(response);
-    } catch (e){
-        console.log('에러메세지',e)
-
-    };
-
+        case 3:
+            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC';
+            break;
+        case 4:
+            sql = 'SELECT * FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC';
+            break;
+    }
+    try {
+        const [result] = await pool.execute(sql, prepare);
+        response = {
+            ...response,
+            result,
+            errno: 0
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+    res.json(response);
 }
+
+
+
+
+// exports.communityList = async (req,res) =>{
+//     const sql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board ORDER BY board_idx DESC`;
+//     const classicSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`;
+//     const musicalSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 2 ORDER BY board_idx DESC`;
+//     const operaSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 3 ORDER BY board_idx DESC`;
+//     const balletSql = `SELECT board_idx, board_subject, user_idx, board_date, board_hit FROM board WHERE show_category_idx = 4 ORDER BY board_idx DESC`;
+
+//     const {category} = req.body;
+//     console.log(category)
+
+//     try{
+//         if(category === 'classic'){
+//             const [result] = await pool.execute(classicSql);
+//             response = {
+//                 ...response,
+//                 result,
+//                 errno:0
+//             };
+            
+//         } else if (category === 'musical'){
+//             const [result] = await pool.execute(musicalSql);
+//             response = {
+//                 ...response,
+//                 result,
+//                 errno:0
+//             };
+//         } else if (category === 'opera'){
+//             const [result] = await pool.execute(operaSql);
+//             response = {
+//                 ...response,
+//                 result,
+//                 errno:0
+//             };
+//         } else if (category === 'ballet'){
+//             const [result] = await pool.execute(balletSql);
+//             response = {
+//                 ...response,
+//                 result,
+//                 errno:0
+//             };
+//         };
+
+//         // const [result] = await pool.execute(sql)
+//         // response = {
+//         //     ...response,
+//         //     result,
+//         //     errno:0
+//         // }
+        
+//         res.json(response);
+//     } catch (e){
+//         console.log('에러메세지',e)
+
+//     };
+
+// }
 
 exports.communityWrite = async (req,res) =>{                                
     const {select}=req.body;
