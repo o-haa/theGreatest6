@@ -13,7 +13,7 @@ async function init() {
         console.log(user)
         if (user === undefined) throw new Error('로그인 안함');
         const signin = document.querySelector('#signin')
-        signin.innerHTML = 'mypage'
+        signin.innerHTML = 'MY PAGE'
         signin.setAttribute('href','/account/management/myinfo')
     }
     catch (e) {
