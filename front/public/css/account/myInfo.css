@@ -130,7 +130,7 @@
 }
 
 
-#content > #calContent > #userBadge > #username{
+#content > #calContent > #userBadge > #userName{
     color: #465D58;
     font-size: 39px;
 }
@@ -187,20 +187,26 @@
     border-radius: 5px;
     /* background-color: #465D58; */
     opacity: 0.4;
+    background: #F4D3AA;
 }
 
 .requiredBox{
-    width: 55%;
+    width: 50%;
     height: 80%;
-    padding: 5% 0;
+    padding: 5% 5%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid #465D58;
+    background: #F2F2F2;
+}
+
+.line{
+    border-right: 2px solid #465D58;
+    height: 80%;
 }
 
 .optionalBox{
-    width: 45%;
+    width: 50%;
     height: 80%;
     padding: 5% 5%;
     display: flex;
@@ -212,6 +218,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 50%;
 }
 
 .infoKey{
@@ -224,6 +231,7 @@
 }
 
 .infoValue{
+    
     width: 55%;
     font-family: 'basicLight';
     src: url('../../font/NotoSansKR-Light.otf') format('truetype');
@@ -233,3 +241,25 @@
 }
 
 
+
+#off{
+
+}
+
+#userOptionFrm {
+    background: blue;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+#userOptionFrm > input {
+
+}
+
+.optionBox{
+    background: red;
+}

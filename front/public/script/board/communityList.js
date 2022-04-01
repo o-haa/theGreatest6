@@ -81,7 +81,6 @@ async function init() {
      for (i = 0; i < check.length; i++) {
         check[i].addEventListener('click', clickHanlder);
     }
-
 }
 
 /* init 여기까지 */
