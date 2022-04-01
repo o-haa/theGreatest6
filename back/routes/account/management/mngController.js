@@ -1,8 +1,34 @@
 const pool = require('../../../db');
 
-exports.info = (req, res) => {
-    res.send('info페이지');
+exports.myinfo = async (req, res) => {
+    const { userIdx } = req.body
+    const prepare = [ userIdx ]
+    const sql = 'SELECT * FROM u_personal WHERE user_idx = ?'
+
+    let response = {
+        result: {},
+        errno: 1,
+    }
+    try{
+        const [result] = await pool.execute(sql,prepare)
+        console.log(result)
+        if( result == [] ) throw new Error ('optional value 없음')
+        response = {
+            result,
+            errno: 0
+        }
+    } catch (e){
+        console.log('myinfo 에러', e.message)
+    }
+
+    res.json(response);
 }
+
+exports.optionalInfo = async(req,res) => {
+    console.log(req.body)
+    res.json(response)
+}
+
 
 exports.myTicket = (req, res) => {
     res.send('내 티켓');

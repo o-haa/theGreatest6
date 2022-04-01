@@ -80,26 +80,35 @@ exports.signIn = async (req, res) => {
   };
   const { userPw, userId } = req.body;
   const prepare = [userId, userPw];
-  const sql = 'SELECT * from USER WHERE user_id = ? AND user_password = ?';
+  console.log(prepare)
+  const sql = `SELECT 
+                  user_idx,
+                  user_id,
+                  user_password,
+                  user_nickname,
+                  DATE_FORMAT(user_doj,'%Y-%m-%d') AS user_doj,
+                  user_level,
+                  user_active
+                FROM user 
+                WHERE user_id = ? AND user_password = ?`;
   try {
     const [[result]] = await pool.execute(sql, prepare);
-    if (userPw == result.user_password && userId == result.user_id) {
-      delete result.user_password;
-      const token = await createToken(result);
-
-      res.cookie('AccessToken', token, {
-        path: '/',
-        httpOnly: true,
-        secure: true,
-        domain: 'localhost'
-      })
-      response = {
-        ...response,
-        result,
-        errno: 0
-      };
-    } else throw new Error('로그인 오류');
-    
+    console.log(result)
+    if (userPw !== result.user_password || userId !== result.user_id) throw new Error('로그인 오류');
+    delete result.user_password
+    console.log(result)
+    const token = await createToken(result);
+    res.cookie('AccessToken', token, {
+      path: '/',
+      httpOnly: true,
+      secure: true,
+      domain: 'localhost'
+    })
+    response = {
+      ...response,
+      result,
+      errno: 0
+    };
   } catch (e) {
     console.log(e);
   }

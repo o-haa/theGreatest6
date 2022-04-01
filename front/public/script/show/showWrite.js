@@ -9,35 +9,61 @@ async function noEnterkey(e){
 
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
+    axios.defaults.withCredentials= true;
     makeOption()
 
     const writeForm = document.querySelector('#writeForm');
+    const files = document.querySelector('#showFile'); //id는 showFile, name은 upload
     writeForm.addEventListener('submit',makeData)
+    
+    
 
     async function makeData(e){
         e.preventDefault();
-        const data = {
-            category : document.querySelector('#category').value,
-            xrated : document.querySelector('#category').value,
-            title : document.querySelector('#title').value,
-            place : document.querySelector('#place').value,
-            showCast1 : document.querySelector('#showCast1').value,
-            showCast2 : document.querySelector('#showCast2').value,
-            showDirector : document.querySelector('#showDirector').value,
-            showCompany : document.querySelector('#showCompany').value,
-            showContent : document.querySelector('#showContent').value,
-            ticketMonth : document.querySelector('#ticketMonth').value,
-            ticketDate : document.querySelector('#ticketDate').value,
-            ticketHour : document.querySelector('#ticketHour').value,
-            showMonth : document.querySelector('#showMonth').value,
-            showDate : document.querySelector('#showDate').value,
-            showHour : document.querySelector('#showHour').value
+
+        const {upload} = e.target
+        console.log('upload,files[0] : ',upload.files[0])
+
+        const formData = new FormData()
+        formData.append('files', upload.files[0])
+        formData.append('category', document.querySelector('#category').value)
+        formData.append('xrated' , document.querySelector('#xrated').value)
+        formData.append('title' , document.querySelector('#title').value)
+        formData.append('place' , document.querySelector('#place').value)
+        formData.append('showCast1' , document.querySelector('#showCast1').value)
+        formData.append('showCast2' , document.querySelector('#showCast2').value)
+        formData.append('showDirector' , document.querySelector('#showDirector').value)
+        formData.append('showCompany' , document.querySelector('#showCompany').value)
+        formData.append('showContent' , document.querySelector('#showContent').value)
+        formData.append('ticketMonth' , document.querySelector('#ticketMonth').value)
+        formData.append('ticketDate' , document.querySelector('#ticketDate').value)
+        formData.append('ticketHour' , document.querySelector('#ticketHour').value)
+        formData.append('showMonth' , document.querySelector('#showMonth').value)
+        formData.append('showDate' , document.querySelector('#showDate').value)
+        formData.append('showHour' , document.querySelector('#showHour').value)
+
+        console.log('2 : ',formData)
+        const options = {
+            headers : {
+                'Content-Type':'multipart/form-data'
+            },
+            // formData
         }
-<<<<<<< HEAD
-        const response = await axios.post('showwrite',data)
-        const show_idx = response.data.resultShow.insertId
-        location.href = `showview/${show_idx}`
+
+        try{
+            // const instance = axios.create()
+            // instance('showwrite',{
+            //     method:'post',
+            //     data:formData
+            // })
+            const response = await axios.post('showwrite',options, formData)
+            // const show_idx = response.data.resultShow.insertId
+            // location.href = `showview/${show_idx}`
+        }
+        catch(e){
+            console.log(e)
+        }
     }
 
     function makeOption(){

@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const options = {
     origin: true,
+    // methods:"GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders:['Content-type','Authorization'],
     credentials: true
 };
 
