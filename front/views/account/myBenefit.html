@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/account/account.css" rel="stylesheet" type="text/css">
+    <link href="/css/account/myBenefit.css" rel="stylesheet" type="text/css">
+
+    <script src="/script/account/myBenefit.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+            <div id="nav">
+                <h1 id="logoBox">
+                    <a href="/">Team6</a>
+                </h1>
+                <ul id="mainMenu">
+                    <li id="home">
+                        <!-- <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01"> -->
+                        <a href="/">HOME</a>
+                        <!-- </label> -->
+                    </li>
+                    <li id="show">
+                        <!-- click 이벤트를 만들어주는 체크박스 -->
+                        <input type="radio" name="menuCheck" id="check02">
+                        <label for="check02">SHOW</label>
+                        <!-- show 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/show/program/showcard">Show List</a></li>
+                            <li><a href="/show/program/ticketopen">Ticket Open Date</a></li>
+                        </ul>
+                        <!-- show 서브메뉴 끝 -->
+                    </li>
+
+                    <li id="board">
+                        <input type="radio" name="menuCheck" id="check03">
+                        <label for="check03">BOARD</label>
+                        <!-- board 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/board/review/list">Review</a></li>
+                            <li><a href="/board/community/list">Community</a></li>
+                            <li><a href="/board/news/list">News</a></li>
+                        </ul>
+                        <!-- board 서브메뉴 끝 -->
+                    </li>
+                    <li id="my page">
+                        <input type="radio" name="menuCheck" id="check04">
+                        <label for="check04">MY PAGE</label>
+                        <!-- my page 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/account/management/mycalendar">My Calendar</a></li>
+                            <li><a href="/account/management/myinfo">My Profile</a></li>
+                            <li><a href="/account/management/myticket">My Ticket</a></li>
+                            <li><a href="/account/management/mypick">My Pick</a></li>
+                            <li><a href="/account/management/mybenefit">My Point</a></li>
+                        </ul>
+                        <!-- my page 서브메뉴 끝 -->
+                    </li>
+                    <li id="admin">
+                        <input type="radio" name="menuCheck" id="check05">
+                        <label for="check05">ADMIN</label>
+                        <!-- admin 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/admin/showmanagement">공연관리</a></li>
+                            <li><a href="/admin/accountmanagement">회원관리</a></li>
+                            <li><a href="/admin/benefitmanagement">포인트관리</a></li>
+                            <li><a href="/admin/boardmanagement">보드관리</a></li>
+                            <li><a href="/admin/graphicchart">통계</a></li>
+                        </ul>
+                        <!-- admin 서브메뉴 끝 -->
+                    </li>
+                    <li id="about">
+                        <!-- <input type="radio" name="menuCheck" id="check06"> -->
+                        <!-- <label for="check06"> -->
+                        <a href="/about/list">ABOUT</a>
+                        <!-- </label> -->
+                    </li>
+                    <li>
+                        <span id="mainSearch">
+                            <input type="text" name="searchInput" id="searchInput">
+                            <img src="/img/icon/icon_search_2x.png" name="searchIcon" id="searchIcon">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <main id="content">
+            <div id="calContent" dd>
+                <div id="calSmall">
+                </div>
+            </div>
+            <div id = "mainContent">
+                <span id ="userImg"></span>
+                <table id="userContent">
+                    <tr>
+                        <td>
+                            <span>
+                                아이디:
+                            </span>
+                        </td>
+                        <td id="userId" class="userInfo">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            닉네임:
+                        </td>
+                        <td id="userNickName" class="userInfo">
+
+                        </td>
+                        <td>
+                            <input type="button" vlaue="닉네임 변경">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            레벨:
+                        </td>
+                        <td id="userLevel" class="userInfo">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            가입일:
+                        </td>
+                        <td id="userDoj" class="userInfo">
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
