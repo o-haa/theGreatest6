@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Write</title>
     <script src="/script/show/showWrite.js"></script>
-    <script src="/script/show/showUpload.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
     <!-- 관리자만 사용할 수 있는 게시판 작성 -->
-    <form method="post" action="/show/program/showWrite" name="writeForm" id="writeForm" ectype="multipart/form-data">
+    <form method="post" action="/show/program/showWrite" name="writeForm" id="writeForm" enctype="multipart/form-data">
         <table>
             <tr>
                 <th>공연 분류 *</th>
@@ -92,11 +91,15 @@
                 <th>공연 주최측 *</th>
                 <td><input type="text" name="showCompany" id="showCompany"></td>
             </tr>
+            <tr>
+                <td>
+                    <div> 첨부파일 </div>
+                    <input type="file" name="upload" id="showFile" multiple>
+                </td>
+            </tr>
             <!-- <th>파일업로드</th> -->
         </table>
         <div> * 별표가 있는 항목은 필수 항목 입니다</div>
-        <div> 첨부파일 </div>
-        <input type="file" name="upload" id="showUpload" multiple>
         <input type="submit" value="작성하기">
     </form>
 </body>
