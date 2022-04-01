@@ -6,47 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community view</title>
     <script src="/script/board/communityView.js"></script>
+    <link href="/css/board/boardView.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <h3>Community View</h3>
-    <table>
-        <tr>
-            <td>category : </td>
-            <td id="category"></td>
-        </tr>
-        <tr>
-            <td>subject : </td>
-            <td id="subject"></td>
-        </tr>
-        <tr>
-            <td>writer : </td>
-            <td id="writer"></td>
-        </tr>
-        <tr>
-            <td>date : </td>
-            <td id="date"></td>
-        </tr>
-        <tr>
-            <td>view : </td>
-            <td id="hit"></td>
-        </tr>
-        <tr>
-            <td>content : </td>
-            <td id="content"></td>
-        </tr>
-        <tr>
-            <td>img : </td>
-            <td id="imgView"></td>
-        </tr>
-    </table>
-    <a href = "/board/community/list">List</a>
-    
-    <button id="update"></button>
-    
-    <form method = "post" action = "/board/community/delete" id="deleteFrm">
-        <input type="hidden" name = "idx" value=`req.params`>
-        <button type="submit" value="Delete">Delete</button>
-    </form>
+    <div id="wrap">
+        <h3>Community View</h3>
+        
+            <div id="category"></div>
+            <table cellspacing="0" cellpadding="0" id="viewTable">
+                <tr>
+                    <th>num</th>
+                    <th>subject</th>
+                    <th>writer</th>
+                    <th>date</th>
+                    <th>view</th>
+                </tr>
+                <tr id="viewHead">
+                    <td id="idx"></td>
+                    <td id="subject"></td>
+                    <td id="writer"></td>
+                    <td id="date"></td>
+                    <td id="hit"></td>
+                </tr>
+            </table>
+            <div id="viewContent">
+                <div id="bContent"></div>
+            </div>
+            <div id="img">
+                <span>img : </span>
+                <div id="imgView"></div>
+            </div>
+            <div id="button">
+                <button><a href = "/board/community/list" class="list">List</a></button>
+            
+                <button id="update" class="update"></button>
+                
+                <form method = "post" action = "/board/community/delete" id="deleteFrm">
+                    <input type="hidden" name = "idx" value=`req.params`>
+                    <button type="submit" value="Delete" class="delete">Delete</button>
+                </form>
+            </div>
+        
+    </div>
 </body>
 </html>

@@ -1,0 +1,84 @@
+@import url('../index/_fontLayout.css');
+@import url('../index/_headerLayout.css');
+@import url('../index/_settingLayout.css');
+
+body{
+    zoom:100%;
+}
+
+h3{
+    text-align: center;
+    margin-top:5%;
+}
+
+table{
+    width:80%;
+    margin:1% auto;
+    font-size:18px;
+}
+
+#viewHead td{
+    padding:7px 12px;
+    border-bottom:1px solid #eee;
+    text-align: center;
+}
+
+th{
+    background-color: #a8bebf;
+    border-bottom: 2px solid #465d59;
+    height: 25px;
+    padding:7px 12px;
+    border-bottom:1px solid #eee;
+    text-align: center;
+}
+
+th:nth-child(2){
+    width:25%;
+}
+
+#category {
+    border-radius: 10px;
+    width:fit-content;
+    font-size:17px;
+    margin-left: 112.104px;
+    background: #f4d3aa;
+    padding:7px 14px;
+    box-sizing: border-box;
+    font-size:18px;
+}
+
+#viewContent{
+    width:80%;
+    margin: 0 auto;
+    height:200px;
+    border-bottom:1px solid #eee;
+    font-size:18px;
+}
+
+#img{
+    width:80%;
+    margin: 0 auto;
+    height:50px;
+}
+
+#button {
+    width:80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.list .update .delete{ 
+    padding: 7px 12px;
+    background-color: #465d59;
+}
+
+a, .delete{
+    color: #465d59 !important;
+    font-size: 16px;
+}
+
+
+
+
+
