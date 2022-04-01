@@ -47,40 +47,49 @@ async function init() {
                 async function submitHandler(e){
                     e.preventDefault();
                     
-                    const usertName = document.querySelector('#userName').value
-                    const inputDob = document.querySelectorAll('.userDob')
-                    const userGender = document.querySelector('input[type=radio]')
-                    const inputsMobile = document.querySelectorAll('.userMobile')
+                    const userName = document.querySelector('#userNameInput').value
+                    const inputDob01 = document.querySelector('#userDob01').value
+                    const inputDob02 = document.querySelector('#userDob02').value
+                    const inputDob03 = document.querySelector('#userDob03').value
+                    const userDob = inputDob01+inputDob02+inputDob03
+
+                    const userGender = document.querySelector('input[name=userGender]:checked').value
+                    const inputsMobile01 = document.querySelector('#userMobile01').value
+                    const inputsMobile02 = document.querySelector('#userMobile02').value
+                    const inputsMobile03 = document.querySelector('#userMobile03').value
+                    const userMobile = inputsMobile01+inputsMobile02+inputsMobile03;
                     const userAddress = document.querySelectorAll('#userAddress').value
 
-                    inputDob.forEach(v=> {
-                        console.log(v.value)
-                        
-                    });
+                    let today = new Date()
+                    let year = today.getFullYear()
 
-                    inputsMobile.forEach(v=> {
-                        console.log(v.value)
-                        
-                    });
+                    const expYear = new RegExp(`/^(?=.*[1900-${year}]).{2}$/;`, "g") 
+                    const expMonth = /^(?=.*[01-12]).{2}$/;
+                    const expDay = /^(?=.*[01-31]).{2}$/;
+                    const exp010 = /^(?=.*[010]).{3}$/;
+                    const expMobile = /^(?=.*[0000-9999]).{4}$/;
 
-
-                    console.log(userName, userGender,userAddress)
-
-                    // const data = {
-                    //     userName,
-                    //     userDob,
-                    //     userGender,
-                    //     userMobile
-                    // }
+                    if (!expPw.test(userPw))
 
 
                     try{
-                        // const optionalInputs = clone.querySelectorAll('input').value
-                        const body = {
+                    expYear.test(inputDob01)
+                    expMonth.test(inputDob02)
+                    expDay.test(inputDob03)
+                    exp010.test(inputsMobile01)
+                    expMobile.test(inputsMobile02,inputsMobile03)
 
-                        }
 
-                        const response2 = await axios.post('/',body)
+                    const data = {
+                        userName,
+                        userDob,
+                        userGender,
+                        userMobile,
+                        userAddress
+                    }
+                        const response2 = await axios.post('/optionalInfo',data)
+                        console.log(response2.data)
+
                     } catch (e){
 
                     }

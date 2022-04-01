@@ -31,9 +31,9 @@ body{
 
 
 #header > #nav{
-    width: 90%;
-    height: 40px;
-    padding-top:20px;
+    width: 95%;
+    height: 150px;
+    padding-top:35px;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -55,10 +55,11 @@ body{
 
 /* 메인메뉴바 시작 */
 #nav > ul {
-    width:35%;
+    width:10%;
     height: 100%;
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 #nav > ul > li {
@@ -74,4 +75,5 @@ body{
     /* 자동 줄넘김 막는 코드 */
     white-space:nowrap;
     position: relative;
+    font-size: 28px;
 }

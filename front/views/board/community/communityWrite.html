@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Write</title>
     <script src="/script/board/communityWrite.js"></script>
-    <script src="/script/board/communityUpdate.js"></script>
     <link href="/css/board/boardWrite.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- <style>
@@ -26,7 +25,7 @@
 </head>
 <body>
     <div id="wrap">
-        {% include "/Users/oo_ha/workspace/project/team6/theGreatest6/front/views/nav.html" %}
+        {% include "nav.html" %}
         <h3>Community Write</h3>
         <form method="post" action="/board/community/write" enctype="multipart/form-data" id="writeFrm"> 
             <table>
