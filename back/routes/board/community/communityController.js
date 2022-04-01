@@ -215,17 +215,15 @@ exports.communityUpdate = async (req,res)=>{
     const {select}=req.body;
     const sql = "SELECT * FROM s_category WHERE show_category = ?";
     const selectPre = [select];
-
     const result = await pool.execute(sql,selectPre);
-
+    
     const [selectidx] = result[0];
     const {subject,content}=req.body;
     const categoryIdx = selectidx.show_category_id;
     const sql2 = `UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?`;
-
     const prepare2 = [subject,content,categoryIdx,boardIdxPre];
-
     try{
+        
         const [result] = await pool.execute(sql2,prepare2);
         const response = {
             result:{

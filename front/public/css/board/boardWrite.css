@@ -1,0 +1,83 @@
+@import url('../index/_fontLayout.css');
+@import url('../index/_headerLayout.css');
+@import url('../index/_settingLayout.css');
+
+body{
+    zoom:100%;
+    font-size: 18px;
+}
+h3{
+    text-align: center;
+    margin-top:5%;
+}
+
+table {
+    margin: 0 auto;
+    margin-top:20px;
+    width:80%;
+    border-spacing: 20px;
+    
+}
+
+td:nth-child(1){
+    text-align: end;
+    width:15%;
+}
+
+select{
+    font-size: 16px;
+    border:1px solid #f4d3aa;
+}
+
+input{
+    width:90%;
+    border-bottom: 1px solid #f4d3aa;
+}
+
+textarea{
+    border:1px solid #f4d3aa;
+    width:90%;
+    height:200px;
+}
+
+#communityFile {
+    border:none;
+}
+
+#button{
+    width: 64.2%;
+    margin:0 auto;
+    text-align: end;
+}
+
+#submit{
+    width:fit-content;
+    padding:7px 14px;
+    box-sizing: border-box;
+    background: #f4d3aa;
+    
+}
+
+#fileBox{
+    padding-top:5px;
+    box-sizing: border-box;
+}
+
+#fileBox label {
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color:#f4d3aa;
+}
+
+#fileName {
+    margin-left:1%;
+    width:81.5%;
+    box-sizing: border-box;
+}
+
+#communityFile{
+    display: none;
+}
+    
+

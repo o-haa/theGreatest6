@@ -10,63 +10,139 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
 </head>
 <body>
-    <h3>Community List</h3>
     <div id="wrap">
-        <div id="category">
-            <ul>
-                <li>
-                    <input type="checkbox" name="classic" value="1" >
-                    <label for ="classic">Classic</label>
-                </li>
-                <li>
-                    <input type="checkbox" name="musical" value="2" >
-                    <label for ="musical">Musical</label>
-                </li>
-                <li>
-                    <input type="checkbox" name="opera" value="3" >
-                    <label for ="opera">Opera</label>
-                </li>
-                <li>
-                    <input type="checkbox" name="ballet" value="4" checked>
-                    <label for ="ballet">Ballet</label>
-                </li>
-            </ul>
+        <div id="header">
+            <!-- nav 시작 -->
+            <div id="nav">
+                <!-- Logo -->
+                <div id="logoBox">
+                    <h1>Team6</h1>
+                </div>
+                <!-- 메인 메뉴 -->
+                <ul id="mainMenu">
+                    <li id="home">
+                        <!-- <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01"> -->
+                            <a href="/">HOME</a>
+                        <!-- </label> -->
+                    </li>
+                    <li id="show">
+                        <!-- click 이벤트를 만들어주는 체크박스 -->
+                        <input type="radio" name="menuCheck" id="check02">
+                        <label for="check02">SHOW</label>
+                        <!-- show 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">Show List</a></li>
+                            <li><a href="javascript">Ticket Open Date</a></li>
+                        </ul>
+                        <!-- show 서브메뉴 끝 -->
+                    </li>
+
+                    <li id="board">
+                        <input type="radio" name="menuCheck" id="check03">
+                        <label for="check03">BOARD</label>
+                        <!-- board 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">Review</a></li>
+                            <li><a href="javascript">Community</a></li>
+                            <li><a href="javascript">News</a></li>
+                        </ul>
+                        <!-- board 서브메뉴 끝 -->
+                    </li>
+                    <li id="my page">
+                        <input type="radio" name="menuCheck" id="check04">
+                        <label for="check04">MY PAGE</label>
+                        <!-- my page 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">My Calendar</a></li>
+                            <li><a href="javascript">My Profile</a></li>
+                            <li><a href="javascript">My Ticket</a></li>
+                            <li><a href="javascript">My Pick</a></li>
+                            <li><a href="javascript">My Point</a></li>
+                        </ul>
+                        <!-- my page 서브메뉴 끝 -->
+                    </li>
+                    <li id="admin">
+                        <input type="radio" name="menuCheck" id="check05">
+                        <label for="check05">ADMIN</label>
+                        <!-- admin 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">공연관리</a></li>
+                            <li><a href="javascript">회원관리</a></li>
+                            <li><a href="javascript">포인트관리</a></li>
+                            <li><a href="javascript">보드관리</a></li>
+                            <li><a href="javascript">통계</a></li>
+                        </ul>
+                        <!-- admin 서브메뉴 끝 -->
+                    </li>
+                    <li id="about">
+                        <!-- <input type="radio" name="menuCheck" id="check06"> -->
+                        <!-- <label for="check06"> -->
+                            <a href="#">ABOUT</a>
+                        <!-- </label> -->
+                    </li>
+                    <li>
+                        <span id="mainSearch">
+                            <input type="text" name="searchInput" id="searchInput">
+                            <img src="/img/icon/icon_search_2x.png" name="searchIcon" id="searchIcon">
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <table cellspacing="0" cellpadding="0" id="communityBoard">
-            <thead>
-                <tr>
-                    <th>num</th>
-                    <th>subject</th>
-                    <th>writer</th>
-                    <th>date</th>
-                    <th>hit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="communityListRow">
-                  
-                </tr>
-            </tbody>
-        </table>
-        <div id="box">
-            <button type="button" id="bBtn"><a href="write" >write</a></button>
-        </div>
-        <div id="pagingDiv">
-            <ul id="paging">
+        <h3>Community List</h3>
+                <div id="category">
+                    <ul>
+                        <li>
+                            <label for ="classic"><input type="checkbox" name="classic" id="classic" value="1" >Classic</label>
+                        </li>
+                        <li>
+                            <label for ="musical"><input type="checkbox" name="musical" id="musical" value="2" >Musical</label>
+                        </li>
+                        <li>
+                            <label for ="opera"><input type="checkbox" name="opera" id="opera" value="3" >Opera</label>
+                        </li>
+                        <li>
+                            <label for ="ballet"><input type="checkbox" name="ballet" id="ballet" value="4" checked>Ballet</label>
+                        </li>
+                    </ul>
+                </div>
+                <table cellspacing="0" cellpadding="0" id="communityBoard">
+                    <thead>
+                        <tr>
+                            <th>num</th>
+                            <th>subject</th>
+                            <th>writer</th>
+                            <th>date</th>
+                            <th>hit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="communityListRow">
+                        
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="box">
+                    <button type="button" id="bBtn"><a href="write" >write</a></button>
+                </div>
+                <div id="pagingDiv">
+                    <ul id="paging">
+                
+                    </ul>
+                </div>
+                <template id="communityBoardRow">
+                    <tr>
+                        <td>{idx}</td>
+                        <td id="td1"></td>
+                        <td>{nickname}</td>
+                        <td>{date}</td>
+                        <td>{hit}</td>
+                    </tr>
+                </template>
+            </div>
+            
         
-            </ul>
-        </div>
-        <template id="communityBoardRow">
-            <tr>
-                <td>{idx}</td>
-                <td id="td1"></td>
-                <td>{nickname}</td>
-                <td>{date}</td>
-                <td>{hit}</td>
-            </tr>
-        </template>
     </div>
-    
-    
 </body>
 </html>

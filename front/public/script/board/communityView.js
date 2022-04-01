@@ -16,7 +16,7 @@ async function init() {
     const subject = document.querySelector('#subject');
     const nickname = document.querySelector('#writer');
     const date = document.querySelector('#date');
-    const content = document.querySelector('#content');
+    const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit');
     const file = document.querySelector('#imgView');
 
@@ -30,17 +30,6 @@ async function init() {
         withCredentials:true,
     });
     const showCategory = response.data.result[0].show_category_idx
-    
-    // const uploadedFile = file.files[0];
-    // console.log(uploadedFile)
-    // const image = document.createElement('img');
-    // console.log(image)
-    // image.setAttribute('class','img')
-    // image.src = URL.createObjectURL(file)
-    // file.appendChild(image)
-    // const auth = await axios.post('/auth')
-
-    // console.log(auth.data)
    
     if(response.data.errno === 0){
         const [{board_subject,board_date,board_hit,board_content}]=response.data.result;
@@ -69,7 +58,6 @@ async function init() {
 
     };
 
-  
     const deleteFrm = document.querySelector('#deleteFrm');
     deleteFrm.addEventListener('submit',
     async function deleteSubmit (e){
@@ -86,3 +74,15 @@ async function init() {
 
 
 };
+
+
+// const uploadedFile = file.files[0];
+    // console.log(uploadedFile)
+    // const image = document.createElement('img');
+    // console.log(image)
+    // image.setAttribute('class','img')
+    // image.src = URL.createObjectURL(file)
+    // file.appendChild(image)
+    // const auth = await axios.post('/auth')
+
+    // console.log(auth.data)

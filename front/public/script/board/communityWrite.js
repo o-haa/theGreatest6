@@ -3,9 +3,17 @@ document.addEventListener('DOMContentLoaded', init);
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+    const file = document.querySelector('#communityFile');
+    const fileInput = document.querySelector('#fileName')
+    file.addEventListener('click',inputFileName)
+    function inputFileName (input) {
+        const name = input.file[0];
+        console.log(name)
+        // fileInput.textContent = name.nameInput
+    }
     
     const writeFrm = document.querySelector('#writeFrm');
-    const file = document.querySelector('#communityFile');
     
     writeFrm.addEventListener('submit',writeSubmit);
     async function writeSubmit (e){
@@ -28,10 +36,7 @@ async function init() {
             console.log(e);
             alert('try again');
         };
-    
-        
 
     };
     
-
 };
