@@ -35,6 +35,11 @@ async function init() {
                             .replace('{show_xrated}',v.show_xrated)
     })
 
+
+    const listBtn = document.querySelector('#List');
+    const gridBtn = document.querySelector('#grid');
+    const calBtn = document.querySelector('#claBtn');
+
     const homeBtn = document.querySelector('#home');
     const aboutBtn = document.querySelector('#about');
 
@@ -47,8 +52,3 @@ async function init() {
     homeBtn.addEventListener('click', moveHome)
     aboutBtn.addEventListener('click', moveAbout)
 }
-
-console.log('브라우저 현재 너비 : ',window.innerWidth)
-console.log('브라우저 현재 높이 : ',window.innerHeight)
-console.log('브라우저 전체 너비 : ',window.outerWidth)
-console.log('브라우저 전체 높이 : ',window.outerHeight)
