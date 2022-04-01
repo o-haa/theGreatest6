@@ -6,17 +6,30 @@
 body {
     zoom:100%;
 }
-h3{
-    text-align: center;
-    margin-top:5%;
+
+
+#category{
+    margin-top:6%;
 }
 
-/* #wrap {
-    width:100%;
-} */
+#label {
+    width: 80%;
+    margin:0 auto;
+    text-align: end;
+    
+}
+
+#label span {
+    font-weight: 600;
+    padding: 7px 14px;
+    box-sizing: border-box;
+    background: #f4d3aa;
+    font-size:18px;
+}
+
 
 #category ul {
-    margin-top:8%;
+    margin-top:3%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -35,7 +48,7 @@ h3{
 
 #communityBoard{
     width:80%;
-    margin:1% auto;
+    margin:3% auto;
 }
 
 td,th{
