@@ -69,6 +69,9 @@ async function init() {
                     const exp010 = /^(?=.*[010]).{3}$/;
                     const expMobile = /^(?=.*[0000-9999]).{4}$/;
 
+                    if (!expPw.test(userPw))
+
+
                     try{
                     expYear.test(inputDob01)
                     expMonth.test(inputDob02)
