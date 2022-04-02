@@ -6,6 +6,7 @@ let response = {
 };
 
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 exports.communityList = async (req, res) => {
@@ -166,7 +167,7 @@ exports.communityView = async (req,res) => {
     const{idx}=req.params;
     const prepare = [idx];
  
-    const sql = `SELECT ${param},${date} FROM board WHERE board_idx = ? `;
+    const sql = `SELECT ${param},${datetime} FROM board WHERE board_idx = ? `;
     const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
     const imgPrepare = [idx]
 

@@ -7,14 +7,17 @@
     <title>Community Update</title>
     <script src="/script/board/communityUpdate.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="/css/board/boardUpdate.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     {% include "/Users/oo_ha/workspace/project/team6/theGreatest6/front/views/nav.html" %}
-    <h3>Community Update</h3>
+    <div id="label">
+        <span>COMMUNITY</span>
+    </div>
     <form method="post" action="/board/community/update" enctype="multipart/form-data" id="updateFrm"> 
         <table>
             <tr>
-                <td>category : </td>
+                <td>Category</td>
                 <td>
                     <select name="select" form="updateFrm" >
                         <option value="Classic">Classic</option>
@@ -25,26 +28,30 @@
                 </td>
             </tr>
             <tr>
-                <td>subject : </td>
+                <td>Subject</td>
                 <td>
                     <input type="text" name="updateSubject" id="updateSubject">
                 </td>
             </tr>
             <tr>
-                <td>content : </td>
+                <td>content</td>
                 <td>
                     <textarea type="text" name="updateContent" id="updateContent"></textarea>
                 </td>
             </tr>
             <tr>
-                <td>file : </td>
-                <td>
+                <td>File</td>
+                <td id="fileBox">
+                    <label for="updateFile">File</label>
                     <input type="file" name="upload" id="updateFile">
+                    <input id="fileName" value="첨부파일" placeholder="첨부파일">
                 </td>
             </tr>
             <input type="hidden" name="idx" id={idx}>
         </table>
-        <input type="submit" value="Submit" id="submit">
+        <div id="button">
+            <input type="submit" value="Submit" id="submit">
+        </div>
     </form>
 </body>
 </html>

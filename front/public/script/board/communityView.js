@@ -12,6 +12,7 @@ async function init() {
     const user_nickname = user.user_nickname;
 
     const [,,,,idx]=location.pathname.split('/');
+    const boardIdx = document.querySelector('#idx');
     const category = document.querySelector('#category')
     const subject = document.querySelector('#subject');
     const nickname = document.querySelector('#writer');
@@ -36,18 +37,23 @@ async function init() {
         switch (showCategory){
             case 1:
                 category.innerHTML = 'Classic';
+                category.style.backgroundColor = "#A5A5A5";
             break;
             case 2:
                 category.innerHTML = 'Musical';
+                category.style.backgroundColor = "#DB6039";
             break;
             case 3:
                 category.innerHTML = 'Opera';
+                category.style.backgroundColor = "#64CBE6";
             break;
             case 4:
                 category.innerHTML = 'Ballet';
+                category.style.backgroundColor = "#FAE100";
             break;   
         }
         // category.innerHTML = showCategory
+        boardIdx.innerHTML = idx;
         subject.innerHTML = board_subject;
         nickname.innerHTML = user_nickname
         date.innerHTML = board_date;

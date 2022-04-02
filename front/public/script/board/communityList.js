@@ -94,15 +94,19 @@ async function init() {
         switch (showCategory){
             case 1:
                 td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
             break;
             case 2:
                 td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
             break;
             case 3:
                 td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
             break;
             case 4:
                 td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
             break;   
         }
         td[2].appendChild(aElement);
@@ -192,15 +196,19 @@ async function clickHanlder() {
             switch (showCategory){
                 case 1:
                     td[1].innerHTML = 'Classic';
+                    td[1].style.color = "#A5A5A5";
                 break;
                 case 2:
                     td[1].innerHTML = 'Musical';
+                    td[1].style.color = "#DB6039";
                 break;
                 case 3:
                     td[1].innerHTML = 'Opera';
+                    td[1].style.color = "#64CBE6";
                 break;
                 case 4:
                     td[1].innerHTML = 'Ballet';
+                    td[1].style.color = "#FAE100";
                 break;   
             }
             td[2].appendChild(aElement);
@@ -245,15 +253,19 @@ async function clickHanlder() {
                 switch (showCategory){
                     case 1:
                         td[1].innerHTML = 'Classic';
+                        td[1].style.color = "#A5A5A5";
                     break;
                     case 2:
                         td[1].innerHTML = 'Musical';
+                        td[1].style.color = "#DB6039";
                     break;
                     case 3:
                         td[1].innerHTML = 'Opera';
+                        td[1].style.color = "#64CBE6";
                     break;
                     case 4:
                         td[1].innerHTML = 'Ballet';
+                        td[1].style.color = "#FAE100";
                     break;   
                 }
                 td[2].appendChild(aElement);
@@ -307,15 +319,19 @@ async function pages(num) {
         switch (showCategory){
             case 1:
                 td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
             break;
             case 2:
                 td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
             break;
             case 3:
                 td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
             break;
             case 4:
                 td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
             break;   
         }
         td[2].appendChild(aElement);

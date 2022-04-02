@@ -12,10 +12,11 @@
 <body>
     <div id="wrap">
         {% include "/Users/oo_ha/workspace/project/team6/theGreatest6/front/views/nav.html" %}
-                <div id="category">
-                    <div id="label">
-                        <span>COMMUNITY</span>
-                    </div>
+        <div id="label">
+            <span>COMMUNITY</span>
+        </div>        
+        <div id="category">
+                    
                     <ul>
                         <li>
                             <label for ="classic"><input type="checkbox" name="classic" id="classic" value="1" checked>Classic</label>
@@ -34,12 +35,14 @@
                 <table cellspacing="0" cellpadding="0" id="communityBoard">
                     <thead>
                         <tr>
-                            <th>num</th>
-                            <th>category</th>
-                            <th>subject</th>
-                            <th>writer</th>
-                            <th>date</th>
-                            <th>hit</th>
+                            <th>Num</th>
+                            <th>Category</th>
+                            <th>Subject</th>
+                            <th>Writer</th>
+                            <th>Date</th>
+                            <th id="eye">
+                                <img src="/img/border/eye_hit.png">
+                            </th>
                         </tr>
                     </thead>
                     <tbody>

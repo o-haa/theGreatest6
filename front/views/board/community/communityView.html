@@ -12,16 +12,21 @@
 <body>
     <div id="wrap">
         {% include "/Users/oo_ha/workspace/project/team6/theGreatest6/front/views/nav.html" %}
-        <h3>Community View</h3>
-        
-            <div id="category"></div>
+            <div id="label">
+                <span>COMMUNITY</span>
+            </div>
+            <div id="categoryBox">
+                <div id="category"></div>
+            </div>
             <table cellspacing="0" cellpadding="0" id="viewTable">
                 <tr>
-                    <th>num</th>
-                    <th>subject</th>
-                    <th>writer</th>
-                    <th>date</th>
-                    <th>view</th>
+                    <th>Num</th>
+                    <th>Subject</th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                    <th id="eye">
+                        <img src="/img/border/eye_hit.png">
+                    </th>
                 </tr>
                 <tr id="viewHead">
                     <td id="idx"></td>
