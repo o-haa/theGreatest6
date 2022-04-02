@@ -168,9 +168,8 @@ async function clickHanlder() {
             const aElement = document.createElement('a');
             liElement.appendChild(aElement);
             paging.appendChild(liElement);
-
             pages(i)
-            // aElement.setAttribute(`onClick`, `pages(${i})`);//
+            
             arr.push(i)
             console.log(arr)
             for (let j = 1; j <= arr.length; j++) {

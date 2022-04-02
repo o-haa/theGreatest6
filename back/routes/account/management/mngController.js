@@ -26,6 +26,23 @@ exports.myinfo = async (req, res) => {
 
 exports.optionalInfo = async(req,res) => {
     console.log(req.body)
+    let response = {
+        result: {},
+        errno: 1
+    };
+    // const sql ='INSERT INTO u_personal () VALUES ()'
+    const prepare = []
+    try{
+        const result = pool.execute(sql,prepare)
+        response = {
+            result,
+            errno: 0
+        }
+    }
+    catch{
+
+    }
+
     res.json(response)
 }
 
