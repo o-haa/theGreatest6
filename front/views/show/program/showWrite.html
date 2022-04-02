@@ -9,8 +9,8 @@
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
-    <!-- 관리자만 사용할 수 있는 게시판 작성 -->
-    <form method="post" action="/show/program/showWrite" name="writeForm" id="writeForm" enctype="multipart/form-data">
+    <!-- multer 타입 지정! enctype="multipart/form-data"-->
+    <form method="post" action="/show/program/showwrite" name="writeForm" id="writeForm" enctype="multipart/form-data">
         <table>
             <tr>
                 <th>공연 분류 *</th>
@@ -94,10 +94,9 @@
             <tr>
                 <td>
                     <div> 첨부파일 </div>
-                    <input type="file" name="upload" id="showFile" multiple>
+                    <input type="file" name="upload" id="upload">
                 </td>
             </tr>
-            <!-- <th>파일업로드</th> -->
         </table>
         <div> * 별표가 있는 항목은 필수 항목 입니다</div>
         <input type="submit" value="작성하기">

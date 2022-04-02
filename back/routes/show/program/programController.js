@@ -6,56 +6,16 @@ let response = {
 }
 
 exports.showWrite = async (req,res)=>{
-    console.log('back / showWrite 라우터 접속!')
-    
+    // console.log(req)
+    // 오 일단 upload: (binary)로 들어옴
+    // 미들라우터가 이상해서 서버 터짐 뭐가 이상한거지
+    //Error: ENOENT: no such file or directory, open 's_uploads/2_1648898020479.png'
 
-    const today = new Date()
-    const thisYear = today.getFullYear()
-
-    console.log('2')
-    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,ticketMonth,ticketDate,ticketHour,showMonth,showDate,showHour} = req.body
-    console.log('확인 ------>' , category)
-    console.log('확인 ------>' ,  req.files)
-    console.log('확인 ------>' ,  req.body)
-
-    console.log('3')
-    try{
-        const sqlShow = `INSERT INTO shows(
-            show_title,
-            show_category_idx,
-            show_xrated,
-            show_company,
-            show_director,
-            show_like,
-            show_content,
-            show_open_flag
-            )VALUES(?,?,?,?,?,'0',?,'0')`
-        const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
-        console.log('4')
-        const [resultShow] = await pool.execute(sqlShow,prespareShow)
-        console.log('5')
-
-        const timestamp = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
-        const newIdx = resultShow.insertId
-
-        const prespareOption = [newIdx, timestamp, place, showCast1, showCast2]
-        const sqlOption = `INSERT
-        INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
-        VALUES (?,?,?,?,?)`
-        
-        const [resultOption] = await pool.execute(sqlOption,prespareOption)
- 
-        response = {
-            resultShow,
-            resultOption,
-            error:0,
-        }
-        console.log('6')
-        res.json('-------------> ',response)
-    }
-    catch(e){
-        console.log(e)
-    }
+    // console.log('req : ',req)
+    console.log('req.body : ',req.body)
+    console.log('req.response : ',response)
+    console.log('req.file : ',req.file) //정보 들어옴!!!!!
+    res.json(response)
 }
 
 exports.showList = async (req,res)=>{
