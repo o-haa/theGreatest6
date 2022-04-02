@@ -16,6 +16,13 @@ async function init() {
 
     const updateFrm = document.querySelector('#updateFrm');
     const file = document.querySelector('#updateFile');
+
+    file.addEventListener('change',inputFileName)
+    function inputFileName(input){
+        const inputFile = file.files[0];
+        const name = document.querySelector('#inputName');
+        name.textContent = inputFile.name;
+    }
     
     updateFrm.addEventListener('submit',updateSubmit);
     async function updateSubmit (e){

@@ -178,13 +178,19 @@ async function clickHanlder() {
                 
             }
             }
-    
+        
+
+        const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+        const { user } = response1.data.result;
+        const user_nickname = user.user_nickname;
+        
 
         const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
         const tr = document.querySelector('#communityBoardRow');
         const tbody = document.querySelector('table > tbody');
     
         await Nodes.forEach(v => {
+            
             const showCategory = v.show_category_idx
             const clone = document.importNode(tr.content, true);
             const td = clone.querySelectorAll('td');
@@ -279,7 +285,7 @@ async function clickHanlder() {
         }
     
     } catch (e) {
-        console.log(e.message);
+        console.log(e);
     }
 }
 
@@ -314,6 +320,7 @@ async function pages(num) {
         const aElement = document.createElement('a');
         aElement.href = '/board/community/view/' + v.board_idx;
         aElement.innerHTML = v.board_subject;
+        
 
         td[0].innerHTML = v.board_idx;
         switch (showCategory){
@@ -335,6 +342,7 @@ async function pages(num) {
             break;   
         }
         td[2].appendChild(aElement);
+        
         td[3].innerHTML = user_nickname
         td[4].innerHTML = v.board_date;
         td[5].innerHTML = v.board_hit;

@@ -83,22 +83,41 @@ textarea{
 }
 
 #fileBox{
-    width:80%;
+    width:90%;
     padding-top:5px;
     box-sizing: border-box;
+    display: flex;
 }
 
-#fileBox label {
+.fileBtn label {
     padding: 4px 10px;
+    box-sizing: border-box;
     cursor: pointer;
     font-size: 16px;
     background-color:#f4d3aa;
 }
 
-#fileName {
-    margin-left:1%;
-    width:82.5%;
+.fileName {
+    margin-left:2%;
+    width:100%;
+    
+}
+
+.fileName p {
+    font-size: 16px;
+    border-bottom: 1px solid #f4d3aa;
+    padding-top:5px;
     box-sizing: border-box;
+}
+
+.fileName p:empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    color:#f4d3aa;
+}
+
+#src {
+    width:80px;
+    
 }
 
 

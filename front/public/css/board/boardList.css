@@ -7,7 +7,6 @@ body {
     zoom:100%;
 }
 
-
 #category{
     margin-top:4%;
 }
@@ -152,3 +151,6 @@ input[type="checkbox"]+label{
 
 }
 
+#td1 a {
+    color:#000000;
+}

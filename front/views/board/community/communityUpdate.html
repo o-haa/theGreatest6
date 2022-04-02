@@ -42,9 +42,14 @@
             <tr>
                 <td>File</td>
                 <td id="fileBox">
-                    <label for="updateFile">File</label>
-                    <input type="file" name="upload" id="updateFile">
-                    <input id="fileName" value="첨부파일" placeholder="첨부파일">
+                    <div class="fileBtn">
+                        <label for="updateFile">File</label>
+                    </div>
+                    
+                    <input type="file" name="upload" id="updateFile" accept="image/*">
+                    <div class="fileName">
+                        <p data-placeholder="Please put 'New img'.  Thank you." contenteditable id="inputName"></p>
+                    </div>
                 </td>
             </tr>
             <input type="hidden" name="idx" id={idx}>

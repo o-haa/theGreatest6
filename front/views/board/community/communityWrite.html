@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community Write</title>
     <script src="/script/board/communityWrite.js"></script>
-    <script src="/script/board/communityUpdate.js"></script>
     <link href="/css/board/boardWrite.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- <style>
@@ -58,9 +57,14 @@
                 <tr>
                     <td>File</td>
                     <td id="fileBox">
-                        <label for="communityFile">File</label>
-                        <input type="file" name="upload" id="communityFile" onchange="inputFileName(this)">
-                        <input id="fileName" value="첨부파일" placeholder="첨부파일">
+                        <div class="fileBtn">
+                            <label for="communityFile">File</label>
+                        </div>
+                        
+                        <input type="file" name="upload" id="communityFile" accept="image/*">
+                        <div class="fileName">
+                            <p data-placeholder="img" contenteditable id="inputName"></p>
+                        </div>
                     </td>
                 </tr>
                 <input type="hidden" name="idx" id={idx}>
@@ -68,7 +72,7 @@
             <div id="button">
                 <input type="submit" value="Submit" id="submit">
             </div>
-            
+            <!-- <img src="" id="src"> -->
         </form>
     </div>
 </body>

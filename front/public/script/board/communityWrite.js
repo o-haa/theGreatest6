@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -5,13 +6,51 @@ async function init() {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
     const file = document.querySelector('#communityFile');
-    const fileInput = document.querySelector('#fileName')
-    file.addEventListener('click',inputFileName)
-    function inputFileName (input) {
-        const name = input.file[0];
-        console.log(name)
-        // fileInput.textContent = name.nameInput
+    // const src = document.querySelector('#src')
+    
+    file.addEventListener('change',inputFileName)
+    function inputFileName(e){
+        const inputFile = file.files[0];
+        const name = document.querySelector('#inputName');
+        name.textContent = inputFile.name;
+            
+        if(file.files[0].size > 0 ){
+            const reader = new FileReader();
+            
+            console.log('확인 write',reader)
+            reader.addEventListener('load',loadStor)
+            function loadStor(){
+                localStorage.setItem("file",reader.result);
+            }
+            
+            reader.readAsDataURL(e.target.files[0])
+            
+            
+        }else{
+            
+        }
     }
+
+    
+    
+    // src.addEventListener('load',getDataUrl)
+    // function getDataUrl(img){
+    //     const canvas = document.createElement('canvas');
+    //     const ctx = canvas.getContext("2d");
+    //     canvas.width = src.width;
+    //     canvas.height = src.height;
+    //     ctx.drawImage(src,0,0);
+        
+    //     const base64 = canvas.toDataURL('image/*');
+    //     console.log(base64)
+    //     // const strImage = base64.replace(/^data:image\/[a-z]+;base64,/,"");
+    //     try{
+    //         localStorage.setItem('file',JSON.stringify(base64))
+    //         console.log('good')
+    //     } catch(e){
+    //         console.log('localstorage fail',e.message)
+    //     }
+    // }
     
     const writeFrm = document.querySelector('#writeFrm');
     
@@ -19,19 +58,17 @@ async function init() {
     async function writeSubmit (e){
         e.preventDefault();
         const {communitySubject,communityContent,select} = e.target;
-
+        console.log('1')
         const formData = new FormData()
             formData.append('upload',file.files[0])
             formData.append('select',select.value)
             formData.append('subject',communitySubject.value)
             formData.append('content',communityContent.value)
         
-        console.log(formData)
         try {
             const response = await axios.post(`/write`,formData);
             const{insertId} = response.data.result;
-            // location.href=`/board/community/view/${insertId}`;
-            
+            location.href=`/board/community/view/${insertId}`;
         } catch(e){
             console.log(e);
             alert('try again');
