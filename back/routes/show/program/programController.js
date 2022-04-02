@@ -6,16 +6,78 @@ let response = {
 }
 
 exports.showWrite = async (req,res)=>{
-    // console.log(req)
-    // 오 일단 upload: (binary)로 들어옴
-    // 미들라우터가 이상해서 서버 터짐 뭐가 이상한거지
-    //Error: ENOENT: no such file or directory, open 's_uploads/2_1648898020479.png'
 
-    // console.log('req : ',req)
-    console.log('req.body : ',req.body)
-    console.log('req.response : ',response)
-    console.log('req.file : ',req.file) //정보 들어옴!!!!!
-    res.json(response)
+    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,ticketMonth,ticketDate,ticketHour,showMonth,showDate,showHour} = req.body
+
+    let now = new Date()
+    let thisYear = now.getFullYear()
+    
+    try{
+        const sqlShow = `INSERT INTO shows(
+            show_title,
+            show_category_idx,
+            show_xrated,
+            show_company,
+            show_director,
+            show_like,
+            show_content,
+            show_open_flag
+            )VALUES(?,?,?,?,?,'0',?,'0')`
+        const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
+        const [resultShow] = await pool.execute(sqlShow,prespareShow)
+
+        const timestamp = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
+        const newIdx = resultShow.insertId
+
+        const prespareOption = [newIdx, timestamp, place, showCast1, showCast2]
+        const sqlOption = `INSERT
+        INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
+        VALUES (?,?,?,?,?)`
+        
+        const [resultOption] = await pool.execute(sqlOption,prespareOption)
+ 
+        response = {
+            resultShow,
+            resultOption,
+            error:0,
+        }
+        res.json(response) //데이터 파일이 sql 모두 들어감., 사진도 폴더에 들어감.
+
+        //view에 보여줄 이미지 가져오기.
+        const fileOriginalname = req.file.originalname;
+        const fileStoredname = req.file.filename;
+        const fileSize = req.file.size;
+        const fileDate = new Date();
+        const fileDltF = '0'; //이건 무슨 값이지
+        const fileSql = `INSERT INTO s_file (
+                                            show_idx,
+                                            file_originalname,
+                                            file_storedname,
+                                            file_size,
+                                            file_date,
+                                            file_dlt_flag
+                                            )
+                                    VALUES(?,?,?,?,?,?)`;
+
+        const showIdx = resultOption.insertId;
+        const showPrepare = [showIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];
+
+        if(req.file.size > 0){
+
+            const [result] = await pool.execute(fileSql,showPrepare);
+            response = {
+                result:{
+                    row:result.affectedRows,
+                    insertId:result.insertId
+                },
+                errno:0    
+            };
+            
+        };
+    }
+    catch(e){
+        console.log(e)
+    }
 }
 
 exports.showList = async (req,res)=>{
