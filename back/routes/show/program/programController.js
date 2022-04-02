@@ -6,44 +6,42 @@ let response = {
 }
 
 exports.showWrite = async (req,res)=>{
+    // console.log('req.file : ',req.file) //파일
+    // console.log('req.body : ',req.body) //텍스트
 
     const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,ticketMonth,ticketDate,ticketHour,showMonth,showDate,showHour} = req.body
+    //show_idx 필요함
 
     let now = new Date()
     let thisYear = now.getFullYear()
-    
-    try{
-        const sqlShow = `INSERT INTO shows(
-            show_title,
-            show_category_idx,
-            show_xrated,
-            show_company,
-            show_director,
-            show_like,
-            show_content,
-            show_open_flag
-            )VALUES(?,?,?,?,?,'0',?,'0')`
-        const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
-        const [resultShow] = await pool.execute(sqlShow,prespareShow)
 
-        const timestamp = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
-        const newIdx = resultShow.insertId
+    const sqlShow = `INSERT INTO shows(
+        show_title,
+        show_category_idx,
+        show_xrated,
+        show_company,
+        show_director,
+        show_like,
+        show_content,
+        show_open_flag
+        )VALUES(?,?,?,?,?,'0',?,'0')`
 
-        const prespareOption = [newIdx, timestamp, place, showCast1, showCast2]
-        const sqlOption = `INSERT
+    const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
+    const timestamp = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
+    const sqlOption = `INSERT
         INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
         VALUES (?,?,?,?,?)`
-        
-        const [resultOption] = await pool.execute(sqlOption,prespareOption)
- 
-        response = {
-            resultShow,
-            resultOption,
-            error:0,
-        }
-        res.json(response) //데이터 파일이 sql 모두 들어감., 사진도 폴더에 들어감.
 
-        //view에 보여줄 이미지 가져오기.
+    try{
+        const [resultShow] = await pool.execute(sqlShow,prespareShow)
+        let insertShowId = resultShow.insertId
+        console.log(insertShowId)
+
+        const prespareOption = [insertShowId, timestamp, place, showCast1, showCast2]
+        const [resultOption] = await pool.execute(sqlOption,prespareOption)
+        let insertOptionId = resultOption.insertId
+        console.log('insertOptionId --> ',insertOptionId)
+
         const fileOriginalname = req.file.originalname;
         const fileStoredname = req.file.filename;
         const fileSize = req.file.size;
@@ -58,25 +56,23 @@ exports.showWrite = async (req,res)=>{
                                             file_dlt_flag
                                             )
                                     VALUES(?,?,?,?,?,?)`;
-
-        const showIdx = resultOption.insertId;
-        const showPrepare = [showIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];
+        const filePrepare = [insertShowId,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];
 
         if(req.file.size > 0){
+            const [resultFile] = await pool.execute(fileSql,filePrepare);
+            console.log('resultFile --> ',resultFile)
 
-            const [result] = await pool.execute(fileSql,showPrepare);
             response = {
                 result:{
-                    row:result.affectedRows,
-                    insertId:result.insertId
+                    insertShowId,
+                    insertOptionId
                 },
-                errno:0    
-            };
-            
-        };
-    }
-    catch(e){
-        console.log(e)
+                errno:0
+            }
+        }
+        res.json(response)
+    }catch(e){
+
     }
 }
 
@@ -129,6 +125,7 @@ exports.showView = async (req,res)=>{
 exports.showModify = async (req,res)=>{
     console.log('back / showModify 라우터 접속!')
     const {idx} = req.params
+    console.log(idx)
     
     const sqlGetShows = `
     SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 

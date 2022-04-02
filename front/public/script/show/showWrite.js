@@ -44,8 +44,10 @@ async function init() {
             //헤더 바뀜!!!
 
         try{
-            //formData를 넣은 순간부터 막힘.
+            console.log('check')
             const response = await axios.post('showwrite',formData)
+            let idx = response.data.result.insertShowId
+            window.location.href = `/show/program/showview/${idx}`
             console.log('마지막 : ',response)
         }
         catch(e){

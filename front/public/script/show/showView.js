@@ -8,11 +8,13 @@ async function init() {
     const rightBtn = document.querySelector('#rightBtn')
     const modifyBtn = document.querySelector('#modifyBtn')
     const deleteBtn = document.querySelector('#deleteBtn')
+    const goListBtn = document.querySelector('#goList')
 
     leftBtn.addEventListener('click',leftBtnHandler)
     rightBtn.addEventListener('click',rightBtnHandler)
     modifyBtn.addEventListener('click',modifyBtnHandler)
     deleteBtn.addEventListener('click',deleteBtnHandler)
+    goListBtn.addEventListener('click',goListBtnHandler)
 
     let [,,,,idx] = location.pathname.split('/')
     const response = await axios.post(`showview/${idx}`)
@@ -73,6 +75,15 @@ async function init() {
         catch(e){
             console.log('게시글 삭제 취소')
             location.href = `http://localhost:3001/show/program/showview/${idx}`
+        }
+    }
+
+    async function goListBtnHandler(){
+        try{
+            location.href = `http://localhost:3001/show/program/showlist`
+        }
+        catch(e){
+
         }
     }
 }

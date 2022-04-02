@@ -13,15 +13,22 @@ async function init() {
     makeOption()
 
     let [,,,,idx] = location.pathname.split('/')
-    const response = await axios.post(`showmodify/${idx}`)
-    const {show_idx, show_title, show_category_idx, show_xrated, show_company, show_director, show_content, show_date, show_place, show_cast1, show_cast2 } = response.data.result[0]
 
-    console.log(typeof(show_date.slice(5,7)))
-    console.log(show_date.slice(8,10))
-    console.log(show_date.slice(11,13))
-    //2022-01-01T01:00:00.000Z
+    const response = await axios.post(`showmodify/${idx}`)
+    console.log(response.data.result[0])
+
+    const {show_idx, show_category_idx, show_xrated, show_title, show_place, show_cast1, show_cast2, show_director,show_company,show_content,show_date} = response.data.result[0]
+    
+    showSplit = show_date.split('T')
+    showYMD = showSplit[0].split('-')
+    showMonth = showYMD[1]
+    showDate = showYMD[2]
+    showHour = showSplit[1].slice(0,2)
+    console.log()
+    // const {ticketMonth,ticketDate,ticketHour}
 
     document.querySelector('#category').value = show_category_idx
+    document.querySelector('#xrated').value = show_xrated
     document.querySelector('#title').value = show_title
     document.querySelector('#place').value = show_place
     document.querySelector('#showCast1').value = show_cast1
@@ -29,13 +36,23 @@ async function init() {
     document.querySelector('#showDirector').value = show_director
     document.querySelector('#showCompany').value = show_company
     document.querySelector('#showContent').value = show_content
-    console.log(document.querySelector('#ticketMonth').value)  
-    document.querySelector('#ticketDate').value  
-    document.querySelector('#ticketHour').value 
-    document.querySelector('#showMonth').value = show_date.slice(5,7)
-    document.querySelector('#showDate').value = show_date.slice(8,10)
-    document.querySelector('#showHour').value = show_date.slice(11,13)
+    document.querySelector('#ticketMonth').value
+    document.querySelector('#ticketDate').value
+    document.querySelector('#ticketHour').value
+    document.querySelector('#showMonth option').innerHTML = showMonth
+    document.querySelector('#showDate option').innerHTML = showDate
+    document.querySelector('#showHour option').innerHTML = showHour
 
+    try{
+        const modifyForm = document.querySelector('#modifyForm')
+        modifyForm.addEventListener('submit',modifyFormHandler)
+        async function modifyFormHandler(e){
+            e.preventDefault()
+            window.location.href = `/show/program/showview/${idx}`
+        }
+    }catch(e){
+
+    }
     function makeOption(){
         const ticketMonth = document.querySelector('#ticketMonth')
         const ticketDate = document.querySelector('#ticketDate')
