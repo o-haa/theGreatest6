@@ -17,26 +17,115 @@ async function init() {
     goListBtn.addEventListener('click',goListBtnHandler)
 
     let [,,,,idx] = location.pathname.split('/')
+    console.log('idx : ',idx)
     const response = await axios.post(`showview/${idx}`)
-    let result = response.data.result
+    let showResult = response.data.result
+    console.log('ishowResultdx : ',showResult)
 
-    const ul = document.querySelector('#viewList')
-    const span = ul.querySelectorAll('li span:nth-child(2)')
-
-    showViewList(result)
-
-    async function showViewList(result){
-        result.forEach(v=>{
+    const thElements = document.querySelectorAll('.title')
+    const tdElements = document.querySelectorAll('.viewContent')
+    
+    showViewList(showResult)
+    
+    async function showViewList(showResult){
+        showResult.forEach(v=>{
             let i=0
-            span[i].innerHTML = v.show_idx
-            span[i+1].innerHTML = v.show_category
-            span[i+2].innerHTML = v.show_xrated
-            span[i+3].innerHTML = v.show_title
-            span[i+4].innerHTML = v.show_company
-            span[i+5].innerHTML = v.show_director
+            
+            show_category = getCategory(v.show_category_idx)
+            show_xrated = getXrated(v.show_xrated)
+            show_date = makeShowTicketDate(v.show_date)
+            ticketYear = show_date[0]
+            ticketMonth = show_date[1]
+            ticketDate = show_date[2]
+            showYear = show_date[3]
+            showMonth = show_date[4]
+            showDate = show_date[5]
+
+            tdElements[i].innerHTML = show_category
+            tdElements[i+1].innerHTML = show_xrated
+            tdElements[i+2].innerHTML = v.show_title
+            tdElements[i+3].innerHTML = `${ticketYear}년 ${ticketMonth}월 ${ticketDate}일 `
+            tdElements[i+4].innerHTML = `${showYear}년 ${showMonth}월 ${showDate}일 `
+            tdElements[i+5].innerHTML = v.show_place
+            tdElements[i+6].innerHTML = v.show_cast1
+            tdElements[i+7].innerHTML = v.show_cast2
+            tdElements[i+8].innerHTML = v.show_director
+            tdElements[i+9].innerHTML = v.show_company
+            tdElements[i+10].innerHTML = v.show_content
         })
     }
     
+    function makeShowTicketDate(v){
+        showSplit = v.split('T')
+        showYMD = showSplit[0].split('-')
+
+        showYear = showYMD[0]
+        showMonth = showYMD[1]
+        showDate = showYMD[2]
+        showHour = showSplit[1].slice(0,2)
+
+        let ticketYear = showYear
+        let ticketMonth = showMonth
+        let ticketDate = showDate
+
+        if(ticketDate - 21 <= 0){
+            let restDay = 21 - showDate
+            let defaultDay = new Date(showYear,showMonth-1,0)
+
+            ticketDate = defaultDay.getDate()-restDay
+
+            if(showMonth -1 <= 0){
+                ticketMonth = 12
+                ticketYear = ticketYear -1 
+            }else{
+                ticketMonth = showMonth - 1
+                console.log(showMonth, ticketMonth)
+            }
+        } 
+
+        let dateBox = [showYear,showMonth,showDate,ticketYear,ticketMonth,ticketDate]
+
+        return dateBox
+    }
+
+    function getCategory(v){
+        switch(v){
+            case 1 :
+                return show_category = 'musical'
+            break;
+            case 2 :
+                return show_category = 'concert'
+            break;
+            case 3 :
+                return how_category = 'classic'
+            break;
+            case 4 :
+                return show_category = 'ballet'
+            break;
+            default:
+                console.log('show_category 오류 발생')
+            break;
+        }
+    }
+
+
+    function getXrated(v){
+        switch(v){
+            case 1 :
+                return show_xrated = '전체관람가'
+            break;
+            case 2 :
+                return show_xrated = '청소년'
+            break;
+            case 3 :
+                return show_xrated = '청소년불가'
+            break;
+            default:
+                console.log('show_xrated 오류 발생')
+            break;
+        }
+    }
+
     async function leftBtnHandler(){
         console.log('left')
         try{

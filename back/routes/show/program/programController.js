@@ -9,7 +9,7 @@ exports.showWrite = async (req,res)=>{
     // console.log('req.file : ',req.file) //파일
     // console.log('req.body : ',req.body) //텍스트
 
-    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,ticketMonth,ticketDate,ticketHour,showMonth,showDate,showHour} = req.body
+    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,showMonth,showDate,showHour} = req.body
     //show_idx 필요함
 
     let now = new Date()
@@ -27,7 +27,7 @@ exports.showWrite = async (req,res)=>{
         )VALUES(?,?,?,?,?,'0',?,'0')`
 
     const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
-    const timestamp = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
+    const timestamp = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
     const sqlOption = `INSERT
         INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
         VALUES (?,?,?,?,?)`
@@ -107,7 +107,10 @@ exports.showView = async (req,res)=>{
     console.log('back / showView 라우터 접속!')
 
     const {idx} = req.params
-    const sql = `select * from shows where show_idx=${idx};`
+    console.log(idx)
+    const sql = `SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
+    WHERE s.show_idx=${idx} `
 
     try{
         const [result] = await pool.execute(sql)
@@ -115,6 +118,7 @@ exports.showView = async (req,res)=>{
             result,
             error:0,
         }
+        console.log('체크용 ----->',response)
         res.json(response)
     }
     catch(e){
@@ -155,4 +159,16 @@ exports.showDelete = async (req,res)=>{
 
 exports.showCalendar = (req,res)=>{
     console.log('back / showCalendar 라우터 접속!')
+    try{
+        // const [result] = await pool.execute(sql)
+        response = {
+            result,
+            error:0,
+        }
+        console.log('체크용 ----->',response)
+        res.json(response)
+    }
+    catch(e){
+        console.log("showView 에러발생")
+    }
 }

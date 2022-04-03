@@ -40,6 +40,7 @@
 /* 카드 컨텐츠 연월 표시 span */
 #content > #mainContent > #mainContentTitle > #mainContentTitleMonth > span{
     margin-right: 15px;
+    width: 130px;
     vertical-align: bottom;
     font-size: 28px;
     /*글자 내부적인 여백때문에 혼자 들뜸
@@ -73,5 +74,76 @@
 #content > #mainContent > #mainCal {
     width: 100%;
     height: 85%;
-    border: 3px solid #E3E7EA;
+    /* border: 3px solid #E3E7EA; */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* 여기부터 모두 #content > #mainContent > #mainCal 내부 속성 */
+#mainCal > span .hidden{
+    display: none;
+}
+
+#mainCal > .cal_box{
+    width:100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#mainCal > .cal_box > .cal_nav{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#mainCal > .cal_box > .cal_nav a{
+    display: inline-block;
+    margin: 0 15px;
+}
+
+#mainCal > .cal_box > .cal_day{
+    width:100%;
+}
+
+#mainCal > .cal_box > .cal_day > .days{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 40px;
+    padding-top: 15px;
+    font-size: 17px;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+#mainCal > .cal_box > .cal_day > .days > .day{
+    width: calc(100%/7);
+    text-align: center;
+}
+
+#mainCal > .cal_box > .cal_day > .dates{
+    display: flex;
+    flex-flow:wrap;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+#mainCal > .cal_box > .cal_day > .dates > li{
+    width: calc(100% / 7);
+    height: 100px;
+    padding-top: 10px;
+    text-align: center;
+    border: 1px solid #465D59;
+    box-sizing: border-box;
+    
+}
+
+#mainCal > .cal_box > .cal_temp{
+    width: 100%;
+    height: 100%;
+}
+
+#mainCal > .cal_box > .cal_temp > .date{
 }

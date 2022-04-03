@@ -35,9 +35,6 @@ async function init() {
             formData.append('showDirector' , document.querySelector('#showDirector').value)
             formData.append('showCompany' , document.querySelector('#showCompany').value)
             formData.append('showContent' , document.querySelector('#showContent').value)
-            formData.append('ticketMonth' , document.querySelector('#ticketMonth').value)
-            formData.append('ticketDate' , document.querySelector('#ticketDate').value)
-            formData.append('ticketHour' , document.querySelector('#ticketHour').value)
             formData.append('showMonth' , document.querySelector('#showMonth').value)
             formData.append('showDate' , document.querySelector('#showDate').value)
             formData.append('showHour' , document.querySelector('#showHour').value)
@@ -56,9 +53,6 @@ async function init() {
     }
 
     function makeOption(){
-        const ticketMonth = document.querySelector('#ticketMonth')
-        const ticketDate = document.querySelector('#ticketDate')
-        const ticketHour = document.querySelector('#ticketHour')
         const showMonth = document.querySelector('#showMonth')
         const showDate = document.querySelector('#showDate')
         const showHour = document.querySelector('#showHour')
@@ -77,38 +71,16 @@ async function init() {
             newOption.text = `${v}`
             if(v<10){ newOption.value = `${v}` }
             else { newOption.value = `${v}` }
-            ticketMonth.options.add(newOption)
-        })
-
-        datelist.forEach(v=>{
-            const newOption = document.createElement("option")
-            newOption.text = `${v}`
-            newOption.value = `${v}`    
-            ticketDate.options.add(newOption)
-        })
-
-        timelist.forEach(v=>{
-            const newOption = document.createElement("option")
-            newOption.text = `${v}`
-            newOption.value = `${v}`    
-            ticketHour.options.add(newOption)
-        })
-        
-        monthlist.forEach(v=>{
-            const newOption = document.createElement("option")
-            newOption.text = `${v}`
-            if(v<10){ newOption.value = `${v}` }
-            else { newOption.value = `${v}` }
             showMonth.options.add(newOption)
         })
-    
+
         datelist.forEach(v=>{
             const newOption = document.createElement("option")
             newOption.text = `${v}`
             newOption.value = `${v}`    
             showDate.options.add(newOption)
         })
-    
+
         timelist.forEach(v=>{
             const newOption = document.createElement("option")
             newOption.text = `${v}`

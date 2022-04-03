@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/show/showCalendar.css">
-    <script type="text/javascript">
+    <script src="/script/show/showCalendar.js"></script>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
     </script>
 </head>
 <body>
@@ -96,6 +97,30 @@
                  <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                  
                 <div id="calSmall">
+                    <div class="cal_box">
+                        <div class="cal_day">
+                          <div class="days">
+                            <div class="day">SUN</div>
+                            <div class="day">MON</div>
+                            <div class="day">TUE</div>
+                            <div class="day">WED</div>
+                            <div class="day">THU</div>
+                            <div class="day">FRI</div>
+                            <div class="day">SAT</div>
+                          </div>
+                          <ul class="dates"></ul>
+                        </div>
+                    </div>
+                    
+                    <template class="cal_temp">
+                        <li>
+                            <button class="date"></button>
+                            <div>
+                                <span class="btnAdmin"></span>
+                                <span class="btnCustomer"></span>
+                            </div>
+                          </li>
+                    </template>    
                 </div>
 
                 <div id="monthly">
@@ -113,11 +138,11 @@
                 
                 <div id="mainContentTitle">
                     <div id="mainContentTitleMonth">
-                        <span>MAR 2022</span>
-                        <button class="miniBtn">
+                        <span class="year-month"></span>
+                        <button class="miniBtn left">
                             <img src="/img/icon/icon_next_2x.png" style="transform: rotate(180deg);" id="prev_arrow">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn right">
                             <img src="/img/icon/icon_next_2x.png" id="next_arrow">
                         </button>
                     </div>
@@ -136,12 +161,6 @@
 
                 <div id="mainCal">
                     <div class="cal_box">
-                        <div class="cal_nav">
-                          <a href="javascript:;" class="btnLeft">prev</a>
-                          <div class="year-month"></div>
-                          <a href="javascript:;" class="btnRight">next</a>
-                        </div>
-                    
                         <div class="cal_day">
                           <div class="days">
                             <div class="day">SUN</div>
@@ -156,15 +175,15 @@
                         </div>
                     </div>
                     
-                      <template class="cal_temp">
-                          <li>
-                              <button class="date"></button>
-                              <div>
-                                  <span class="btnAdmin"></span>
-                                  <span class="btnCustomer"></span>
-                              </div>
-                            </li>
-                      </template>
+                    <template class="cal_temp">
+                        <li>
+                            <button class="date"></button>
+                            <div>
+                                <span class="btnAdmin"></span>
+                                <span class="btnCustomer"></span>
+                            </div>
+                          </li>
+                    </template>    
                 </div>
             </div>
         </div>

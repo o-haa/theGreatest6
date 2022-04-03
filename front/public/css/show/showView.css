@@ -1,0 +1,192 @@
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
+@import url('../index/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
+@import url('../index/_contentLayout.css'); /* 본문 오른쪽 메인박스 틀 */
+
+/*
+    현진 작성 CSS 읽는 방법!
+    가로세로 -> 여백 -> 정렬순 -> 그 외 꾸밈(box-sixing, 선굵기 등)
+    이 순서대로 작성하기 때문에 만약 여백이 먼저 작성되었다면 가로세로 값은 없다는 뜻이에요!
+*/
+
+#wrap{
+    /* overflow: hidden; */
+    margin: 0 auto;
+}
+
+/* 헤더 #header */
+
+/* 본문 #content */
+#content{
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+
+#modifyForm{
+    width: 100%;
+    font-size: 18px;
+    justify-content: center;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+#modifyForm > tbody{
+    box-sizing: border-box;
+}
+
+tr{
+    height: 60px;
+    /* border: 1.5px solid #465D59; */
+    /* border-bottom: 1.5px solid #465D59; */
+    color: #465D59;
+    box-sizing: border-box;
+}
+
+th{
+    text-align: left;
+    padding-left: 30px;
+    width: 25%;
+    /* border-right: 1.5px solid #465D59; */
+    box-sizing: border-box;
+}
+
+td{
+    padding-left: 30px;
+    height: 100%;
+    color: #465D59;
+    box-sizing: border-box;
+}
+
+#category, #xrated {
+    height: 100%;
+    width:50%;
+    padding: 5px 20px 5px 20px;
+    /* box-sizing: border-box; */
+    color: #465D59;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background: #E3E7EA;
+}
+
+#title {
+    height: 100%;
+    width:100%;
+    padding: 10px 20px 10px 20px;
+    /* box-sizing: border-box; */
+    color: #465D59;
+    font-size: 16px;
+    /* border: none; */
+    background: #E3E7EA;
+    border-radius: 6px;
+}
+
+#ticketMonth, #ticketDate, #ticketHour, #showMonth, #showDate, #showHour{
+    height: 100%;
+    width: 20%;
+    padding: 10px 0px;
+    /* box-sizing: border-box; */
+    text-align: center;
+    color: #465D59;
+    border-radius: 6px;
+    background: #E3E7EA;
+    font-size: 16px;
+    border: none;
+    margin-right: 5px;
+}
+
+#ticketDate, #ticketHour, #showDate, #showHour{
+    margin-left: 30px;
+    margin-right: 5px;
+}
+
+tr:nth-child(12){
+    height: 120px;
+}
+
+#showContent{
+    width:100%;
+    height: 100%;
+    margin: 10px 0;
+    padding: 10px 20px 10px 20px;
+    /* box-sizing: border-box; */
+    color: #465D59;
+    font-size: 16px;
+    border: none;
+    background: #E3E7EA;
+    border-radius: 6px;
+    white-space:pre-wrep;
+}
+
+#place, #showCast1, #showCast2, #showDirector, #showCompany{
+    width:100%;
+    height: 100%;
+    padding: 10px 20px 10px 20px;
+    /* box-sizing: border-box; */
+    color: #465D59;
+    font-size: 16px;
+    border: none;
+    background: #E3E7EA;
+    border-radius: 6px;
+}
+
+#upload{
+    height: 100%;
+    width:100%;
+    padding: 5px 20px 5px 20px;
+    /* box-sizing: border-box; */
+    color: #465D59;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    /* background: #E3E7EA; */
+}
+
+#notice{
+    padding-left: 30px;
+    font-size: 13px;
+    height: 30px;
+    color: red;
+}
+
+#writeForm > #submitBtn{
+    margin: 20px 30px;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    padding: 5px 20px 5px 20px;
+    /* box-sizing: border-box; */
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background: #465D59;
+    box-sizing: border-box;
+}
+
+#btnBox{
+    display: flex;
+    height: 50px;
+    width: 580px;
+}
+
+#btnBox > button{
+    margin-right: 3px;
+    text-align: center;
+    height: 50px;
+    width: 17%;
+    padding: 5px 20px 5px 20px;
+    /* box-sizing: border-box; */
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background: #465D59;
+    box-sizing: border-box;
+}
