@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/show/showCalendar.css">
     <script src="/script/show/showCalendar.js"></script>
+    <script src="/script/show/_calBoxLayer.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
     </script>
 </head>
@@ -97,32 +98,40 @@
                  <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                  
                 <div id="calSmall">
-                    <div class="cal_box">
-                        <div class="cal_day">
-                          <div class="days">
-                            <div class="day">SUN</div>
-                            <div class="day">MON</div>
-                            <div class="day">TUE</div>
-                            <div class="day">WED</div>
-                            <div class="day">THU</div>
-                            <div class="day">FRI</div>
-                            <div class="day">SAT</div>
-                          </div>
-                          <ul class="dates"></ul>
+                    <div class="cal_box_small">
+                        <div class="cal_nav_small">
+                            <div class="year-month_small"></div>
+                            <div class="btnBoxSmall">
+                                <a href="javascript:;" class="btnLeft_small"><</a>
+                                <a href="javascript:;" class="btnRight_small">></a>
+                            </div>
+                        </div>
+       
+                        <div class="cal_day_small">
+                            <div class="days_small">
+                                <div class="day_small sun">SUN</div>
+                                <div class="day_small">MON</div>
+                                <div class="day_small">TUE</div>
+                                <div class="day_small">WED</div>
+                                <div class="day_small">THU</div>
+                                <div class="day_small">FRI</div>
+                                <div class="day_small sat">SAT</div>
+                            </div>
+                            <ul class="dates_small"></ul>
                         </div>
                     </div>
-                    
-                    <template class="cal_temp">
+                           
+                    <template class="cal_temp_small">
                         <li>
-                            <button class="date"></button>
+                            <button class="date_small"></button>
                             <div>
-                                <span class="btnAdmin"></span>
-                                <span class="btnCustomer"></span>
+                                <span class="btnAdmin_small"></span>
+                                <span class="btnCustomer_small"></span>
                             </div>
-                          </li>
+                            </li>
                     </template>    
                 </div>
-
+       
                 <div id="monthly">
                     <div id="monthlyTitle">Monthly</div>
                     <div id="monthTitleSmall">MAR</div>
@@ -139,10 +148,10 @@
                 <div id="mainContentTitle">
                     <div id="mainContentTitleMonth">
                         <span class="year-month"></span>
-                        <button class="miniBtn left">
+                        <button class="miniBtnL">
                             <img src="/img/icon/icon_next_2x.png" style="transform: rotate(180deg);" id="prev_arrow">
                         </button>
-                        <button class="miniBtn right">
+                        <button class="miniBtnR">
                             <img src="/img/icon/icon_next_2x.png" id="next_arrow">
                         </button>
                     </div>
@@ -163,13 +172,13 @@
                     <div class="cal_box">
                         <div class="cal_day">
                           <div class="days">
-                            <div class="day">SUN</div>
+                            <div class="day sun">SUN</div>
                             <div class="day">MON</div>
                             <div class="day">TUE</div>
                             <div class="day">WED</div>
                             <div class="day">THU</div>
                             <div class="day">FRI</div>
-                            <div class="day">SAT</div>
+                            <div class="day sat">SAT</div>
                           </div>
                           <ul class="dates"></ul>
                         </div>

@@ -52,8 +52,8 @@
 #content > #mainContent > #mainContentTitle > #mainContentTitleIcon {
     display: flex;
 }
-/* 버튼 공통 속성 */
-.miniBtn{
+
+.miniBtn {
     width: 25px;
     height: 25px;
     margin-left: 7px;
@@ -63,11 +63,40 @@
     border: 1px solid #080C31;
     box-sizing: border-box;
 }
-/* 버튼 이미지 공통 속성 */
+.miniBtnL {
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #080C31;
+    box-sizing: border-box;
+}
+.miniBtnR {
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #080C31;
+    box-sizing: border-box;
+}
+
 .miniBtn > img{
     width: 22px;
     height: 22px;
 }
+.miniBtnL > img{
+    width: 22px;
+    height: 22px;
+}
+.miniBtnR > img{
+    width: 22px;
+    height: 22px;
+}
+
 /* 여기까지 showCard와 동일
 타이틀 h1의 margin-bottom만 다름. (line 28)*/
 
@@ -143,7 +172,4 @@
 #mainCal > .cal_box > .cal_temp{
     width: 100%;
     height: 100%;
-}
-
-#mainCal > .cal_box > .cal_temp > .date{
 }
