@@ -107,6 +107,10 @@ exports.communityWrite = async (req,res) =>{
 exports.communityView = async (req,res) => {
     const{idx}=req.params;
     const prepare = [idx];
+
+    const hitSql = `UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ${idx}`
+    const hitResult = await pool.execute(hitSql);
+    console.log('view',hitResult)
  
     const sql = `SELECT
                 a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,

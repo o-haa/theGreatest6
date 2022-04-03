@@ -12,6 +12,8 @@ async function init() {
     const { user } = response1.data.result;
     const user_nickname = user.user_nickname;
 
+    
+
     // const check=JSON.parse(localStorage.getItem("file"));
     // // console.log(check)
     // const src = document.querySelector('#src');
