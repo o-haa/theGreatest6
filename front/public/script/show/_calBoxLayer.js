@@ -15,6 +15,8 @@ async function init() {
     let btnDate = clone.querySelector('.date_small')
     let dotAdmin = clone.querySelector('.btnAdmin_small')
     let dotCumstomer = clone.querySelector('.btnCustomer_small')
+    let dotAdmin_small = clone.querySelector('.dotAdmin_small')
+    let dotCustomer_small = clone.querySelector('.dotCustomer_small') 
 
     //클릭한 좌표 찾기
     const cal_day = document.querySelector('.cal_day_small')

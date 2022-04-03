@@ -40,6 +40,7 @@
 /* 카드 컨텐츠 연월 표시 span */
 #content > #mainContent > #mainContentTitle > #mainContentTitleMonth > span{
     margin-right: 15px;
+    width: 130px;
     vertical-align: bottom;
     font-size: 28px;
     /*글자 내부적인 여백때문에 혼자 들뜸
@@ -51,8 +52,9 @@
 #content > #mainContent > #mainContentTitle > #mainContentTitleIcon {
     display: flex;
 }
-/* 버튼 공통 속성 */
-.miniBtn{
+
+
+.miniBtn {
     width: 25px;
     height: 25px;
     margin-left: 7px;
@@ -62,8 +64,36 @@
     border: 1px solid #080C31;
     box-sizing: border-box;
 }
-/* 버튼 이미지 공통 속성 */
+.miniBtnL {
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #080C31;
+    box-sizing: border-box;
+}
+.miniBtnR {
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #080C31;
+    box-sizing: border-box;
+}
+
 .miniBtn > img{
+    width: 22px;
+    height: 22px;
+}
+.miniBtnL > img{
+    width: 22px;
+    height: 22px;
+}
+.miniBtnR > img{
     width: 22px;
     height: 22px;
 }
@@ -76,11 +106,12 @@
 }
 /* 카드 컨텐츠 ul list */
 #content > #mainContent > #scrollBox > .ulCard {
-    height: 550px;
+    height: 380px;
 }
+
 .ulCard > li {
-    width: 400px;
-    height: 520px;
+    width: 250px;
+    height: 350px;
     padding-top:10px;
     margin-right:20px;
     display: inline-block;
@@ -102,7 +133,7 @@
 
 #content > #mainContent > .infoCard{
     width: 96%;
-    height: 200px;
+    height: 130px;
     padding:20px;
     border: 1.5px solid #A8BEBF; 
     border-radius: 10px;  

@@ -8,6 +8,11 @@ async function init(e) {
 
     //좌우이동 버튼, 연.월 버튼
     const mainContent = document.querySelector('#mainContent')
+
+    const listBtn = document.querySelector('#listBtn')
+    const listGrid = document.querySelector('#listGrid')
+    const listCalendar = document.querySelector('#listCalendar')
+    
     const btnLeft = mainContent.querySelector('.miniBtnL')
     const btnRight = mainContent.querySelector('.miniBtnR')
     const year_month = document.querySelector('.year-month')
@@ -109,6 +114,23 @@ async function init(e) {
 
     btnLeft.addEventListener('click', btnLeftHandler)
     btnRight.addEventListener('click', btnRightHandler)
+
+    listBtn.addEventListener('click', listBtnHandler)
+    listGrid.addEventListener('click', listGridHandler)
+    listCalendar.addEventListener('click', listCalendarHandler)
+
+
+    async function listBtnHandler(){
+        const calHtml = mainContent.innerHTML
+        const response = await axios.post('/showlist')
+        console.log('잘 받아왔니  ------> ',response)
+    }
+    function listGridHandler(){
+        console.log('클릭')
+    }
+    function listCalendarHandler(){
+        console.log('클릭')
+    }
 
     function btnLeftHandler(){
         month-=1

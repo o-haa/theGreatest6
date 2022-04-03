@@ -6,21 +6,53 @@ async function init() {
 
     const leftBtn = document.querySelector('#leftBtn')
     const rightBtn = document.querySelector('#rightBtn')
-    const modifyBtn = document.querySelector('#modifyBtn')
-    const deleteBtn = document.querySelector('#deleteBtn')
-    const goListBtn = document.querySelector('#goList')
+    const modifyBtn = document.querySelector('.modifyBtn')
+    const deleteBtn = document.querySelector('.deleteBtn')
+    const goViewList = document.querySelector('.goViewList')
 
     leftBtn.addEventListener('click',leftBtnHandler)
     rightBtn.addEventListener('click',rightBtnHandler)
     modifyBtn.addEventListener('click',modifyBtnHandler)
     deleteBtn.addEventListener('click',deleteBtnHandler)
-    goListBtn.addEventListener('click',goListBtnHandler)
+    goViewList.addEventListener('click',goListBtnHandler)
+
+    const img = document.querySelector('.img')
+    const summaryTextBox = document.querySelector('.summaryTextBox')
+    const summaryTextList = document.querySelectorAll('.summaryText')
+    const goViewLink = document.querySelector('.goViewLink')
+    
+
+    //예매정보 만들어지면 사용할 버튼
+    // for(let i=0; i<summaryTextList.length; i++){
+    //     goViewLink.addEventListener('click',()=>{
+    //         if(summaryTextList[i].className.search('VIEW')!==-1){
+    //             window.location.href= "http://location:3000/show/payment/공연정보"
+    //         }
+    //     })
+    // }
+
+    //좌우버튼 구현
+    // for(let i=0; i<summaryTextList.length; i++){
+    //     goViewLink.addEventListener('click',()=>{
+    //         console.log(summaryTextList[i].className)
+    //         if(summaryTextList[i].className.search('front')!==-1){
+    //             summaryTextList[i].className = summaryTextList[i].className.replace('back',"front")
+    //             summaryTextList[i].className = summaryTextList[i].className.replace('VIEW',"HIDDEN")
+    //             summaryTextList[i+1].className = summaryTextList[i+1].className.replace('HIDDEN',"VIEW")
+    //         }else{
+    //             summaryTextList[i].className = summaryTextList[i].className.replace('front',"back")
+    //             summaryTextList[i].className = summaryTextList[i].className.replace('VIEW',"HIDDEN")
+    //             summaryTextList[i+1].className = summaryTextList[i+1].className.replace('HIDDEN',"VIEW")
+    //         }
+    //     })
+
 
     let [,,,,idx] = location.pathname.split('/')
     console.log('idx : ',idx)
     const response = await axios.post(`showview/${idx}`)
     let showResult = response.data.result
     console.log('ishowResultdx : ',showResult)
+    console.log(summaryTextList)
 
     const thElements = document.querySelectorAll('.title')
     const tdElements = document.querySelectorAll('.viewContent')

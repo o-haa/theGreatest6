@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/show/showCard.css">
+    <script src="/script/show/_calBoxLayer.js"></script>
+    <script src="/script/show/showCard.js"></script>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
     <script type="text/javascript">
     </script>
 </head>
@@ -103,19 +106,67 @@
                     
                     <!-- 소형 캘린더 -->
                     <div id="calSmall">
+                        <div class="cal_box_small">
+                            <div class="cal_nav_small">
+                                <div class="year-month_small"></div>
+                                <div class="btnBoxSmall">
+                                    <a href="javascript:;" class="btnLeft_small"><</a>
+                                    <a href="javascript:;" class="btnRight_small">></a>
+                                </div>
+                            </div>
+           
+                            <div class="cal_day_small">
+                                <div class="days_small">
+                                    <div class="day_small sun">SUN</div>
+                                    <div class="day_small">MON</div>
+                                    <div class="day_small">TUE</div>
+                                    <div class="day_small">WED</div>
+                                    <div class="day_small">THU</div>
+                                    <div class="day_small">FRI</div>
+                                    <div class="day_small sat">SAT</div>
+                                </div>
+                                <ul class="dates_small"></ul>
+                            </div>
+                        </div>
+                               
+                        <template class="cal_temp_small">
+                            <li>
+                                <button class="date_small"></button>
+                                <div class="dot_small">
+                                    <span class="dotAdmin_small"></span>
+                                    <span class="dotCustomer_small"></span>
+                                </div>
+                                </li>
+                        </template>    
                     </div>
-
-                    <!-- 이번주의 공연목록 -->
+           
+                    <!-- 위클리 카드 -->
                     <div id="monthly">
-                        <div id="monthlyTitle">Weekly</div>
-                        <div id="monthTitleSmall">First Week</div>
-                        <!-- 이번주 공연목록 카드 -->
-                        <div id="menuSmall"></div>
+                        <div id="monthlyTitle">Monthly</div>
+                        <div id="monthTitleSmall">MAR</div>
+                        <div id="menuSmall">
+                            <div class="monthlyCard">
+                                <div class="pic"></div>
+                                <div class="news">
+                                    <span>뮤지컬 더 뮤즈</span>
+                                    <span>예매 시작일 : 3월 12일</span>
+                                </div>
+                            </div>
+    
+                            <div class="monthlyCard">
+                                <div class="pic"></div>
+                                <div class="news">
+                                    <span>뮤지컬 더 뮤즈</span>
+                                    <span>예매 시작일 : 3월 12일</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- 카드 컨텐츠 -->
+
                 <div id="mainContent">
+                    <!-- 카드 컨텐츠 -->
                     <h1 style="font-family: 'korFontBold' !important;">카드뉴스</h1>
                     <div id="mainContentTitle">
                         <!-- 카드 컨텐츠 타이틀 -->
@@ -131,7 +182,7 @@
                         <!-- 보기 형태 선택 아이콘 : 리스트 or 앨범 or 캘린더 버튼 -->
                         <div id="mainContentTitleIcon">
                             <button class="miniBtn">
-                                <img src="/img/icon/icon_list_2x.png" id="List">
+                                <img src="/img/icon/icon_list_2x.png" id="list">
                             </button>
                             <button class="miniBtn">
                                 <img src="/img/icon/icon_grid_2x.png" id="grid">

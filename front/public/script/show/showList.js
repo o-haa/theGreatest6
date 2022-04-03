@@ -3,8 +3,21 @@ document.addEventListener('DOMContentLoaded', init)
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+    const listBtn = document.querySelector('#List');
+    const gridBtn = document.querySelector('#grid');
+    const calBtn = document.querySelector('#claBtn');
+    const homeBtn = document.querySelector('#home');
+    const aboutBtn = document.querySelector('#about');
+    const mainContent = document.querySelector('#mainContent')
+
+    //mainContent 내용을 담은 option
+    const htmlData = mainContent.innerHTML
+    let option = {
+        data : htmlData
+    }
     
-    const response = await axios.post('showlist')
+    const response = await axios.post('showlist',option)
     console.log('도착')
     
     const Nodes = response.data.result
@@ -34,14 +47,6 @@ async function init() {
                             .replace('{show_category_idx}',v.show_category_idx)
                             .replace('{show_xrated}',v.show_xrated)
     })
-
-
-    const listBtn = document.querySelector('#List');
-    const gridBtn = document.querySelector('#grid');
-    const calBtn = document.querySelector('#claBtn');
-
-    const homeBtn = document.querySelector('#home');
-    const aboutBtn = document.querySelector('#about');
 
     function moveHome(){ 
         window.location.href = 'http://localhost:3001/'; 

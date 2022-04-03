@@ -17,22 +17,18 @@ body {
     height: var(--vh);
 }
 
-#wrap{
+.wrap{
     overflow: hidden;
     margin: 0 auto;
 }
 /* view background */
-#wrap::before{
+.wrap::before{
     width: 100%;
     height: 100%;
     top:0px;
     left: 0px;
     position: absolute;
     content: "";
-    background-image: url("../../img/poster/park.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50%;
     opacity: 0.9;
 }
 
@@ -62,42 +58,107 @@ body {
 #content > .contentBox > .summaryBox > .summaryImg > .img{
     width: 75%;
     height: 100%;
-    border-radius: 60px;
+    border-radius: 20px;
+}
+.first{
     background-image: url("../../img/poster/park.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
 }
+.sec{
+    background-image: url("../../img/poster/devil.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.thrd{
+    background-image: url("../../img/poster/end.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.four{
+    background-image: url("../../img/poster/moment.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
 /* 테두리 내용 : 텍스트 */
 #content > .contentBox > .summaryBox > .summaryTextBox{
-    width: 50%;
+    width: 47%;
     height: 100%;
-    padding: 10% 0 9% 0;
     display: flex;
     flex-direction:column;
     align-items: flex-end;
     box-sizing: border-box;
+    overflow: auto;
 }
 #content > .contentBox > .summaryBox > .summaryTextBox > .summaryText {
     width: 100%;
-    height: 75%;
-    padding: 6% 6%;
-    font-size: 0.8rem;
-    font-family: 'viewFont';
+    height: 100%;
+    padding: 45px 6% 30px 6%;
+    font-size: 1.2rem;
+    /* font-family: 'viewFont'; */
     line-height: 180%;
     color: #C2C2C2;
     border: 1px solid #A5A5A5;
     box-sizing: border-box;
+    border-radius: 20px;
     overflow: auto;
 }
-#content > .contentBox > .summaryBox > .summaryTextBox > .goViewLink{
-    width: 31%;
-    height: 12%;
-    margin-top: 30px;
+.goViewLink{
+    float: right;
+    width: 150px;
+    height: 45px;
     border-radius: 5px;
     color: #fff;
     font-size: 1.2em;
-    /* background: #A47B64; */
+    margin-top: 50px;
+    margin-bottom: 30px;
     border: 1px solid #fff;
     box-sizing: border-box;
+}
+
+.VIEW{
+    display: block;
+}
+.HIDDEN{
+    display: none;
+}
+
+
+#modifyForm > tbody{
+    box-sizing: border-box;
+}
+
+tr{
+    height: 100%;
+    box-sizing: border-box;
+}
+
+th{
+    text-align: left;
+    padding-left: 30px;
+    width: 33%;
+    box-sizing: border-box;
+}
+
+td{
+    padding-left: 40px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+#category, #xrated, #title, ,#place, #showCast1, #showCast2, #showDirector, #showCompany {
+    height: 100%;
+    padding: 5px 20px 5px 20px;
+    font-size: 16px;
+    border: none;
+}
+
+#ticketDate, #ticketHour, #showDate, #showHour{
+    margin-left: 30px;
+    margin-right: 5px;
 }

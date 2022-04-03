@@ -78,11 +78,16 @@ exports.showWrite = async (req,res)=>{
 
 exports.showList = async (req,res)=>{
     console.log('back / showList 라우터 접속!')
-
+    //showList mainContent가 담겨있는 req.body
+    const htmlData = JSON.stringify(req.body.data)
+    const test = {'key':`${htmlData}`}
+    console.log('너 왜 안나와',typeof(htmlData)) 
     const sql = `SELECT show_idx, show_title, show_category_idx, show_xrated FROM shows ORDER BY show_idx DESC`
 
     try{
         const [result] = await pool.execute(sql)
+        result.push(test)
+
         response = {
             result,
             error:0,
@@ -96,11 +101,16 @@ exports.showList = async (req,res)=>{
 }
 
 exports.showCard = (req,res)=>{
-    console.log('back / showCard 라우터 접속!')
+    console.log('showCard : ',req.body)
+    //아이디가 있다고 치고,
 }
 
 exports.showCalendar = (req,res)=>{
     console.log('back / showCalendar 라우터 접속!')
+}
+
+exports.showHome = async (req,res)=>{
+    console.log('Home')
 }
 
 exports.showView = async (req,res)=>{

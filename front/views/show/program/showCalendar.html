@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Show Calendar</title>
     <link rel="stylesheet" href="/css/show/showCalendar.css">
     <script src="/script/show/showCalendar.js"></script>
     <script src="/script/show/_calBoxLayer.js"></script>
@@ -97,6 +97,7 @@
             <div id="calContent">
                  <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                  
+                <!-- 소형 캘린더 -->
                 <div id="calSmall">
                     <div class="cal_box_small">
                         <div class="cal_nav_small">
@@ -124,23 +125,39 @@
                     <template class="cal_temp_small">
                         <li>
                             <button class="date_small"></button>
-                            <div>
-                                <span class="btnAdmin_small"></span>
-                                <span class="btnCustomer_small"></span>
+                            <div class="dot_small">
+                                <span class="dotAdmin_small"></span>
+                                <span class="dotCustomer_small"></span>
                             </div>
                             </li>
                     </template>    
                 </div>
        
+                <!-- 위클리 카드 -->
                 <div id="monthly">
                     <div id="monthlyTitle">Monthly</div>
                     <div id="monthTitleSmall">MAR</div>
                     <div id="menuSmall">
-                        <!-- 카드뉴스 생성 -->
+                        <div class="monthlyCard">
+                            <div class="pic"></div>
+                            <div class="news">
+                                <span>뮤지컬 더 뮤즈</span>
+                                <span>예매 시작일 : 3월 12일</span>
+                            </div>
+                        </div>
+
+                        <div class="monthlyCard">
+                            <div class="pic"></div>
+                            <div class="news">
+                                <span>뮤지컬 더 뮤즈</span>
+                                <span>예매 시작일 : 3월 12일</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
+
             <div id="mainContent">
                 <!-- 타이틀 캘린더 -->
                 <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
@@ -156,13 +173,13 @@
                         </button>
                     </div>
                     <div id="mainContentTitleIcon">
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listBtn">
                             <img src="/img/icon/icon_list_2x.png" id="List">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listGrid">
                             <img src="/img/icon/icon_grid_2x.png" id="grid">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listCalendar">
                             <img src="/img/icon/icon_cal_2x.png" id="calBtn">
                         </button>
                     </div>
@@ -187,9 +204,9 @@
                     <template class="cal_temp">
                         <li>
                             <button class="date"></button>
-                            <div>
-                                <span class="btnAdmin"></span>
-                                <span class="btnCustomer"></span>
+                            <div class="dot_main">
+                                <div class="dotAdmin"></div>
+                                <div class="dotCustomer"></div>
                             </div>
                           </li>
                     </template>    

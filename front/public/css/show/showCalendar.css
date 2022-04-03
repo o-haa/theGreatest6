@@ -116,6 +116,7 @@
 #mainCal > .cal_box{
     width:100%;
     height: 100%;
+    margin-top: 15px;
     box-sizing: border-box;
 }
 
@@ -172,4 +173,30 @@
 #mainCal > .cal_box > .cal_temp{
     width: 100%;
     height: 100%;
+}
+
+.date{
+    width: 100%;
+    height: 20$;
+}
+
+.dot_main{
+    width: 100%;
+    height: 80%;
+    padding-top: 10px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    box-sizing: border-box;
+}
+.dotAdmin{
+    height: 18px;
+    width: 100%;
+    background: #E79177; /*메인 주황색 70% 투명도 준 색*/
+    margin-bottom: 7px;
+}
+
+.dotCustomer{
+    height: 18px;
+    width: 100%;
+    background: #a8bebf;
 }
