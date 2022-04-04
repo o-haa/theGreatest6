@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show listSearchBox</title>
+    <title>Show List</title>
     <link rel="stylesheet" href="/css/show/showList.css">
     <script src="/script/show/showList.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -44,13 +44,13 @@
                 <div id="listEventBox">
                     <span id="totalNotice">총 3개의 공지사항이 있습니다</span>
                     <div id="mainContentTitleIcon">
-                        <button class="miniBtn">
-                            <img src="/img/icon/icon_list_2x.png" id="List">
+                        <button class="miniBtn" id="listBtn">
+                            <img src="/img/icon/icon_list_2x.png" id="list">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listGrid">
                             <img src="/img/icon/icon_grid_2x.png" id="grid">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listCalendar">
                             <img src="/img/icon/icon_cal_2x.png" id="calBtn">
                         </button>
                     </div>
@@ -69,9 +69,6 @@
                     </thead>
     
                     <tbody>
-                        <tr id="newShowList">
-                            <!-- 반복될 부분 -->
-                        </tr>
                     </tbody>
                 </table>
 
@@ -85,7 +82,9 @@
                     </tr>
                 </template>
 
-               <a href='/show/program/showwrite'>글쓰기</a>
+                <div id="writeBtn">
+                    <a href='/show/program/showwrite'>글쓰기</a>
+                </div>
                </script>
             </div>
         </div>

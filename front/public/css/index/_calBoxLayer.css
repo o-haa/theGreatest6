@@ -23,21 +23,168 @@
     flex-direction: column;
     border-right:1px solid #E3E7EA;
     box-sizing: border-box;
+    font-family: 'korFontBold';
     white-space: nowrap;
     overflow: auto;
-    box-sizing: border-box;
 }
 
 /* 소형 캘린더 */
 #content > #calContent > #calSmall{
     width: 100%;
+    min-height: 290px;
     height: 68%;
     margin-top: 27px;
-    margin-bottom: 42px;
+    margin-bottom: 37px;
     border-radius: 25px;
-    box-shadow: 0px 25px 37px #F2F2F2;
+    box-shadow: 0px 15px 15px #F2F2F2;
+    box-sizing: border-box;
+    padding: 0px 10px;
+}
+
+/* 여기부터 모두 #content > #calContent > #calSmall 하위속성 */
+#calSmall > .cal_box_small{
+    width:100%;
+    height: 100%;
+    min-height: 280px;
+    margin-top: 20px;
+    padding: 0px 10px;
     box-sizing: border-box;
 }
+
+#calSmall > .cal_box_small > span .hidden{
+    display: none;
+}
+
+#calSmall > .cal_box_small > .cal_nav_small{
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0px 0px 13px 10px;
+    margin-top: 10px;
+    margin-bottom: 7px;
+    font-size: 21px;
+    box-sizing: border-box;
+}
+
+.cal_nav_small a{
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.cal_day_small{
+    width:100%;
+    font-size: 12px;
+}
+
+.btnBoxSmall{
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    box-sizing: border-box;
+    padding-bottom: 5px;
+}
+
+.btnLeft_small{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    border-radius: 3px;
+    text-align: center;
+    /* border: 1px solid #080C31; */
+    color: #080C31;
+    box-sizing: border-box;
+}
+.btnRight_small{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    display: flex;
+    border-radius: 3px;
+    text-align: center;
+    /* border: 1px solid #080C31; */
+    color: #080C31;
+    box-sizing: border-box;
+}
+
+.days_small{
+    width: 100%;
+    display: flex;
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+
+.day_small{
+    width: calc(100%/7);
+    text-align: center;
+}
+
+.dates_small{
+    display: flex;
+    flex-flow:wrap;
+}
+
+.dates_small > li{
+    width: calc(100% / 7);
+    height: 34px;
+    text-align: center;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.dates_small > li > button{
+    width: 100%;
+    height: 50%;
+    box-sizing: border-box;
+    /* background: brown; */
+}
+
+.date.prev{
+    color:#A5A5A5
+}
+.date.next{
+    color:#A5A5A5
+}
+
+.sat{
+    color:#95D1E3;
+}
+.sun{
+    color:#E66464;
+    opacity: 90%;
+}
+
+
+.dot_small{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    padding-top: 4px;
+    box-sizing: border-box;
+}
+.dotAdmin_small{
+    height: 3px;
+    width: 3px;
+    background: #DB6039;
+    margin-right: 4px;
+    border-radius: 100%;
+}
+
+.dotCustomer_small{
+    height: 3px;
+    width: 3px;
+    background: #465D59;
+    margin-right: 3px;
+    border-radius: 100%;
+}
+
+
+
 
 /* 위클리 카드 뉴스 */
 #content > #calContent > #monthly{
@@ -57,4 +204,51 @@
 }
 #content > #calContent > #monthly > #menuSmall{
     width:100%;
+}
+
+#content > #calContent > #monthly > #menuSmall > .monthlyCard{
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 10px #dddddd;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.monthlyCard > #pic1{
+    width: 100%;
+    height: 55%;
+    border-radius: 10px 10px 0 0;
+    background-image:url("/img/poster/musical.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.monthlyCard > #pic2{
+    width: 100%;
+    height: 55%;
+    border-radius: 10px 10px 0 0;
+    background-image:url("/img/poster/broadway.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.monthlyCard > .news{
+    width: 100%;
+    height: 45%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 9px;
+    box-sizing: border-box;
+}
+
+.monthlyCard > .news > span:first-child{
+    font-size: 16px;
+}
+
+.monthlyCard > .news > span:not(:first-child){
+    font-size: 11px;
+    margin-top: 3px;
 }

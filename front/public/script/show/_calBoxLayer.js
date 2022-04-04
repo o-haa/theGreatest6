@@ -1,20 +1,29 @@
 document.addEventListener('DOMContentLoaded', init)
 
-async function init(e) {
+async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    const mainContent = document.querySelector('#mainContent')
-    let dates = document.querySelector('.dates')
-    let template = document.querySelector('.cal_temp')
+    //좌우이동 버튼, 연.월 버튼
+    const btnLeft = document.querySelector('.btnLeft_small')
+    const btnRight = document.querySelector('.btnRight_small')
+    const prev_arrow = document.querySelector('#prev_arrow')
+    const next_arrow = document.querySelector('#next_arrow')
+
+    const year_month_small = document.querySelector('.year-month_small')
+    const year_month = document.querySelector('.year-month')
+    let dates = document.querySelector('.dates_small')
+    let template = document.querySelector('.cal_temp_small')
 
     let clone = document.importNode(template.content,true)
-    let btnDate = clone.querySelector('.date')
-    let dotAdmin = clone.querySelector('.btnAdmin')
-    let dotCumstomer = clone.querySelector('.btnCustomer')
+    let btnDate = clone.querySelector('.date_small')
+    let dotAdmin = clone.querySelector('.btnAdmin_small')
+    let dotCumstomer = clone.querySelector('.btnCustomer_small')
+    let dotAdmin_small = clone.querySelector('.dotAdmin_small')
+    let dotCustomer_small = clone.querySelector('.dotCustomer_small') 
 
     //클릭한 좌표 찾기
-    const cal_day = document.querySelector('.cal_day')
+    const cal_day = document.querySelector('.cal_day_small')
     cal_day.addEventListener('click',cal_dayHandler)
 
     function cal_dayHandler(event){
@@ -50,12 +59,14 @@ async function init(e) {
         let nowLastDay = nowMonth.getDay() //이번달 마지막 요일
 
         calMonth = monthThreeWord(month+1)
+        year_month_small.innerHTML = `${calMonth} ${year}`
+        year_month.innerHTML = `${calMonth} ${year}`
 
         //이번달이 일요일로 시작하지 않을 경우
         if(nowFirstDay!==0){
         for(let i=(prevLastDate+1) - nowFirstDay; i<=prevLastDate; i++){
             let clone = document.importNode(template.content,true)
-            let btnDate = clone.querySelector('.date')
+            let btnDate = clone.querySelector('.date_small')
             day = (new Date(year,month,i)).getDay()
             btnDate.setAttribute("value",`${year}/${month}/${i-1}/${day}_0/0`)
             btnDate.setAttribute("class","date prev")
@@ -64,7 +75,7 @@ async function init(e) {
         }
         for(let i=1; i<=nowLastDate; i++){
             let clone = document.importNode(template.content,true)
-            let btnDate = clone.querySelector('.date')
+            let btnDate = clone.querySelector('.date_small')
             btnDate.innerHTML+='<div>'+'</div>'
             day = (new Date(year,month,i)).getDay()
             btnDate.setAttribute("value",`${year}/${month-1}/${i-1}/${day}_0/0`)
@@ -74,7 +85,7 @@ async function init(e) {
         }
         for(let i=1; i<=(nowLastDay==6 ? 0 : 6-nowLastDay); i++){
             let clone = document.importNode(template.content,true)
-            let btnDate = clone.querySelector('.date')
+            let btnDate = clone.querySelector('.date_small')
             btnDate.innerHTML+='<div>'+'</div>'
             day = (new Date(year,month,i)).getDay()
             btnDate.setAttribute("value",`${year}/${month+1}/${i-1}/${day}_0/0`)
@@ -85,14 +96,14 @@ async function init(e) {
         } else {
         for(let i=1; i<=nowLastDate; i++){
             let clone = document.importNode(template.content,true)
-            let btnDate = clone.querySelector('.date')
+            let btnDate = clone.querySelector('.date_small')
             btnDate.innerHTML+='<div class="date">'+i+'</div>'
             btnDate.value = `result[${month}][${i-1}]`
             dates.appendChild(clone)
         }
         for(let i=1; i<=(nowLastDay==6 ? 0 : 6-nowLastDay); i++){
             let clone = document.importNode(template.content,true)
-            let btnDate = clone.querySelector('.date')
+            let btnDate = clone.querySelector('.date_small')
             btnDate.innerHTML+='<div class="date_next">'+i+'</div>'
             btnDate.value = `result[${month+1}][${i-1}]`
             dates.appendChild(clone)
@@ -100,43 +111,17 @@ async function init(e) {
         }
     }
 
-
-    const btnLeft = mainContent.querySelector('.miniBtnL')
-    const btnRight = mainContent.querySelector('.miniBtnR')
-    const homeBtn = document.querySelector('#home');
-    const aboutBtn = document.querySelector('#about');
-    const listBtn = document.querySelector('#listBtn')
-    const listGrid = document.querySelector('#listGrid')
-    const listCalendar = document.querySelector('#listCalendar')
-
     btnLeft.addEventListener('click', btnLeftHandler)
+    prev_arrow.addEventListener('click',btnLeftHandler)
     btnRight.addEventListener('click', btnRightHandler)
-    homeBtn.addEventListener('click', moveHome)
-    aboutBtn.addEventListener('click', moveAbout)
-    listBtn.addEventListener('click', listBtnHandler)
-    listGrid.addEventListener('click', gridBtnHandler)
-    listCalendar.addEventListener('click', calBtnHandler)
+    next_arrow.addEventListener('click',btnRightHandler)
 
-    function listBtnHandler(){ 
-        window.location.href = 'http://localhost:3001/show/program/showlist'; 
-    }
-    function gridBtnHandler(){ 
-        window.location.href = 'http://localhost:3001/show/program/showcard'; 
-    }
-    function calBtnHandler(){ 
-        window.location.href = '#'; 
-    }
-    function moveHome(){ 
-        window.location.href = 'http://localhost:3001/'; 
-    }
-    function moveAbout(){
-        window.location.href = 'http://localhost:3001/about';
-    }
     function btnLeftHandler(){
         month-=1
         let now = new Date(year,month)
         createCalendar(now)
     }
+
     function btnRightHandler(){
         month+=1 // 달이 넘어가지 않는 이슈 해결
         let now = new Date(year,month)

@@ -14,62 +14,45 @@ async function init() {
     makeOption()
 
     const writeForm = document.querySelector('#writeForm');
-    const files = document.querySelector('#showFile'); //id는 showFile, name은 upload
+    //input의 name값 upload가 인자로 들어감
+    const file = document.querySelector('#upload');
     writeForm.addEventListener('submit',makeData)
     
-    
-
     async function makeData(e){
         e.preventDefault();
-
-        const {upload} = e.target
-        console.log('upload,files[0] : ',upload.files[0])
+        
+        console.log('file.value : ',file.value)// C:\fakepath\1.png
+        console.log('file.files[0] : ',file.files[0]) //파일정보
 
         const formData = new FormData()
-        formData.append('files', upload.files[0])
-        formData.append('category', document.querySelector('#category').value)
-        formData.append('xrated' , document.querySelector('#xrated').value)
-        formData.append('title' , document.querySelector('#title').value)
-        formData.append('place' , document.querySelector('#place').value)
-        formData.append('showCast1' , document.querySelector('#showCast1').value)
-        formData.append('showCast2' , document.querySelector('#showCast2').value)
-        formData.append('showDirector' , document.querySelector('#showDirector').value)
-        formData.append('showCompany' , document.querySelector('#showCompany').value)
-        formData.append('showContent' , document.querySelector('#showContent').value)
-        formData.append('ticketMonth' , document.querySelector('#ticketMonth').value)
-        formData.append('ticketDate' , document.querySelector('#ticketDate').value)
-        formData.append('ticketHour' , document.querySelector('#ticketHour').value)
-        formData.append('showMonth' , document.querySelector('#showMonth').value)
-        formData.append('showDate' , document.querySelector('#showDate').value)
-        formData.append('showHour' , document.querySelector('#showHour').value)
-
-        console.log('2 : ',formData)
-        const options = {
-            headers : {
-                'Content-Type':'multipart/form-data'
-            },
-            // formData
-        }
+            formData.append('upload',file.files[0])
+            formData.append('category', document.querySelector('#category').value)
+            formData.append('xrated' , document.querySelector('#xrated').value)
+            formData.append('title' , document.querySelector('#title').value)
+            formData.append('place' , document.querySelector('#place').value)
+            formData.append('showCast1' , document.querySelector('#showCast1').value)
+            formData.append('showCast2' , document.querySelector('#showCast2').value)
+            formData.append('showDirector' , document.querySelector('#showDirector').value)
+            formData.append('showCompany' , document.querySelector('#showCompany').value)
+            formData.append('showContent' , document.querySelector('#showContent').value)
+            formData.append('showMonth' , document.querySelector('#showMonth').value)
+            formData.append('showDate' , document.querySelector('#showDate').value)
+            formData.append('showHour' , document.querySelector('#showHour').value)
+            //헤더 바뀜!!!
 
         try{
-            // const instance = axios.create()
-            // instance('showwrite',{
-            //     method:'post',
-            //     data:formData
-            // })
-            const response = await axios.post('showwrite',options, formData)
-            // const show_idx = response.data.resultShow.insertId
-            // location.href = `showview/${show_idx}`
+            console.log('check')
+            const response = await axios.post('showwrite',formData)
+            let idx = response.data.result.insertShowId
+            window.location.href = `/show/program/showview/${idx}`
+            console.log('마지막 : ',response)
         }
         catch(e){
-            console.log(e)
+            console.log(e) //네트워크 에러 생겨서 여기 출력
         }
     }
 
     function makeOption(){
-        const ticketMonth = document.querySelector('#ticketMonth')
-        const ticketDate = document.querySelector('#ticketDate')
-        const ticketHour = document.querySelector('#ticketHour')
         const showMonth = document.querySelector('#showMonth')
         const showDate = document.querySelector('#showDate')
         const showHour = document.querySelector('#showHour')
@@ -88,38 +71,16 @@ async function init() {
             newOption.text = `${v}`
             if(v<10){ newOption.value = `${v}` }
             else { newOption.value = `${v}` }
-            ticketMonth.options.add(newOption)
-        })
-
-        datelist.forEach(v=>{
-            const newOption = document.createElement("option")
-            newOption.text = `${v}`
-            newOption.value = `${v}`    
-            ticketDate.options.add(newOption)
-        })
-
-        timelist.forEach(v=>{
-            const newOption = document.createElement("option")
-            newOption.text = `${v}`
-            newOption.value = `${v}`    
-            ticketHour.options.add(newOption)
-        })
-        
-        monthlist.forEach(v=>{
-            const newOption = document.createElement("option")
-            newOption.text = `${v}`
-            if(v<10){ newOption.value = `${v}` }
-            else { newOption.value = `${v}` }
             showMonth.options.add(newOption)
         })
-    
+
         datelist.forEach(v=>{
             const newOption = document.createElement("option")
             newOption.text = `${v}`
             newOption.value = `${v}`    
             showDate.options.add(newOption)
         })
-    
+
         timelist.forEach(v=>{
             const newOption = document.createElement("option")
             newOption.text = `${v}`
