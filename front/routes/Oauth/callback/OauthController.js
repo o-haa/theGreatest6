@@ -14,7 +14,7 @@ exports.kakao = async (req, res) => {
   try {
     const response = await axios.post('/kakao', data,);
   } catch (e) {
-    console.log(e)
+    console.log('/kakao',e.message)
   }
   res.send('kakao login');
 }
