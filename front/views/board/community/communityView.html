@@ -12,16 +12,21 @@
 <body>
     <div id="wrap">
         {% include "nav.html" %}
-        <h3>Community View</h3>
-        
-            <div id="category"></div>
+            <div id="label">
+                <span>COMMUNITY</span>
+            </div>
+            <div id="categoryBox">
+                <div id="category"></div>
+            </div>
             <table cellspacing="0" cellpadding="0" id="viewTable">
                 <tr>
-                    <th>num</th>
-                    <th>subject</th>
-                    <th>writer</th>
-                    <th>date</th>
-                    <th>view</th>
+                    <th>Num</th>
+                    <th>Subject</th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                    <th id="eye">
+                        <img src="/img/border/eye_hit.png">
+                    </th>
                 </tr>
                 <tr id="viewHead">
                     <td id="idx"></td>
@@ -33,10 +38,9 @@
             </table>
             <div id="viewContent">
                 <div id="bContent"></div>
-            </div>
-            <div id="img">
-                <span>img : </span>
-                <div id="imgView"></div>
+                <div id="img">
+                    <!-- <img src="" id="src"> -->
+                </div>
             </div>
             <div id="button">
                 <button><a href = "/board/community/list" class="list">List</a></button>
@@ -48,7 +52,38 @@
                     <button type="submit" value="Delete" class="delete">Delete</button>
                 </form>
             </div>
+            <!-- <template id="tImg">
+                <div id="imgView"></div>
+            </template> -->
+            <!-- 댓글 구현 -->
+            <div id="commentBox">
+                <ul>
         
+                </ul>
+            </div>
+            <template id="commentForm">
+                <li>
+                    <form method="post" action="">
+                        <span><input type="text" name="comment" id="hello" placeholder="comment write here!"></span>
+                        <input type="submit" value="click!" class="commentSubmit">
+                    </form>
+                </li>
+            </template>
+            <template id="commentList">
+                <li>
+                    <ul class = "commentRow">
+                        <li class="commentContent">
+                            <input type="hidden" name="idx" value="">
+                            <span class="commentDeleteBtn">X</span>
+                        </li>
+                        <li>
+                            <span class="commentID"></span>
+                            <span class="commentDate"></span>
+                            <!-- <span class="commentLike"></span> -->
+                        </li>
+                    </ul>
+                </li>
+            </template>
     </div>
 </body>
 </html>

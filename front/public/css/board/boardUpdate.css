@@ -6,6 +6,7 @@ body{
     zoom:100%;
     font-size: 18px;
 }
+
 #label {
     width: 80%;
     margin:4% auto 0 auto;
@@ -31,6 +32,7 @@ form {
 }
 
 table {
+    /* margin: 0 auto; */
     margin-top:16px;
     width:100%;
     border-spacing: 25px;
@@ -62,7 +64,7 @@ textarea{
     box-sizing: border-box;
 }
 
-#communityFile {
+#updateFile {
     border:none;
     display: none;
 }
@@ -114,12 +116,4 @@ textarea{
     content: attr(data-placeholder);
     color:#f4d3aa;
 }
-
-#src {
-    width:80px;
-    
-}
-
-
-    
 
