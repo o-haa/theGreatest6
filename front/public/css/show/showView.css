@@ -15,12 +15,14 @@
 body {
     height: 100vh;
     height: var(--vh);
+    overflow: hidden;
 }
 
 .wrap{
     overflow: hidden;
     margin: 0 auto;
 }
+
 /* view background */
 .wrap::before{
     width: 100%;
@@ -30,8 +32,8 @@ body {
     position: absolute;
     content: "";
     opacity: 0.9;
+    
 }
-
 /* 헤더 */
 
 /* 본문 */

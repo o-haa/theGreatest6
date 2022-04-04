@@ -10,10 +10,9 @@ async function noEnterkey(e){
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
-    makeOption()
+    console.log('도착')
 
     let [,,,,idx] = location.pathname.split('/')
-    console.log(idx)
 
     const response = await axios.post(`showmodify/${idx}`)
     console.log(response.data.result[0])
@@ -25,7 +24,7 @@ async function init() {
     showMonth = showYMD[1]
     showDate = showYMD[2]
     showHour = showSplit[1].slice(0,2)
-    console.log()
+    console.log(showMonth)
     // const {ticketMonth,ticketDate,ticketHour}
 
     document.querySelector('#category').value = show_category_idx
@@ -44,6 +43,8 @@ async function init() {
     document.querySelector('#showDate option').innerHTML = showDate
     document.querySelector('#showHour option').innerHTML = showHour
 
+    makeOption()
+
     try{
         const modifyForm = document.querySelector('#modifyForm')
         modifyForm.addEventListener('submit',modifyFormHandler)
@@ -52,7 +53,8 @@ async function init() {
             window.location.href = `/show/program/showview/${idx}`
         }
     }catch(e){
-
+        console.log("modify에서 에러 발생")
+        console.log(e)
     }
     function makeOption(){
         const ticketMonth = document.querySelector('#ticketMonth')
