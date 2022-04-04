@@ -1,23 +1,15 @@
 const pool = require('../../../db');
 
-exports.myinfo = async (req, res) => {
+exports.myInfo = async (req, res) => {
     const { userIdx } = req.body;
     const prepare = [ userIdx ];
-    const sql = `SELECT 
-                    u_name, 
-                    DATE_FORMAT(u_dob, '%Y-%m-%d') AS u_dob,
-                    u_gender,
-                    u_mobile,
-                    u_address_idx
-                FROM u_personal 
-                WHERE user_idx = ?`;
 
     let response = {
         result: {},
         errno: 1,
     };
     try{
-        const [ result ] = await pool.execute(sql,prepare);
+        const [ result ] = await pool.execute(sql.myInfo,prepare);
         if( result == 0 ) throw new Error ('optional value 없음');
         response = {
             result,
@@ -36,10 +28,9 @@ exports.optionalInfo = async(req,res) => {
     };
 
     const { userIdx, userName, userDob, userGender, userMobile, userAddress } = req.body;
-    const sql ='INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile) VALUES (?,?,?,?,?)';
     const prepare = [ userIdx, userName, userDob, userGender, userMobile ];
     try{
-        const result = pool.execute(sql,prepare);
+        const result = pool.execute(sql.optionalInfo,prepare);
         response = {
             result,
             errno: 0
@@ -64,7 +55,26 @@ exports.myPic = (req, res) => {
 
 exports.myCalendar = (req, res) => {
     res.send('내 달력');
+}
 
+exports.myBenefit = async (req, res) => {
+    let response = {
+        result : {},
+        errno: 1
+    };
+    try{
+        const prepare = [req.body.userIdx];
+        const [ result ] = await pool.execute(sql.myBenefit,prepare);
+        console.log(result);
+        response = {
+            ...response,
+            result,
+            errno: 0
+        };
+    } catch (e){
+        console.log('/mybenefit',e.message);
+    }
+    res.json(response);
 }
 
 exports.myAct = (req, res) => {

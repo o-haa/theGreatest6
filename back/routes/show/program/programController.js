@@ -23,8 +23,7 @@ exports.showWrite = async (req,res)=>{
         show_director,
         show_like,
         show_content,
-        show_open_flag
-        )VALUES(?,?,?,?,?,'0',?,'0')`
+        )VALUES(?,?,?,?,?,'0',?)`
 
     const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
     const timestamp = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
