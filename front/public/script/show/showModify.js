@@ -53,7 +53,7 @@ async function init() {
             window.location.href = `/show/program/showview/${idx}`
         }
     }catch(e){
-        console.log("front / showmodify에서 에러 발생", e.message)
+        console.log('/showmodify', e.message)
     }
     function makeOption(){
         const ticketMonth = document.querySelector('#ticketMonth')
