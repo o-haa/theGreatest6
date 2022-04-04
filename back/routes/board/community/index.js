@@ -7,7 +7,7 @@ const path = require('path');
 const upload = multer({
     storage:multer.diskStorage({
         destination:(req,file,done)=>{
-            done(null,'/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads');
+            done(null,'/Users/oo_ha/workspace/project/team6/theGreatest6/uploads/c_uploads');
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname);
@@ -24,6 +24,7 @@ router.post('/write',upload.single('upload'),communityController.communityWrite)
 router.post(`/view/:idx`,communityController.communityView);
 router.post(`/delete/:idx`,communityController.communityDelete);
 router.post(`/update/:idx`,upload.single('upload'),communityController.communityUpdate);
+router.post(`/comment/:idx`,communityController.communityComment)
                                            
 
 

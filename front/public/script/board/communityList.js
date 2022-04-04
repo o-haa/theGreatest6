@@ -94,15 +94,19 @@ async function init() {
         switch (showCategory){
             case 1:
                 td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
             break;
             case 2:
                 td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
             break;
             case 3:
                 td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
             break;
             case 4:
                 td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
             break;   
         }
         td[2].appendChild(aElement);
@@ -158,115 +162,46 @@ async function clickHanlder() {
     
         const paging = document.querySelector('#paging');
         const arr = []
-        for (let i = block + 1; i <= endBlock; i++) {
-            paging.innerHTML = '';
-            const liElement = document.createElement('li');
-            const aElement = document.createElement('a');
-            liElement.appendChild(aElement);
-            paging.appendChild(liElement);
-            pages(i)
+        // for (let i = block + 1; i <= endBlock; i++) {
+        //     paging.innerHTML = '';
+        //     const liElement = document.createElement('li');
+        //     const aElement = document.createElement('a');
+        //     liElement.appendChild(aElement);
+        //     paging.appendChild(liElement);
+        //     pages(i)
             
-            arr.push(i)
-            console.log(arr)
-            for (let j = 1; j <= arr.length; j++) {
-                aElement.innerHTML = `[${arr}]`
+        //     arr.push(i)
+        //     // console.log(arr)
+        //     for (let j = 1; j <= arr.length; j++) {
+        //         aElement.innerHTML = `[${arr}]`
+                
+        //     }
+        // }
+
+        for (let j = 1; j <= arr.length; j++){
+            paging.innerHTML = '';
+            for (let i = block + 1; i <= endBlock; i++) {
+                paging.innerHTML = '';
+                const liElement = document.createElement('li');
+                const aElement = document.createElement('a');
+                
+                // pages(i)
+                aElement.setAttribute(`onClick`, `pages(${i})`);
+                // arr.push(`[${i}]`)
+                // // console.log(arr)
+                // for (let j = 1; j <= arr.length; j++) {
+                //     aElement.innerHTML = arr
+                // }
+                aElement.innerHTML = `[${i}]`;
+    
+                liElement.appendChild(aElement);
+                paging.appendChild(liElement);
                 
             }
-            }
-    
-
-        const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
-        const tr = document.querySelector('#communityBoardRow');
-        const tbody = document.querySelector('table > tbody');
-    
-        await Nodes.forEach(v => {
-            const showCategory = v.show_category_idx
-            const clone = document.importNode(tr.content, true);
-            const td = clone.querySelectorAll('td');
-            const aElement = document.createElement('a');
-            aElement.href = '/board/community/view/' + v.board_idx;
-            aElement.innerHTML = v.board_subject;
-    
-            td[0].innerHTML = v.board_idx;
-            switch (showCategory){
-                case 1:
-                    td[1].innerHTML = 'Classic';
-                break;
-                case 2:
-                    td[1].innerHTML = 'Musical';
-                break;
-                case 3:
-                    td[1].innerHTML = 'Opera';
-                break;
-                case 4:
-                    td[1].innerHTML = 'Ballet';
-                break;   
-            }
-            td[2].appendChild(aElement);
-            td[3].innerHTML = user_nickname
-            td[4].innerHTML = v.board_date;
-            td[5].innerHTML = v.board_hit;
-    
-            tbody.appendChild(clone);
-        })
-
-        async function pages(num) {
-            const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
-            const { user } = response1.data.result;
-            const user_nickname = user.user_nickname;
-            const tr = document.querySelector('#communityBoardRow');
-            const value = test.data.result; //어레이 밸류_
-        
-            //제목과 a 태그 이동 관련
-            const aElement = document.createElement('a');
-            aElement.href = '/board/community/view' + value.board_idx;
-            aElement.innerHTML = value.board_subject;
-        
-            //10개씩 보임
-            const viewRows = 10;
-            const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows);
-            const tbody = document.querySelector('table > tbody');
-        
-        
-            let template = '';
-            await Nodes.forEach(v => { });
-            tbody.innerHTML = template;
-        
-            await Nodes.forEach(v => {
-                const showCategory = v.show_category_idx
-                const clone = document.importNode(tr.content, true);
-                const td = clone.querySelectorAll('td');
-                const aElement = document.createElement('a');
-                aElement.href = '/board/community/view/' + v.board_idx;
-                aElement.innerHTML = v.board_subject;
-        
-                td[0].innerHTML = v.board_idx;
-                switch (showCategory){
-                    case 1:
-                        td[1].innerHTML = 'Classic';
-                    break;
-                    case 2:
-                        td[1].innerHTML = 'Musical';
-                    break;
-                    case 3:
-                        td[1].innerHTML = 'Opera';
-                    break;
-                    case 4:
-                        td[1].innerHTML = 'Ballet';
-                    break;   
-                }
-                td[2].appendChild(aElement);
-                td[3].innerHTML = user_nickname
-                td[4].innerHTML = v.board_date;
-                td[5].innerHTML = v.board_hit;
-        
-                const tbody1 = document.querySelector('table > tbody');
-                tbody1.appendChild(clone);
-            })
         }
     
     } catch (e) {
-        console.log(e.message);
+        console.log(e);
     }
 }
 
@@ -301,23 +236,29 @@ async function pages(num) {
         const aElement = document.createElement('a');
         aElement.href = '/board/community/view/' + v.board_idx;
         aElement.innerHTML = v.board_subject;
+        
 
         td[0].innerHTML = v.board_idx;
         switch (showCategory){
             case 1:
                 td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
             break;
             case 2:
                 td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
             break;
             case 3:
                 td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
             break;
             case 4:
                 td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
             break;   
         }
         td[2].appendChild(aElement);
+        
         td[3].innerHTML = user_nickname
         td[4].innerHTML = v.board_date;
         td[5].innerHTML = v.board_hit;
