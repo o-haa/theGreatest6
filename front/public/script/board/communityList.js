@@ -24,7 +24,7 @@ async function init() {
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
     } catch (e) {
-        console.log(e.message);
+        console.log('communitylistinit',e.message);
     }
 
     test = {
@@ -192,7 +192,7 @@ async function clickHanlder() {
         }
 
     } catch (e) {
-        console.log(e);
+        console.log('communitylist',e.message);
     }
 }
 

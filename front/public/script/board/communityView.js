@@ -7,6 +7,7 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
+    console.log(user)
     const user_nickname = user.user_nickname;
 
     const [,,,,idx]=location.pathname.split('/');
@@ -79,7 +80,8 @@ async function init() {
         try{
             await axios.post(`/delete/${idx}`);
             location.href='/board/community/list';
-        } catch {
+        } catch(e){
+            console.log('communityviewdlt',e.message)
             alert('try again');
         };
         
@@ -116,11 +118,11 @@ async function init() {
             cmt_date:'2022-04-04'
         }
         
-        // replay.push(body)
+        replay.push(body)
 
-        // const data = {
-        //     replay
-        // }
+        const data = {
+            replay
+        }
         
         hello.value=''
       
@@ -128,7 +130,7 @@ async function init() {
         state = await axios.post(`/comment/${idx}`,body)
         console.log(state.data)
        }catch(e){
-           console.log(e)
+           console.log('/communityviewcmt',e.message)
        }
     
        
@@ -164,7 +166,7 @@ async function init() {
             const response = await axios.post(`/commentList/${idx}`)
             console.log(state.data)
         } catch(e){
-            console.log(e.message)
+            console.log('communityviewcmt',e.message)
         }
     }
 

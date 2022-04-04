@@ -40,7 +40,7 @@ async function init() {
             console.log(response)
             location.href=`/board/community/view/${idx}`;
         } catch(e){
-            console.log(e.message);
+            console.log('communityupdate',e.message);
             alert('try again');
         };
 

@@ -69,7 +69,7 @@ async function init() {
             const{insertId} = response.data.result;
             location.href=`/board/community/view/${insertId}`;
         } catch(e){
-            console.log(e);
+            console.log('communitywrite',e.message);
             alert('try again');
         };
 
