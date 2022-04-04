@@ -56,11 +56,15 @@
                 <div id="imgView"></div>
             </template> -->
             <!-- 댓글 구현 -->
-            <div id="commentBox">
-                <ul>
-        
-                </ul>
-            </div>
+            <details>
+                <summary>Comments</summary>
+                <div id="commentBox">
+                    <ul>
+            
+                    </ul>
+                </div>
+            </details>
+            
             <template id="commentForm">
                 <li>
                     <form method="post" action="">
@@ -73,7 +77,7 @@
                 <li>
                     <ul class = "commentRow">
                         <li class="commentContent">
-                            <input type="hidden" name="idx" value="">
+                            <input type="hidden" id="cidx" name="idx" value="">
                             <span class="commentDeleteBtn">X</span>
                         </li>
                         <li>

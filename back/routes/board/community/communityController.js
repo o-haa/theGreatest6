@@ -188,7 +188,9 @@ exports.communityUpdate = async (req,res)=>{
 exports.communityComment = async (req,res)=>{
     const{idx}=req.params;
     const { userIdx, ccontent } = req.body
+    
     const prepare = [userIdx,idx,ccontent]
+    
     try{
         const [result] = await pool.execute(sql.commentWrite,prepare);
         response = {
@@ -199,9 +201,11 @@ exports.communityComment = async (req,res)=>{
             },
             errno: 0
         }
+        
     }catch(e){
         console.log('/communitycontent',e.message)
     }
+    res.json(response)
     
 }
 
@@ -227,15 +231,35 @@ exports.communityCoDlt = async (req,res)=>{
     const{idx}=req.params;
     const prepare = [idx];
     try{
-        const [result] = await pool.execute(sql.communityDelete,prepare);
+        const [result] = await pool.execute(sql.commentDelete,prepare);
         response = {
                 result,
                 errno:0
             };
         res.json(response);
-       
     } catch (e) {
-        console.log('communitydelete',e.message);
+        console.log('commentdelete',e.message);
     };
+    
+}
+
+exports.communityCoUp = async (req,res)=>{
+    const{idx}=req.params;
+    const ccontent = req.body[0].cmt_content
+    const prepare = [ccontent,idx]
+    
+    try{
+        const [result] = await pool.execute(sql.commentUp,prepare);
+        response = {
+            ...response,
+            result: {
+                affectedRows: result.affectedRows,
+                insertId: result.insertId,
+            },
+            errno: 0
+        }
+    }catch(e){
+        console.log('/commentup',e.message)
+    }
     
 }

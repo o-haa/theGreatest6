@@ -27,6 +27,6 @@ router.post(`/update/:idx`,upload.single('upload'),communityController.community
 router.post(`/comment/:idx`,communityController.communityComment)
 router.post(`/commentList/:idx`,communityController.communityCoList)
 router.post(`/commentListDlt/:idx`,communityController.communityCoDlt)                                 
-
+router.post(`/commentListUp/:idx`,communityController.communityCoUp)   
 
 module.exports = router
