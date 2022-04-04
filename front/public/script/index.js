@@ -10,10 +10,9 @@ async function init() {
     try {
         const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
         const { user } = response.data.result;
-        console.log(user)
         if (user === undefined) throw new Error('로그인 안함');
         const signin = document.querySelector('#signin')
-        signin.innerHTML = 'mypage'
+        signin.innerHTML = 'MY PAGE'
         signin.setAttribute('href','/account/management/myinfo')
     }
     catch (e) {
