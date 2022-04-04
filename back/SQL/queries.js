@@ -4,7 +4,7 @@ const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 
-exports.sql = {
+module.exports = {
     //account
     myInfo: `SELECT 
     u_name, 
@@ -64,7 +64,7 @@ WHERE user_idx = ?`,
 VALUES(?,?,?,?,?,?)`,
 
     updateHit: 'UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ?',
-    communityViewFil: `SELECT
+    communityViewFile: `SELECT
                 a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
                 b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
                 ,${datetime} 
