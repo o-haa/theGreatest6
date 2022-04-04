@@ -25,6 +25,7 @@ async function init() {
     aElement.innerHTML = 'Edit';
     upElement.appendChild(aElement);
     
+    console.log(idx)
     const response = await axios.post(`/view/${idx}`,{
         withCredentials:true,
     });
@@ -114,6 +115,7 @@ async function init() {
         const body = {
             user:user,
             ccontent:hello.value,
+            userIdx: user.user_idx,
             user_nickname:user_nickname,
             cmt_date:'2022-04-04'
         }

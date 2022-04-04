@@ -4,7 +4,7 @@ const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 
-exports.sql = {
+module.exports = {
     //account
     myInfo: `SELECT 
     u_name, 
