@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Write</title>
+    <script src="/script/board/communityWrite.js"></script>
+    <link href="/css/board/boardWrite.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <style>
+        #fileBox{
+            width:500px;
+            min-height: 150px;
+            padding:10px;
+            border: 1px dotted #f1f1f1;
+        }
+
+        #fileBox:empty:before{
+            content: attr(data-placeholder);
+            color:#999;
+            font-size: 12px;
+        }
+    </style> -->
+</head>
+<body>
+    <div id="wrap">
+        {% include "nav.html" %}
+        <h3>Community Write</h3>
+        <form method="post" action="/board/community/write" enctype="multipart/form-data" id="writeFrm"> 
+            <table>
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select name="select" form="writeFrm" >
+                            <option value="Classic">Classic</option>
+                            <option value="Musical">Musical</option>
+                            <option value="Opera">Opera</option>
+                            <option value="Ballet">Ballet</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Subject</td>
+                    <td>
+                        <input type="text" name="communitySubject" id="communitySubject">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>
+                        <textarea type="text" name="communityContent" id="communityContent"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>File</td>
+                    <td id="fileBox">
+                        <label for="communityFile">File</label>
+                        <input type="file" name="upload" id="communityFile" onchange="inputFileName(this)">
+                        <input id="fileName" value="첨부파일" placeholder="첨부파일">
+                    </td>
+                </tr>
+                <input type="hidden" name="idx" id={idx}>
+            </table>
+            <div id="button">
+                <input type="submit" value="Submit" id="submit">
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>

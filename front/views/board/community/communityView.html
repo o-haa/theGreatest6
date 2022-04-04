@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community view</title>
+    <script src="/script/board/communityView.js"></script>
+    <link href="/css/board/boardView.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        {% include "nav.html" %}
+        <h3>Community View</h3>
+        
+            <div id="category"></div>
+            <table cellspacing="0" cellpadding="0" id="viewTable">
+                <tr>
+                    <th>num</th>
+                    <th>subject</th>
+                    <th>writer</th>
+                    <th>date</th>
+                    <th>view</th>
+                </tr>
+                <tr id="viewHead">
+                    <td id="idx"></td>
+                    <td id="subject"></td>
+                    <td id="writer"></td>
+                    <td id="date"></td>
+                    <td id="hit"></td>
+                </tr>
+            </table>
+            <div id="viewContent">
+                <div id="bContent"></div>
+            </div>
+            <div id="img">
+                <span>img : </span>
+                <div id="imgView"></div>
+            </div>
+            <div id="button">
+                <button><a href = "/board/community/list" class="list">List</a></button>
+            
+                <button id="update" class="update"></button>
+                
+                <form method = "post" action = "/board/community/delete" id="deleteFrm">
+                    <input type="hidden" name = "idx" value=`req.params`>
+                    <button type="submit" value="Delete" class="delete">Delete</button>
+                </form>
+            </div>
+        
+    </div>
+</body>
+</html>

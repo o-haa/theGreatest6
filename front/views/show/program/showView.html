@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show View</title>
+    <script src="/script/show/showView.js"></script>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
+</head>
+<body>
+    {% include "nav.html" %}
+    <ul id="viewList">
+        <li>
+            <span class="title">기간 : </span>
+            <span>{show_date}</span>
+        </li> 
+        <li>
+            <span class="title">시간 : </span>
+            <span>{hour 추출}</span>
+        </li> 
+        <li>
+            <span class="title">장소 : </span>
+            <span> {show_place}</span>
+        </li> 
+        <li>
+            <span class="title">입장연령 : </span>
+            <span>{show_xrated}</span>
+        </li> 
+        <li>
+            <span class="title">관람시간 : </span>
+            <span>2시간</span>
+        </li> 
+        <li>
+            <span class="title">가격 : </span>
+            <span>{show_price -> 변수 없음}</span>
+        </li> 
+        <li>
+            <span class="title">주최 : </span>
+            <span>team6</span>
+        </li> 
+        <li>
+            <span class="title">문의 : </span>
+            <span>013-345-2394</span>
+        </li> 
+    </ul>
+    <button id="leftBtn"><</button>  
+    <button id="rightBtn">></button>  
+    <button id="modifyBtn">수정</button>  
+    <button id="deleteBtn">삭제</button>  
+
+    <template>
+
+    </template>
+</body>
+</html>

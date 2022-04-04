@@ -1,18 +1,28 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-require('dotenv').config()
-const port = process.env.PORT || '4001'
-const router = require('./routes')
+const express = require('express');
+const app = express();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
-app.set('view engine', 'html')
+require('dotenv').config();
+const port = process.env.PORT || '4001';
+const router = require('./routes');
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
+app.set('view engine', 'html');
 
-app.use(router)
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const options = {
+    origin: true,
+    // methods:"GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders:['Content-type','Authorization'],
+    credentials: true
+};
+
+app.use(cors(options));
+app.use(router);
 
 app.listen(port, _ => {
-    console.log(`back server running on localhost:${port}`)
+    console.log(`back server running on localhost:${port}`);
 })

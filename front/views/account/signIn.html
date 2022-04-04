@@ -1,1 +1,101 @@
-로그인
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/account/member.css" rel="stylesheet" type="text/css">
+    <script src="/script/account/signIn.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="wrap" class = "backGround">
+        <div id="header">
+            <div id="nav">
+                <h1 id="logoBox">
+                    <a href="/">Team6</a>
+                </h1>
+                <ul id="mainMenu">
+                    <li id="show">
+                        <a href="/show/program/showcard">show</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <main class="memberBox">
+            <article class=" signInBox rad5">
+                <section class="w100">
+                    <h3 class="accountFrmHead">sign in</h3>
+                </section>
+                <section class="w100 kakaoBox marginAuto">
+                    <span class="kakao">
+                        <a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=07e2741dea7ed6e8b2ba90e09024f231&redirect_uri=http://localhost:5001/auth/kakao">
+                            Kakao Talk
+                        </a>
+                    </span>
+                </section>
+                <section class="w100 h100 marginAuto">
+                    <form method="post" action="*" id="signInFrm" class="w100">
+                        <ul class="inputBox flexCol">
+                            <li class="inputs">
+                                <span id="userIcon"></span>
+                                <input type="text" id="tempId" placeholder="signInId" autofocus>
+                                <select name="mail" id="mail">mail
+                                    <option value="@gmail.com">@gmail.com</option>
+                                    <option value="@naver.com">@naver.com</option>
+                                    <option value="@daum.net">@daum.net</option>
+                                    <!-- <option value="">직접 입력</option> -->
+                                </select>
+                            </li>
+                        </ul>
+                        <div id ="msgEmptyId"></div>
+                        <ul class="inputBox flexCol">
+                            <li class="inputs">
+                                <span id="passwordIcon"> </span>
+                                <input type="password" placeholder="Password" id="signInPw">
+                            </li>
+                        </ul>
+                        <ul class="inputBox flexCol">
+                            <li class="whBtn">
+                                <input type="submit" value="sign in">
+                            </li>
+                        </ul>
+                    </form>
+                </section>
+                <section id ="signUpLink">
+                    <a href="/account/member/signup">create account</a>
+                </section>
+            </article>
+            <article>
+
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>
+
+<!-- <div class="v16_401">
+    <span class="v16_402">sign up</span>
+</div>
+<div class="v16_406">
+    <div class="v16_404"></div>
+    <span class="v16_405">Password</span>
+</div>
+<div class="input">
+    <div class="v16_407"></div>
+    <span class="v16_408">Email</span>
+</div>
+<div class="input">
+    <div class="v16_410"></div>
+    <span class="v16_411">Name</span>
+</div>
+<span class="signup">Or Sign Up Using</span>
+<div class="v16_414">
+    <span class="v16_415">Kakao Talk</span>
+</div>
+<span class="v16_416">Create Account</span> -->
+    <!-- </div> -->

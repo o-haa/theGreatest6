@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Write</title>
+</head>
+<body>
+    {% include "nav.html" %}
+    <h3>Review Write</h3>
+    <from method="post" action="/">
+        <table>
+            <tr>
+                <td>subject : </td>
+                <td id="subject">
+                    <input type="text" name="reviewSubject" id="reviewSubject">
+                </td>
+            </tr>
+            <tr>
+                <td>writer : </td>
+                <td id="writer"></td>
+            </tr>
+            <tr>
+                <td>date : </td>
+                <td id="date"></td>
+            </tr>
+            <tr>
+                <td>content : </td>
+                <td id="content">
+                    <textarea type="text" name="reviewContent" id="reviewContent"></textarea>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit" id="submit">
+    </from>
+</body>
+</html>

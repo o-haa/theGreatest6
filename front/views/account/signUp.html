@@ -1,1 +1,94 @@
-회원가입
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/account/member.css" rel="stylesheet" type="text/css">
+    <script src="/script/account/signUp.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <div id="wrap" class = "backGround">
+        <div id="header">
+            <div id="nav">
+                <h1 id="logoBox">
+                    <a href="/">Team6</a>
+                </h1>
+                <ul id="mainMenu">
+                    <li id="show">
+                        <a href="/show/program/showcard">show</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <main class="memberBox">
+            <form method="post" action="*" id="signUpFrm">
+                <table class="w100 signUpBox ">
+                    <h3 class="accountFrmHead">
+                        sign up
+                    </h3>
+                    <tbody class="flexCol" id="signUpTable">
+                        <tr class="signUpTr">
+                            <td class="inputs">
+                                <input type="text" id="userId" placeholder="ID" autofocus>
+                                <select name="mail" id="mail">mail
+                                    <option value="@gmail.com">@gmail.com</option>
+                                    <option value="@naver.com">@naver.com</option>
+                                    <option value="@daum.net">@daum.net</option>
+                                    <!-- <option value="">직접 입력</option> -->
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id="msgIdCheck" class ="msg"></span>
+                            </td>
+                        </tr>
+                        <tr class="signUpTr">
+                            <td class="inputs">
+                                <input type="text" class="w80" id="userNickName" placeholder="nickname">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id="msgNicknameCheck" class="msg"></span>
+                            </td>
+                        </tr>
+
+                        <tr class="signUpTr">
+                            <td class="w80 inputs">
+                                <input type="password" id="userPw" placeholder="password">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id="msgPwCheck1" class="msg"></span>
+                            </td>
+                        </tr>
+                        <tr class="signUpTr">
+                            <td class="w80 inputs">
+                                <input type="password" id="userPwCheck" placeholder="confirm">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span id = "msgPwCheck2" class="msg"></span>
+                            </td>
+                        </tr>
+                        <tr class="inputBox2 flexCol">
+                            <td id = "signUpSbm">
+                                <input type="submit" value="sign up" id="signUpBtn">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </main>
+</body>
+
+</html>

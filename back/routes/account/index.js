@@ -1,13 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const accountMngRouter = require('./management')
-const accountController = require('./accountController')
+const express = require('express');
+const router = express.Router();
+const accountMngRouter = require('./management');
+const memberRouter = require('./member');
 
-
-router.post('/signup', accountController.signUp)
-router.post('/signin', accountController.signIn)
-router.use('/management', accountMngRouter)
+router.use('/member', memberRouter);
+router.use('/management', accountMngRouter);
 
 
 
-module.exports = router
+module.exports = router;

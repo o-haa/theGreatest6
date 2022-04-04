@@ -1,0 +1,109 @@
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
+@import url('../index/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
+@import url('../index/_contentLayout.css'); /* 본문 오른쪽 메인박스 틀 */
+
+/*
+    현진 작성 CSS 읽는 방법!
+    가로세로 -> 여백 -> 정렬순 -> 그 외 꾸밈(box-sixing, 선굵기 등)
+    이 순서대로 작성하기 때문에 만약 여백이 먼저 작성되었다면 가로세로 값은 없다는 뜻이에요!
+*/
+
+#wrap{
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/* 헤더 #header */
+
+/* 본문 #content */
+/* 본문 왼쪽 달력 박스  : #content > #calContent */
+/* 본문 오른쪽 박스  : #content > #mainContent */
+
+/* 카드 컨텐츠 타이틀 */
+#content > #mainContent > #mainContentTitle{
+    width: 100%;
+    height: 55px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+#content > #mainContent > #mainContentTitle > #mainContentTitleMonth{
+    display: flex;
+    align-items: flex-end;
+    box-sizing: border-box;
+}
+/* 카드 컨텐츠 연월 표시 span */
+#content > #mainContent > #mainContentTitle > #mainContentTitleMonth > span{
+    margin-right: 15px;
+    vertical-align: bottom;
+    font-size: 28px;
+    /*글자 내부적인 여백때문에 혼자 들뜸
+    그걸 없애주기 위해 line-height사용*/
+    line-height: 60%; 
+}
+
+/* 보기 형태 선택 아이콘 : 리스트 or 앨범 or 캘린더 버튼 */
+#content > #mainContent > #mainContentTitle > #mainContentTitleIcon {
+    display: flex;
+}
+/* 버튼 공통 속성 */
+.miniBtn{
+    width: 25px;
+    height: 25px;
+    margin-left: 7px;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    border: 1px solid #080C31;
+    box-sizing: border-box;
+}
+/* 버튼 이미지 공통 속성 */
+.miniBtn > img{
+    width: 22px;
+    height: 22px;
+}
+
+/* 카드 컨텐츠 박스 */
+#content > #mainContent > #scrollBox{
+    width:100%;
+    white-space: nowrap;
+    overflow: auto;
+}
+/* 카드 컨텐츠 ul list */
+#content > #mainContent > #scrollBox > .ulCard {
+    height: 550px;
+}
+.ulCard > li {
+    width: 400px;
+    height: 520px;
+    padding-top:10px;
+    margin-right:20px;
+    display: inline-block;
+    box-sizing: border-box;
+    box-shadow: 0px 25px 37px #F2F2F2;
+    border-radius: 25px;
+}
+
+/* 카드 개별 상세정보 보기 */
+.ulCard > li > .imgBox{
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    background-image: url('/img/poster/park.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+#content > #mainContent > .infoCard{
+    width: 96%;
+    height: 200px;
+    padding:20px;
+    border: 1.5px solid #A8BEBF; 
+    border-radius: 10px;  
+}

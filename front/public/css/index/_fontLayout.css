@@ -1,0 +1,105 @@
+/* 
+  폰트 모음소입니다.
+  사용하시는 폰트가 있을경우 여기에 넣고, 원하는 곳에 font-family: '원하는 폰트명';을 넣으면 적용됩니다.
+  예) body{ font-family: 'basicBoldStrong'; } --> 페이지 전체에 적용
+     #box { font-family: 'basicBoldStrong'; }
+
+     만약에 먹혀야 하는 곳인데 폰트가 안 먹힌다!
+     font-family: 'basicBoldStrong'!important;를 하면 다른 효과들을 모두 무시하고 적용됩니다.
+
+  index와 같은 depth로 있는 폴더 안에 있는 css에서 사용할 경우,
+  예) public > css > account > index.css 에서 사용.
+
+  @import url('../index/_fontLayout.css');
+  로 삽입하시면 됩니다.
+*/
+
+
+@font-face {
+    font-family: 'basicBoldStrong';
+    src: url('../../font/NotoSansKR-Black.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicBold';
+    src: url('../../font/NotoSansKR-Bold.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicLight';
+    src: url('../../font/NotoSansKR-Light.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicMid';
+    src: url('../../font/NotoSansKR-Medium.otf') format('truetype');
+}
+@font-face {
+    font-family: 'basicReg';
+    src: url('../../font/NotoSansKR-Regular.otf') format('truetype');
+}
+
+
+/* 나눔 명조체 */
+@font-face {
+    font-family: 'viewFont';
+    src: url('../../font/NanumMyeongjo.ttf') format('truetype');
+}
+
+
+/* 현재 기본 적용되고있는 폰트 */
+@font-face {
+    font-family: 'MADE';
+    src: url('../../font/MADE Evolve Sans Light (PERSONAL USE).otf') format('truetype');
+}
+
+body{
+    font-family:'MADE';
+    /* 일단은 기본 폰트입니다만 수정 가능성이 높습미다... */
+}
+
+
+
+/*
+포인트를 주고싶을때는 이곳에서 자유롭게 font-family 이름을 정하시고 사용하시면 됩니다!
+같은 계열 폰트끼리 묶어놨습니다!
+*/
+@font-face {
+    font-family: '';
+    src: url('../../font/NanumSquare_acL.ttf') format('truetype');
+}
+@font-face {
+    font-family: '';
+    src: url('../../font/NanumSquareB.ttf') format('truetype');
+}
+@font-face {
+    font-family: '';
+    src: url('../../font/NanumSquareL.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: '';
+    src: url('../../font/OpenSans_SemiCondensed-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: '';
+    src: url('../../font/OpenSans_SemiCondensed-Medium.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: '';
+    src: url('../../font/OpenSans_Condensed-Bold.ttf') format('truetype');
+}
+
+
+@font-face {
+    font-family: '';
+    src: url('../../font/OpenSans-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: '';
+    src: url('../../font/OpenSans-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: '';
+    src: url('../../font/OpenSans-SemiBold.ttf') format('truetype');
+}

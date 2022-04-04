@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/show/showCalendar.css">
+    <script type="text/javascript">
+    </script>
+</head>
+<body>
+    <div id="wrap">
+        {% include "nav.html" %}
+
+        <div id="content">
+            <div id="calContent">
+                 <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
+                 
+                <div id="calSmall">
+                </div>
+
+                <div id="monthly">
+                    <div id="monthlyTitle">Monthly</div>
+                    <div id="monthTitleSmall">MAR</div>
+                    <div id="menuSmall">
+                        <!-- 카드뉴스 생성 -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="mainContent">
+                <!-- 타이틀 캘린더 -->
+                <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
+                
+                <div id="mainContentTitle">
+                    <div id="mainContentTitleMonth">
+                        <span>MAR 2022</span>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_next_2x.png" style="transform: rotate(180deg);" id="prev_arrow">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_next_2x.png" id="next_arrow">
+                        </button>
+                    </div>
+                    <div id="mainContentTitleIcon">
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_list_2x.png" id="List">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_grid_2x.png" id="grid">
+                        </button>
+                        <button class="miniBtn">
+                            <img src="/img/icon/icon_cal_2x.png" id="calBtn">
+                        </button>
+                    </div>
+                </div>
+
+                <div id="mainCal">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

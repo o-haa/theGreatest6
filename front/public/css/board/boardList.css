@@ -1,0 +1,124 @@
+@import url('../index/_fontLayout.css');
+@import url('../index/_headerLayout.css');
+/* @import url('../index/_mainContentLayout.css'); */
+@import url('../index/_settingLayout.css');
+
+body {
+    zoom:100%;
+}
+
+
+#category{
+    margin-top:4%;
+}
+
+#label {
+    width: 80%;
+    margin:0 auto;
+    text-align: end;
+    
+}
+
+#label span {
+    font-weight: 600;
+    padding: 7px 14px;
+    box-sizing: border-box;
+    background: #f4d3aa;
+    font-size:18px;
+    
+}
+
+
+#category ul {
+    margin-top:3%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#category ul li {
+    font-size: 18px;
+}
+
+
+#paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#communityBoard{
+    width:80%;
+    margin:3% auto 0 auto;
+    letter-spacing: 0.5px;
+    border-spacing: 0 3px;
+}
+
+td,th{
+    padding:7px 12px;
+    border-bottom:1px solid #eee;
+    text-align: center;
+}
+
+th{
+    background-color: #a8bebf;
+    border-bottom: 2px solid #465d59;
+    height: 25px;
+}
+
+th:nth-child(2){
+    width:30%;
+}
+
+#pagingDiv{
+    margin-top:1%;
+}
+
+#box{
+    width: 80%;
+    text-align: end;
+    margin:1% auto;
+    color: #eee;
+    
+}
+
+#bBtn{
+    padding: 7px 12px;
+    background-color: #465d59;
+    border-radius: 10px;
+}
+
+#bBtn a {
+    color: #eee !important;
+    font-size: 16px;
+}
+
+
+#category ul li{
+    border-radius: 10px;
+    background-color: #a8bebf;
+    padding-right:9px;
+    box-sizing: border-box;
+
+}
+
+input[type="checkbox"]{
+    width:14px;
+    height: 14px;
+    cursor: pointer;
+    margin:10px;
+    accent-color: #465d59;
+    border:1px dotted #465d59;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #465d59;
+}
+
+input[type="checkbox"]+label{
+    font-size:20px;
+    cursor: pointer;
+    align-items: center;
+
+}
+
