@@ -1,4 +1,5 @@
 const pool = require('../../../db');
+const sql = require('../../../SQL/queries')
 
 exports.myInfo = async (req, res) => {
     const { userIdx } = req.body;

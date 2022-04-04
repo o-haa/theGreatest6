@@ -1,4 +1,5 @@
-const pool = require('../../../db.js')
+const pool = require('../../../db');
+const sql = require('../../../SQL/queries')
 
 let response = {
     result:[],

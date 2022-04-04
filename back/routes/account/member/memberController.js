@@ -1,6 +1,7 @@
 const pool = require('../../../db');
-const { createToken, createSignature } = require('../../../utils/createJWT')
 const sql = require('../../../SQL/queries')
+
+const { createToken, createSignature } = require('../../../utils/createJWT')
 
 exports.idCheck = async (req, res) => {
   let response = {
