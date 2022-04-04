@@ -26,7 +26,7 @@ exports.communityList = async (req, res) => {
         break;
     }
     try {
-        console.log(sql)
+        // console.log(sql)
         const [result] = await pool.execute(sql, prepare);
         response = {
             ...response,
@@ -121,6 +121,7 @@ exports.communityView = async (req,res) => {
 exports.communityDelete = async (req,res) =>{
     const{idx}=req.params;
     const prepare = [idx];
+    console.log(idx)
     try{
         const [result] = await pool.execute(sql.communityDelete,prepare);
         response = {
@@ -226,12 +227,10 @@ exports.communityCoList = async (req,res)=>{
 }
 
 exports.communityCoDlt = async (req,res)=>{
-    const {cmt_idx}=req.body;
-    console.log(req.body)
-    const sql = `DELETE FROM comment WHERE cmt_idx = ?`;
-    const prepare = [cmt_idx];
+    const{idx}=req.params;
+    const prepare = [idx];
     try{
-        const [result] = await pool.execute(sql,prepare);
+        const [result] = await pool.execute(sql.communityDelete,prepare);
         response = {
                 result,
                 errno:0
@@ -240,6 +239,6 @@ exports.communityCoDlt = async (req,res)=>{
        
     } catch (e) {
         console.log('communitydelete',e.message);
-        
     };
+    
 }

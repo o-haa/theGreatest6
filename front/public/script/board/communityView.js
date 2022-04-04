@@ -169,9 +169,9 @@ async function init() {
     async function deleteHandler(){
         const responseList = await axios.post(`/commentList/${idx}`)
         const cmtList = responseList.data.cmtListResult
-        
+        const cmtidx = cmtList.cmt_idx
         try{
-            await axios.post(`/commentListDlt/${idx}`,cmtList)    
+            await axios.post(`/commentListDlt/${cmtidx}`,cmtList)    
         } catch (e){
             console.log('/cmtdelete',e.message)
         }       
