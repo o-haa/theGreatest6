@@ -9,7 +9,11 @@ async function init() {
 
     //템플릿
     const tableBox = document.querySelector('#tableBox')
-
+    const requiredOn = document.querySelector('#requiredOn')  //필수 정보
+    const whiteBlock = document.querySelector('#prevent')   //블로킹
+    const userOptionFrm = document.querySelector('#optionalOff')    //유저 선택 정보 없는 경우
+    const optionalBox = document.querySelector('#optionalOn')  //유저 선택 정보 있는 경우
+    const benefitOn = document.querySelector('#benefitOn')
 
     const checked = document.querySelectorAll('#itemBox input')
     checked.forEach(v => v.addEventListener('click', checkedHandler))
@@ -27,9 +31,11 @@ async function init() {
                 location.href = '/account/management/mybenefit';
                 break;
             case 'myPick':
+                // myPick()
                 location.href = '/account/management/mypick';
                 break;
             case 'myTicket':
+                // myTicket()
                 location.href = '/account/management/myticket';
                 break;
         }
