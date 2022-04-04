@@ -1,4 +1,5 @@
-const pool = require('../../../db.js')
+const pool = require('../../../db');
+const { sql }= require('../../../SQL/queries.js')
 
 let response = {
     result:[],
@@ -24,12 +25,17 @@ exports.showWrite = async (req,res)=>{
         show_company,
         show_director,
         show_like,
+<<<<<<< HEAD
         show_date_open,
         show_content
         ) VALUES(
             ?,?,?,?,?,1,
             ?,
             ?)`
+=======
+        show_content,
+        )VALUES(?,?,?,?,?,'0',?)`
+>>>>>>> e7d4d5991ca186ba67ff5ca002650b39adac097b
 
     const timestamp = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
     // let timestamp = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
