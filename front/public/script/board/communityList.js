@@ -24,7 +24,7 @@ async function init() {
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
     } catch (e) {
-        console.log(e.message);
+        console.log('communitylistinit',e.message);
     }
 
     test = {
@@ -181,13 +181,8 @@ async function clickHanlder() {
                 const liElement = document.createElement('li');
                 const aElement = document.createElement('a');
                 
-                // pages(i)
                 aElement.setAttribute(`onClick`, `pages(${i})`);
-                // arr.push(`[${i}]`)
-                // // console.log(arr)
-                // for (let j = 1; j <= arr.length; j++) {
-                //     aElement.innerHTML = arr
-                // }
+            
                 aElement.innerHTML = `[${i}]`;
     
                 liElement.appendChild(aElement);
@@ -197,7 +192,7 @@ async function clickHanlder() {
         }
 
     } catch (e) {
-        console.log(e);
+        console.log('communitylist',e.message);
     }
 }
 

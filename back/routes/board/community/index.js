@@ -25,6 +25,7 @@ router.post(`/view/:idx`,communityController.communityView);
 router.post(`/delete/:idx`,communityController.communityDelete);
 router.post(`/update/:idx`,upload.single('upload'),communityController.communityUpdate);
 router.post(`/comment/:idx`,communityController.communityComment)
+router.post(`/commentList/:idx`,communityController.communityCoList)
                                            
 
 
