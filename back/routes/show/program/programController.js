@@ -40,9 +40,7 @@ exports.showWrite = async (req,res)=>{
         VALUES (?,?,?,?,?)`
 
     try{
-        console.log('1')
         const [resultShow] = await pool.execute(sqlShow,prespareShow) //
-        console.log('2')
 
         let insertShowId = resultShow.insertId
         console.log(insertShowId)
