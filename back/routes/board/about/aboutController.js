@@ -1,5 +1,5 @@
 const pool = require('../../../db');
-const sql = require('../../../SQL/queries')
+const { sql }= require('../../../SQL/queries.js')
 
 exports.aboutList = (req,res) =>{
   

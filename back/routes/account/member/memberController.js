@@ -1,7 +1,7 @@
 const pool = require('../../../db');
-const sql = require('../../../SQL/queries')
-
+const { sql }= require('../../../SQL/queries.js')
 const { createToken, createSignature } = require('../../../utils/createJWT')
+
 
 exports.idCheck = async (req, res) => {
   let response = {
@@ -72,6 +72,7 @@ exports.signUp = async (req, res) => {
 
 
 exports.signIn = async (req, res) => {
+
   let response = {
     result: [],
     errno: 1
