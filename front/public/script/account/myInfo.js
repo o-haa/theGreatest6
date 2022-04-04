@@ -47,7 +47,6 @@ async function init() {
     const requiredClone = document.importNode(requiredOn.content, true)
     const requiredInfo = requiredClone.querySelectorAll('.infoValue');
     tableBox.appendChild(requiredClone)
-
     try {
         //유저 필수 정보 렌더하기 위해 가져오기 ok
         const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
