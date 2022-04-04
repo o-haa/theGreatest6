@@ -208,11 +208,11 @@ async function init() {
                 location.href = `http://localhost:3001/show/program/showlist`
             }
             catch(e){
-
+                console.log('/showview/goListBtnHandler',e.message)
             }
         }
     }
     catch(e){
-        console.log('에러발생')    
+        console.log('/showview',e.message)    
     }
 }
