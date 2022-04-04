@@ -8,13 +8,15 @@ let response = {
 exports.showWrite = async (req,res)=>{
     // console.log('req.file : ',req.file) //파일
     // console.log('req.body : ',req.body) //텍스트
-
+    
     const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,showMonth,showDate,showHour} = req.body
     //show_idx 필요함
-
+    
     let now = new Date()
+    console.log(now)
     let thisYear = now.getFullYear()
-
+    
+    console.log(req.body)
     const sqlShow = `INSERT INTO shows(
         show_title,
         show_category_idx,
@@ -22,18 +24,26 @@ exports.showWrite = async (req,res)=>{
         show_company,
         show_director,
         show_like,
-        show_content,
-        show_open_flag
-        )VALUES(?,?,?,?,?,'0',?,'0')`
+        show_date_open,
+        show_content
+        ) VALUES(
+            ?,?,?,?,?,1,
+            ?,
+            ?)`
 
-    const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
     const timestamp = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
+    // let timestamp = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
+    console.log(timestamp)
+    const prespareShow = [title,category,xrated,showCompany,showDirector,timestamp,showContent]
     const sqlOption = `INSERT
         INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
         VALUES (?,?,?,?,?)`
 
     try{
-        const [resultShow] = await pool.execute(sqlShow,prespareShow)
+        console.log('1')
+        const [resultShow] = await pool.execute(sqlShow,prespareShow) //
+        console.log('2')
+
         let insertShowId = resultShow.insertId
         console.log(insertShowId)
 
@@ -72,7 +82,7 @@ exports.showWrite = async (req,res)=>{
         }
         res.json(response)
     }catch(e){
-        console.log('/showwrite',e.message)
+        console.log('/showwrite',e)
     }
 }
 

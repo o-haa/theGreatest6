@@ -11,8 +11,9 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
     axios.defaults.withCredentials= true;
+    
     makeOption()
-
+    
     const writeForm = document.querySelector('#writeForm');
     //input의 name값 upload가 인자로 들어감
     const file = document.querySelector('#upload');
@@ -56,7 +57,7 @@ async function init() {
         const showMonth = document.querySelector('#showMonth')
         const showDate = document.querySelector('#showDate')
         const showHour = document.querySelector('#showHour')
-        const timestamp = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
+        let timestamp = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
 
         let monthlist=[] 
         let datelist=[]
