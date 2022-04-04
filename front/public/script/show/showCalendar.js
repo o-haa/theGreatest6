@@ -4,18 +4,7 @@ async function init(e) {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    console.log(e.target)
-
-    //좌우이동 버튼, 연.월 버튼
     const mainContent = document.querySelector('#mainContent')
-
-    const listBtn = document.querySelector('#listBtn')
-    const listGrid = document.querySelector('#listGrid')
-    const listCalendar = document.querySelector('#listCalendar')
-    
-    const btnLeft = mainContent.querySelector('.miniBtnL')
-    const btnRight = mainContent.querySelector('.miniBtnR')
-    const year_month = document.querySelector('.year-month')
     let dates = document.querySelector('.dates')
     let template = document.querySelector('.cal_temp')
 
@@ -61,7 +50,6 @@ async function init(e) {
         let nowLastDay = nowMonth.getDay() //이번달 마지막 요일
 
         calMonth = monthThreeWord(month+1)
-        year_month.innerHTML = `${calMonth} ${year}`
 
         //이번달이 일요일로 시작하지 않을 경우
         if(nowFirstDay!==0){
@@ -112,32 +100,43 @@ async function init(e) {
         }
     }
 
+
+    const btnLeft = mainContent.querySelector('.miniBtnL')
+    const btnRight = mainContent.querySelector('.miniBtnR')
+    const homeBtn = document.querySelector('#home');
+    const aboutBtn = document.querySelector('#about');
+    const listBtn = document.querySelector('#listBtn')
+    const listGrid = document.querySelector('#listGrid')
+    const listCalendar = document.querySelector('#listCalendar')
+
     btnLeft.addEventListener('click', btnLeftHandler)
     btnRight.addEventListener('click', btnRightHandler)
-
+    homeBtn.addEventListener('click', moveHome)
+    aboutBtn.addEventListener('click', moveAbout)
     listBtn.addEventListener('click', listBtnHandler)
-    listGrid.addEventListener('click', listGridHandler)
-    listCalendar.addEventListener('click', listCalendarHandler)
+    listGrid.addEventListener('click', gridBtnHandler)
+    listCalendar.addEventListener('click', calBtnHandler)
 
-
-    async function listBtnHandler(){
-        const calHtml = mainContent.innerHTML
-        const response = await axios.post('/showlist')
-        console.log('잘 받아왔니  ------> ',response)
+    function listBtnHandler(){ 
+        window.location.href = 'http://localhost:3001/show/program/showlist'; 
     }
-    function listGridHandler(){
-        console.log('클릭')
+    function gridBtnHandler(){ 
+        window.location.href = 'http://localhost:3001/show/program/showcard'; 
     }
-    function listCalendarHandler(){
-        console.log('클릭')
+    function calBtnHandler(){ 
+        window.location.href = '#'; 
     }
-
+    function moveHome(){ 
+        window.location.href = 'http://localhost:3001/'; 
+    }
+    function moveAbout(){
+        window.location.href = 'http://localhost:3001/about';
+    }
     function btnLeftHandler(){
         month-=1
         let now = new Date(year,month)
         createCalendar(now)
     }
-
     function btnRightHandler(){
         month+=1 // 달이 넘어가지 않는 이슈 해결
         let now = new Date(year,month)

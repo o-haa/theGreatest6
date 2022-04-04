@@ -4,97 +4,178 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Show Modify</title>
+    <link rel="stylesheet" href="/css/show/showWrite.css">
     <script src="/script/show/showModify.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
-    <form method="post" action="/" name="modifyForm" id="modifyForm">
-        <table>
-            <tr>
-                <th>공연 분류 *</th>
-                <td>
-                    <select name="category" id="category">
-                        <option value="1">musical</option>
-                        <option value="2">concert</option>
-                        <option value="3">classic</option>
-                        <option value="4">ballet</option>
-                    </select>
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>관람 등급 *</th>
-                <td>
-                    <select name="xrated" id="xrated">
-                        <option value="1">전체관람가</option>
-                        <option value="2">청소년</option>
-                        <option value="3">청소년 불가</option>
-                    </select>
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>공연 제목 *</th>
-                <td><input type="text" name="title" id="title"></td>
-            </tr>
-            <tr>
-                <th>예매일 *</th>
-                <td>
-                    <select name="ticketMonth" id="ticketMonth">
-                    </select>
-                    월
-                    <select name="ticketDate" id="ticketDate">
-                    </select>
-                    일
-                    <select name="ticketHour" id="ticketHour">
-                    </select>
-                    시
-                </td>
-            </tr>
-            <tr>
-                <th>공연일 *</th>
-                <td>
-                    <select name="showMonth" id="showMonth">
-                    </select>
-                    월
-                    <select name="showDate" id="showDate">
-                    </select>
-                    일
-                    <select name="showHour" id="showHour">
-                    </select>
-                    시
-                </td>
-            </tr>
-            <tr>
-                <th>내용 작성 *</th>
-                <td><input type="text" name="showContent" id="showContent"></td>
-            </tr>
-            <tr>
-                <th>공연 장소 *</th>
-                <td><input type="text" name="place" id="place"></td>
-            </tr>
-            <tr>
-                <th>공연 출연진 *</th>
-                <td><input type="text" name="showCast1" id="showCast1"></td>
-            </tr>
-            <tr>
-                <th>공연 보조출연진</th>
-                <td><input type="text" name="showCast2" id="showCast2"></td>
-            </tr>
-            <tr>
-                <th>공연 감독 *</th>
-                <td><input type="text" name="showDirector" id="showDirector"></td>
-            </tr>
-            <tr>
-                <th>공연 주최측 *</th>
-                <td><input type="text" name="showCompany" id="showCompany"></td>
-            </tr>
-            <!-- <th>파일업로드</th> -->
-        </table>
-        <div> * 별표가 있는 항목은 필수 항목 입니다</div>
-        <input type="submit" value="수정하기">
-        <button id="cancle">취소하기</button>
-    </form>
+    <div id="wrap">
+        <div id="header">
+            <!-- nav 시작 -->
+            <div id="nav">
+                <!-- Logo -->
+                <div id="logoBox">
+                    <h1>Team6</h1>
+                </div>
+                <!-- 메인 메뉴 -->
+                <ul id="mainMenu">
+                    <li id="home">
+                        <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01">HOME</label>
+                    </li>
+                    <li id="show">
+                        <!-- click 이벤트를 만들어주는 체크박스 -->
+                        <input type="radio" name="menuCheck" id="check02">
+                        <label for="check02">SHOW</label>
+                        <!-- show 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/show/program/showcard">Show List</a></li>
+                            <li><a href="javascript">Ticket Open Date</a></li>
+                        </ul>
+                        <!-- show 서브메뉴 끝 -->
+                    </li>
+                    <li id="board">
+                        <input type="radio" name="menuCheck" id="check03">
+                        <label for="check03">BOARD</label>
+                        <!-- board 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/board/review/list">Review</a></li>
+                            <li><a href="/board/community/list">Community</a></li>
+                            <li><a href="/board/news/list">News</a></li>
+                        </ul>
+                        <!-- board 서브메뉴 끝 -->
+                    </li>
+                    <li id="my page">
+                        <input type="radio" name="menuCheck" id="check04">
+                        <label for="check04">MY PAGE</label>
+                        <!-- my page 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/account/management/myCalendar">My Calendar</a></li>
+                            <li><a href="/account/management/myInfo">My Profile</a></li>
+                            <li><a href="/account/management/myTicket">My Ticket</a></li>
+                            <li><a href="/account/management/myPick">My Pick</a></li>
+                            <li><a href="/account/management/myPoint">My Point</a></li>
+                        </ul>
+                        <!-- my page 서브메뉴 끝 -->
+                    </li>
+                    <li id="admin">
+                        <input type="radio" name="menuCheck" id="check05">
+                        <label for="check05">ADMIN</label>
+                        <!-- admin 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">공연관리</a></li>
+                            <li><a href="javascript">회원관리</a></li>
+                            <li><a href="javascript">포인트관리</a></li>
+                            <li><a href="javascript">보드관리</a></li>
+                            <li><a href="javascript">통계</a></li>
+                        </ul>
+                        <!-- admin 서브메뉴 끝 -->
+                    </li>
+                    <li id="about">
+                        <input type="radio" name="menuCheck" id="check06">
+                        <label for="check06">ABOUT</label>
+                    </li>
+                    <li>
+                        <span id="mainSearch">
+                            <input type="text" name="searchInput" id="searchInput">
+                            <img src="/img/icon/icon_search_2x.png" name="searchIcon" id="searchIcon">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="content">         
+            <form method="post" action="/" name="modifyForm" id="modifyForm">
+                <table id="modifyForm">
+                    <div id="notice"> * 별표가 있는 항목은 필수 항목 입니다</div>
+                    <tr>
+                        <th>공연 분류 *</th>
+                        <td>
+                            <select name="category" id="category">
+                                <option value="1">musical</option>
+                                <option value="2">concert</option>
+                                <option value="3">classic</option>
+                                <option value="4">ballet</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>관람 등급 *</th>
+                        <td>
+                            <select name="xrated" id="xrated">
+                                <option value="1">전체관람가</option>
+                                <option value="2">청소년</option>
+                                <option value="3">청소년 불가</option>
+                            </select>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>공연 제목 *</th>
+                        <td><input type="text" name="title" id="title"></td>
+                    </tr>
+                    <tr>
+                        <th>예매일 *</th>
+                        <td>
+                            예매일은 공연 2주전으로 자동등록 됩니다.
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>공연일 *</th>
+                        <td>
+                            <select name="showMonth" id="showMonth">
+                            </select>
+                            월
+                            <select name="showDate" id="showDate">
+                            </select>
+                            일
+                            <select name="showHour" id="showHour">
+                            </select>
+                            시
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>공연 장소 *</th>
+                        <td><input type="text" name="place" id="place"></td>
+                    </tr>
+                    <tr>
+                        <th>공연 출연진 *</th>
+                        <td><input type="text" name="showCast1" id="showCast1"></td>
+                    </tr>
+                    <tr>
+                        <th>공연 보조출연진</th>
+                        <td><input type="text" name="showCast2" id="showCast2"></td>
+                    </tr>
+                    <tr>
+                        <th>공연 감독 *</th>
+                        <td><input type="text" name="showDirector" id="showDirector"></td>
+                    </tr>
+                    <tr>
+                        <th>공연 주최측 *</th>
+                        <td><input type="text" name="showCompany" id="showCompany"></td>
+                    </tr>
+                    <tr>
+                        <th>내용 작성 *</th>
+                        <td>
+                            <input type="text" name="showContent" id="showContent">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>첨부파일</th>
+                        <td>
+                            <input type="file" name="upload" id="upload">
+                        </td>
+                    </tr>
+                </table>
+                <div id="submitModifyBtn">
+                    <input type="submit" value="수정하기">
+                    <button id="cancle">취소하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

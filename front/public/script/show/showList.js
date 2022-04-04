@@ -4,23 +4,9 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    const listBtn = document.querySelector('#List');
-    const gridBtn = document.querySelector('#grid');
-    const calBtn = document.querySelector('#claBtn');
-    const homeBtn = document.querySelector('#home');
-    const aboutBtn = document.querySelector('#about');
-    const mainContent = document.querySelector('#mainContent')
-
-    //mainContent 내용을 담은 option
-    const htmlData = mainContent.innerHTML
-    let option = {
-        data : htmlData
-    }
-    
-    const response = await axios.post('showlist',option)
-    console.log('도착')
-    
+    const response = await axios.post('showlist')
     const Nodes = response.data.result
+    
     let trElement = document.querySelector('#showList_row');
     let trInner = document.querySelector('#showList_row').innerHTML;
     const tbody = document.querySelector("table > tbody")
@@ -48,12 +34,46 @@ async function init() {
                             .replace('{show_xrated}',v.show_xrated)
     })
 
+
+    // const btnLeft = mainContent.querySelector('.miniBtnL')
+    // const btnRight = mainContent.querySelector('.miniBtnR')
+    const homeBtn = document.querySelector('#home');
+    const aboutBtn = document.querySelector('#about');
+    const listBtn = document.querySelector('#listBtn')
+    const listGrid = document.querySelector('#listGrid')
+    const listCalendar = document.querySelector('#listCalendar')
+
+    // btnLeft.addEventListener('click', btnLeftHandler)
+    // btnRight.addEventListener('click', btnRightHandler)
+    homeBtn.addEventListener('click', moveHome)
+    aboutBtn.addEventListener('click', moveAbout)
+    listBtn.addEventListener('click', listBtnHandler)
+    listGrid.addEventListener('click', gridBtnHandler)
+    listCalendar.addEventListener('click', calBtnHandler)
+
+    function listBtnHandler(){ 
+        window.location.href = '#'; 
+    }
+    function gridBtnHandler(){ 
+        window.location.href = 'http://localhost:3001/show/program/showcard'; 
+    }
+    function calBtnHandler(){ 
+        window.location.href = 'http://localhost:3001/show/program/showcalendar'; 
+    }
     function moveHome(){ 
         window.location.href = 'http://localhost:3001/'; 
     }
     function moveAbout(){
         window.location.href = 'http://localhost:3001/about';
     }
-    homeBtn.addEventListener('click', moveHome)
-    aboutBtn.addEventListener('click', moveAbout)
+    function btnLeftHandler(){
+        month-=1
+        let now = new Date(year,month)
+        createCalendar(now)
+    }
+    function btnRightHandler(){
+        month+=1 // 달이 넘어가지 않는 이슈 해결
+        let now = new Date(year,month)
+        createCalendar(now)
+    }
 }

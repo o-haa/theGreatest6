@@ -7,7 +7,11 @@ async function init() {
     //좌우이동 버튼, 연.월 버튼
     const btnLeft = document.querySelector('.btnLeft_small')
     const btnRight = document.querySelector('.btnRight_small')
-    const year_month = document.querySelector('.year-month_small')
+    const prev_arrow = document.querySelector('#prev_arrow')
+    const next_arrow = document.querySelector('#next_arrow')
+
+    const year_month_small = document.querySelector('.year-month_small')
+    const year_month = document.querySelector('.year-month')
     let dates = document.querySelector('.dates_small')
     let template = document.querySelector('.cal_temp_small')
 
@@ -55,6 +59,7 @@ async function init() {
         let nowLastDay = nowMonth.getDay() //이번달 마지막 요일
 
         calMonth = monthThreeWord(month+1)
+        year_month_small.innerHTML = `${calMonth} ${year}`
         year_month.innerHTML = `${calMonth} ${year}`
 
         //이번달이 일요일로 시작하지 않을 경우
@@ -107,7 +112,9 @@ async function init() {
     }
 
     btnLeft.addEventListener('click', btnLeftHandler)
+    prev_arrow.addEventListener('click',btnLeftHandler)
     btnRight.addEventListener('click', btnRightHandler)
+    next_arrow.addEventListener('click',btnRightHandler)
 
     function btnLeftHandler(){
         month-=1

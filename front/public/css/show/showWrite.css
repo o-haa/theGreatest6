@@ -23,6 +23,7 @@
     height: 100%;
     display: flex;
     justify-content: center;
+    /* flex-direction: column; */
 }
 
 #modifyForm{
@@ -151,7 +152,7 @@ tr:nth-child(12){
     color: red;
 }
 
-#writeForm > #submitBtn{
+#writeForm > #submitWriteBtn > input{
     margin: 20px 30px;
     text-align: center;
     height: 50px;
@@ -163,5 +164,27 @@ tr:nth-child(12){
     border-radius: 6px;
     border: none;
     background: #465D59;
+    box-sizing: border-box;
+}
+#submitModifyBtn {
+    display: flex;
+    margin: 20px 0;
+    text-align: center;
+    height: 50px;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 5%;
+    box-sizing: border-box;
+}
+#submitModifyBtn > input, button{
+    height: 100%;
+    width: 45%;
+    padding: 5px 20px 5px 20px;
+    /* box-sizing: border-box; */
+    color: #465D59;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    border: 1px solid #465D59;
     box-sizing: border-box;
 }

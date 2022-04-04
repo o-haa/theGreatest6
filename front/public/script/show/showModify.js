@@ -13,6 +13,7 @@ async function init() {
     makeOption()
 
     let [,,,,idx] = location.pathname.split('/')
+    console.log(idx)
 
     const response = await axios.post(`showmodify/${idx}`)
     console.log(response.data.result[0])
