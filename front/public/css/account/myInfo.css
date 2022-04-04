@@ -124,9 +124,22 @@
 }
 
 
+
 #content > #calContent > #userBadge > #userName{
     color: #465D58;
     font-size: 39px;
+}
+
+
+
+#calContent > #userBadge > #signOut{
+    border-radius: 5px;
+    font-size: 35px;
+    text-align: center;
+    color: #fff;
+    background: #465D59;
+    display: inline-block;
+    box-sizing: border-box;
 }
 
 
