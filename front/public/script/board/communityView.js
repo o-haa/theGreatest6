@@ -7,7 +7,6 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
-    console.log(user)
     const user_nickname = user.user_nickname;
 
     const [,,,,idx]=location.pathname.split('/');
@@ -25,6 +24,7 @@ async function init() {
     aElement.innerHTML = 'Edit';
     upElement.appendChild(aElement);
     
+    console.log(idx)
     const response = await axios.post(`/view/${idx}`,{
         withCredentials:true,
     });
@@ -114,6 +114,7 @@ async function init() {
         
         const body = {
             ccontent:hello.value,
+            userIdx: user.user_idx,
             user_nickname:user_nickname,
             cmt_date:'2022-04-04'
         }

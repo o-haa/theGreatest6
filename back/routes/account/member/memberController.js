@@ -1,5 +1,5 @@
 const pool = require('../../../db');
-const { sql }= require('../../../SQL/queries.js')
+const sql = require('../../../SQL/queries.js')
 const { createToken, createSignature } = require('../../../utils/createJWT')
 
 
