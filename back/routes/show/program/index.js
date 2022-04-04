@@ -5,28 +5,29 @@ const path = require('path')
 const os = require('os')
 const multer = require('multer')
 
+//upload라는 미들웨어를 만듬
 const upload = multer({
     storage : multer.diskStorage({
         destination : (req,file,done)=>{
-            done(null,'/Users/hancoco/workspace/theGreatest6/s_uploads')
+            done(null,'/Users/hancoco/workspace/theGreatest6/s_uploads/')
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname)
-            const filename = path.basename(file.originalname,ext) + '_' + Date.now() + ext
+            // const filename = path.basename(file.originalname,ext) + '_' + Date.now() + ext
+            const filename = path.basename(file.originalname,ext) + '_' + ext
             done(null,filename)
         }
     }),
-    // limits: {fileSize: 5 * 1024 * 1024}
+    limits: {fileSize: 5 * 1024 * 1024}
 })
-
 
 router.post('/showlist', programController.showList)
 router.post('/showcard', programController.showCard)
 router.post('/showcalendar', programController.showCalendar)
 
-router.post('/showwrite', upload.array('s_uploads'), programController.showWrite)
+router.post('/showwrite', upload.single('upload'), programController.showWrite)
 router.post('/showview/:idx', programController.showView)
-router.post('/showmodify/:idx',  upload.array('s_uploads'), programController.showModify)
+router.post('/showmodify/:idx',  upload.single('upload'), programController.showModify)
 router.post('/showdelete/:idx', programController.showDelete)
 
 

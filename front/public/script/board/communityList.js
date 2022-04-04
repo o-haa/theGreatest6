@@ -27,10 +27,6 @@ async function init() {
         console.log(e.message);
     }
 
-    // for (i = 0; i < check.length; i++) {
-    //     check[i].addEventListener('click', clickHanlder);
-    // }
-    
     test = {
         ...response
     };
@@ -75,7 +71,7 @@ async function init() {
     //     for (let j = 1; j <= arr.length; j++) {
     //         aElement.innerHTML = `[${arr}]`
     //     }
-    
+
 
 
     const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
@@ -91,7 +87,7 @@ async function init() {
         aElement.innerHTML = v.board_subject;
 
         td[0].innerHTML = v.board_idx;
-        switch (showCategory){
+        switch (showCategory) {
             case 1:
                 td[1].innerHTML = 'Classic';
                 td[1].style.color = "#A5A5A5";
@@ -117,8 +113,8 @@ async function init() {
         tbody.appendChild(clone);
     })
 
-     /* 체크박스 클릭 이벤트 */
-     for (i = 0; i < check.length; i++) {
+    /* 체크박스 클릭 이벤트 */
+    for (i = 0; i < check.length; i++) {
         check[i].addEventListener('click', clickHanlder);
     }
 }
@@ -135,31 +131,31 @@ async function clickHanlder() {
         const data = {
             prepare
         };
-        console.log(prepare,'clicked')
+        console.log(prepare, 'clicked')
         response = await axios.post('/list', data);
         // return response.data;
 
         test = {
             ...response
         };
-    
+
         const totalRows = response.data.result.length;
         console.log(totalRows);
         const viewRows = 10;
         const pagingBlock = 10;
-    
-    
+
+
         const totalPage = Math.ceil(totalRows / viewRows);
         const blockBox = Math.ceil(totalPage / pagingBlock);
         console.log(blockBox);
-    
+
         let page = 1;
         const currentBlock = Math.ceil(page / pagingBlock);
         const block = ((currentBlock - 1) * pagingBlock);
-    
+
         let endBlock = block + pagingBlock;
         if (endBlock > totalPage) endBlock = totalPage;
-    
+
         const paging = document.querySelector('#paging');
         const arr = []
         // for (let i = block + 1; i <= endBlock; i++) {
@@ -194,7 +190,7 @@ async function clickHanlder() {
                 
             }
         }
-    
+
     } catch (e) {
         console.log(e);
     }
@@ -234,7 +230,7 @@ async function pages(num) {
         
 
         td[0].innerHTML = v.board_idx;
-        switch (showCategory){
+        switch (showCategory) {
             case 1:
                 td[1].innerHTML = 'Classic';
                 td[1].style.color = "#A5A5A5";

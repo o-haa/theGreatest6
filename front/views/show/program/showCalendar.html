@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Show Calendar</title>
     <link rel="stylesheet" href="/css/show/showCalendar.css">
-    <script type="text/javascript">
+    <script src="/script/show/showCalendar.js"></script>
+    <script src="/script/show/_calBoxLayer.js"></script>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
     </script>
 </head>
 <body>
@@ -17,47 +19,119 @@
             <div id="calContent">
                  <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                  
+                <!-- 소형 캘린더 -->
                 <div id="calSmall">
+                    <div class="cal_box_small">
+                        <div class="cal_nav_small">
+                            <div class="year-month_small"></div>
+                            <div class="btnBoxSmall">
+                                <a href="javascript:;" class="btnLeft_small"><</a>
+                                <a href="javascript:;" class="btnRight_small">></a>
+                            </div>
+                        </div>
+       
+                        <div class="cal_day_small">
+                            <div class="days_small">
+                                <div class="day_small sun">SUN</div>
+                                <div class="day_small">MON</div>
+                                <div class="day_small">TUE</div>
+                                <div class="day_small">WED</div>
+                                <div class="day_small">THU</div>
+                                <div class="day_small">FRI</div>
+                                <div class="day_small sat">SAT</div>
+                            </div>
+                            <ul class="dates_small"></ul>
+                        </div>
+                    </div>
+                           
+                    <template class="cal_temp_small">
+                        <li>
+                            <button class="date_small"></button>
+                            <div class="dot_small">
+                                <span class="dotAdmin_small"></span>
+                                <span class="dotCustomer_small"></span>
+                            </div>
+                            </li>
+                    </template>    
                 </div>
-
+       
+                <!-- 위클리 카드 -->
                 <div id="monthly">
                     <div id="monthlyTitle">Monthly</div>
                     <div id="monthTitleSmall">MAR</div>
                     <div id="menuSmall">
-                        <!-- 카드뉴스 생성 -->
+                        <div class="monthlyCard">
+                            <div class="pic"></div>
+                            <div class="news">
+                                <span>뮤지컬 더 뮤즈</span>
+                                <span>예매 시작일 : 3월 12일</span>
+                            </div>
+                        </div>
+
+                        <div class="monthlyCard">
+                            <div class="pic"></div>
+                            <div class="news">
+                                <span>뮤지컬 더 뮤즈</span>
+                                <span>예매 시작일 : 3월 12일</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
+
             <div id="mainContent">
                 <!-- 타이틀 캘린더 -->
                 <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
                 
                 <div id="mainContentTitle">
                     <div id="mainContentTitleMonth">
-                        <span>MAR 2022</span>
-                        <button class="miniBtn">
+                        <span class="year-month"></span>
+                        <button class="miniBtnL">
                             <img src="/img/icon/icon_next_2x.png" style="transform: rotate(180deg);" id="prev_arrow">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtnR">
                             <img src="/img/icon/icon_next_2x.png" id="next_arrow">
                         </button>
                     </div>
                     <div id="mainContentTitleIcon">
-                        <button class="miniBtn">
-                            <img src="/img/icon/icon_list_2x.png" id="List">
+                        <button class="miniBtn" id="listBtn">
+                            <img src="/img/icon/icon_list_2x.png" id="list">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listGrid">
                             <img src="/img/icon/icon_grid_2x.png" id="grid">
                         </button>
-                        <button class="miniBtn">
+                        <button class="miniBtn" id="listCalendar">
                             <img src="/img/icon/icon_cal_2x.png" id="calBtn">
                         </button>
                     </div>
                 </div>
 
                 <div id="mainCal">
-
+                    <div class="cal_box">
+                        <div class="cal_day">
+                          <div class="days">
+                            <div class="day sun">SUN</div>
+                            <div class="day">MON</div>
+                            <div class="day">TUE</div>
+                            <div class="day">WED</div>
+                            <div class="day">THU</div>
+                            <div class="day">FRI</div>
+                            <div class="day sat">SAT</div>
+                          </div>
+                          <ul class="dates"></ul>
+                        </div>
+                    </div>
+                    
+                    <template class="cal_temp">
+                        <li>
+                            <button class="date"></button>
+                            <div class="dot_main">
+                                <div class="dotAdmin"></div>
+                                <div class="dotCustomer"></div>
+                            </div>
+                          </li>
+                    </template>    
                 </div>
             </div>
         </div>

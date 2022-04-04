@@ -49,6 +49,7 @@
     width:20%;
     text-align: center;
 }
+
 #nav > ul#mainMenu > li:last-child {
     margin-right: 50px;
     margin-left:20px;

@@ -5,52 +5,406 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show View</title>
+    <link rel="stylesheet" href="/css/show/showView.css">
     <script src="/script/show/showView.js"></script>
     <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
 </head>
 <body>
-    {% include "nav.html" %}
-    <ul id="viewList">
-        <li>
-            <span class="title">기간 : </span>
-            <span>{show_date}</span>
-        </li> 
-        <li>
-            <span class="title">시간 : </span>
-            <span>{hour 추출}</span>
-        </li> 
-        <li>
-            <span class="title">장소 : </span>
-            <span> {show_place}</span>
-        </li> 
-        <li>
-            <span class="title">입장연령 : </span>
-            <span>{show_xrated}</span>
-        </li> 
-        <li>
-            <span class="title">관람시간 : </span>
-            <span>2시간</span>
-        </li> 
-        <li>
-            <span class="title">가격 : </span>
-            <span>{show_price -> 변수 없음}</span>
-        </li> 
-        <li>
-            <span class="title">주최 : </span>
-            <span>team6</span>
-        </li> 
-        <li>
-            <span class="title">문의 : </span>
-            <span>013-345-2394</span>
-        </li> 
-    </ul>
-    <button id="leftBtn"><</button>  
-    <button id="rightBtn">></button>  
-    <button id="modifyBtn">수정</button>  
-    <button id="deleteBtn">삭제</button>  
+    <div class="wrap first">
+        <!--
+            소메뉴가 없는 대메뉴 클릭 -> 링크 이동
+            소메뉴가 있는 대메뉴 클릭 -> 링크 이동 없음
+            기존 메뉴가 이런 통일성을 갖고있는데
+            다른 메뉴들 사이에서 조금 튀는 감이 있어 home에 있는게 나을것 같아요
+        -->
+        <div id="header">
+            <!-- nav 시작 -->
+            <div id="nav">
+                <!-- Logo -->
+                <div id="logoBox">
+                    <h1>Team6</h1>
+                </div>
+                <!-- 메인 메뉴 -->
+                <ul id="mainMenu">
+                    <li id="home">
+                        <input type="radio" name="menuCheck" id="check01">
+                        <label for="check01">HOME</label>
+                    </li>
+                    <li id="show">
+                        <!-- click 이벤트를 만들어주는 체크박스 -->
+                        <input type="radio" name="menuCheck" id="check02">
+                        <label for="check02">SHOW</label>
+                        <!-- show 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/show/program/list">Show List</a></li>
+                            <li><a href="javascript">Ticket Open Date</a></li>
+                        </ul>
+                        <!-- show 서브메뉴 끝 -->
+                    </li>
+                    <li id="board">
+                        <input type="radio" name="menuCheck" id="check03">
+                        <label for="check03">BOARD</label>
+                        <!-- board 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/board/review/list">Review</a></li>
+                            <li><a href="/board/community/list">Community</a></li>
+                            <li><a href="/board/news/list">News</a></li>
+                        </ul>
+                        <!-- board 서브메뉴 끝 -->
+                    </li>
+                    <li id="my page">
+                        <input type="radio" name="menuCheck" id="check04">
+                        <label for="check04">MY PAGE</label>
+                        <!-- my page 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="/account/management/myCalendar">My Calendar</a></li>
+                            <li><a href="/account/management/myInfo">My Profile</a></li>
+                            <li><a href="/account/management/myTicket">My Ticket</a></li>
+                            <li><a href="/account/management/myPick">My Pick</a></li>
+                            <li><a href="/account/management/myPoint">My Point</a></li>
+                        </ul>
+                        <!-- my page 서브메뉴 끝 -->
+                    </li>
+                    <li id="admin">
+                        <input type="radio" name="menuCheck" id="check05">
+                        <label for="check05">ADMIN</label>
+                        <!-- admin 서브메뉴 시작 -->
+                        <ul class="subMenu">
+                            <li><a href="javascript">공연관리</a></li>
+                            <li><a href="javascript">회원관리</a></li>
+                            <li><a href="javascript">포인트관리</a></li>
+                            <li><a href="javascript">보드관리</a></li>
+                            <li><a href="javascript">통계</a></li>
+                        </ul>
+                        <!-- admin 서브메뉴 끝 -->
+                    </li>
+                    <li id="about">
+                        <input type="radio" name="menuCheck" id="check06">
+                        <label for="check06">ABOUT</label>
+                    </li>
+                    <li>
+                        <span id="mainSearch">
+                            <input type="text" name="searchInput" id="searchInput">
+                            <img src="/img/icon/icon_search_2x.png" name="searchIcon" id="searchIcon">
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-    <template>
-
-    </template>
+        <div id="content">
+            <span id="leftBtn"><</span>
+            <div class="contentBox">
+                <div class="summaryBox">
+                    <div class="summaryImg">
+                        <div class="img first"></div>
+                    </div>
+                    <div class="summaryTextBox">
+                        <div class="summaryText front HIDDEN">
+                            <p>1923년, 관동대지진으로 붕괴된 도쿄에 괴소문이 퍼진다.</p>
+                            <p>"조선인이 지진을 틈타 폭동을 일으키고 있다!"</p>
+                            <br>
+                            <p>그로인해 조선인 6천명이 학살되자 도쿄재판소 검사국장 류지에게 특명이 떨어진다.</p>
+                            <p>"조선인 대학살 사건을 덮을 사건을 찾아라!"</p>
+                            <br>
+                            <p>그 계략에 들어온 건, 조선인 아나키스트 박열과 그의 일본인 아내 가네코 후미코.</p>
+                            <p>류지가 박열의 폭탄 계획을 과장하려 들자 계략을 눈치챈 두 사람은 황태자 저격 의도를 자백하며 대역죄인을 자처한다.
+                            <br>
+                            </p>
+                        </div>
+                        <div class="summaryText back VIEW">
+                            <table id="modifyForm">
+                                <tr>
+                                    <!-- 1 -->
+                                    <th class="title">공연 분류</th>
+                                    <td><span class = "viewContent">{show_category}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 2 -->
+                                    <th class="title">관람 등급</th>
+                                    <td><span class = "viewContent">{show_xrated}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 3 -->
+                                    <th class="title">공연 제목</th>
+                                    <td><span class = "viewContent">{show_title}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 4 -->
+                                    <th>예매일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 5 -->
+                                    <th class="title">공연일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 6 -->
+                                    <th class="title">공연 장소</th>
+                                    <td><span class = "viewContent">{show_place}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 7 -->
+                                    <th class="title">공연 출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 8 -->
+                                    <th class="title">보조출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 9 -->
+                                    <th class="title">공연 감독</th>
+                                    <td><span class = "viewContent">{show_director}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 10 -->
+                                    <th class="title">공연 주최측</th>
+                                    <td><span class = "viewContent">{show_company}</span></td>
+                                </tr>
+                            </table>
+                            </p>
+                        </div>
+                        <div class="summaryText front HIDDEN">
+                            <p>1923년, 관동대지진으로 붕괴된 도쿄에 괴소문이 퍼진다.</p>
+                            <p>"조선인이 지진을 틈타 폭동을 일으키고 있다!"</p>
+                            <br>
+                            <p>그로인해 조선인 6천명이 학살되자 도쿄재판소 검사국장 류지에게 특명이 떨어진다.</p>
+                            <p>"조선인 대학살 사건을 덮을 사건을 찾아라!"</p>
+                            <br>
+                            <p>그 계략에 들어온 건, 조선인 아나키스트 박열과 그의 일본인 아내 가네코 후미코.</p>
+                            <p>류지가 박열의 폭탄 계획을 과장하려 들자 계략을 눈치챈 두 사람은 황태자 저격 의도를 자백하며 대역죄인을 자처한다.
+                            <br>
+                            </p>
+                        </div>
+                        <div class="summaryText back HIDDEN">
+                            <table id="modifyForm">
+                                <tr>
+                                    <!-- 1 -->
+                                    <th class="title">공연 분류</th>
+                                    <td><span class = "viewContent">{show_category}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 2 -->
+                                    <th class="title">관람 등급</th>
+                                    <td><span class = "viewContent">{show_xrated}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 3 -->
+                                    <th class="title">공연 제목</th>
+                                    <td><span class = "viewContent">{show_title}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 4 -->
+                                    <th>예매일*</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 5 -->
+                                    <th class="title">공연일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 6 -->
+                                    <th class="title">공연 장소</th>
+                                    <td><span class = "viewContent">{show_place}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 7 -->
+                                    <th class="title">공연 출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 8 -->
+                                    <th class="title">보조출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 9 -->
+                                    <th class="title">공연 감독</th>
+                                    <td><span class = "viewContent">{show_director}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 10 -->
+                                    <th class="title">공연 주최측</th>
+                                    <td><span class = "viewContent">{show_company}</span></td>
+                                </tr>
+                            </table>
+                            </p>
+                        </div>
+                        <div class="summaryText front HIDDEN">
+                            <p>1923년, 관동대지진으로 붕괴된 도쿄에 괴소문이 퍼진다.</p>
+                            <p>"조선인이 지진을 틈타 폭동을 일으키고 있다!"</p>
+                            <br>
+                            <p>그로인해 조선인 6천명이 학살되자 도쿄재판소 검사국장 류지에게 특명이 떨어진다.</p>
+                            <p>"조선인 대학살 사건을 덮을 사건을 찾아라!"</p>
+                            <br>
+                            <p>그 계략에 들어온 건, 조선인 아나키스트 박열과 그의 일본인 아내 가네코 후미코.</p>
+                            <p>류지가 박열의 폭탄 계획을 과장하려 들자 계략을 눈치챈 두 사람은 황태자 저격 의도를 자백하며 대역죄인을 자처한다.
+                            <br>
+                            
+                            </p>
+                        </div>
+                        <div class="summaryText back HIDDEN">
+                            <table id="modifyForm">
+                                <tr>
+                                    <!-- 1 -->
+                                    <th class="title">공연 분류</th>
+                                    <td><span class = "viewContent">{show_category}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 2 -->
+                                    <th class="title">관람 등급</th>
+                                    <td><span class = "viewContent">{show_xrated}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 3 -->
+                                    <th class="title">공연 제목</th>
+                                    <td><span class = "viewContent">{show_title}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 4 -->
+                                    <th>예매일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 5 -->
+                                    <th class="title">공연일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 6 -->
+                                    <th class="title">공연 장소</th>
+                                    <td><span class = "viewContent">{show_place}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 7 -->
+                                    <th class="title">공연 출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 8 -->
+                                    <th class="title">보조출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 9 -->
+                                    <th class="title">공연 감독</th>
+                                    <td><span class = "viewContent">{show_director}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 10 -->
+                                    <th class="title">공연 주최측</th>
+                                    <td><span class = "viewContent">{show_company}</span></td>
+                                </tr>
+                            </table>
+                            </p>
+                        </div>
+                        <div class="summaryText front HIDDEN">
+                            <p>1923년, 관동대지진으로 붕괴된 도쿄에 괴소문이 퍼진다.</p>
+                            <p>"조선인이 지진을 틈타 폭동을 일으키고 있다!"</p>
+                            <br>
+                            <p>그로인해 조선인 6천명이 학살되자 도쿄재판소 검사국장 류지에게 특명이 떨어진다.</p>
+                            <p>"조선인 대학살 사건을 덮을 사건을 찾아라!"</p>
+                            <br>
+                            <p>그 계략에 들어온 건, 조선인 아나키스트 박열과 그의 일본인 아내 가네코 후미코.</p>
+                            <p>류지가 박열의 폭탄 계획을 과장하려 들자 계략을 눈치챈 두 사람은 황태자 저격 의도를 자백하며 대역죄인을 자처한다.
+                            <br>
+                            </p>
+                        </div>
+                        <div class="summaryText back HIDDEN">
+                            <table id="modifyForm">
+                                <tr>
+                                    <!-- 1 -->
+                                    <th class="title">공연 분류</th>
+                                    <td><span class = "viewContent">{show_category}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 2 -->
+                                    <th class="title">관람 등급</th>
+                                    <td><span class = "viewContent">{show_xrated}</span></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <!-- 3 -->
+                                    <th class="title">공연 제목</th>
+                                    <td><span class = "viewContent">{show_title}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 4 -->
+                                    <th>예매일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 5 -->
+                                    <th class="title">공연일</th>
+                                    <td>
+                                        <span class = "viewContent">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <!-- 6 -->
+                                    <th class="title">공연 장소</th>
+                                    <td><span class = "viewContent">{show_place}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 7 -->
+                                    <th class="title">공연 출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 8 -->
+                                    <th class="title">보조출연진</th>
+                                    <td><span class = "viewContent"></span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 9 -->
+                                    <th class="title">공연 감독</th>
+                                    <td><span class = "viewContent">{show_director}</span></td>
+                                </tr>
+                                <tr>
+                                    <!-- 10 -->
+                                    <th class="title">공연 주최측</th>
+                                    <td><span class = "viewContent">{show_company}</span></td>
+                                </tr>
+                            </table>
+                            
+                            </p>
+                        </div>
+                        <button class="goViewList">목록가기</button>
+                        <button class="goViewLink">예매하기</button>
+                    </div>
+                </div>
+            </div>
+            <span id="rightBtn"></span>
+            <button class="modifyBtn">수정하기</button>
+            <button class="deleteBtn">삭제하기</button>
+            <div class="slideBox">
+            </div>
+        </div>
+    </div>
 </body>
 </html>

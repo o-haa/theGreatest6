@@ -66,7 +66,7 @@ exports.signUp = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log(e, '회원가입 에러 발생');
+    console.log(e.message, '회원가입 에러 발생');
   }
   res.json(response);
 }
@@ -80,7 +80,6 @@ exports.signIn = async (req, res) => {
   };
   const { userPw, userId } = req.body;
   const prepare = [userId, userPw];
-  console.log(prepare)
   const sql = `SELECT 
                   user_idx,
                   user_id,
@@ -93,10 +92,8 @@ exports.signIn = async (req, res) => {
                 WHERE user_id = ? AND user_password = ?`;
   try {
     const [[result]] = await pool.execute(sql, prepare);
-    console.log(result)
     if (userPw !== result.user_password || userId !== result.user_id) throw new Error('로그인 오류');
     delete result.user_password
-    console.log(result)
     const token = await createToken(result);
     res.cookie('AccessToken', token, {
       path: '/',
@@ -110,7 +107,7 @@ exports.signIn = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log(e);
+    console.log(e.message);
   }
   res.json(response);
 }
