@@ -14,7 +14,7 @@ exports.auth = async (req, res, next) => {
         const response = await axios.post('/auth', data);
         next();
     } catch (e) {
-        console.log(e.message);
+        console.log('/auth',e.message);
         res.render('account/signIn');
     }
 }

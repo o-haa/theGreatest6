@@ -21,7 +21,7 @@ exports.getUserInfo = async (req,res) => {
             result : result.data
         }
     } catch (e) {
-        console.log(e.message);
+        console.log('/getuserinfo',e.message);
     }
     res.json(response)
 }

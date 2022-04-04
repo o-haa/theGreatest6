@@ -19,7 +19,7 @@ exports.idCheck = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log(e.message);
+    console.log('/idcheck',e.message);
   }
   res.json(response);
 }
@@ -42,7 +42,7 @@ exports.nickNameCheck = async (req, res) => {
       };
     }
   } catch (e) {
-    console.log(e.message);
+    console.log('/nicknamecheck',e.message);
   }
   res.json(response);
 }
@@ -66,7 +66,7 @@ exports.signUp = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log(e.message, '회원가입 에러 발생');
+    console.log('/signup',e.message);
   }
   res.json(response);
 }
@@ -107,7 +107,7 @@ exports.signIn = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log(e.message);
+    console.log('/signin',e.message);
   }
   res.json(response);
 }
@@ -130,7 +130,7 @@ exports.auth = async (req, res) => {
     }
   }
   catch (e) {
-    console.log(e);
+    console.log('/auth',e.message);
   }
   res.json(response);
 }

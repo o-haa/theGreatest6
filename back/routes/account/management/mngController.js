@@ -24,7 +24,7 @@ exports.myinfo = async (req, res) => {
             errno: 0
         };
     } catch (e){
-        console.log('myinfo 에러', e.message);
+        console.log('/myinfo', e.message);
     }
     res.json(response);
 }
@@ -46,7 +46,7 @@ exports.optionalInfo = async(req,res) => {
         };
     }
     catch{
-        console.log('/optionalInfo 에러',e.message);
+        console.log('/optionalInfo',e.message);
     }
     res.json(response);
 }
