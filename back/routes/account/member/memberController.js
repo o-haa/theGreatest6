@@ -66,7 +66,7 @@ exports.signUp = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log(e.message, '회원가입 에러 발생');
+    console.log(e, '회원가입 에러 발생');
   }
   res.json(response);
 }

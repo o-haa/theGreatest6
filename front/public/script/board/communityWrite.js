@@ -58,7 +58,6 @@ async function init() {
     async function writeSubmit (e){
         e.preventDefault();
         const {communitySubject,communityContent,select} = e.target;
-        console.log('1')
         const formData = new FormData()
             formData.append('upload',file.files[0])
             formData.append('select',select.value)

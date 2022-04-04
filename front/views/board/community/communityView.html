@@ -55,6 +55,35 @@
             <!-- <template id="tImg">
                 <div id="imgView"></div>
             </template> -->
+            <!-- 댓글 구현 -->
+            <div id="commentBox">
+                <ul>
+        
+                </ul>
+            </div>
+            <template id="commentForm">
+                <li>
+                    <form method="post" action="">
+                        <span><input type="text" name="comment" id="hello" placeholder="comment write here!"></span>
+                        <input type="submit" value="click!" class="commentSubmit">
+                    </form>
+                </li>
+            </template>
+            <template id="commentList">
+                <li>
+                    <ul class = "commentRow">
+                        <li class="commentContent">
+                            <input type="hidden" name="idx" value="">
+                            <span class="commentDeleteBtn">X</span>
+                        </li>
+                        <li>
+                            <span class="commentID"></span>
+                            <span class="commentDate"></span>
+                            <!-- <span class="commentLike"></span> -->
+                        </li>
+                    </ul>
+                </li>
+            </template>
     </div>
 </body>
 </html>

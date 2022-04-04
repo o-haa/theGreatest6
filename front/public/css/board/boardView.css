@@ -108,6 +108,7 @@ th:nth-child(4){
 #button {
     width:80%;
     margin: 0 auto;
+    margin-top:3%;
     display: flex;
     justify-content: space-between;
 }
@@ -128,6 +129,49 @@ th:nth-child(4){
     font-size: 16px;
     border-bottom: 1px solid #465d59;
 }
+
+#commentBox {
+    width:80%;
+    margin: 0 auto;
+    margin-top:4%;
+}
+
+#hello {
+    width:40%;
+    font-size:16px;
+    padding:0.3% 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #465d59;
+}
+
+.commentSubmit {
+    color: #465d59 !important;
+    padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: end;
+}
+
+.commentRow{
+    margin-top:2%;
+    border: 1px solid #465d59;
+    padding: 0.5%;
+    box-sizing: border-box;
+}
+
+.commentRow li:nth-child(2){
+    margin-top:0.5%;
+    font-size: 12px;
+    
+}
+
+.commentID{
+    color:#465d59;
+}
+
+
+
 
 
 

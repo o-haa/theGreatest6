@@ -7,6 +7,7 @@ let response = {
 
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
+const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 exports.communityList = async (req, res) => {
@@ -37,7 +38,7 @@ exports.communityList = async (req, res) => {
         } 
         // console.log(response.result)
     } catch (e) {
-        console.log(e.message);
+        console.log(e);
     }
     res.json(response);
 }
@@ -46,16 +47,17 @@ exports.communityList = async (req, res) => {
 
 exports.communityWrite = async (req,res) =>{                                
     const {select}=req.body;
-    const sql = "SELECT * FROM s_category WHERE show_category = ?";
+    const sql = "SELECT show_category_idx FROM s_category WHERE show_category = ?";
     const prepare = [select];
 
     const result = await pool.execute(sql,prepare);
     const [idx] = result[0];
     const {subject,content}=req.body;
-    const categoryIdx = idx.show_category_id;
+    
+    const categoryIdx = idx.show_category_idx;
     const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)';
     
-    const prepare2 = ['117',subject,content,categoryIdx];
+    const prepare2 = ['134',subject,content,categoryIdx];
 
     try{
         const [result] = await pool.execute(sql2,prepare2);
@@ -110,7 +112,6 @@ exports.communityView = async (req,res) => {
 
     const hitSql = `UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ${idx}`
     const hitResult = await pool.execute(hitSql);
-    console.log('view',hitResult)
  
     const sql = `SELECT
                 a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
@@ -120,8 +121,8 @@ exports.communityView = async (req,res) => {
                 ON a.board_idx = b.board_idx 
                 WHERE a.board_idx = ?`;
     
-    const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
-    const imgPrepare = [idx]
+    // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
+    // const imgPrepare = [idx]
 
     // const imgIdx = await pool.execute(imgSql,imgPrepare)
     // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
@@ -133,13 +134,12 @@ exports.communityView = async (req,res) => {
             result,
             errno:0
         };
-
-        
         res.json(response);
-        console.log(response)
-    } catch (e) {
+        // console.log(response)
+    } catch(e) {
         console.log(e.message);
     };
+
 
 }
 
@@ -219,4 +219,20 @@ exports.communityUpdate = async (req,res)=>{
     }catch(e){
         console.log(e.message);
     }
+}
+
+exports.communityComment = async (req,res)=>{
+    const{idx}=req.params;
+    const boardIdxPre = idx;
+    // const cmtUserName = `SELECT user_nickname FROM user WHERE user_idx = ?`
+    // const cmtUserNamePre = []
+    const {ccontent}=req.body;
+    console.log(req.body)
+    const cmtSql = `INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)`;
+    const cmtSqlPre = ['134', boardIdxPre, ccontent]
+    const cmtInResult = await pool.execute(cmtSql,cmtSqlPre);
+    console.log(cmtInResult)
+
+    // const cListSql = `SELECT *,${cmtDate} FROM comment WHERE board_idx = ${idx}`
+    // const clistResult = await pool.execute(cListSql)
 }

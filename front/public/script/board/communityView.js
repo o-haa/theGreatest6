@@ -1,6 +1,3 @@
-// const { default: axios } = require("axios");
-
-
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -12,21 +9,6 @@ async function init() {
     const { user } = response1.data.result;
     const user_nickname = user.user_nickname;
 
-    
-
-    // const check=JSON.parse(localStorage.getItem("file"));
-    // // console.log(check)
-    // const src = document.querySelector('#src');
-    // src.addEventListener('load',getDataUrl)
-    // function getDataUrl(img){
-    //     const canvas = document.createElement('canvas');
-    //     const ctx = canvas.getContext("2d");
-    //     canvas.width = src.width;
-    //     canvas.height = src.height;
-    //     ctx.drawImage(src,0,0);
-
-    //     check.src = canvas.toDataURL('image/*');
-    // }
     const [,,,,idx]=location.pathname.split('/');
     const boardIdx = document.querySelector('#idx');
     const category = document.querySelector('#category')
@@ -35,7 +17,6 @@ async function init() {
     const date = document.querySelector('#date');
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit');
-    // const file = document.querySelector('#img');
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
@@ -47,14 +28,6 @@ async function init() {
         withCredentials:true,
     });
 
-    // file 가지고 오기
-    // const imgName = response.data.result[0].file_storedname
-    // const imgN = response.data.result[0].file
-    // const fileImg = document.createElement('img');
-    // fileImg.src = `/uploads/c_uploads/${imgName}`
-    // console.log(fileImg.src)
-    
-    
     const showCategory = response.data.result[0].show_category_idx
    
     if(response.data.errno === 0){
@@ -77,7 +50,7 @@ async function init() {
                 category.style.backgroundColor = "#FAE100";
             break;   
         }
-        // category.innerHTML = showCategory
+
         boardIdx.innerHTML = idx;
         subject.innerHTML = board_subject;
         nickname.innerHTML = user_nickname
@@ -85,9 +58,6 @@ async function init() {
         hit.innerHTML = board_hit;
         content.innerHTML = board_content;
         
-        
-        
-        // console.log('확인',fileDataUrl)
         if(board_file_idx > 0){
             const fileDataUrl = localStorage.getItem("file")
             const imgBox = document.querySelector("#img")
@@ -115,6 +85,82 @@ async function init() {
         
     });
 
+   
+
+    const commentBox = document.querySelector('#commentBox>ul')
+    const commentForm = document.querySelector('#commentForm')
+    const input = document.querySelector('#hello')
+    const commentList = document.querySelector('#commentList')
+
+    let state={
+        replay:[]
+    }
+
+    commentBox.appendChild(commentForm)
+    function createForm () {
+        const clone = document.importNode(commentForm.content,true)
+        const form = clone.querySelector('form')
+        form.addEventListener('submit',submitHandler)
+        commentBox.appendChild(clone)
+    }
+
+
+    async function submitHandler(e){
+        e.preventDefault()
+        const {hello} = e.target
+        // const cmt_idx = length !=0 ? parseInt(state.replay[length-1].cmt_idx+1):1
+        // console.log(result)
+        
+        const body = {
+            ccontent:hello.value,
+            user_nickname:user_nickname,
+            cmt_date:'2022-04-04'
+        }
+        
+        replay.push(body)
+
+        const data = {
+            replay
+
+        }
+        
+        hello.value=''
+        // commentBox.innerHTML=''
+        CommentList()
+        
+        // console.log(state)
+       try{
+        state = await axios.post(`/comment/${idx}`,data)
+       }catch(e){
+           console.log(e)
+       }
+        
+    }
+
+    async function CommentList(){
+        commentBox.innerHTML=''
+        createForm()
+        console.log(state.replay)
+        state.replay.body.forEach(v=>{
+            const clone = document.importNode(commentList.content,true)
+            const row = clone.querySelector('.commentContent')
+            const roww = clone.querySelectorAll('.commentContent+li>span')
+            console.log('v',v)
+            
+            row.innerHTML=v.ccontent
+            roww[0].innerHTML=v.user_nickname
+            roww[1].innerHTML=v.cmt_date
+
+            commentBox.appendChild(clone)
+            
+        })
+        
+    }
+
+    CommentList()
+    
+
+
 
 };
 
@@ -129,3 +175,24 @@ async function init() {
     // const auth = await axios.post('/auth')
 
     // console.log(auth.data)
+
+    // const check=JSON.parse(localStorage.getItem("file"));
+    // // console.log(check)
+    // const src = document.querySelector('#src');
+    // src.addEventListener('load',getDataUrl)
+    // function getDataUrl(img){
+    //     const canvas = document.createElement('canvas');
+    //     const ctx = canvas.getContext("2d");
+    //     canvas.width = src.width;
+    //     canvas.height = src.height;
+    //     ctx.drawImage(src,0,0);
+
+    //     check.src = canvas.toDataURL('image/*');
+    // }
+
+     // file 가지고 오기
+    // const imgName = response.data.result[0].file_storedname
+    // const imgN = response.data.result[0].file
+    // const fileImg = document.createElement('img');
+    // fileImg.src = `/uploads/c_uploads/${imgName}`
+    // console.log(fileImg.src)
