@@ -6,42 +6,81 @@ body{
     zoom:100%;
 }
 
-h3{
-    text-align: center;
-    margin-top:5%;
+
+
+#label {
+    width: 80%;
+    margin:4% auto 0 auto;
+    text-align: end;
+}
+
+#label span {
+    font-weight: 600;
+    padding: 7px 14px;
+    box-sizing: border-box;
+    background: #f4d3aa;
+    font-size:18px;
+    
 }
 
 table{
     width:80%;
-    margin:1% auto;
-    font-size:18px;
+    margin:0.5% auto;
+    /* font-size:18px; */
+    border-spacing: 0 5px;
 }
 
 #viewHead td{
-    padding:7px 12px;
+    padding:8px 14px;
     border-bottom:1px solid #eee;
     text-align: center;
+    box-sizing: border-box;
 }
 
 th{
     background-color: #a8bebf;
     border-bottom: 2px solid #465d59;
     height: 25px;
-    padding:7px 12px;
-    border-bottom:1px solid #eee;
+    padding:8px 14px;
+    box-sizing: border-box;
     text-align: center;
 }
 
+th:nth-child(1){
+    width:5%;
+}
 th:nth-child(2){
+    width:50%;
+}
+th:nth-child(3){
+    width:15%;
+}
+th:nth-child(4){
     width:25%;
 }
 
+
+#eye {
+    width:18px;
+    height: 18px;
+}
+
+#eye img{
+    width: 20px;
+    padding:1px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+#categoryBox{
+    width:80%;
+    margin:3% auto;
+}
 #category {
-    border-radius: 10px;
     width:fit-content;
+    border-radius: 10px;
     font-size:17px;
-    margin-left: 112.104px;
-    background: #f4d3aa;
     padding:7px 14px;
     box-sizing: border-box;
     font-size:18px;
@@ -49,21 +88,27 @@ th:nth-child(2){
 
 #viewContent{
     width:80%;
-    margin: 0 auto;
+    margin:3% auto 0 auto;
     height:200px;
     border-bottom:1px solid #eee;
     font-size:18px;
 }
 
 #img{
-    width:80%;
+    width:50px;
     margin: 0 auto;
     height:50px;
+}
+
+#img img {
+    width:50px;
+    height: 50px;;
 }
 
 #button {
     width:80%;
     margin: 0 auto;
+    margin-top:3%;
     display: flex;
     justify-content: space-between;
 }
@@ -73,10 +118,60 @@ th:nth-child(2){
     background-color: #465d59;
 }
 
-a, .delete{
+#button button a{
     color: #465d59 !important;
     font-size: 16px;
+    border-bottom: 1px solid #465d59;
 }
+
+.delete{
+    color: #465d59 !important;
+    font-size: 16px;
+    border-bottom: 1px solid #465d59;
+}
+
+#commentBox {
+    width:80%;
+    margin: 0 auto;
+    margin-top:4%;
+}
+
+#hello {
+    width:40%;
+    font-size:16px;
+    padding:0.3% 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #465d59;
+}
+
+.commentSubmit {
+    color: #465d59 !important;
+    padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: end;
+}
+
+.commentRow{
+    margin-top:2%;
+    border: 1px solid #465d59;
+    padding: 0.5%;
+    box-sizing: border-box;
+}
+
+.commentRow li:nth-child(2){
+    margin-top:0.5%;
+    font-size: 12px;
+    
+}
+
+.commentID{
+    color:#465d59;
+}
+
+
+
 
 
 

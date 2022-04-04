@@ -1,49 +1,54 @@
 const pool = require('../../../db');
 
 exports.myinfo = async (req, res) => {
-    const { userIdx } = req.body
-    const prepare = [ userIdx ]
-    const sql = 'SELECT * FROM u_personal WHERE user_idx = ?'
+    const { userIdx } = req.body;
+    const prepare = [ userIdx ];
+    const sql = `SELECT 
+                    u_name, 
+                    DATE_FORMAT(u_dob, '%Y-%m-%d') AS u_dob,
+                    u_gender,
+                    u_mobile,
+                    u_address_idx
+                FROM u_personal 
+                WHERE user_idx = ?`;
 
     let response = {
         result: {},
         errno: 1,
-    }
+    };
     try{
-        const [result] = await pool.execute(sql,prepare)
-        console.log(result)
-        if( result == [] ) throw new Error ('optional value 없음')
+        const [ result ] = await pool.execute(sql,prepare);
+        if( result == 0 ) throw new Error ('optional value 없음');
         response = {
             result,
             errno: 0
-        }
+        };
     } catch (e){
-        console.log('myinfo 에러', e.message)
+        console.log('myinfo 에러', e.message);
     }
-
     res.json(response);
 }
 
 exports.optionalInfo = async(req,res) => {
-    console.log(req.body)
     let response = {
         result: {},
         errno: 1
     };
-    // const sql ='INSERT INTO u_personal () VALUES ()'
-    const prepare = []
+
+    const { userIdx, userName, userDob, userGender, userMobile, userAddress } = req.body;
+    const sql ='INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile) VALUES (?,?,?,?,?)';
+    const prepare = [ userIdx, userName, userDob, userGender, userMobile ];
     try{
-        const result = pool.execute(sql,prepare)
+        const result = pool.execute(sql,prepare);
         response = {
             result,
             errno: 0
-        }
+        };
     }
     catch{
-
+        console.log('/optionalInfo 에러',e.message);
     }
-
-    res.json(response)
+    res.json(response);
 }
 
 
