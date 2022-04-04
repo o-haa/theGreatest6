@@ -72,7 +72,7 @@ exports.showWrite = async (req,res)=>{
         }
         res.json(response)
     }catch(e){
-
+        console.log('back / showwrite',e.message)
     }
 }
 
@@ -91,7 +91,7 @@ exports.showList = async (req,res)=>{
         res.json(response)
     }
     catch(e){
-        console.log("showList 에러발생")
+        console.log("back / showlist 에러발생")
     }
     
 }
@@ -128,7 +128,7 @@ exports.showView = async (req,res)=>{
         res.json(response)
     }
     catch(e){
-        console.log("showView 에러발생")
+        console.log("back / showview 에러발생")
     }
 }
 
@@ -159,7 +159,7 @@ exports.showDelete = async (req,res)=>{
         const [result] = await pool.execute(sql)
     }
     catch(e){
-        console.log("showModify 에러발생")
+        console.log("back / showmodify 에러발생", e.message)
     }
 }
 
@@ -175,6 +175,6 @@ exports.showCalendar = (req,res)=>{
         res.json(response)
     }
     catch(e){
-        console.log("showView 에러발생")
+        console.log("back / showview 에러발생",e.message)
     }
 }

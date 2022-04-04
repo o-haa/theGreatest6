@@ -208,11 +208,11 @@ async function init() {
                 location.href = `http://localhost:3001/show/program/showlist`
             }
             catch(e){
-
+                console.log('front / showview / goListBtnHandler 에러발생',e.message)
             }
         }
     }
     catch(e){
-        console.log('에러발생')    
+        console.log('front / showview에서 에러 발생',e.message)    
     }
 }

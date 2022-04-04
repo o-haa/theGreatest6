@@ -48,7 +48,7 @@ async function init() {
             console.log('마지막 : ',response)
         }
         catch(e){
-            console.log(e) //네트워크 에러 생겨서 여기 출력
+            console.log('front / showwrite 에러발생',e.message) //네트워크 에러 생겨서 여기 출력
         }
     }
 
