@@ -26,7 +26,7 @@ router.post(`/delete/:idx`,communityController.communityDelete);
 router.post(`/update/:idx`,upload.single('upload'),communityController.communityUpdate);
 router.post(`/comment/:idx`,communityController.communityComment)
 router.post(`/commentList/:idx`,communityController.communityCoList)
-                                           
+router.post(`/commentListDlt/:idx`,communityController.communityCoDlt)                                 
 
 
 module.exports = router

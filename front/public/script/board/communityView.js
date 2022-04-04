@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -7,7 +8,6 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
-    console.log(user)
     const user_nickname = user.user_nickname;
 
     const [,,,,idx]=location.pathname.split('/');
@@ -99,12 +99,11 @@ async function init() {
     function createForm () {
         const clone = document.importNode(commentForm.content,true)
         const form = clone.querySelector('form')
-        form.addEventListener('submit',submitHandler)
+        
         commentBox.appendChild(clone)
+        form.addEventListener('submit',submitHandler)
     }
 
-
-    let state
     const replay = []
     async function submitHandler(e){
         e.preventDefault()
@@ -113,61 +112,69 @@ async function init() {
         // console.log(result)
         
         const body = {
+            user:user,
             ccontent:hello.value,
             user_nickname:user_nickname,
             cmt_date:'2022-04-04'
         }
         
         replay.push(body)
-
-        const data = {
-            replay
-        }
+       
         
-        hello.value=''
-      
        try{
-        state = await axios.post(`/comment/${idx}`,body)
-        console.log(state.data)
+        await axios.post(`/comment/${idx}`,body)
+        location.reload()
        }catch(e){
            console.log('/communityviewcmt',e.message)
        }
     
-       
+       hello.value=''
        CommentList()
     }
-
     const body = {
         ccontent:input,
         user_nickname:user_nickname,
         cmt_date:'2022-04-04'
     }
     replay.push(body)
-
     async function CommentList(){
-        commentBox.innerHTML=''
+        const responseList = await axios.post(`/commentList/${idx}`)
+        const cmtList = responseList.data.cmtListResult
+        // commentBox.innerHTML=''
         createForm()
-        console.log(replay)
-        replay.forEach(v=>{
+        
+        cmtList.forEach(v=>{
             const clone = document.importNode(commentList.content,true)
             const row = clone.querySelector('.commentContent')
             const roww = clone.querySelectorAll('.commentContent+li>span')
-            console.log('v',v)
             
-            row.innerHTML=v.ccontent
-            roww[0].innerHTML=v.user_nickname
+            spanElement = document.createElement('span')
+            spanElement.innerHTML = v.cmt_content
+            const deleteBtn = row.querySelector('.commentDeleteBtn')
+            deleteBtn.addEventListener('click',deleteHandler)
+            row.prepend(spanElement)
+            roww[0].innerHTML=user_nickname
             roww[1].innerHTML=v.cmt_date
 
             commentBox.appendChild(clone)
-            
         })
         
         try{
-            const response = await axios.post(`/commentList/${idx}`)
-            console.log(state.data)
+            await axios.post(`/commentList/${idx}`)            
         } catch(e){
-            console.log('communityviewcmt',e.message)
+            console.log('/communityviewcmtlist',e.message)
         }
+    }
+
+    async function deleteHandler(){
+        const responseList = await axios.post(`/commentList/${idx}`)
+        const cmtList = responseList.data.cmtListResult
+        
+        try{
+            await axios.post(`/commentListDlt/${idx}`,cmtList)    
+        } catch (e){
+            console.log('/cmtdelete',e.message)
+        }       
     }
 
     CommentList()
