@@ -90,11 +90,8 @@ async function init() {
     const commentBox = document.querySelector('#commentBox>ul')
     const commentForm = document.querySelector('#commentForm')
     const input = document.querySelector('#hello')
+    
     const commentList = document.querySelector('#commentList')
-
-    let state={
-        replay:[]
-    }
 
     commentBox.appendChild(commentForm)
     function createForm () {
@@ -105,6 +102,8 @@ async function init() {
     }
 
 
+    let state
+    const replay = []
     async function submitHandler(e){
         e.preventDefault()
         const {hello} = e.target
@@ -117,31 +116,37 @@ async function init() {
             cmt_date:'2022-04-04'
         }
         
-        replay.push(body)
+        // replay.push(body)
 
-        const data = {
-            replay
-
-        }
+        // const data = {
+        //     replay
+        // }
         
         hello.value=''
-        // commentBox.innerHTML=''
-        CommentList()
-        
-        // console.log(state)
+      
        try{
-        state = await axios.post(`/comment/${idx}`,data)
+        state = await axios.post(`/comment/${idx}`,body)
+        console.log(state.data)
        }catch(e){
            console.log(e)
        }
-        
+    
+       
+       CommentList()
     }
+
+    const body = {
+        ccontent:input,
+        user_nickname:user_nickname,
+        cmt_date:'2022-04-04'
+    }
+    replay.push(body)
 
     async function CommentList(){
         commentBox.innerHTML=''
         createForm()
-        console.log(state.replay)
-        state.replay.body.forEach(v=>{
+        console.log(replay)
+        replay.forEach(v=>{
             const clone = document.importNode(commentList.content,true)
             const row = clone.querySelector('.commentContent')
             const roww = clone.querySelectorAll('.commentContent+li>span')
@@ -155,6 +160,12 @@ async function init() {
             
         })
         
+        try{
+            const response = await axios.post(`/commentList/${idx}`)
+            console.log(state.data)
+        } catch(e){
+            console.log(e.message)
+        }
     }
 
     CommentList()

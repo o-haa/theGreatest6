@@ -185,13 +185,8 @@ async function clickHanlder() {
                 const liElement = document.createElement('li');
                 const aElement = document.createElement('a');
                 
-                // pages(i)
                 aElement.setAttribute(`onClick`, `pages(${i})`);
-                // arr.push(`[${i}]`)
-                // // console.log(arr)
-                // for (let j = 1; j <= arr.length; j++) {
-                //     aElement.innerHTML = arr
-                // }
+            
                 aElement.innerHTML = `[${i}]`;
     
                 liElement.appendChild(aElement);
