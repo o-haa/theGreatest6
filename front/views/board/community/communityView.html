@@ -59,39 +59,43 @@
             <details>
                 <summary>Comments<span></span></summary>
                 <div id="commentBox">
-                    <ul>
-            
-                    </ul>
+
                 </div>
             </details>
             
             <template id="commentForm">
-                <li>
-                    <form method="post" action="">
-                        <span><input type="text" name="comment" id="hello" placeholder="comment write here!"></span>
-                        <input type="submit" value="click!" class="commentSubmit">
-                    </form>
-                </li>
+                <ul id = 'writeRow'>
+                    <li>
+                        <form method="post" action="">
+                            <span><input type="text" name="comment" id="hello" placeholder="comment write here!"></span>
+                            <input type="submit" value="click!" class="commentSubmit">
+                        </form>
+                    </li>
+                </ul>
             </template>
+
             <template id="commentList">
-                <li>
-                    <ul class = "commentRow">
-                        <li class="commentContent">
-                            <input type="hidden" id="cidx" name="idx" value="">
-                            <span class="commentDeleteBtn">X</span>
-                        </li>
-                        <li>
-                            <span class="commentID"></span>
-                            <span class="commentDate"></span>
-                            <!-- <span class="commentLike"></span> -->
-                        </li>
-                    </ul>
-                </li>
+                <ul class="commentRow">
+                    <li class="commentContent">
+                        <input type="hidden" id="cidx" name="idx" value="">
+                        <input type="hidden" id="uidx" name="idx" value="">
+                        <span class="commentDeleteBtn">X</span>
+                    </li>
+                    <li class ="writerInfo">
+                        <span class="commentID"></span>
+                        <span class="commentDate"></span>
+                        <!-- <span class="commentLike"></span> -->
+                    </li>
+                </ul>
             </template>
+
             <template id="commentInput">
-                <span>
-                    <input type="text" class="cmtUp" value="">
-                </span>
+                <form method="post" action="/" id="commentUpdateFrm">
+                    <span>
+                        <input type="text" name="comment" id="helloAgain" placeholder="comment write here!">
+                    </span>
+                    <input type = "submit" value ="update!" class="commentSubmit">
+                </form>
             </template>
     </div>
 </body>

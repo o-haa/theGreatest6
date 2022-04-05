@@ -258,13 +258,13 @@ exports.communityCoList = async (req,res)=>{
     const prepare = [idx];
 
     try{
-        const [cmtListResult] = await pool.execute(sql.commentList,prepare)
+        const [result] = await pool.execute(sql.commentList,prepare)
         response = {
-            ...response,
-            cmtListResult,
+            result,
+            length: result.length,
             errno: 0
         } 
-        console.log('start',cmtListResult)
+        // console.log('start',cmtListResult)
 
     }catch(e){
         console.log('communitycolist',e.message)
@@ -290,22 +290,21 @@ exports.communityCoDlt = async (req,res)=>{
 }
 
 exports.communityCoUp = async (req,res)=>{
-    const{idx}=req.params;
-    const ccontent = req.body[0].cmt_content
-    const prepare = [ccontent,idx]
-    
+    const { cmtidx } = req.params;
+    const { updateComment } = req.body
+    const prepare = [updateComment, cmtidx]
+    console.log(prepare)
     try{
         const [result] = await pool.execute(sql.commentUp,prepare);
         response = {
             ...response,
             result: {
-                affectedRows: result.affectedRows,
-                insertId: result.insertId,
+                affectedRows: result.affectedRows
             },
             errno: 0
         }
     }catch(e){
-        console.log('/commentup',e.message)
+        console.log('/commentup',e)
     }
     
 }
