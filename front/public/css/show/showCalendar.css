@@ -191,6 +191,12 @@
 .dotAdmin{
     height: 18px;
     width: 100%;
+    /* background: #E79177; 메인 주황색 70% 투명도 준 색 */
+    margin-bottom: 7px;
+}
+.dotAdmin.on{
+    height: 18px;
+    width: 100%;
     background: #E79177; /*메인 주황색 70% 투명도 준 색*/
     margin-bottom: 7px;
 }

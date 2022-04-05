@@ -52,13 +52,12 @@ async function init() {
         let prevMonth = new Date(year, month, 0) //저번달 마지막날 정보 객체
         let prevLastDate = prevMonth.getDate()  //저번달 마지막 날
         let prevLastDay = prevMonth.getDay()  //저번달 마지막 요일
-        let nowFirstDay = prevLastDay + 1 //이번달 시작하는 요일
-
+        let nowFirstDay = (prevLastDay + 1 == 7 ? prevLastDay = 0 : prevLastDay + 1) //이번달 시작하는 요일
         let nowMonth = new Date(year, month+1, 0) //이번달 마지막날 정보 객체
         let nowLastDate = nowMonth.getDate() //이번달 마지막 말
         let nowLastDay = nowMonth.getDay() //이번달 마지막 요일
-
         calMonth = monthThreeWord(month+1)
+
         year_month_small.innerHTML = `${calMonth} ${year}`
         year_month.innerHTML = `${calMonth} ${year}`
 
@@ -67,8 +66,8 @@ async function init() {
         for(let i=(prevLastDate+1) - nowFirstDay; i<=prevLastDate; i++){
             let clone = document.importNode(template.content,true)
             let btnDate = clone.querySelector('.date_small')
-            day = (new Date(year,month,i)).getDay()
-            btnDate.setAttribute("value",`${year}/${month}/${i-1}/${day}_0/0`)
+            day = (new Date(year,month-1,i)).getDay()
+            btnDate.setAttribute("value",`${year}/${month}/${i}/${day}_0/0`)
             btnDate.setAttribute("class","date prev")
             btnDate.innerHTML+=i
             dates.appendChild(clone)
@@ -78,7 +77,7 @@ async function init() {
             let btnDate = clone.querySelector('.date_small')
             btnDate.innerHTML+='<div>'+'</div>'
             day = (new Date(year,month,i)).getDay()
-            btnDate.setAttribute("value",`${year}/${month-1}/${i-1}/${day}_0/0`)
+            btnDate.setAttribute("value",`${year}/${month+1}/${i}/${day}_0/0`)
             btnDate.setAttribute("class","date")
             btnDate.innerHTML+=i
             dates.appendChild(clone)
@@ -88,7 +87,7 @@ async function init() {
             let btnDate = clone.querySelector('.date_small')
             btnDate.innerHTML+='<div>'+'</div>'
             day = (new Date(year,month,i)).getDay()
-            btnDate.setAttribute("value",`${year}/${month+1}/${i-1}/${day}_0/0`)
+            btnDate.setAttribute("value",`${year}/${month+2}/${i}/${day}_0/0`)
             btnDate.setAttribute("class","date next")
             btnDate.innerHTML+=i
             dates.appendChild(clone)
