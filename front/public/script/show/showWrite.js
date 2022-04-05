@@ -11,8 +11,9 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
     axios.defaults.withCredentials= true;
+    
     makeOption()
-
+    
     const writeForm = document.querySelector('#writeForm');
     //input의 name값 upload가 인자로 들어감
     const file = document.querySelector('#upload');
@@ -38,6 +39,9 @@ async function init() {
             formData.append('showMonth' , document.querySelector('#showMonth').value)
             formData.append('showDate' , document.querySelector('#showDate').value)
             formData.append('showHour' , document.querySelector('#showHour').value)
+            formData.append('ticketMonth' , document.querySelector('#ticketMonth').value)
+            formData.append('ticketDate' , document.querySelector('#ticketDate').value)
+            formData.append('ticketHour' , document.querySelector('#ticketHour').value)
             //헤더 바뀜!!!
 
         try{
@@ -56,7 +60,11 @@ async function init() {
         const showMonth = document.querySelector('#showMonth')
         const showDate = document.querySelector('#showDate')
         const showHour = document.querySelector('#showHour')
-        const timestamp = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
+        const ticketMonth = document.querySelector('#ticketMonth')
+        const ticketDate = document.querySelector('#ticketDate')
+        const ticketHour = document.querySelector('#ticketHour')
+        let timestampShow = `DATE_FORMAT (show_date, %Y-%m-%d %h:%i) AS show_date`
+        let timestampTicket = `DATE_FORMAT (ticket_date, %Y-%m-%d %h:%i) AS ticket_date`
 
         let monthlist=[] 
         let datelist=[]
@@ -66,6 +74,27 @@ async function init() {
         for(let i=1; i<=31; i++){ datelist.push(`${i}`) ;}
         timelist = ['10','13','18']
 
+        monthlist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            if(v<10){ newOption.value = `${v}` }
+            else { newOption.value = `${v}` }
+            ticketMonth.options.add(newOption)
+        })
+
+        datelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`    
+            ticketDate.options.add(newOption)
+        })
+
+        timelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`    
+            ticketHour.options.add(newOption)
+        })
         monthlist.forEach(v=>{
             const newOption = document.createElement("option")
             newOption.text = `${v}`

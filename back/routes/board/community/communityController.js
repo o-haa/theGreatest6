@@ -1,26 +1,28 @@
 const pool = require('../../../db');
-let sql = require('../../../SQL/queries.js')
-
-const param = 'board_idx,show_category_idx, board_subject, board_content, board_hit'
-const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
-
-
 
 let response = {
 result: [],
 errno: 1
 };
 
+
+const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
+const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
+const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
+
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
+    let sql ='';
     switch (prepare.length) {
-        case 1:{
+        case 1:
             sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
-        }
+
         case 2:
             sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
+
         case 3:
             sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
             break;
@@ -36,8 +38,9 @@ exports.communityList = async (req, res) => {
             result,
             errno: 0
         } 
+        // console.log(response.result)
     } catch (e) {
-        console.log('/communitylist',e);
+        console.log('/communitylist',e.message);
     }
     res.json(response);
 }
@@ -46,17 +49,20 @@ exports.communityList = async (req, res) => {
 
 exports.communityWrite = async (req,res) =>{                                
     const {select}=req.body;
+    const sql = "SELECT show_category_idx FROM s_category WHERE show_category = ?";
     const prepare = [select];
 
-    const result = await pool.execute(sql.getCategoryIdx,prepare);
+    const result = await pool.execute(sql,prepare);
     const [idx] = result[0];
     const {subject,content}=req.body;
     
     const categoryIdx = idx.show_category_idx;
+    const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)';
+    
     const prepare2 = ['134',subject,content,categoryIdx];
 
     try{
-        const [result] = await pool.execute(sql.communityWrite,prepare2);
+        const [result] = await pool.execute(sql2,prepare2);
         response = {
             result:{
                 row:result.affectedRows,
@@ -71,13 +77,22 @@ exports.communityWrite = async (req,res) =>{
         const fileSize = req.file.size;
         const fileDate = new Date();
         const fileDltF = '0';
+        const fSql = `INSERT INTO b_file (
+                                            board_idx,
+                                            file_originalname,
+                                            file_storedname,
+                                            file_size,
+                                            file_date,
+                                            file_dlt_flag
+                                            )
+                                    VALUES(?,?,?,?,?,?)`;
 
         const boardIdx = result.insertId;
         const fPrepare = [boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];                   
 
         if(req.file.size > 0){
 
-            const [result] = await pool.execute(sql.communityWriteFile,fPrepare);
+            const [result] = await pool.execute(fSql,fPrepare);
             response = {
                 result:{
                     row:result.affectedRows,
@@ -89,23 +104,34 @@ exports.communityWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywrite',e.message);
+        console.log('/communitywright',e.message);
     };
 }
 
 exports.communityView = async (req,res) => {
-const{idx}=req.params;
+    const{idx}=req.params;
     const prepare = [idx];
-    const hitResult = await pool.execute(sql.updateHit,prepare);
+
+    const hitSql = `UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ${idx}`
+    const hitResult = await pool.execute(hitSql);
+ 
+    const sql = `SELECT
+                a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
+                b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
+                ,${datetime} 
+                FROM board AS a LEFT OUTER JOIN b_file AS b 
+                ON a.board_idx = b.board_idx 
+                WHERE a.board_idx = ?`;
     
     // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
     // const imgPrepare = [idx]
+
     // const imgIdx = await pool.execute(imgSql,imgPrepare)
     // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
 
    
     try{
-        const [result] = await pool.execute(sql.communityViewFile,prepare);
+        const [result] = await pool.execute(sql,prepare);
         response = {
             result,
             errno:0
@@ -120,10 +146,11 @@ const{idx}=req.params;
 
 exports.communityDelete = async (req,res) =>{
     const{idx}=req.params;
+    const sql = `DELETE FROM board WHERE board_idx = ? `;
     const prepare = [idx];
     console.log(idx)
     try{
-        const [result] = await pool.execute(sql.communityDelete,prepare);
+        const [result] = await pool.execute(sql,prepare);
         response = {
                 result,
                 errno:0
@@ -131,25 +158,28 @@ exports.communityDelete = async (req,res) =>{
         res.json(response);
        
     } catch (e) {
-        console.log('/communitydelete',e.message);
+        console.log('communitydelete',e.message);
         
     };
+   
 }
 
 exports.communityUpdate = async (req,res)=>{
     const{idx}=req.params;
 
     const {select}=req.body;
+    const sql = "SELECT * FROM s_category WHERE show_category = ?";
     const selectPre = [select];
-    const result = await pool.execute(sql.getCategory,selectPre);
+    const result = await pool.execute(sql,selectPre);
     
     const [selectidx] = result[0];
     const {subject,content}=req.body;
     const categoryIdx = selectidx.show_category_id;
     const prepare2 = [subject,content,categoryIdx,idx];
+
     try{
         
-        const [result] = await pool.execute(sql.communityUpdate,prepare2);
+        const [result] = await pool.execute(sql2,prepare2);
         const response = {
             result:{
                 row:result.affectedRows,
@@ -163,13 +193,21 @@ exports.communityUpdate = async (req,res)=>{
         const fileStoredname = req.file.filename;
         const fileSize = req.file.size;
         const fileDate = new Date();
-
+        const fSql = `UPDATE b_file SET 
+                                    file_originalname = ?,
+                                    file_storedname = ?,
+                                    file_size = ?,
+                                    file_date = ?,
+                                    WHERE
+                                    board_idx = ?
+                                    `;
 
         const fPrepare = [fileOriginalname,fileStoredname,fileSize,fileDate,idx];                          
 
         if(req.file.size > 0){
 
             const [result] = await pool.execute(sql.communityUpdateFile,fPrepare);
+
             response = {
                 result:{
                     row:result.affectedRows,
@@ -181,7 +219,7 @@ exports.communityUpdate = async (req,res)=>{
         };
 
     }catch(e){
-        console.log('/communityupdate',e.message);
+        console.log('communityupdate',e.message);
     }
 }
 
@@ -202,16 +240,25 @@ exports.communityComment = async (req,res)=>{
             errno: 0
         }
         
+
     }catch(e){
-        console.log('/communitycontent',e.message)
+        console.log('communitycontent',e.message)
     }
     res.json(response)
     
+
+    // const cListSql = `SELECT *,${cmtDate} FROM comment WHERE board_idx = ${idx}`
+    // const clistResult = await pool.execute(cListSql)
 }
 
 exports.communityCoList = async (req,res)=>{
     const {idx}=req.params;
-    const prepare = [idx];
+    const boardIdxPre = idx;
+
+    console.log('cookie',req.cookies.user)
+
+    const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
+
     try{
         const [cmtListResult] = await pool.execute(sql.commentList,prepare)
         response = {
@@ -220,8 +267,9 @@ exports.communityCoList = async (req,res)=>{
             errno: 0
         } 
         console.log('start',cmtListResult)
+
     }catch(e){
-        console.log('/communitycolist',e.message)
+        console.log('communitycolist',e.message)
     }
     res.json(response)
     
