@@ -86,9 +86,17 @@ VALUES(?,?,?,?,?,?)`,
 
 
         commentWrite: 'INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)',
-        commentList: `SELECT *,${cmtDate} FROM comment WHERE board_idx = ?`,
+        commentList: `SELECT cmt_idx,board_idx, c.user_idx, user_id, user_nickname, user_level, cmt_content, ${cmtDate}, cmt_update_flag
+        FROM comment AS c 
+        LEFT OUTER JOIN user AS u
+        ON c.user_idx = u.user_idx
+        WHERE c.board_idx = ?
+         `,
+
+
+
         commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
-        commentUp:'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
+        commentUp:'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?'
 
 
     //show
