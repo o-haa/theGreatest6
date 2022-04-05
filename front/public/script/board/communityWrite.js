@@ -64,12 +64,12 @@ async function init() {
         const {communitySubject,communityContent,select} = e.target;
         const formData = new FormData()
             formData.append('upload',file.files[0])
-            formData.append('select',select.value)
+            formData.append('category',(select.value))
             formData.append('subject',communitySubject.value)
             formData.append('content',communityContent.value)
-            formData.append('user',user)
+            formData.append('userIdx',user.user_idx)
         
-        try {
+        try {   
             const response = await axios.post(`/write`,formData);
             const{insertId} = response.data.result;
             location.href=`/board/community/view/${insertId}`;
@@ -81,3 +81,5 @@ async function init() {
     };
     
 };
+
+
