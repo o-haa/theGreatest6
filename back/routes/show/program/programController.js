@@ -11,10 +11,13 @@ exports.showWrite = async (req,res)=>{
     // console.log('req.body : ',req.body) //텍스트
     
     const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,showMonth,showDate,showHour,ticketMonth,ticketDate,ticketHour} = req.body
-    //show_idx 필요함
-    
+    console.log('/write 체크용 ----> req.body', req.body)
+    //ticket 들어온거 확인함.
+
     let now = new Date()
     let thisYear = now.getFullYear()
+
+    //timestamp 형식으로 가공하는 함수
     const timestampShow = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
     const timestampTicket = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
     
@@ -36,15 +39,13 @@ exports.showWrite = async (req,res)=>{
         VALUES (?,?,?,?,?)`
 
     try{
-        const [resultShow] = await pool.execute(sqlShow,prespareShow) //
-
+        //sql 입력
+        const [resultShow] = await pool.execute(sqlShow,prespareShow)
         let insertShowId = resultShow.insertId
-        console.log(insertShowId)
 
         const prespareOption = [insertShowId, timestampShow, place, showCast1, showCast2]
         const [resultOption] = await pool.execute(sqlOption,prespareOption)
         let insertOptionId = resultOption.insertId
-        console.log('insertOptionId --> ',insertOptionId)
 
         const fileOriginalname = req.file.originalname;
         const fileStoredname = req.file.filename;
@@ -64,7 +65,6 @@ exports.showWrite = async (req,res)=>{
 
         if(req.file.size > 0){
             const [resultFile] = await pool.execute(fileSql,filePrepare);
-            console.log('resultFile --> ',resultFile)
 
             response = {
                 result:{
@@ -117,8 +117,7 @@ exports.showView = async (req,res)=>{
     console.log('back / showView 라우터 접속!')
 
     const {idx} = req.params
-    console.log(idx)
-    const sql = `SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    const sql = `SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx} `
 
@@ -128,7 +127,6 @@ exports.showView = async (req,res)=>{
             result,
             error:0,
         }
-        console.log('체크용 ----->',response)
         res.json(response)
     }
     catch(e){

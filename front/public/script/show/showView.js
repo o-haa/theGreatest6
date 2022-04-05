@@ -37,17 +37,16 @@ async function init() {
     }
 
     let [,,,,idx] = location.pathname.split('/')
-    console.log('idx : ',idx)
+    console.log('show_idx : ',idx)
     try{
         const response = await axios.post(`showview/${idx}`)
         let showResult = response.data.result
-        console.log('---------->',summaryTextList)
         
         const thElements = document.querySelectorAll('.title')
         const tdElements = document.querySelectorAll('.viewContent')
         
         showViewList(showResult)
-        console.log('aaaaa',showResult)
+        console.log(showResult[0])
 
         const leftBtn = document.querySelector('#leftBtn')
         const rightBtn = document.querySelector('#rightBtn')
@@ -64,62 +63,44 @@ async function init() {
         async function showViewList(showResult){
             showResult.forEach(v=>{
                 let i=0
+                let show_date_open=[]
                 
                 show_category = getCategory(v.show_category_idx)
                 show_xrated = getXrated(v.show_xrated)
-                show_date = makeShowTicketDate(v.show_date)
-                ticketYear = show_date[0]
-                ticketMonth = show_date[1]
-                ticketDate = show_date[2]
-                showYear = show_date[3]
-                showMonth = show_date[4]
-                showDate = show_date[5]
+                show_date_open = makeDate(v.show_date_open) //예매일
+                console.log('이건가???? : ',show_date_open)
+                // show_date = makeDate(v.show_date) //공연일
 
-                tdElements[i].innerHTML = show_category
-                tdElements[i+1].innerHTML = show_xrated
-                tdElements[i+2].innerHTML = v.show_title
-                tdElements[i+3].innerHTML = `${ticketYear}년 ${ticketMonth}월 ${ticketDate}일 `
-                tdElements[i+4].innerHTML = `${showYear}년 ${showMonth}월 ${showDate}일 `
-                tdElements[i+5].innerHTML = v.show_place
-                tdElements[i+6].innerHTML = v.show_cast1
-                tdElements[i+7].innerHTML = v.show_cast2
-                tdElements[i+8].innerHTML = v.show_director
-                tdElements[i+9].innerHTML = v.show_company
-                tdElements[i+10].innerHTML = v.show_content
+                // ticketYear = show_date_on[0]
+                // ticketMonth = show_date_on[1]
+                // ticketDate = show_date_on[2]
+                // showYear = show_date[0]
+                // showMonth = show_date[1]
+                // showDate = show_date[2]
+
+                // tdElements[i].innerHTML = show_category
+                // tdElements[i+1].innerHTML = show_xrated
+                // tdElements[i+2].innerHTML = v.show_title
+                // tdElements[i+3].innerHTML = `${ticketYear}년 ${ticketMonth}월 ${ticketDate}일 `
+                // tdElements[i+4].innerHTML = `${showYear}년 ${showMonth}월 ${showDate}일 `
+                // tdElements[i+5].innerHTML = v.show_place
+                // tdElements[i+6].innerHTML = v.show_cast1
+                // tdElements[i+7].innerHTML = v.show_cast2
+                // tdElements[i+8].innerHTML = v.show_director
+                // tdElements[i+9].innerHTML = v.show_company
+                // tdElements[i+10].innerHTML = v.show_content
             })
         }
         
-        function makeShowTicketDate(v){
-            showSplit = v.split('T')
-            showYMD = showSplit[0].split('-')
+        function makeDate(v){
+            stringSplit = v.split('T')
+            YMD = stringSplit[0].split('-')
+            year = YMD[0]
+            month = YMD[1]
+            date = YMD[2]
+            hour = stringSplit[1].slice(0,2)
 
-            showYear = showYMD[0]
-            showMonth = showYMD[1]
-            showDate = showYMD[2]
-            showHour = showSplit[1].slice(0,2)
-
-            let ticketYear = showYear
-            let ticketMonth = showMonth
-            let ticketDate = showDate
-
-            if(ticketDate - 21 <= 0){
-                let restDay = 21 - showDate
-                let defaultDay = new Date(showYear,showMonth-1,0)
-
-                ticketDate = defaultDay.getDate()-restDay
-
-                if(showMonth -1 <= 0){
-                    ticketMonth = 12
-                    ticketYear = ticketYear -1 
-                }else{
-                    ticketMonth = showMonth - 1
-                    console.log(showMonth, ticketMonth)
-                }
-            } 
-
-            let dateBox = [showYear,showMonth,showDate,ticketYear,ticketMonth,ticketDate]
-
-            return dateBox
+            return year,month,date,hour
         }
 
         function getCategory(v){
