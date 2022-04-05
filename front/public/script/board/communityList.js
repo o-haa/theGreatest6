@@ -75,7 +75,7 @@ async function init() {
     //     }
 
 
-
+    
     const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
     const tr = document.querySelector('#communityBoardRow');
     const tbody = document.querySelector('table > tbody');

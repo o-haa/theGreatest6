@@ -1,5 +1,4 @@
 const pool = require('../../../db');
-const sql = require('../../../SQL/queries')
 
 let response = {
 result: [],
@@ -10,26 +9,30 @@ errno: 1
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
-const aparam = `a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_hit`
-const bparam = `b.user_idx,b.user_nickname,b.user_level`
+const bparam = `board_idx,b.user_idx,show_category_idx, board_subject, board_content, board_hit`
+const uparam = `u.user_idx,user_nickname,user_level`
+const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 exports.communityList = async (req, res) => {
+    console.log('1')
     const { prepare } = req.body;
+
+    console.log(prepare)
     let sql ='';
     switch (prepare.length) {
         case 1:
-            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
+            sql = `SELECT * FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = ? ORDER BY board_idx DESC`;
             break;
 
         case 2:
-            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
 
         case 3:
-            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
         case 4:
-            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
             break;
     }
     try {
@@ -40,6 +43,7 @@ exports.communityList = async (req, res) => {
             result,
             errno: 0
         } 
+        console.log(result)
         // console.log(response.result)
     } catch (e) {
         console.log('/communitylist',e.message);
@@ -255,16 +259,20 @@ exports.communityComment = async (req,res)=>{
 
 exports.communityCoList = async (req,res)=>{
     const {idx}=req.params;
-    const prepare = [idx];
+    const boardIdxPre = idx;
+
+    console.log('cookie',req.cookies.user)
+
+    const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
 
     try{
-        const [result] = await pool.execute(sql.commentList,prepare)
+        const [cmtListResult] = await pool.execute(sql.commentList,prepare)
         response = {
-            result,
-            length: result.length,
+            ...response,
+            cmtListResult,
             errno: 0
         } 
-        // console.log('start',cmtListResult)
+        console.log('start',cmtListResult)
 
     }catch(e){
         console.log('communitycolist',e.message)
@@ -290,21 +298,22 @@ exports.communityCoDlt = async (req,res)=>{
 }
 
 exports.communityCoUp = async (req,res)=>{
-    const { cmtidx } = req.params;
-    const { updateComment } = req.body
-    const prepare = [updateComment, cmtidx]
-    console.log(prepare)
+    const{idx}=req.params;
+    const ccontent = req.body[0].cmt_content
+    const prepare = [ccontent,idx]
+    
     try{
         const [result] = await pool.execute(sql.commentUp,prepare);
         response = {
             ...response,
             result: {
-                affectedRows: result.affectedRows
+                affectedRows: result.affectedRows,
+                insertId: result.insertId,
             },
             errno: 0
         }
     }catch(e){
-        console.log('/commentup',e)
+        console.log('/commentup',e.message)
     }
     
 }
