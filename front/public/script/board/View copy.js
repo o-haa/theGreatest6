@@ -1,6 +1,7 @@
 
 
 document.addEventListener('DOMContentLoaded', init);
+let updateFlag = true
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -89,18 +90,17 @@ async function init() {
 
    
     const boardiidx = idx
-    const commentBox = document.querySelector('#commentBox')
-    const commentForm = document.querySelector('#commentForm') //템플릿
-    const commentList = document.querySelector('#commentList')  //템플릿
-    const commentInput = document.querySelector('#commentInput') //업데이트??
+    const commentBox = document.querySelector('#commentBox>ul')
+    const commentForm = document.querySelector('#commentForm')
+    const commentList = document.querySelector('#commentList')
+    const commentInput = document.querySelector('#commentInput')
     
     const replay = []
-    commentBox.appendChild(commentForm )
+    commentBox.appendChild(commentForm)
     function createForm () {
         const clone = document.importNode(commentForm.content,true)
-        const writeRow = clone.querySelector('#writeRow')
         const form = clone.querySelector('form')
-        commentBox.appendChild(writeRow)
+        commentBox.appendChild(clone)
         form.addEventListener('submit',submitHandler)
     }
 
@@ -108,6 +108,7 @@ async function init() {
     async function submitHandler(e){
         e.preventDefault()
         const {hello} = e.target
+        
         
         const body = {
             user:user,
@@ -118,7 +119,7 @@ async function init() {
         }
 
         replay.push(body)
-        // 
+       
        
        try{
         const insert = await axios.post(`/comment/${boardiidx}`,body)
@@ -127,48 +128,47 @@ async function init() {
            console.log('/communityviewcmt',e.message)
        }
     
-       hello.value='';
+       hello.value=''
        CommentList()
     }
 
     async function CommentList(){
         const responseList = await axios.post(`/commentList/${boardiidx}`)
-        const cmtList = responseList.data.result
+        const cmtList = responseList.data.cmtListResult
         commentBox.innerHTML=''
         createForm()
 
         const count = document.querySelector('details summary span')
         count.innerHTML = `(${cmtList.length})`
         
-        // 
+        
         cmtList.forEach(v=>{
-            const row = document.importNode(commentList.content,true)
-            const commentContent = row.querySelector('.commentContent')
-            const writerInfo = row.querySelectorAll('.commentRow > .writerInfo > span')
-
+            const clone = document.importNode(commentList.content,true)
+            const row = clone.querySelector('.commentContent')
+            const roww = clone.querySelectorAll('.commentContent+li>span')
+            
             if(v.cmt_update_flag === 1){
                 const spanElement = document.createElement('span')
                 spanElement.innerHTML = v.cmt_content
                 spanElement.addEventListener('click',updateHandler)
-                const deleteBtn = commentContent.querySelector('.commentDeleteBtn')
+                const deleteBtn = row.querySelector('.commentDeleteBtn')
                 deleteBtn.addEventListener('click',deleteHandler)
-                commentContent.prepend(spanElement)
+                row.prepend(spanElement)
             }else {
                 const clone = document.importNode(commentInput.content,true)
                 clone.querySelector('input').value = v.cmt_content
                 // clone.querySelector('input').addEventListener('keypress',updateSubmitHandler)
                 row.prepend(clone)
+                
             }
 
-            commentContent.querySelector('input').value = v.cmt_idx
+            row.querySelector('input').value = v.cmt_idx
             
+            roww[0].innerHTML=user_nickname
+            roww[1].innerHTML=v.cmt_date
 
-//
-
-            writerInfo[0].innerHTML=v.user_nickname
-            writerInfo[1].innerHTML=v.cmt_date
-
-            commentBox.appendChild(row)
+            commentBox.appendChild(clone)
+            
         })
         
         try{
@@ -189,53 +189,27 @@ async function init() {
     }
     
     async function updateHandler(e){
-        // const responseList = await axios.post(`/commentList/${boardiidx}`)
-        // const cmtlist = responseList.data.result
-        const cmtidx = e.target.parentNode.querySelector('input[id=cidx]').value
-
-        const commentInput = document.querySelector('#commentInput')
-        const clone = document.importNode(commentInput.content,true)  
-        const Frm = clone.querySelector('form')
-        Frm[0].cmt_update_Flag = 0
-        e.target.parentNode.prepend(clone)
-
-
-        Frm.addEventListener('submit',commentSubmitHandler)
-
-        async function commentSubmitHandler(e){
-           e.preventDefault()
-           const updateComment = (e.target[0]).value
-            const data = {
-                updateComment,
-            }
-
-            try {
-                const response = await axios.post(`/commentListUp/${cmtidx}`, data)
-                if (response.data.errno !== 0) throw new Error
-                console.log(response.data)
-                location.href=`/board/community/view/${idx}`
-            } catch (e) {
-                console.log('/communityview', e.message)
+        
+        const responseList = await axios.post(`/commentList/${boardiidx}`)
+        const cmtlist = responseList.data.cmtListResult
+        const cmtidx = e.target.parentNode.querySelector('input').value
+        
+        const newarr = [...cmtlist]
+        
+        for(let i=0; i<newarr.length; i++){
+            if(newarr[i].cmt_idx === cmtidx){
+                newarr[i].cmt_update_flag = 0
+                console.log(newarr[i])
             }
         }
+        // console.log(index)
         // newarr[index].cmt_update_flag = 0
         // console.log(cmtidx, newarr)
-
-    }
-
-     
-
-        
-
-
-            
-
-        
-
         
         
     
-        // CommentList()     
+        CommentList()     
+    }
 
 
     CommentList()
