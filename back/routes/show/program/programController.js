@@ -211,15 +211,39 @@ exports.showDelete = async (req,res)=>{
     }
 }
 
-exports.showCalendar = (req,res)=>{
+exports.showCalendar = async (req,res)=>{
     console.log('back / showCalendar 라우터 접속!')
+    const {year,month,date} = req.body
+    let sqlCheck=``
+    if(month<10){
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month+1}%")`
+    } else if(month+1>=10){
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-${month+1}%"))`
+    }else if(month+1>12){
+        month=1
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month}%")`
+    }else{
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (select * from s_option where (show_date like "${year}-${month}%" OR show_date like "${year}-${month+1}%")`
+    }
+
     try{
-        // const [result] = await pool.execute(sql)
+        const [result] = await pool.execute(sqlCheck)
         response = {
             result,
             error:0,
         }
-        console.log('체크용 ----->',response)
         res.json(response)
     }
     catch(e){
