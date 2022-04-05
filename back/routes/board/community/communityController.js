@@ -1,4 +1,5 @@
 const pool = require('../../../db');
+const sql = require('../../../SQL/queries')
 
 let response = {
 result: [],
@@ -253,11 +254,7 @@ exports.communityComment = async (req,res)=>{
 
 exports.communityCoList = async (req,res)=>{
     const {idx}=req.params;
-    const boardIdxPre = idx;
-
-    console.log('cookie',req.cookies.user)
-
-    const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
+    const prepare = [idx];
 
     try{
         const [cmtListResult] = await pool.execute(sql.commentList,prepare)
