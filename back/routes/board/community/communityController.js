@@ -10,25 +10,26 @@ errno: 1
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
-const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
+const aparam = `a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_hit`
+const bparam = `b.user_idx,b.user_nickname,b.user_level`
 
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
     let sql ='';
     switch (prepare.length) {
         case 1:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
             break;
 
         case 2:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
             break;
 
         case 3:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
+            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
             break;
         case 4:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
+            sql = `SELECT ${aparam},${bparam},${date} FROM board AS a LEFT OUTER JOIN user AS b ON a.user_idx = b.user_idx WHERE a.board_idx = ? ORDER BY board_idx DESC`;
             break;
     }
     try {
