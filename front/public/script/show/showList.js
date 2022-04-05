@@ -78,18 +78,20 @@ async function init() {
     }
     function getCategory(v){
         switch(v){
-            case 7 :
+            case 3 :
                 return show_category = 'musical'
             break;
-            case 8 :
+            case 6 :
                 return show_category = 'concert'
             break;
-            case 9 :
+            case 2 :
                 return how_category = 'classic'
             break;
-            case 10 :
+            case 5 :
                 return show_category = 'ballet'
             break;
+            case 4:
+                return show_category = 'Opera'
             default:
                 console.log('show_category 오류 발생')
             break;
