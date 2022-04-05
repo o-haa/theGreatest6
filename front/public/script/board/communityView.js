@@ -1,7 +1,7 @@
 
 
 document.addEventListener('DOMContentLoaded', init);
-
+let updateFlag = true
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
@@ -93,17 +93,20 @@ async function init() {
     const commentBox = document.querySelector('#commentBox>ul')
     const commentForm = document.querySelector('#commentForm')
     const commentList = document.querySelector('#commentList')
-
+    const replay = []
     commentBox.appendChild(commentForm)
     function createForm () {
         const clone = document.importNode(commentForm.content,true)
         const form = clone.querySelector('form')
+        const count = document.querySelector('details summary span')
+        // count.innerHTML = `(${replay.length})`
+        console.log(replay.length)
         
         commentBox.appendChild(clone)
         form.addEventListener('submit',submitHandler)
     }
 
-    const replay = []
+   
     async function submitHandler(e){
         e.preventDefault()
         const {hello} = e.target
@@ -172,18 +175,25 @@ async function init() {
             console.log('/cmtdelete',e.message)
         }       
     }
-
+    
     async function updateHandler(e){
+        let click = e.target
+        if(updateFlag = false){
+            click.innerHTML=''
+            let input = document.createElement('textarea')
+            click.appendChild(input)
+        } else {
+            
+        }
+            
+            
+            // click.textContent = 'ji'
+            // console.log(click.textContent)e
+        
         const responseList = await axios.post(`/commentList/${boardiidx}`)
         const cmtidx = e.target.parentNode.querySelector('input').value
         const update = e.target.parentNode
-        let click = e.target
-        console.log(click)
-        click.createElement('textarea')
-        click.innerHTML('hello')
-        
-        // click.textContent = 'ji'
-        // console.log(click.textContent)
+       
 
         
         
