@@ -21,3 +21,4 @@ async function init() {
                 const response = await axios.post('/list',categoryData);
                 console.log(response)
                 location.href='/board/community/list';
+            }

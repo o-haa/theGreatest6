@@ -5,6 +5,10 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+    const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+    const {user} = response1.data.result;
+    console.log('user',user)
+
     const file = document.querySelector('#communityFile');
     // const src = document.querySelector('#src')
     
@@ -63,6 +67,7 @@ async function init() {
             formData.append('select',select.value)
             formData.append('subject',communitySubject.value)
             formData.append('content',communityContent.value)
+            formData.append('user',user)
         
         try {
             const response = await axios.post(`/write`,formData);

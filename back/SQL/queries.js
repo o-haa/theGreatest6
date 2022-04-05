@@ -15,9 +15,9 @@ module.exports = {
 FROM u_personal 
 WHERE user_idx = ?`,
     optionalInfo: 'INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile) VALUES (?,?,?,?,?)',
-    myBenefit: 'SELECT * from u_point WHERE user_idx = ?',
-
-
+    myBenefit: `SELECT user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_net  
+                FROM u_point 
+                WHERE user_idx = ?`,
 
 
 
@@ -86,8 +86,9 @@ VALUES(?,?,?,?,?,?)`,
 
 
         commentWrite: 'INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)',
-        commentList: 'SELECT * FROM comment WHERE board_idx = ?'
-
+        commentList: `SELECT *,${cmtDate} FROM comment WHERE board_idx = ?`,
+        commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
+        commentUp:'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
 
 
     //show

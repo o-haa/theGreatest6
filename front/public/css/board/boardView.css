@@ -131,9 +131,11 @@ th:nth-child(4){
 }
 
 #commentBox {
-    width:80%;
+    width:100%;
     margin: 0 auto;
-    margin-top:4%;
+    margin-top:2%;
+    padding: 1%;
+    box-sizing: border-box;
 }
 
 #hello {
@@ -142,6 +144,7 @@ th:nth-child(4){
     padding:0.3% 0;
     box-sizing: border-box;
     border-bottom: 1px solid #465d59;
+   
 }
 
 .commentSubmit {
@@ -158,18 +161,51 @@ th:nth-child(4){
     border: 1px solid #465d59;
     padding: 0.5%;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentContent {
+    width: 50%;
+}
+
+.commentDeleteBtn {  
+    font-size: 14px;
+    line-height: 20px;
+    background: #a8bebf;
+    border-radius: 3px;
+    color:#eee;
+    padding:0.2%;
+    box-sizing: border-box;
+    
 }
 
 .commentRow li:nth-child(2){
     margin-top:0.5%;
-    font-size: 12px;
-    
+    font-size: 14px;
+   
 }
 
 .commentID{
     color:#465d59;
 }
 
+details{
+    width:80%;
+    height: 30px;
+    margin:0 auto;
+    margin-top: 2%;
+    padding-left: 1%;
+    box-sizing: border-box;
+    background: #a8bebf;
+    border-radius: 10px;
+    
+}
+
+details summary{
+    line-height: 30px;
+    font-size:18px;
+}
 
 
 
