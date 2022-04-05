@@ -41,9 +41,8 @@ async function init() {
     try{
         const response = await axios.post(`showview/${idx}`)
         let showResult = response.data.result
-        console.log('ishowResultdx : ',showResult)
-        console.log(summaryTextList)
-
+        console.log('---------->',summaryTextList)
+        
         const thElements = document.querySelectorAll('.title')
         const tdElements = document.querySelectorAll('.viewContent')
         
@@ -125,16 +124,16 @@ async function init() {
 
         function getCategory(v){
             switch(v){
-                case 1 :
+                case 7 :
                     return show_category = 'musical'
                 break;
-                case 2 :
+                case 8 :
                     return show_category = 'concert'
                 break;
-                case 3 :
+                case 9 :
                     return how_category = 'classic'
                 break;
-                case 4 :
+                case 10 :
                     return show_category = 'ballet'
                 break;
                 default:
@@ -187,7 +186,12 @@ async function init() {
         }
 
         async function modifyBtnHandler(){
-            location.href = `http://localhost:3001/show/program/showmodify/${idx}`
+            try{
+                location.href = `http://localhost:3001/show/program/showmodify/${idx}`
+            }
+            catch(e){
+                console.log('/showmodify',e.message)
+            }
         }
 
         async function deleteBtnHandler(){

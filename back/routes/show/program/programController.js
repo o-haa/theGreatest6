@@ -9,13 +9,15 @@ let response = {
 exports.showWrite = async (req,res)=>{
     // console.log('req.file : ',req.file) //파일
     // console.log('req.body : ',req.body) //텍스트
-
-    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,showMonth,showDate,showHour} = req.body
+    
+    const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,showMonth,showDate,showHour,ticketMonth,ticketDate,ticketHour} = req.body
     //show_idx 필요함
-
+    
     let now = new Date()
     let thisYear = now.getFullYear()
-
+    const timestampShow = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
+    const timestampTicket = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
+    
     const sqlShow = `INSERT INTO shows(
         show_title,
         show_category_idx,
@@ -23,21 +25,23 @@ exports.showWrite = async (req,res)=>{
         show_company,
         show_director,
         show_like,
-        show_content,
-        )VALUES(?,?,?,?,?,'0',?)`
-
-    const prespareShow = [title,category, xrated,showCompany,showDirector,showContent]
-    const timestamp = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
+        show_date_open,
+        show_content
+        ) VALUES( ?,?,?,?,?,1,?,? )`
+    
+    const prespareShow = [title,category,xrated,showCompany,showDirector,timestampTicket,showContent]
+    
     const sqlOption = `INSERT
         INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
         VALUES (?,?,?,?,?)`
 
     try{
-        const [resultShow] = await pool.execute(sqlShow,prespareShow)
+        const [resultShow] = await pool.execute(sqlShow,prespareShow) //
+
         let insertShowId = resultShow.insertId
         console.log(insertShowId)
 
-        const prespareOption = [insertShowId, timestamp, place, showCast1, showCast2]
+        const prespareOption = [insertShowId, timestampShow, place, showCast1, showCast2]
         const [resultOption] = await pool.execute(sqlOption,prespareOption)
         let insertOptionId = resultOption.insertId
         console.log('insertOptionId --> ',insertOptionId)
@@ -72,7 +76,7 @@ exports.showWrite = async (req,res)=>{
         }
         res.json(response)
     }catch(e){
-        console.log('/showwrite',e.message)
+        console.log('/showwrite',e)
     }
 }
 
@@ -132,21 +136,34 @@ exports.showView = async (req,res)=>{
     }
 }
 
-exports.showModify = async (req,res)=>{
-    console.log('back / showModify 라우터 접속!')
+//입력받은 기존 값을 불러오는 라우터
+exports.showModifyGetInfo = async (req,res)=>{
+    console.log('showModifyGetInfo 접속')
     const {idx} = req.params
-    console.log(idx)
+    console.log('idx : ',idx)
     
     const sqlGetShows = `
     SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx}`
-    const [result] = await pool.execute(sqlGetShows)
 
-    response ={
-        result,
-        error:0
+    try{
+        const [result] = await pool.execute(sqlGetShows)
+
+        response ={
+            result,
+            error:0
+        }
+        res.json(response)
     }
+    catch(e){
+        console.log(e)
+    }
+}
+
+//새로 입력받은 값을 update하는 라우터
+exports.showModifyView = async (req,res)=>{
+    console.log('showModifyView 접속!')
     res.json(response)
 }
 
