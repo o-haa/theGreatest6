@@ -141,7 +141,7 @@ exports.showModifyGetInfo = async (req,res)=>{
     console.log('idx : ',idx)
     
     const sqlGetShows = `
-    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx}`
 
@@ -162,7 +162,40 @@ exports.showModifyGetInfo = async (req,res)=>{
 //새로 입력받은 값을 update하는 라우터
 exports.showModifyView = async (req,res)=>{
     console.log('showModifyView 접속!')
-    res.json(response)
+    let {show_idx,category,xrated,title,place,showCast1,showCast2,showDirector,showCompany,showContent,timestampShow,timestampTicket} = req.body
+
+    const sqlUpdate = `
+    UPDATE shows AS s INNER JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    SET
+        s.show_title='${title}',
+        s.show_category_idx=${category},
+        s.show_xrated=${xrated},
+        s.show_company='${showCompany}',
+        s.show_director='${showDirector}',
+        s.show_date_open='${timestampTicket}',
+        s.show_content='${showContent}',
+        o.show_date='${timestampShow}',
+        o.show_place='${place}',
+        o.show_cast1='${showCast1}',
+        o.show_cast2='${showCast2}' 
+    WHERE s.show_idx=${show_idx}
+    `
+
+    try{
+        const [result] = await pool.execute(sqlUpdate)
+        console.log('insertId가 뭐더라',result)
+        response = {
+            result,
+            show_idx,
+            error:0
+        }
+        res.json(response)
+    }
+    catch(e){
+        console.log(e)
+    }
+    // res.json(response)
 }
 
 exports.showDelete = async (req,res)=>{

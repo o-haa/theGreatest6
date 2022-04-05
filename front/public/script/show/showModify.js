@@ -14,19 +14,10 @@ async function init() {
 
     let [,,,,idx] = location.pathname.split('/')
     const response = await axios.post(`showmodify/${idx}`)
-    console.log(response)
     const {show_idx, show_category_idx, show_xrated, show_title, show_place, show_cast1, show_cast2, show_director,show_company,show_content,show_date,show_date_open} = response.data.result[0]
     
-    splitTimestamp(show_date) //공연일
-    console.log(showY)
-
-    // ticketSplit = show_date_open.split('T')
-    // ticketYMD = ticketSplit[0].split('-')
-    // ticketY = ticketYMD[0]
-    // ticketM = ticketYMD[1]
-    // ticketD = ticketYMD[2]
-    // ticketH = ticketSplit[1].slice(0,2)
-    // console.log(show_date_open)
+    let ticketDay = makeDate(show_date_open) //예매일
+    let showDay = makeDate(show_date) //공연일
 
     // console.log(category,xrated,title,place,showCast1,showCast2,showDirector,showCompany,showContent,showMonth,showDate,showHour)
 
@@ -54,17 +45,15 @@ async function init() {
         let ticketHour = document.querySelector('#ticketHour').value
 
         //sql 저장을 위해 따로 생성한 timestampShow와 timestampTicket
-        let timestampShow = `${showY}-${showMonth}-${showDate}T${showHour}:00:00`
-        let timestampTicket = `${ticketY}-${ticketMonth}-${ticketDate}T${ticketHour}:00:00`
-        console.log('timestampShow : ',timestampShow)
-        console.log('timestampTicket : ',timestampTicket)
+        let timestampShow = `${ticketDay[0]}-${showMonth}-${showDate}T${showHour}:00:00`
+        let timestampTicket = `${ticketDay[0]}-${ticketMonth}-${ticketDate}T${ticketHour}:00:00`
 
         try{
             let option = {
-                data : {show_idx,category,xrated,title,place,showCast1,showCast2,showDirector,showCompany,showContent,timestampShow, timestampTicket}
+                show_idx,category,xrated,title,place,showCast1,showCast2,showDirector,showCompany,showContent,timestampShow, timestampTicket
             }
-            const responseRepost = await axios.post(`showview/${show_idx}`,option)
-            console.log('---->',responseRepost)
+            const responseRepost = await axios.post(`showmodifygoinfo/${show_idx}`,option)
+            window.location.href = `http://localhost:3001/show/program/showview/${show_idx}`
         }
         catch(e){
             console.log(e)
@@ -122,13 +111,16 @@ async function init() {
         return month,date,hour
     }
 
-    //timestamp 나눠서 year,month,date,hour 만드는 함수
-    function splitTimestamp(timestamp){
-        showSplit = timestamp.split('T')
-        showYMD = showSplit[0].split('-')
-        showY = showYMD[0]
-        showM = showYMD[1]
-        showD = showYMD[2]
-        showH = showSplit[1].slice(0,2)
+    //날짜 분리해주는 함수
+    function makeDate(v){
+        stringSplit = v.split('T')
+        YMD = stringSplit[0].split('-')
+        year = YMD[0]
+        month = YMD[1]
+        date = YMD[2]
+        hour = stringSplit[1].slice(0,2)
+        let list = [year,month,date,hour]
+
+        return list
     }
 }

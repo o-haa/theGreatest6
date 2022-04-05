@@ -63,35 +63,34 @@ async function init() {
         async function showViewList(showResult){
             showResult.forEach(v=>{
                 let i=0
-                let show_date_open=[]
-                
+
                 show_category = getCategory(v.show_category_idx)
                 show_xrated = getXrated(v.show_xrated)
                 show_date_open = makeDate(v.show_date_open) //예매일
-                console.log('이건가???? : ',show_date_open)
-                // show_date = makeDate(v.show_date) //공연일
+                show_date = makeDate(v.show_date) //공연일
 
-                // ticketYear = show_date_on[0]
-                // ticketMonth = show_date_on[1]
-                // ticketDate = show_date_on[2]
-                // showYear = show_date[0]
-                // showMonth = show_date[1]
-                // showDate = show_date[2]
+                ticketYear = show_date_open[0]
+                ticketMonth = show_date_open[1]
+                ticketDate = show_date_open[2]
+                showYear = show_date[0]
+                showMonth = show_date[1]
+                showDate = show_date[2]
 
-                // tdElements[i].innerHTML = show_category
-                // tdElements[i+1].innerHTML = show_xrated
-                // tdElements[i+2].innerHTML = v.show_title
-                // tdElements[i+3].innerHTML = `${ticketYear}년 ${ticketMonth}월 ${ticketDate}일 `
-                // tdElements[i+4].innerHTML = `${showYear}년 ${showMonth}월 ${showDate}일 `
-                // tdElements[i+5].innerHTML = v.show_place
-                // tdElements[i+6].innerHTML = v.show_cast1
-                // tdElements[i+7].innerHTML = v.show_cast2
-                // tdElements[i+8].innerHTML = v.show_director
-                // tdElements[i+9].innerHTML = v.show_company
-                // tdElements[i+10].innerHTML = v.show_content
+                tdElements[i].innerHTML = show_category
+                tdElements[i+1].innerHTML = show_xrated
+                tdElements[i+2].innerHTML = v.show_title
+                tdElements[i+3].innerHTML = `${ticketYear}년 ${ticketMonth}월 ${ticketDate}일 `
+                tdElements[i+4].innerHTML = `${showYear}년 ${showMonth}월 ${showDate}일 `
+                tdElements[i+5].innerHTML = v.show_place
+                tdElements[i+6].innerHTML = v.show_cast1
+                tdElements[i+7].innerHTML = v.show_cast2
+                tdElements[i+8].innerHTML = v.show_director
+                tdElements[i+9].innerHTML = v.show_company
+                tdElements[i+10].innerHTML = v.show_content
             })
         }
         
+        //날짜 분리해주는 함수
         function makeDate(v){
             stringSplit = v.split('T')
             YMD = stringSplit[0].split('-')
@@ -99,8 +98,9 @@ async function init() {
             month = YMD[1]
             date = YMD[2]
             hour = stringSplit[1].slice(0,2)
+            let list = [year,month,date,hour]
 
-            return year,month,date,hour
+            return list
         }
 
         function getCategory(v){
@@ -122,7 +122,6 @@ async function init() {
                 break;
             }
         }
-
 
         function getXrated(v){
             switch(v){
