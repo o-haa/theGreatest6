@@ -66,7 +66,6 @@ exports.myBenefit = async (req, res) => {
     try{
         const prepare = [req.body.userIdx];
         const [ result ] = await pool.execute(sql.myBenefit,prepare);
-        console.log(result);
         response = {
             ...response,
             result,

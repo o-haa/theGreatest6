@@ -4,7 +4,7 @@ const memberController = require('./memberController');
 
 router.get('/signin',memberController.signIn);
 router.get('/signup',memberController.signUp);
-
+router.post('/destroycookie',memberController.destroyCookie)
 
 
 module.exports = router;

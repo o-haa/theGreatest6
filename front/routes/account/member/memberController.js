@@ -6,3 +6,10 @@ exports.signUp = (req,res)=>{
 exports.signIn = (req,res)=>{
     res.render('./account/signin');
 }
+
+
+exports.destroyCookie = (req,res)=>{
+    res.clearCookie('AccessToken')
+    res.end()
+    location.href='/'
+}

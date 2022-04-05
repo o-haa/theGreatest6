@@ -48,8 +48,17 @@ async function init() {
         //유저 정보 불러와서 렌더하기
         const userLevel = document.querySelector('#userLevel');
         const userName = document.querySelector('#userName');
+        const signOut = document.querySelector('#signOut')
+
         userLevel.innerHTML = user.user_level;
         userName.innerHTML = user.user_nickname;
+        signOut.innerHTML = 'sign out';
+
+        signOut.addEventListener('click',signOutHandler)
+        async function signOutHandler(){
+            const response = await axios.post('http://localhost:3001/account/member/destroycookie',null)
+            console.log(response.data)
+        }
 
 
         //포인트 정보 불러와서 렌더하기
@@ -66,7 +75,7 @@ async function init() {
         if(responseBenefit.data.errno !==0 )throw new Error;
         const point = responseBenefit.data.result;
         point.forEach(v=>{
-            pointRow[0] = '1'
+            pointRow[0] = '';       //인덱스...개개인의 거래 인덱스?
             pointRow[1].innerHTML = v.u_point_date
             pointRow[2].innerHTML = v.u_point_description
             pointRow[3].innerHTML = v.u_point_in
