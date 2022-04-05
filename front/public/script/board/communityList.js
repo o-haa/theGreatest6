@@ -54,24 +54,7 @@ async function init() {
         aElement.innerHTML = `[${i}]`;
         liElement.appendChild(aElement);
         paging.appendChild(liElement);
-
     }
-    // for (let i = block + 1; i <= endBlock; i++) {
-    //     paging.innerHTML = '';
-    //     const liElement = document.createElement('li');
-    //     const aElement = document.createElement('a');
-    //     liElement.appendChild(aElement);
-    //     paging.appendChild(liElement);
-
-    //     pages(i)
-    //     // aElement.setAttribute(`onClick`, `pages(${i})`);//
-    //     arr.push(i)
-    //     console.log(arr)
-    //     for (let j = 1; j <= arr.length; j++) {
-    //         aElement.innerHTML = `[${arr}]`
-    //     }
-
-
     
     const Nodes = response.data.result.slice((page - 1) * viewRows, page * viewRows);
     const tr = document.querySelector('#communityBoardRow');
@@ -118,7 +101,7 @@ async function init() {
     }
 }
 
-/* init 여기까지 */
+/* init 여기까지 */ 
 
 async function clickHanlder() {
     try {
@@ -155,55 +138,22 @@ async function clickHanlder() {
         if (endBlock > totalPage) endBlock = totalPage;
 
         ///여기서 부터 체크 페이징
-        const paging = document.querySelector('#paging');
+        let paging = document.querySelector('#paging');
         arr = []
-        //클릭했을 떄 바로 반영이 아닌 페이징 눌러야 반영....length 비교 >>>
-        //처음나오는 페이징이 고정
-        paging.innerHTML = '';
+        paging.innerHTML='';
         for (let i = block + 1; i <= endBlock; i++) {
             arr.push(i)
         }
-        console.log(arr.length)
+        let liElement;
         for(let j = 1; j <= arr.length ; j++){
-            // console.log(j)
-            const liElement = document.createElement('li');
+            liElement = document.createElement('li');
             const aElement = document.createElement('a');
             aElement.innerHTML = `[${j}]`
-            // arr[j] = aElement
+            liElement.appendChild(aElement)
         }
+        // paging.appendChild = liElement;
 
-
-            // paging.innerHTML = '';
-            // arr.push(i)
-            // console.log(arr.length)
-            // for (let j = 0; j <= arr.length; j++) {
-            //     arr.push(j)
-            //     // console.log(arr)
-            //     const liElement = document.createElement('li');
-            //     const aElement = document.createElement('a');
-            //     aElement.addEventListener('click',pages(`${j})`))
-            // }
-
-
-            // aElement.innerHTML = arr
-            // console.log(aElement)
-            // arr.push(aElement.innerHTML)
-            // for (let j = 0; j <= totalRows/10; j++) {
-            //     arr.push(`[${i}]`)
-            //     arr[j].addEventListener('click',`pages(${j})`);
-            //     aElement.setAttribute(`onClick`, `pages(${j})`);
-
-            // }
-            //     arr.forEach(v=>{
-            //         v.addEventListener('click',`pages(${i})`);
-            // })
-            // aElement.setAttribute(`onClick`, `pages(${i})`);
-
-
-            // liElement.appendChild(aElement);
-            // paging.appendChild(liElement);
-            // }
-        } catch (e) {
+    } catch (e) {
             console.log('communitylist', e.message);
         }
     }
@@ -211,10 +161,6 @@ async function clickHanlder() {
 /* 클릭 핸들러 여기까지 */
 
 async function pages(num) {
-        // const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
-        // const { user } = response1.data.result;
-        // const user_nickname = user.user_nickname;
-
         console.log('num', num)
         const tr = document.querySelector('#communityBoardRow');
         const value = test.data.result;
