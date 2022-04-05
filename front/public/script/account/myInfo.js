@@ -8,6 +8,7 @@ async function init() {
     axios.defaults.withCredentials = true;
 
     //템플릿
+    const maincal = document.querySelector('#maincal')
     const tableBox = document.querySelector('#tableBox')
     const requiredOn = document.querySelector('#requiredOn')  //필수 정보
     const whiteBlock = document.querySelector('#prevent')   //블로킹

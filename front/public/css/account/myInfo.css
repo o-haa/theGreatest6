@@ -68,7 +68,7 @@
     display: flex;
     align-items: center;
     border-radius: 3px;
-    border: 1px solid #F4D3AA;
+    /* border: 1px solid #F4D3AA; */
     /* accent-color:#465D59; */
     accent-color: #F4D3AA;
     box-sizing: border-box; 
@@ -186,41 +186,28 @@
 
 
 
-#submitBtn{
-    display: none;
-    position: absolute;
-    bottom:10px;
-    right: 300px;
-    width: 180px;
-    height: 50px;
-    min-height: 48px;
-    max-height: 55px;
-    border-radius: 5px;
-    font-size: 20px;
-    font-family: 'basicLight';
-    text-align: center;
-    color: #FFF;
-    background: #465D58;
-}
+
 
 
 
 #tableBox{
-    padding: 3% 3%;
+    padding:1%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 94%;
-    height: 88.3%;
+    width: 100%;
+    height: 100%;
     border-radius: 17px;
     opacity: 0.9;
     background: #F4D3AA;
 }
 
 .requiredBox{
-    width: 80%;
+    width: 50%;
     height: 83%;
-    padding: 3% 3%;
+    padding: 3%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -228,9 +215,10 @@
 }
 
 .optionalBox{
-    width: 70%;
-    height: 75%;
-    padding: 3% 3% 3% 5%;
+    width: 50%;
+    height: 83%;
+    padding: 3%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -246,36 +234,66 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    height: min-content;
 }
 
-.requiredInfo span, .boxSpan{
-    background:#465D58;
-    height: 100%;
+.requiredInfo span{
+    /* height: 40px; */
     border-radius: 10px;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.optionalInfo span + span{
+    margin:0 1%;
+    margin-right:3%;
+    width: 200px;
+    text-align: end;
+    background: #465D58;
+    border-radius: 10px;
+}
+
+.requiredInfo span:nth-child(1){
+    width: 100px;
+    
+}
+
+
+.requiredInfo span:nth-child(2){
+    margin:0 1%;
+    margin-right:3%;
+    width: 200px;
+    text-align: end;
+    background: #465D58;
 }
 
 #userOptionFrm > .optionBox > .optionBoxSpan{
-    background:#465D58;
-    height: 70%;
+    /* background:#465D58; */
     border-radius: 10px;
+    width: 100px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 1%;
+    color:#fff;
 }
 
 
-.optionBoxSpan .infoKey{
+/* .optionBoxSpan .infoKey{
     line-height: 260% !important;
-}
+} */
 
 .infoKey{
     display: inline-block;
     font-family: 'basicLight';
     src: url('../../font/NotoSansKR-Light.otf') format('truetype');
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
     font-style: italic;
-    width: 100px;
     text-align: center;
-    line-height: 250%;
-    color: #fff;
+    /* line-height: 250%; */
+    color: #465D58;
+    padding:5px;
+    box-sizing: border-box;
 }
 
 .infoValue{
@@ -285,30 +303,39 @@
     font-size: 18px;
     color:#465D58;
     text-align: center;
-    width: 150px;
-    text-align: center;
-    line-height: 250%;
+    /* line-height: 250%; */
     color: #fff;
+    margin-left:2%;
+    padding: 5px;
+    box-sizing: border-box;
+    /* height: 40px; */
 }
 
-#userDoj{
+/* #userDoj{
     line-height:500%  !important;
 
-}
+} */
 
 
 .optionalBox .optionalInfo{
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 2%;
 }
 
 
 .userNameBox, .dobBox, .mobileBox, .userAddressBox{
     display: flex;
     justify-content: center;
-    width: 50%;
-    height: 70%;
+    width: 60%;
+    /* height: 70%; */
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: end;
+    background: #465D58;
+    border-radius: 10px;
+    opacity: 0.9;
 }
 
 
@@ -319,10 +346,11 @@
 
 #insertInfo{
     position: absolute;
-    width: 480px;
-    height: 420px;
-    right: 164px;
-    bottom: 78px;
+    width: 27%;
+    height: 50%;
+    left:60%;
+    /* right: 164px; */
+    /* bottom: 78px; */
     background:#F4D3AA;
     border-radius: 18px;
     z-index: 10;
@@ -330,27 +358,27 @@
 
 #insertBtn{
     position: absolute;
-    bottom:190px;
-    right: 125px;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     width: 180px;
     height: 50px;
-    min-height: 48px;
-    max-height: 55px;
     border-radius: 5px;
     font-size: 20px;
-    padding: 12px 12px;
+    padding: 12px;
     box-sizing: border-box;
     font-family: 'basicLight';
     text-align: center;
     color: #FFF;
     background: #465D58;
     z-index: 15;
+
 }
 
 
 #userOptionFrm {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 83%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -361,39 +389,44 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    /* height: 100%; */
+    /* width: 60%; */
+    margin-bottom:2px;
 }
 
 .genderBox{
     display: flex;
     justify-content: center;
     width:60%;
-    height: 30%;
-    position: relative;
+    /* height: 30%; */
+    /* position: relative; */
 }
 
 
 .labelGender01{
-    position: absolute;
+    /* position: absolute;
     bottom: 5%;
-    right: 38%;
+    right: 38%; */
     font-size: 20px;
     font-family: 'basicLight';
     src: url('../../font/NotoSansKR-Light.otf') format('truetype');
 }
 
 .labelGender02{
-    position: absolute;
+    /* position: absolute;
     bottom: 5%;
-    right: -3%;
+    right: -3%; */
     font-size: 20px;
     font-family: 'basicLight';
     src: url('../../font/NotoSansKR-Light.otf') format('truetype');
 }
 
 .genderBox> span{
-    width: 100%;
+    width: 50%;
+    display: flex;
+    text-align: center;
+    /* justify-content: center; */
+    align-items: center;
 }
 
 .userMobile, .userDob{
@@ -403,10 +436,29 @@
 input {
     border-radius: 5px;
     border: solid 1px #465D58;
-    height: 100%;
-    width: 100%;
+    width: 200px;
     background: #465D58;
     opacity: 0.9;
+    padding:5px;
+    box-sizing: border-box;
+    font-size:20px;
 }
 
+.submitBox{
+    text-align: center;
+}
 
+#submitBtn{
+    display: none;
+    width: 150px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-family: 'basicLight';
+    text-align: center;
+    color: #465D58;
+    background: none;
+    border: 1px solid #465D58;
+    margin-top: 6%;
+    text-align: center;
+    font-weight: 600;
+}
