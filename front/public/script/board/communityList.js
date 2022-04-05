@@ -5,9 +5,7 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
-    const { user } = response1.data.result;
-    const user_nickname = user.user_nickname;
+
 
     const checks = document.querySelectorAll('#category ul li input');
     const checked = document.querySelectorAll('#category ul li input:checked');
@@ -48,7 +46,6 @@ async function init() {
 
     const paging = document.querySelector('#paging');
 
-    const arrPage2 = []
     for (let i = block + 1; i <= endBlock; i++) {
         const liElement = document.createElement('li');
         const aElement = document.createElement('a');
@@ -108,7 +105,7 @@ async function init() {
                 break;
         }
         td[2].appendChild(aElement);
-        td[3].innerHTML = user_nickname
+        td[3].innerHTML = v.user_nickname;
         td[4].innerHTML = v.board_date;
         td[5].innerHTML = v.board_hit;
 
@@ -214,9 +211,9 @@ async function clickHanlder() {
 /* 클릭 핸들러 여기까지 */
 
 async function pages(num) {
-        const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
-        const { user } = response1.data.result;
-        const user_nickname = user.user_nickname;
+        // const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+        // const { user } = response1.data.result;
+        // const user_nickname = user.user_nickname;
 
         console.log('num', num)
         const tr = document.querySelector('#communityBoardRow');
@@ -265,7 +262,7 @@ async function pages(num) {
             }
             td[2].appendChild(aElement);
 
-            td[3].innerHTML = user_nickname
+            td[3].innerHTML = v.user_nickname
             td[4].innerHTML = v.board_date;
             td[5].innerHTML = v.board_hit;
 
