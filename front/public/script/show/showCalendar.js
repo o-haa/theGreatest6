@@ -143,7 +143,7 @@ async function init(e) {
                 let clone = document.importNode(template.content,true)
                 let btnDate = clone.querySelector('.date') //속성 복사
                 day = (new Date(year,month-1,i)).getDay() //넣을 날짜 받음
-                btnDate.setAttribute("class",`date prev ${year}_${month}_${i}_${day}_0`) //value 속성 생성
+                btnDate.setAttribute("class",`date prev _${year}-${month}-${i}-${day}_0_0`) //value 속성 생성
                 // btnDate.setAttribute("class","date prev") //class 속성 생성
                 btnDate.innerHTML+=i //화면에 띄울 날짜 삽입
                 dates.appendChild(clone)
@@ -153,7 +153,7 @@ async function init(e) {
                 let btnDate = clone.querySelector('.date')
                 // console.log("현재 위치 날짜 : ",year,month,date)
                 day = (new Date(year,month,i)).getDay()
-                btnDate.setAttribute("class",`date ${year}_${month+1}_${i}_${day}_0`)
+                btnDate.setAttribute("class",`date _${year}-${month+1}-${i}-${day}_0_0`)
                 btnDate.innerHTML+=i
                 dates.appendChild(clone)
             }
@@ -161,7 +161,7 @@ async function init(e) {
                 let clone = document.importNode(template.content,true)
                 let btnDate = clone.querySelector('.date')
                 day = (new Date(year,month+1,i)).getDay()
-                btnDate.setAttribute("class",`date next ${year}_${month+2}_${i}_${day}_0`)
+                btnDate.setAttribute("class",`date next _${year}-${month+2}-${i}-${day}_0_0`)
                 btnDate.innerHTML+=i
                 dates.appendChild(clone)
             }
@@ -171,7 +171,7 @@ async function init(e) {
                 let btnDate = clone.querySelector('.date')
                 btnDate.innerHTML+='<div class="date">'+i+'</div>'
                 day = (new Date(year,month,i)).getDay()
-                btnDate.setAttribute("class",`date ${year}_${month+1}_${i}_${day}_0`)
+                btnDate.setAttribute("class",`date _${year}-${month+1}-${i}-${day}_0_0`)
                 dates.appendChild(clone)
             }
             for(let i=1; i<=(nowLastDay==6 ? 0 : 6-nowLastDay); i++){
@@ -179,7 +179,7 @@ async function init(e) {
                 let btnDate = clone.querySelector('.date')
                 btnDate.innerHTML+='<div class="date_next">'+i+'</div>'
                 day = (new Date(year,month+1,i)).getDay()
-                btnDate.setAttribute("class",`date next ${year}_${month+2}_${i}_${day}_0`)
+                btnDate.setAttribute("class",`date next _${year}-${month+2}-${i}-${day}_0_0`)
                 dates.appendChild(clone)
             }
         }
@@ -195,12 +195,62 @@ async function init(e) {
         }
     
         let response = await axios.post('/showCalendar',option)
-        flagAdmin = response.data.result[0]
-        console.log('넌 어디있니',flagAdmin) //일정 정보
-        if(flagAdmin!==''){
-            console.log(flagAdmin.show_date) //일정
-            document.querySelector('.2022_4_6_3_0').setAttribute("class","on")
+        flagAdmin = response.data.result//4월 10일 일정 정보
+        console.log(flagAdmin)
+
+        flagAdmin.forEach(v=>{
+            // 연월일요일 문자열
+        let dayString = ((new Date(v.show_date)).toLocaleDateString())
+
+
+        //시간
+        let timeString = JSON.stringify((new Date(v.show_date)).toLocaleTimeString()) // 한국기준시간 문자열
+        let timeLine = timeString.slice(1,3) //오전,오후 문자열
+        let hour = (timeString.slice(4,6)).padStart(2,"0") //시각 문자열
+        console.log(hour)
+        if(timeLine=='오후'){ hour = `${parseInt(hour)+12}`} //24시 기준 시간표현 문자열
+        
+        //만약 일정정보가 있다면,
+        if(v!==''){
+            //4월10일 timestamp에서 날짜만 split
+            let showlistRecord = ((v.show_date).split('T'))[0]
+
+            //clone한 li에서 button만 리스트로 가져옴
+            const btnList = document.querySelectorAll('.dates > li > button')
+            const adminList = document.querySelectorAll('.dates > li > .dot_main')
+
+            let i = 0
+            btnList.forEach(v=>{
+                let calInfo = v
+                let listName = (btnList[i].className) //날짜에서 가져온 class명
+                let listSplit = ((listName.split('_'))[1]).split('-') //연,월,일,요일
+
+                year = listSplit[0]
+                month = listSplit[1].padStart(2,"0")
+                date = listSplit[2].padStart(2,"0")
+                let listDate = `${year}-${month}-${date}` //연,월,일
+
+                // let listDate
+                // if(month<10 && date<10){
+                //     listDate = `${year}-0${month}-0${date}` //연,월,일
+                // }else if(month>=10 && date<10){
+                //     listDate = `${year}-${month}-0${date}` //연,월,일
+                // }else if(month<10 && date>=10){
+                //     listDate = `${year}-0${month}-${date}` //연,월,일
+                // }else{
+                //     listDate = `${year}-${month}-${date}` //연,월,일
+                // }
+
+                if(showlistRecord === listDate){ 
+                    let adminDot = adminList[i].querySelector('.dotAdmin')
+                    adminDot.setAttribute("class","on dotAdmin")
+                    adminDot.innerHTML = `${v.show_title}`
+                }
+
+                i += 1
+            })
         }
+        })
     }
 
 }
