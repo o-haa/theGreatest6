@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -24,7 +26,6 @@ async function init() {
     aElement.innerHTML = 'Edit';
     upElement.appendChild(aElement);
     
-    console.log(idx)
     const response = await axios.post(`/view/${idx}`,{
         withCredentials:true,
     });
@@ -88,88 +89,140 @@ async function init() {
     });
 
    
-
+    const boardiidx = idx
     const commentBox = document.querySelector('#commentBox>ul')
     const commentForm = document.querySelector('#commentForm')
-    const input = document.querySelector('#hello')
-    
     const commentList = document.querySelector('#commentList')
 
     commentBox.appendChild(commentForm)
     function createForm () {
         const clone = document.importNode(commentForm.content,true)
         const form = clone.querySelector('form')
-        form.addEventListener('submit',submitHandler)
+        
         commentBox.appendChild(clone)
+        form.addEventListener('submit',submitHandler)
     }
 
-
-    let state
     const replay = []
     async function submitHandler(e){
         e.preventDefault()
         const {hello} = e.target
-        // const cmt_idx = length !=0 ? parseInt(state.replay[length-1].cmt_idx+1):1
-        // console.log(result)
+        
         
         const body = {
+            user:user,
             ccontent:hello.value,
             userIdx: user.user_idx,
             user_nickname:user_nickname,
             cmt_date:'2022-04-04'
         }
-        
-        replay.push(body)
 
-        const data = {
-            replay
-        }
-        
-        hello.value=''
-      
+        replay.push(body)
+       
+       
        try{
-        state = await axios.post(`/comment/${idx}`,body)
-        console.log(state.data)
+        const insert = await axios.post(`/comment/${boardiidx}`,body)
+        location.href=`/board/community/view/${idx}`
        }catch(e){
            console.log('/communityviewcmt',e.message)
        }
     
-       
+       hello.value=''
        CommentList()
     }
 
-    const body = {
-        ccontent:input,
-        user_nickname:user_nickname,
-        cmt_date:'2022-04-04'
-    }
-    replay.push(body)
-
     async function CommentList(){
+        const responseList = await axios.post(`/commentList/${boardiidx}`)
+        const cmtList = responseList.data.cmtListResult
         commentBox.innerHTML=''
         createForm()
-        console.log(replay)
-        replay.forEach(v=>{
+        
+        cmtList.forEach(v=>{
             const clone = document.importNode(commentList.content,true)
             const row = clone.querySelector('.commentContent')
             const roww = clone.querySelectorAll('.commentContent+li>span')
-            console.log('v',v)
             
-            row.innerHTML=v.ccontent
-            roww[0].innerHTML=v.user_nickname
+            spanElement = document.createElement('span')
+            spanElement.innerHTML = v.cmt_content
+            spanElement.addEventListener('click',updateHandler)
+
+            const deleteBtn = row.querySelector('.commentDeleteBtn')
+            deleteBtn.addEventListener('click',deleteHandler)
+            row.querySelector('input').value = v.cmt_idx
+            row.prepend(spanElement)
+            roww[0].innerHTML=user_nickname
             roww[1].innerHTML=v.cmt_date
 
             commentBox.appendChild(clone)
-            
         })
         
         try{
-            const response = await axios.post(`/commentList/${idx}`)
-            console.log(state.data)
+            await axios.post(`/commentList/${boardiidx}`)        
         } catch(e){
-            console.log('communityviewcmt',e.message)
+            console.log('/communityviewcmtlist',e.message)
         }
     }
+
+    async function deleteHandler(e){
+        const cmtidx = e.target.parentNode.querySelector('input').value
+        try{
+            const test = await axios.post(`/commentListDlt/${cmtidx}`)   
+            location.href=`/board/community/view/${idx}`
+        } catch (e){
+            console.log('/cmtdelete',e.message)
+        }       
+    }
+
+    async function updateHandler(e){
+        const responseList = await axios.post(`/commentList/${boardiidx}`)
+        const cmtidx = e.target.parentNode.querySelector('input').value
+        const update = e.target.parentNode
+        let click = e.target
+        console.log(click)
+        click.createElement('textarea')
+        click.innerHTML('hello')
+        
+        // click.textContent = 'ji'
+        // console.log(click.textContent)
+
+        
+        
+        
+        
+
+        
+
+        // newCmt[i].cmt_idx= cmtidx
+        // console.log(newCmt[i])
+        // newCmt[i].updateFlag = false
+        
+            
+            // newCmt[index].updateFlag = false
+            // cmtList = {
+            //     ...cmtList,
+            //     newCmt
+            // }
+            
+
+            CommentList()
+
+
+        
+        // const responseList = await axios.post(`/commentList/${boardiidx}`)
+        // const cmtList = responseList.data.cmtListResult
+        // const cmtidx = cmtList[0].cmt_idx
+        // const boardidx = cmtList[0].board_idx
+ 
+
+
+        // try{
+        //     const test = await axios.post(`/commentListUp/${cmtidx}`,cmtList)   
+        //     location.href=`/board/community/view/${idx}`
+        // } catch (e){
+        //     console.log('/cmtdelete',e.message)
+        // }       
+    }
+
 
     CommentList()
     

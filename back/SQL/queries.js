@@ -86,8 +86,9 @@ VALUES(?,?,?,?,?,?)`,
 
 
         commentWrite: 'INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)',
-        commentList: 'SELECT * FROM comment WHERE board_idx = ?'
-
+        commentList: `SELECT *,${cmtDate} FROM comment WHERE board_idx = ?`,
+        commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
+        commentUp:'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
 
 
     //show
