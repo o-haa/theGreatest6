@@ -9,8 +9,12 @@ const multer = require('multer')
 const upload = multer({
     storage : multer.diskStorage({
         destination : (req,file,done)=>{
+<<<<<<< HEAD
             done(null,'/Users/hancoco/workspace/theGreatest6/s_uploads/')
             // done(null,'s_uploads/')
+=======
+            done(null,'public/uploads//s_uploads')
+>>>>>>> f0f34fe41cda9a102bf7af06029e6cc2d054928e
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname)

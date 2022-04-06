@@ -1,5 +1,4 @@
 const pool = require('../../../db');
-const sql = require('../../../SQL/queries')
 
 let response = {
 result: [],
@@ -10,29 +9,49 @@ errno: 1
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
+const bparam = `board_idx,b.user_idx,show_category_idx, board_subject, board_content, board_hit`
+const uparam = `u.user_idx,user_nickname,user_level`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
-    let sql ='';
+    console.log(prepare)
     switch (prepare.length) {
         case 1:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT * 
+            FROM board AS b 
+            LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE b.show_category_idx = ? 
+            ORDER BY b.board_idx DESC`;
             break;
 
         case 2:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} 
+            FROM board AS b 
+            LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE (b.show_category_idx = ?  OR b.show_category_idx = ?)
+            ORDER BY b.board_idx DESC`;
             break;
 
         case 3:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} 
+            FROM board AS b 
+            LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE (b.show_category_idx = ? OR b.show_category_idx = ?  OR b.show_category_idx = ? )
+            ORDER BY b.board_idx DESC`;
             break;
         case 4:
-            sql = `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} 
+            FROM board AS b LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE (b.show_category_idx = ? OR b.show_category_idx = ?  OR b.show_category_idx = ?  OR b.show_category_idx = ? )
+            ORDER BY b.board_idx DESC`;
             break;
     }
     try {
-        // console.log(sql)
         const [result] = await pool.execute(sql, prepare);
         response = {
             ...response,
@@ -49,19 +68,18 @@ exports.communityList = async (req, res) => {
 
 
 exports.communityWrite = async (req,res) =>{                                
-    const {select}=req.body;
-    const sql = "SELECT show_category_idx FROM s_category WHERE show_category = ?";
-    const prepare = [select];
+    const { category, userIdx,subject,content }=req.body;
+    const sql = 'SELECT show_category_idx FROM s_category WHERE show_category = ?';
+    const prepare = [category];
+    console.log(prepare)
 
-    const result = await pool.execute(sql,prepare);
-    const [idx] = result[0];
-    const {subject,content}=req.body;
-    
-    const categoryIdx = idx.show_category_idx;
-    const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)';
-    
-    const prepare2 = ['134',subject,content,categoryIdx];
+    const [[result]] = await pool.execute(sql,prepare);
+    const categoryIdx = result.show_category_idx;
 
+    const sql2 = `INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) 
+                VALUES(?,?,?,?)`;
+    
+    const prepare2 = [userIdx,subject,content,categoryIdx];
     try{
         const [result] = await pool.execute(sql2,prepare2);
         response = {
@@ -105,7 +123,7 @@ exports.communityWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywright',e.message);
+        console.log('/communitywrite',e);
     };
 }
 
@@ -254,16 +272,20 @@ exports.communityComment = async (req,res)=>{
 
 exports.communityCoList = async (req,res)=>{
     const {idx}=req.params;
-    const prepare = [idx];
+    const boardIdxPre = idx;
+
+    console.log('cookie',req.cookies.user)
+
+    const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
 
     try{
-        const [result] = await pool.execute(sql.commentList,prepare)
+        const [cmtListResult] = await pool.execute(sql.commentList,prepare)
         response = {
-            result,
-            length: result.length,
+            ...response,
+            cmtListResult,
             errno: 0
         } 
-        // console.log('start',cmtListResult)
+        console.log('start',cmtListResult)
 
     }catch(e){
         console.log('communitycolist',e.message)
@@ -289,21 +311,22 @@ exports.communityCoDlt = async (req,res)=>{
 }
 
 exports.communityCoUp = async (req,res)=>{
-    const { cmtidx } = req.params;
-    const { updateComment } = req.body
-    const prepare = [updateComment, cmtidx]
-    console.log(prepare)
+    const{idx}=req.params;
+    const ccontent = req.body[0].cmt_content
+    const prepare = [ccontent,idx]
+    
     try{
         const [result] = await pool.execute(sql.commentUp,prepare);
         response = {
             ...response,
             result: {
-                affectedRows: result.affectedRows
+                affectedRows: result.affectedRows,
+                insertId: result.insertId,
             },
             errno: 0
         }
     }catch(e){
-        console.log('/commentup',e)
+        console.log('/commentup',e.message)
     }
     
 }

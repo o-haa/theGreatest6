@@ -167,6 +167,15 @@
     background: #465D58;
 }
 
+#signOut {
+    background: #a5a5a5;
+    padding: 3px 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-left: 18%;
+    color:#465D59;
+}
+
 
 
 #tableBox{
@@ -197,12 +206,13 @@ input {
 
 /* 베네핏*/
 #tableBox{
-    padding: 3% 3%;
+    padding: 3%;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 94%;
-    height: 88.3%;
+    width: 100%;
+    height: 100%;
     border-radius: 17px;
     opacity: 0.9;
     background: #F4D3AA;
@@ -210,29 +220,24 @@ input {
 
 
 caption{
-    background: red;
+    background: #a8bebf;
     width: 100%;
     height: 100%;
+    border-radius: 30px;
 }
 
 table{
     width:100%;
     margin:3% auto 0 auto;
     letter-spacing: 0.5px;
-    border-spacing: 0 3px;
-    background: #465D58;
+    border-spacing: 5% 0;
+    /* background: #465D58; */
 }
 
-td,th{
+td{
     padding:7px 12px;
     border-bottom:1px solid #eee;
     text-align: center;
-}
-
-th{
-    background: #a8bebf;
-    border-bottom: 2px solid #465d59;
-    height: 25px;
 }
 
 
