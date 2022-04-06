@@ -28,7 +28,7 @@ async function init() {
     test = {
         ...response
     };
-
+    console.log(response)
     const totalRows = response.data.result.length;
     const viewRows = 10;
     const pagingBlock = 10;

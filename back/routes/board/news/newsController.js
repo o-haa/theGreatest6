@@ -52,6 +52,7 @@ exports.newsWrite = async (req,res) =>{
 exports.newsView = async (req,res) => {
     const{idx}=req.params;
     const prepare = [idx];
+    console.log(idx)
 
     const hitSql = `UPDATE b_news SET news_hit = news_hit + 1 WHERE board_news_idx = ${idx}`
     const hitResult = await pool.execute(hitSql);
