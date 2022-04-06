@@ -65,20 +65,17 @@ async function init() {
         if(nowFirstDay!==0){
         for(let i=(prevLastDate+1) - nowFirstDay; i<=prevLastDate; i++){
             let clone = document.importNode(template.content,true)
-            let btnDate = clone.querySelector('.date_small')
-            day = (new Date(year,month-1,i)).getDay()
-            btnDate.setAttribute("value",`${year}/${month}/${i}/${day}_0/0`)
-            btnDate.setAttribute("class","date prev")
-            btnDate.innerHTML+=i
+            let btnDate = clone.querySelector('.date_small') //속성 복사
+            day = (new Date(year,month-1,i)).getDay() //넣을 날짜 받음
+            btnDate.setAttribute("class",`date prev _${year}-${month}-${i}-${day}_0_0`) //value 속성 생성
+            btnDate.innerHTML+=i //화면에 띄울 날짜 삽입
             dates.appendChild(clone)
         }
         for(let i=1; i<=nowLastDate; i++){
             let clone = document.importNode(template.content,true)
             let btnDate = clone.querySelector('.date_small')
-            btnDate.innerHTML+='<div>'+'</div>'
             day = (new Date(year,month,i)).getDay()
-            btnDate.setAttribute("value",`${year}/${month+1}/${i}/${day}_0/0`)
-            btnDate.setAttribute("class","date")
+            btnDate.setAttribute("class",`date _${year}-${month+1}-${i}-${day}_0_0`)
             btnDate.innerHTML+=i
             dates.appendChild(clone)
         }

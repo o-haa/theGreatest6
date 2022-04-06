@@ -149,7 +149,6 @@ async function init(e) {
             for(let i=1; i<=nowLastDate; i++){
                 let clone = document.importNode(template.content,true)
                 let btnDate = clone.querySelector('.date')
-                // console.log("현재 위치 날짜 : ",year,month,date)
                 day = (new Date(year,month,i)).getDay()
                 btnDate.setAttribute("class",`date _${year}-${month+1}-${i}-${day}_0_0`)
                 btnDate.innerHTML+=i
