@@ -2,7 +2,7 @@ let test = {};
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-    axios.defaults.baseURL = 'http://localhost:4001/board/community';
+    axios.defaults.baseURL = 'http://localhost:4001/board/news';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
     const checks = document.querySelectorAll('#category ul li input');
@@ -20,7 +20,7 @@ async function init() {
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
     } catch (e) {
-        console.log('communitylistinit', e.message);
+        console.log('newslistinit', e.message);
     }
 
     test = {
@@ -59,18 +59,17 @@ async function init() {
     const tbody = document.querySelector('table > tbody');
 
     await Nodes.forEach(v => {
-        const showCategory = v.show_category_idx
         const clone = document.importNode(tr.content, true);
         const td = clone.querySelectorAll('td');
         const aElement = document.createElement('a');
-        aElement.href = '/board/community/view/' + v.board_idx;
-        aElement.innerHTML = v.board_subject;
+        aElement.href = '/board/community/view/' + v.board_news_idx;
+        aElement.innerHTML = v.news_subject;
 
-        td[0].innerHTML = v.board_idx;
+        td[0].innerHTML = v.board_news_idx;
         td[1].appendChild(aElement);
         td[2].innerHTML = v.user_nickname;
-        td[3].innerHTML = v.board_date;
-        td[4].innerHTML = v.board_hit;
+        td[3].innerHTML = v.news_date;
+        td[4].innerHTML = v.news_hit;
 
         tbody.appendChild(clone);
     })
@@ -146,8 +145,8 @@ async function pages(num) {
         const value = test.data.result;
 
         const aElement = document.createElement('a');
-        aElement.href = '/board/community//view' + value.board_idx;
-        aElement.innerHTML = value.board_subject;
+        aElement.href = '/board/community//view' + value.board_news_idx;
+        aElement.innerHTML = value.news_subject;
 
         const viewRows = 10;
         const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows);
@@ -163,13 +162,13 @@ async function pages(num) {
             const clone = document.importNode(tr.content, true);
             const td = clone.querySelectorAll('td');
             const aElement = document.createElement('a');
-            aElement.href = '/board/community/view/' + v.board_idx;
-            aElement.innerHTML = v.board_subject;
-            td[0].innerHTML = v.board_idx;
+            aElement.href = '/board/community/view/' + v.board_news_idx;
+            aElement.innerHTML = v.news_subject;
+            td[0].innerHTML = v.board_news_idx;
             td[1].appendChild(aElement);
             td[2].innerHTML = v.user_nickname
-            td[3].innerHTML = v.board_date;
-            td[4].innerHTML = v.board_hit;
+            td[3].innerHTML = v.news_date;
+            td[4].innerHTML = v.news_hit;
 
             const tbody1 = document.querySelector('table > tbody');
             tbody1.appendChild(clone);

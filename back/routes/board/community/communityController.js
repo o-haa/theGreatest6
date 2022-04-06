@@ -125,7 +125,7 @@ exports.communityWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywrite',e);
+        console.log('/communitywrite',e.message);
     };
 }
 
@@ -189,12 +189,12 @@ exports.communityUpdate = async (req,res)=>{
     
     const [selectidx] = result[0];
     const {subject,content}=req.body;
-    const categoryIdx = selectidx.show_category_id;
+    const categoryIdx = selectidx.show_category_idx;
     const prepare2 = [subject,content,categoryIdx,idx];
 
     try{
         
-        const [result] = await pool.execute(sql2,prepare2);
+        const [result] = await pool.execute(sql.communityUpdate,prepare2);
         const response = {
             result:{
                 row:result.affectedRows,

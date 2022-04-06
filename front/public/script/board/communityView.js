@@ -76,10 +76,14 @@ async function init() {
     deleteFrm.addEventListener('submit',
         async function deleteSubmit(e) {
             e.preventDefault();
-
+            const uidx = e.target.parentNode.querySelector('input[id=useridx]').value
+            if(user.user_idx != uidx){
+                
+            }
+            
             try {
                 await axios.post(`/delete/${idx}`);
-                location.href = '/board/community/list';
+                // location.href = '/board/community/list';
             } catch (e) {
                 console.log('communityviewdlt', e.message)
                 alert('try again');
