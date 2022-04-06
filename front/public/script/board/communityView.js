@@ -8,7 +8,7 @@ async function init() {
     const { user } = response1.data.result;
     // const user_nickname = user.user_nickname;
 
-    const [, , , , idx] = location.pathname.split('/');
+    const [, , , , bIdx] = location.pathname.split('/');
     const boardIdx = document.querySelector('#idx');
     const category = document.querySelector('#category')
     const subject = document.querySelector('#subject');
@@ -19,11 +19,11 @@ async function init() {
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
-    aElement.href = `/board/community/update/` + `${idx}`;
+    aElement.href = `/board/community/update/` + `${bIdx}`;
     aElement.innerHTML = 'Edit';
     upElement.appendChild(aElement);
 
-    const response = await axios.post(`/view/${idx}`, {
+    const response = await axios.post(`/view/${bIdx}`, {
         withCredentials: true,
     });
 
@@ -51,7 +51,7 @@ async function init() {
                 break;
         }
 
-        boardIdx.innerHTML = idx;
+        boardIdx.innerHTML = bIdx;
         subject.innerHTML = board_subject;
         nickname.innerHTML = user_nickname
         date.innerHTML = board_date;
@@ -81,8 +81,9 @@ async function init() {
             }
             
             try {
-                await axios.post(`/delete/${idx}`);
-                // location.href = '/board/community/list';
+
+                await axios.post(`/delete/${bIdx}`);
+                location.href = '/board/community/list';
             } catch (e) {
                 console.log('communityviewdlt', e.message)
                 alert('try again');
@@ -91,7 +92,7 @@ async function init() {
         });
 
 
-    const boardiidx = idx
+    const boardiidx = bIdx;
     const commentBox = document.querySelector('#commentBox')
     const commentForm = document.querySelector('#commentForm') //템플릿
     const commentList = document.querySelector('#commentList')  //템플릿
@@ -123,7 +124,7 @@ async function init() {
 
         try {
             const insert = await axios.post(`/comment/${boardiidx}`, body)
-            location.href = `/board/community/view/${idx}`
+            location.href = `/board/community/view/${bIdx}`
         } catch (e) {
             console.log('/communityviewcmt', e.message)
         }
@@ -194,7 +195,7 @@ async function init() {
         const cmtidx = e.target.parentNode.querySelector('input').value
         try {
             const test = await axios.post(`/commentListDlt/${cmtidx}`)
-            location.href = `/board/community/view/${idx}`
+            location.href = `/board/community/view/${bIdx}`
         } catch (e) {
             console.log('/cmtdelete', e.message)
         }
@@ -232,7 +233,7 @@ async function init() {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data)
                 if (response.data.errno !== 0) throw new Error
                 console.log(response.data)
-                location.href = `/board/community/view/${idx}`
+                location.href = `/board/community/view/${bIdx}`
             } catch (e) {
                 console.log('/communityview', e.message)
             }

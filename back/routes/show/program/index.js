@@ -9,11 +9,10 @@ const multer = require('multer')
 const upload = multer({
     storage : multer.diskStorage({
         destination : (req,file,done)=>{
-            done(null,'uploads//s_uploads')
+            done(null,'uploads/s_uploads')
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname)
-            // const filename = path.basename(file.originalname,ext) + '_' + Date.now() + ext
             const filename = path.basename(file.originalname,ext) + '_' + ext
             done(null,filename)
         }
@@ -25,6 +24,7 @@ router.post('/showlist', programController.showList)
 router.post('/showcard', programController.showCard)
 router.post('/showcalendar', programController.showCalendar)
 
+router.post('/getcategories',programController.getCategories)
 router.post('/showwrite', upload.single('upload'), programController.showWrite)
 router.post('/showview/:idx', programController.showView)
 router.post('/showmodify/:idx',  upload.single('upload'), programController.showModifyGetInfo)
