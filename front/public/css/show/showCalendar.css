@@ -201,8 +201,12 @@
     margin-bottom: 7px;
 }
 
-.dotCustomer{
+.dotCustomer.on{
     height: 18px;
     width: 100%;
     background: #a8bebf;
+}
+.dotCustomer{
+    height: 18px;
+    width: 100%;
 }

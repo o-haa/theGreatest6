@@ -11,6 +11,12 @@ async function init(e) {
 
     year_month.innerHTML = `${calMonth} ${year}`
 
+    const liElement = document.querySelector()
+    let clone = document.importNode(template.content,true)
+    // 작품갯수 먼저 다 채우고 거기에 링크 걸어서 갯수만큼 자동으로 생성하게 만들기
+    let img = clone.querySelector('imgBox')
+
+
     const btnLeft = mainContent.querySelector('.miniBtnL')
     const btnRight = mainContent.querySelector('.miniBtnR')
     const homeBtn = document.querySelector('#home');
