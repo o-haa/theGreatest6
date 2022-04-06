@@ -187,20 +187,17 @@ exports.communityDelete = async (req,res) =>{
 
 exports.communityUpdate = async (req,res)=>{
     const{idx}=req.params;
-
     const {select}=req.body;
-    const sql = "SELECT * FROM s_category WHERE show_category = ?";
     const selectPre = [select];
-    const result = await pool.execute(sql,selectPre);
-    
-    const [selectidx] = result[0];
+    const [[result]] = await pool.execute(sql.getCategory,selectPre);
+
     const {subject,content}=req.body;
-    const categoryIdx = selectidx.show_category_id;
+    const categoryIdx = result.show_category_idx
     const prepare2 = [subject,content,categoryIdx,idx];
 
     try{
         
-        const [result] = await pool.execute(sql2,prepare2);
+        const [result] = await pool.execute(sql.communityUpdate,prepare2);
         const response = {
             result:{
                 row:result.affectedRows,

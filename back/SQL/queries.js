@@ -74,8 +74,8 @@ VALUES(?,?,?,?,?,?)`,
     communityDelete: 'DELETE FROM board WHERE board_idx = ? ',
 
     getCategory: 'SELECT * FROM s_category WHERE show_category = ?',
-        communityUpdate: 'UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?',
-        communityUpdateFile: `UPDATE b_file SET 
+    communityUpdate: 'UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?',
+    communityUpdateFile: `UPDATE b_file SET 
         file_originalname = ?,
         file_storedname = ?,
         file_size = ?,
@@ -85,8 +85,8 @@ VALUES(?,?,?,?,?,?)`,
         `,
 
 
-        commentWrite: 'INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)',
-        commentList: `SELECT cmt_idx,board_idx, c.user_idx, user_id, user_nickname, user_level, cmt_content, ${cmtDate}, cmt_update_flag
+    commentWrite: 'INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)',
+    commentList: `SELECT cmt_idx,board_idx, c.user_idx, user_id, user_nickname, user_level, cmt_content, ${cmtDate}, cmt_update_flag
         FROM comment AS c 
         LEFT OUTER JOIN user AS u
         ON c.user_idx = u.user_idx
@@ -95,8 +95,8 @@ VALUES(?,?,?,?,?,?)`,
 
 
 
-        commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
-        commentUp:'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?'
+    commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
+    commentUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?'
 
 
     //show
