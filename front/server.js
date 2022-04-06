@@ -16,7 +16,8 @@ nunjucks.configure('views',{
 app.use(cookieParser());
 app.use(cors({
     origin:true,
-    credentials:true 
+    credentials:true,
+    allowedHeaders:['Content-type','Authorization'],
 }))
 
 app.use(express.static('public'));

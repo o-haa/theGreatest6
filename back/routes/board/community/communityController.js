@@ -7,54 +7,11 @@ result: [],
 errno: 1
 };
 
-
-const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
-const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
-const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
-const bparam = `board_idx,b.user_idx,show_category_idx, board_subject, board_content, board_hit`
-const uparam = `u.user_idx,user_nickname,user_level`
-const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
-
 exports.communityList = async (req, res) => {
-    const { prepare } = req.body;
-    console.log(prepare)
-    switch (prepare) {
-        case 1:
-            sql = `SELECT * 
-            FROM board AS b 
-            LEFT OUTER JOIN user AS u 
-            ON b.user_idx = u.user_idx 
-            WHERE b.show_category_idx = ? 
-            ORDER BY b.board_idx DESC`;
-            break;
-
-        case 2:
-            sql = `SELECT ${bparam},${uparam},${date} 
-            FROM board AS b 
-            LEFT OUTER JOIN user AS u 
-            ON b.user_idx = u.user_idx 
-            WHERE (b.show_category_idx = ?  OR b.show_category_idx = ?)
-            ORDER BY b.board_idx DESC`;
-            break;
-
-        case 3:
-            sql = `SELECT ${bparam},${uparam},${date} 
-            FROM board AS b 
-            LEFT OUTER JOIN user AS u 
-            ON b.user_idx = u.user_idx 
-            WHERE (b.show_category_idx = ? OR b.show_category_idx = ?  OR b.show_category_idx = ? )
-            ORDER BY b.board_idx DESC`;
-            break;
-        case 4:
-            sql = `SELECT ${bparam},${uparam},${date} 
-            FROM board AS b LEFT OUTER JOIN user AS u 
-            ON b.user_idx = u.user_idx 
-            WHERE (b.show_category_idx = ? OR b.show_category_idx = ?  OR b.show_category_idx = ?  OR b.show_category_idx = ? )
-            ORDER BY b.board_idx DESC`;
-            break;
-    }
+    const {category} = req.body;
+    const prepare = [category]
     try {
-        const [result] = await pool.execute(sql, prepare);
+        const [result] = await pool.execute(sql.communityList,prepare);
         response = {
             ...response,
             result,
@@ -70,7 +27,6 @@ exports.communityList = async (req, res) => {
 
 exports.communityWrite = async (req,res) =>{                                
     const { category, userIdx,subject,content }=req.body;
-    const sql = 'SELECT show_category_idx FROM s_category WHERE show_category = ?';
     const prepare = [category];
 
     const [[result]] = await pool.execute(sql,prepare);
@@ -99,7 +55,7 @@ exports.communityWrite = async (req,res) =>{
 
         if(req.file.size > 0){
 
-            const [result] = await pool.execute(Sql.communityWriteFile,fPrepare);
+            const [result] = await pool.execute(sql.communityWriteFile,fPrepare);
             response = {
                 result:{
                     row:result.affectedRows,
@@ -134,7 +90,6 @@ exports.communityView = async (req,res) => {
             errno:0
         };
         res.json(response);
-        // console.log(response)
     } catch(e) {
         console.log('/communityview',e.message);
     };

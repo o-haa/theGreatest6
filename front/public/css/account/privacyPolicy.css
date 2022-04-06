@@ -1,0 +1,69 @@
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
+@import url('../index/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
+@import url('../index/_contentLayout.css'); /* 본문 오른쪽 메인박스 틀 */
+
+
+#wrap{
+    overflow: hidden;
+    margin: 0 auto;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+a:link, :active, :visited{
+    color: #A5A5A5;
+}
+
+body{
+    background: black;
+    font-family: 'MADE';
+}
+
+.backGround{
+    background: black;
+    background-position: 100%;
+    background-size: 100%;
+}
+
+#content{
+    margin: 0 auto;
+    background: white;
+    width: 600px;
+    height: 580px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    border-radius: 20px;
+    transform: translateY(20%);
+    padding: 10px;
+}
+
+#whiteBox{
+    width: 90%;
+    height: 450px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+    padding: 5%;
+    padding-top: 60px;
+}
+
+#whiteBox:first-child{
+    font-family: 'MADE';
+    font-size: 30px;
+}
+
+#whiteBox  {
+    font-family: 'MADE';
+    font-size: 25px;
+}
+
+#agree{
+    font-size: 20px;
+}

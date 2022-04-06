@@ -64,7 +64,7 @@ exports.signUp = async (req, res) => {
       errno: 0
     };
   } catch (e) {
-    console.log('/signup',e.message);
+    console.log('/signup',e);
   }
   res.json(response);
 }
