@@ -141,12 +141,6 @@ exports.communityView = async (req,res) => {
                 FROM board AS a LEFT OUTER JOIN b_file AS b 
                 ON a.board_idx = b.board_idx 
                 WHERE a.board_idx = ?`;
-    
-    // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
-    // const imgPrepare = [idx]
-
-    // const imgIdx = await pool.execute(imgSql,imgPrepare)
-    // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
 
    
     try{

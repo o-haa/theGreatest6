@@ -72,9 +72,8 @@ exports.newsView = async (req,res) => {
 
 exports.newsDelete = async (req,res) =>{
     const{idx}=req.params;
-    const sql = `DELETE FROM b_news WHERE board_news_idx = ? `;
+    const sql = `DELETE b_news FROM b_news b INNER JOIN user u ON b.user_idx = u.user_idx WHERE board_news_idx = ? `;
     const prepare = [idx];
-    console.log(idx)
     try{
         const [result] = await pool.execute(sql,prepare);
         response = {
