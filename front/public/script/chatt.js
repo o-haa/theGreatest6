@@ -1,4 +1,6 @@
-const socket = io()
+let socket = io.connect(`http://localhost:3001/chat`,{
+    transports: ['websocket']
+})
 
 //접속 되었을 때 실행
 socket.on('connect',()=>{
@@ -6,23 +8,23 @@ socket.on('connect',()=>{
 })
 
 //서버로부터 데이터 받은 경우
-socket.on('update',(date)=>{
+socket.on('update',(data)=>{
     const chat =document.querySelector('#chat')
     const message = document.createElement('div')
-    const node = document.createTextNode(`${data.name}: ${data.message}`)
-    const className = ''
+    const node = document.createTextNode(`${data.user_nickname}: ${data.message}`)
+    let className = ''
 
     //타입에 따라 적용할 클래스를 다르게 지정
     switch(data.type){
         case 'message':
             className = 'other'
-        break;
+        break
         case 'connect':
             className = 'connect'
-        break;
+        break
         case 'disconnect':
             className = 'disconnect'
-        break;
+        break
     }
 
     message.classList.add(className)
@@ -32,15 +34,18 @@ socket.on('update',(date)=>{
 
 //메시지 전송 함수
 function send(){
-    const message = document.querySelector('#chatBox').value 
+    const message = document.querySelector('#test').value 
 
     //메세지 보내면 빈칸으로 변경
-    message = ''
+    document.querySelector('#test').value  = ''
 
     //내가 전송한 메시지 창에 표시
-    const me = document.querySelector('.me')
-    const node = document.createTextNode(message)
-    me.appendChild(node)
+    var chat = document.getElementById('chat')
+    var msg = document.createElement('div')
+    var node = document.createTextNode(message)
+    msg.classList.add('me')
+    msg.appendChild(node)
+    chat.appendChild(msg)
 
     //서버로 message 이벤트 전달 + 데이터와 함께
     socket.emit('message',{type:'message', message:message})
