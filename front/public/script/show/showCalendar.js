@@ -125,7 +125,6 @@ async function init(e) {
         month = today.getMonth()
         date = today.getDate()
         let day
-        console.log("현재 위치 날짜 : ",year,month,date)
 
         let prevMonth = new Date(year, month, 0) //저번달 마지막날 정보 객체
         let prevLastDate = prevMonth.getDate()  //저번달 마지막 날
@@ -144,7 +143,6 @@ async function init(e) {
                 let btnDate = clone.querySelector('.date') //속성 복사
                 day = (new Date(year,month-1,i)).getDay() //넣을 날짜 받음
                 btnDate.setAttribute("class",`date prev _${year}-${month}-${i}-${day}_0_0`) //value 속성 생성
-                // btnDate.setAttribute("class","date prev") //class 속성 생성
                 btnDate.innerHTML+=i //화면에 띄울 날짜 삽입
                 dates.appendChild(clone)
             }
@@ -187,19 +185,17 @@ async function init(e) {
         makedot(year,month,date)
     }
     
+    //일정 그리는 함수
     async function makedot(year,month,date){
         let option={
             year,
             month,
             date
         }
-    
         let response = await axios.post('/showCalendar',option)
-        flagAdmin = response.data.result//4월 10일 일정 정보
-        console.log(flagAdmin)
 
+        flagAdmin = response.data.result
         flagAdmin.forEach(v=>{
-            // 연월일요일 문자열
         let dayString = ((new Date(v.show_date)).toLocaleDateString())
 
 
@@ -226,27 +222,15 @@ async function init(e) {
                 let listSplit = ((listName.split('_'))[1]).split('-') //연,월,일,요일
 
                 year = listSplit[0]
-                month = listSplit[1].padStart(2,"0")
+                month = listSplit[1].padStart(2,"0") //두자리로 만들어주는 함수
                 date = listSplit[2].padStart(2,"0")
                 let listDate = `${year}-${month}-${date}` //연,월,일
-
-                // let listDate
-                // if(month<10 && date<10){
-                //     listDate = `${year}-0${month}-0${date}` //연,월,일
-                // }else if(month>=10 && date<10){
-                //     listDate = `${year}-${month}-0${date}` //연,월,일
-                // }else if(month<10 && date>=10){
-                //     listDate = `${year}-0${month}-${date}` //연,월,일
-                // }else{
-                //     listDate = `${year}-${month}-${date}` //연,월,일
-                // }
 
                 if(showlistRecord === listDate){ 
                     let adminDot = adminList[i].querySelector('.dotAdmin')
                     adminDot.setAttribute("class","on dotAdmin")
                     adminDot.innerHTML = `${v.show_title}`
                 }
-
                 i += 1
             })
         }

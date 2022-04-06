@@ -10,10 +10,10 @@ const upload = multer({
     storage : multer.diskStorage({
         destination : (req,file,done)=>{
             done(null,'/Users/hancoco/workspace/theGreatest6/s_uploads/')
+            // done(null,'s_uploads/')
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname)
-            // const filename = path.basename(file.originalname,ext) + '_' + Date.now() + ext
             const filename = path.basename(file.originalname,ext) + '_' + ext
             done(null,filename)
         }
