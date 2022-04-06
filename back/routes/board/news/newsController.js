@@ -6,7 +6,7 @@ let response = {
     errno: 1
     };
 
-const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+const date = `DATE_FORMAT(news_date, '%Y-%m-%d') AS news_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 
 exports.newsList = async (req, res) => {
@@ -27,10 +27,11 @@ exports.newsList = async (req, res) => {
 
 
 
-exports.newsWrite = async (req,res) =>{                                
+exports.newsWrite = async (req,res) =>{     
+    const {subject, content}=req.body;
+    const {user_idx}=req.body.user                
     const sql = 'INSERT INTO b_news(user_idx,news_subject,news_content) VALUES(?,?,?)';
-    
-    const prepare = [subject,content,categoryIdx];
+    const prepare = [user_idx,subject,content];
 
     try{
         const [result] = await pool.execute(sql,prepare);
@@ -41,6 +42,7 @@ exports.newsWrite = async (req,res) =>{
             },
             errno:0    
         };
+        console.log(result)
         res.json(response)
     }catch(e){
         console.log('/newswright',e.message);

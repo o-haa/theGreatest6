@@ -2,13 +2,14 @@
 
 document.addEventListener('DOMContentLoaded', init);
 async function init() {
-    axios.defaults.baseURL = 'http://localhost:4001/board/community';
+    axios.defaults.baseURL = 'http://localhost:4001/board/news';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.withCredentials = true;
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
     const user_nickname = user.user_nickname;
+    console.log(user)
 
     const [, , , , idx] = location.pathname.split('/');
     const boardIdx = document.querySelector('#idx');
@@ -20,7 +21,7 @@ async function init() {
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
-    aElement.href = `/board/community/update/` + `${idx}`;
+    aElement.href = `/board/news/update/` + `${idx}`;
     aElement.innerHTML = 'Edit';
     upElement.appendChild(aElement);
 
@@ -33,7 +34,7 @@ async function init() {
 
         boardIdx.innerHTML = idx;
         subject.innerHTML = news_subject;
-        nickname.innerHTML = 
+        nickname.innerHTML = user_nickname
         date.innerHTML = news_date;
         hit.innerHTML = news_hit;
         content.innerHTML = news_content;
@@ -49,9 +50,9 @@ async function init() {
 
             try {
                 await axios.post(`/delete/${idx}`);
-                location.href = '/board/community/list';
+                location.href = '/board/news/list';
             } catch (e) {
-                console.log('communityviewdlt', e.message)
+                console.log('newsviewdlt', e.message)
                 alert('try again');
             };
 

@@ -62,7 +62,7 @@ async function init() {
         const clone = document.importNode(tr.content, true);
         const td = clone.querySelectorAll('td');
         const aElement = document.createElement('a');
-        aElement.href = '/board/community/view/' + v.board_news_idx;
+        aElement.href = '/board/news/view/' + v.board_news_idx;
         aElement.innerHTML = v.news_subject;
 
         td[0].innerHTML = v.board_news_idx;
@@ -133,7 +133,7 @@ async function clickHanlder() {
         // paging.appendChild = liElement;
 
     } catch (e) {
-            console.log('communitylist', e.message);
+            console.log('newslist', e.message);
         }
     }
 
@@ -145,7 +145,7 @@ async function pages(num) {
         const value = test.data.result;
 
         const aElement = document.createElement('a');
-        aElement.href = '/board/community//view' + value.board_news_idx;
+        aElement.href = '/board/news//view' + value.board_news_idx;
         aElement.innerHTML = value.news_subject;
 
         const viewRows = 10;
@@ -162,7 +162,7 @@ async function pages(num) {
             const clone = document.importNode(tr.content, true);
             const td = clone.querySelectorAll('td');
             const aElement = document.createElement('a');
-            aElement.href = '/board/community/view/' + v.board_news_idx;
+            aElement.href = '/board/news/view/' + v.board_news_idx;
             aElement.innerHTML = v.news_subject;
             td[0].innerHTML = v.board_news_idx;
             td[1].appendChild(aElement);

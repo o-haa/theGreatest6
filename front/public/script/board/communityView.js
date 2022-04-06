@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', init);
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
@@ -8,7 +6,7 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
-    const user_nickname = user.user_nickname;
+    // const user_nickname = user.user_nickname;
 
     const [, , , , idx] = location.pathname.split('/');
     const boardIdx = document.querySelector('#idx');
@@ -28,6 +26,7 @@ async function init() {
     const response = await axios.post(`/view/${idx}`, {
         withCredentials: true,
     });
+
 
     const showCategory = response.data.result[0].show_category_idx
 

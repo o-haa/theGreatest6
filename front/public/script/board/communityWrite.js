@@ -34,27 +34,6 @@ async function init() {
             
         }
     }
-
-    
-    
-    // src.addEventListener('load',getDataUrl)
-    // function getDataUrl(img){
-    //     const canvas = document.createElement('canvas');
-    //     const ctx = canvas.getContext("2d");
-    //     canvas.width = src.width;
-    //     canvas.height = src.height;
-    //     ctx.drawImage(src,0,0);
-        
-    //     const base64 = canvas.toDataURL('image/*');
-    //     console.log(base64)
-    //     // const strImage = base64.replace(/^data:image\/[a-z]+;base64,/,"");
-    //     try{
-    //         localStorage.setItem('file',JSON.stringify(base64))
-    //         console.log('good')
-    //     } catch(e){
-    //         console.log('localstorage fail',e.message)
-    //     }
-    // }
     
     const writeFrm = document.querySelector('#writeFrm');
     
