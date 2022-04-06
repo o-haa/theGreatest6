@@ -27,6 +27,7 @@ async function init() {
         ...response
     };
 
+    console.log(response)
     const totalRows = response.data.result.length;
     const viewRows = 10;
     const pagingBlock = 10;
@@ -59,6 +60,7 @@ async function init() {
     const tbody = document.querySelector('table > tbody');
 
     await Nodes.forEach(v => {
+        console.log(v)
         const clone = document.importNode(tr.content, true);
         const td = clone.querySelectorAll('td');
         const aElement = document.createElement('a');
