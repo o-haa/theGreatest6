@@ -131,7 +131,8 @@ async function init() {
 
     async function CommentList() {
         const responseList = await axios.post(`/commentList/${boardiidx}`)
-        const cmtList = responseList.data.result
+        const {cmtList} = responseList.data
+        console.log(cmtList)
         commentBox.innerHTML = ''
         createForm()
 
