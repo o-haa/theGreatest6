@@ -1,4 +1,6 @@
 const pool = require('../../../db');
+let sql = require('../../../SQL/queries.js')
+
 
 let response = {
 result: [],
@@ -272,21 +274,18 @@ exports.communityComment = async (req,res)=>{
 
 exports.communityCoList = async (req,res)=>{
     const {idx}=req.params;
-    const boardIdxPre = idx;
+    const prepare = [idx]
 
-    console.log('cookie',req.cookies.user)
-
-    const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
+    // const boardIdxPre = idx;
+    // const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
 
     try{
-        const [cmtListResult] = await pool.execute(sql.commentList,prepare)
+        const [cmtList] = await pool.execute(sql.commentList,prepare)
         response = {
             ...response,
-            cmtListResult,
+            cmtList,
             errno: 0
-        } 
-        console.log('start',cmtListResult)
-
+        }   
     }catch(e){
         console.log('communitycolist',e.message)
     }
@@ -311,10 +310,9 @@ exports.communityCoDlt = async (req,res)=>{
 }
 
 exports.communityCoUp = async (req,res)=>{
-    const{idx}=req.params;
-    const ccontent = req.body[0].cmt_content
-    const prepare = [ccontent,idx]
-    
+    const{cmtIdx}=req.params;
+    const {updateComment} = req.body
+    const prepare = [updateComment,cmtIdx]
     try{
         const [result] = await pool.execute(sql.commentUp,prepare);
         response = {
