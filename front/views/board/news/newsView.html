@@ -5,28 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News view</title>
+    <script src="/script/board/NewsView.js"></script>
+    <link href="/css/board/boardView.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    {% include "nav.html" %}
-    <h3>News View</h3>
-    <table>
-        <tr>
-            <td>subject : </td>
-            <td id="subject"></td>
-        </tr>
-        <tr>
-            <td>writer : </td>
-            <td id="writer"></td>
-        </tr>
-        <tr>
-            <td>date : </td>
-            <td id="date"></td>
-        </tr>
-        <tr>
-            <td>content : </td>
-            <td id="content"></td>
-        </tr>
-    </table>
-    <a href="/board/news/list">List</a>
+    <div id="wrap">
+        {% include "nav.html" %}
+            <div id="label">
+                <span>NEWS</span>
+            </div>
+            <table cellspacing="0" cellpadding="0" id="viewTable">
+                <tr>
+                    <th>Num</th>
+                    <th>Subject</th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                    <th id="eye">
+                        <img src="/img/border/eye_hit.png">
+                    </th>
+                </tr>
+                <tr id="viewHead">
+                    <td id="idx"></td>
+                    <td id="subject"></td>
+                    <td id="writer"></td>
+                    <td id="date"></td>
+                    <td id="hit"></td>
+                </tr>
+            </table>
+            <div id="viewContent">
+                <div id="bContent"></div>
+                <div id="img">
+                    <!-- <img src="" id="src"> -->
+                </div>
+            </div>
+            <div id="button">
+                <button><a href = "/board/news/list" class="list">List</a></button>
+            
+                <button id="update" class="update"></button>
+                
+                <form method = "post" action = "/board/news/delete" id="deleteFrm">
+                    <input type="hidden" name = "idx" value=`req.params`>
+                    <button type="submit" value="Delete" class="delete">Delete</button>
+                </form>
+            </div>
+    </div>
 </body>
 </html>

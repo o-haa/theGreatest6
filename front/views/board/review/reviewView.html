@@ -5,126 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Review view</title>
+    <script src="/script/board/reviewView.js"></script>
+    <link href="/css/board/boardView.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    {% include "nav.html" %}
-    <h3>Review View</h3>
-    <table>
-        <tr>
-            <td>subject : </td>
-            <td id="subject"></td>
-        </tr>
-        <tr>
-            <td>writer : </td>
-            <td id="writer"></td>
-        </tr>
-        <tr>
-            <td>date : </td>
-            <td id="date"></td>
-        </tr>
-        <tr>
-            <td>content : </td>
-            <td id="content"></td>
-        </tr>
-    </table>
-    <a href="/board/review/list">List</a>
-    <!-- '''' -->
-    <h3>Review's Comment</h3>
-    <div id="commentBox">
-        <ul>
-
-        </ul>
-    </div>
-    <template id="commentForm">
-        <li>
-            <form method="post" action="">
-                <span><input type="text" name="comment" id="hello" placeholder="comment write here!"></span>
-                <input type="submit" value="submit" calss="commentSubmit">
-            </form>
-        </li>
-    </template>
-    <template id="commentList">
-        <li>
-            <ul class = "commentRow">
-                <li class="commentContent">
-                    <input type="hidden" name="idx" value="">
-                    <span class="commentDeleteBtn">X</span>
-                </li>
-                <li>
-                    <span class="commentID"></span>
-                    <span class="commentDate"></span>
-                    <span class="commentLike"></span>
-                </li>
-            </ul>
-        </li>
-    </template>
-    <script type="text/javascript">
-        let state = {
-            replay:[
-                {cmt_idx:1, user_id:'oha', cmt_content:'hello',cmt_date:'2022-03-22', cmt_like:1, updateFlag:true},
-                {cmt_idx:1, user_id:'oha', cmt_content:'hello2',cmt_date:'2022-03-22', cmt_like:1, updateFlag:true},
-                {cmt_idx:1, user_id:'oha', cmt_content:'hello3',cmt_date:'2022-03-22', cmt_like:1, updateFlag:true},
-                {cmt_idx:1, user_id:'oha', cmt_content:'hello4',cmt_date:'2022-03-22', cmt_like:1, updateFlag:true},
-                {cmt_idx:1, user_id:'oha', cmt_content:'hello5',cmt_date:'2022-03-22', cmt_like:1, updateFlag:true},
-            ],
-            legth:5,
-        }
-
-        const commentBox = document.querySelector('#commentBox>ul')
-        const commentForm = document.querySelector('#commentForm')
-        const commentList = document.querySelector('#commentList')
-        console.log(commentBox,commentForm,commentList)
-        
-        function createForm () {
-            const clone = document.importNode(commentForm.content,true)
-            const form = clone.querySelector('form')
-
-            form.addEventListener('submit',submitHandler)
+    <div id="wrap">
+        {% include "nav.html" %}
+            <div id="label">
+                <span>REWVIEW</span>
+            </div>
+            <div id="categoryBox">
+                <div id="category"></div>
+            </div>
+            <table cellspacing="0" cellpadding="0" id="viewTable">
+                <tr>
+                    <th>Num</th>
+                    <th>Subject</th>
+                    <th>Writer</th>
+                    <th>Date</th>
+                    <th id="eye">
+                        <img src="/img/border/eye_hit.png">
+                    </th>
+                </tr>
+                <tr id="viewHead">
+                    <td id="idx"></td>
+                    <td id="subject"></td>
+                    <td id="writer"></td>
+                    <td id="date"></td>
+                    <td id="hit"></td>
+                </tr>
+            </table>
+            <div id="viewContent">
+                <div id="bContent"></div>
+                <div id="img">
+                    <!-- <img src="" id="src"> -->
+                </div>
+            </div>
+            <div id="button">
+                <button><a href = "/board/review/list" class="list">List</a></button>
             
-            commentBox.appendChild(clone)
-        }
-
-        function submitHandler(e){
-            e.preventDefault()
-            const {input} = e.target
-            const cmt_idx = length !=0 ? parseInt(state.replay[length-1].cmt_idx+1):1
-            const result = {cmt_idx, user_id:'oha', cmt_content:hello.value, cmt_date:'2022-03-22', cmt_like:1, updateFlag:true}
-            console.log(result)
-            state={
-                ...state,
-                replay:[
-                    ...state.replay,
-                    result
-                ],
-                legth:state.replay.legth + 1
-            }
-
-            hello.value=''
-            console.log(state)
-            CommentList()
-        }
-
-        function CommentList(){
-            commentBox.innerHTML=''
-            createForm()
-
-            state.replay.forEach(v=>{
-                const clone = document.importNode(commentList.content,true)
-                const row = clone.querySelector('.commentContent')
-                const roww = clone.querySelectorAll('.commentContent+li>span')
-                console.log(v)
+                <button id="update" class="update"></button>
                 
-                row.innerHTML=v.cmt_content
-                roww[0].innerHTML=v.user_id
-                roww[1].innerHTML=v.cmt_date
-                roww[2].innerHTML=`like:${v.cmt_like}`
+                <form method = "post" action = "/board/review/delete" id="deleteFrm">
+                    <input type="hidden" name = "idx" value=`req.params`>
+                    <button type="submit" value="Delete" class="delete">Delete</button>
+                </form>
+            </div>
+            <!-- <template id="tImg">
+                <div id="imgView"></div>
+            </template> -->
+            <!-- 댓글 구현 -->
+            <details>
+                <summary>Comments<span></span></summary>
+                <div id="commentBox">
 
-                commentBox.appendChild(clone)
-            })
-        }
+                </div>
+            </details>
+            
+            <template id="commentForm">
+                <ul id = 'writeRow'>
+                    <li>
+                        <form method="post" action="">
+                            <span><input type="text" name="comment" id="hello" placeholder="comment write here!"></span>
+                            <input type="submit" value="click!" class="commentSubmit">
+                        </form>
+                    </li>
+                </ul>
+            </template>
 
-        CommentList()
-    </script>
+            <template id="commentList">
+                <ul class="commentRow">
+                    <li class="commentContent">
+                        <input type="hidden" id="cidx" name="idx" value="">
+                        <input type="hidden" id="uidx" name="idx" value="">
+                        <span class="commentDeleteBtn">X</span>
+                    </li>
+                    <li class ="writerInfo">
+                        <span class="commentID"></span>
+                        <span class="commentDate"></span>
+                        <!-- <span class="commentLike"></span> -->
+                    </li>
+                </ul>
+            </template>
+
+            <template id="commentInput">
+                <form method="post" action="/" id="commentUpdateFrm">
+                    <span>
+                        <input type="text" name="comment" id="helloAgain" placeholder="comment write here!">
+                    </span>
+                    <input type = "submit" value ="update!" class="commentSubmit">
+                </form>
+            </template>
+    </div>
 </body>
 </html>
