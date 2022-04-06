@@ -27,6 +27,7 @@ async function init() {
         withCredentials: true,
     });
 
+    console.log(response)
 
     const showCategory = response.data.result[0].show_category_idx
 
