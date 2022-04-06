@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', init);
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
@@ -6,9 +8,9 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
-    // const user_nickname = user.user_nickname;
+    const user_nickname = user.user_nickname;
 
-    const [, , , , bIdx] = location.pathname.split('/');
+    const [, , , , idx] = location.pathname.split('/');
     const boardIdx = document.querySelector('#idx');
     const category = document.querySelector('#category')
     const subject = document.querySelector('#subject');
@@ -19,14 +21,13 @@ async function init() {
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
-    aElement.href = `/board/community/update/` + `${bIdx}`;
+    aElement.href = `/board/community/update/` + `${idx}`;
     aElement.innerHTML = 'Edit';
     upElement.appendChild(aElement);
 
-    const response = await axios.post(`/view/${bIdx}`, {
+    const response = await axios.post(`/view/${idx}`, {
         withCredentials: true,
     });
-
 
     const showCategory = response.data.result[0].show_category_idx
 
@@ -51,7 +52,7 @@ async function init() {
                 break;
         }
 
-        boardIdx.innerHTML = bIdx;
+        boardIdx.innerHTML = idx;
         subject.innerHTML = board_subject;
         nickname.innerHTML = user_nickname
         date.innerHTML = board_date;
@@ -75,14 +76,9 @@ async function init() {
     deleteFrm.addEventListener('submit',
         async function deleteSubmit(e) {
             e.preventDefault();
-            const uidx = e.target.parentNode.querySelector('input[id=useridx]').value
-            if(user.user_idx != uidx){
-                
-            }
-            
-            try {
 
-                await axios.post(`/delete/${bIdx}`);
+            try {
+                await axios.post(`/delete/${idx}`);
                 location.href = '/board/community/list';
             } catch (e) {
                 console.log('communityviewdlt', e.message)
@@ -92,7 +88,7 @@ async function init() {
         });
 
 
-    const boardiidx = bIdx;
+    const boardiidx = idx
     const commentBox = document.querySelector('#commentBox')
     const commentForm = document.querySelector('#commentForm') //템플릿
     const commentList = document.querySelector('#commentList')  //템플릿
@@ -120,11 +116,13 @@ async function init() {
             user_nickname: user_nickname,
             cmt_date: '2022-04-04'
         }
+
         replay.push(body)
+        // 
 
         try {
             const insert = await axios.post(`/comment/${boardiidx}`, body)
-            location.href = `/board/community/view/${bIdx}`
+            location.href = `/board/community/view/${idx}`
         } catch (e) {
             console.log('/communityviewcmt', e.message)
         }
@@ -135,8 +133,7 @@ async function init() {
 
     async function CommentList() {
         const responseList = await axios.post(`/commentList/${boardiidx}`)
-        const {cmtList} = responseList.data
-        console.log(cmtList)
+        const cmtList = responseList.data.result
         commentBox.innerHTML = ''
         createForm()
 
@@ -189,13 +186,14 @@ async function init() {
             const msg = document.createElement('span')
             msg.style.color='brown';
             msg.innerHTML = '본인이 작성한 글만 삭제 가능합니다'
+
             commentContent.appendChild(msg)
             throw new Error('댓글 작성자 아님')
         }
         const cmtidx = e.target.parentNode.querySelector('input').value
         try {
             const test = await axios.post(`/commentListDlt/${cmtidx}`)
-            location.href = `/board/community/view/${bIdx}`
+            location.href = `/board/community/view/${idx}`
         } catch (e) {
             console.log('/cmtdelete', e.message)
         }
@@ -229,17 +227,41 @@ async function init() {
             const data = {
                 updateComment,
             }
+
             try {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data)
                 if (response.data.errno !== 0) throw new Error
                 console.log(response.data)
-                location.href = `/board/community/view/${bIdx}`
+                location.href = `/board/community/view/${idx}`
             } catch (e) {
                 console.log('/communityview', e.message)
             }
         }
+        // newarr[index].cmt_update_flag = 0
+        // console.log(cmtidx, newarr)
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // CommentList()     
+
+
     CommentList()
+
+
+
+
 };
 
 
@@ -273,4 +295,4 @@ async function init() {
     // const imgN = response.data.result[0].file
     // const fileImg = document.createElement('img');
     // fileImg.src = `/uploads/c_uploads/${imgName}`
-    // console.log(fileImg.src) 
+    // console.log(fileImg.src)

@@ -34,6 +34,27 @@ async function init() {
             
         }
     }
+
+    
+    
+    // src.addEventListener('load',getDataUrl)
+    // function getDataUrl(img){
+    //     const canvas = document.createElement('canvas');
+    //     const ctx = canvas.getContext("2d");
+    //     canvas.width = src.width;
+    //     canvas.height = src.height;
+    //     ctx.drawImage(src,0,0);
+        
+    //     const base64 = canvas.toDataURL('image/*');
+    //     console.log(base64)
+    //     // const strImage = base64.replace(/^data:image\/[a-z]+;base64,/,"");
+    //     try{
+    //         localStorage.setItem('file',JSON.stringify(base64))
+    //         console.log('good')
+    //     } catch(e){
+    //         console.log('localstorage fail',e.message)
+    //     }
+    // }
     
     const writeFrm = document.querySelector('#writeFrm');
     
@@ -43,12 +64,12 @@ async function init() {
         const {communitySubject,communityContent,select} = e.target;
         const formData = new FormData()
             formData.append('upload',file.files[0])
-            formData.append('category',(select.value))
+            formData.append('select',select.value)
             formData.append('subject',communitySubject.value)
             formData.append('content',communityContent.value)
-            formData.append('userIdx',user.user_idx)
+            formData.append('user',user)
         
-        try {   
+        try {
             const response = await axios.post(`/write`,formData);
             const{insertId} = response.data.result;
             location.href=`/board/community/view/${insertId}`;
@@ -60,5 +81,3 @@ async function init() {
     };
     
 };
-
-

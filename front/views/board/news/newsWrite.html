@@ -5,34 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Write</title>
+    <script src="/script/board/newsWrite.js"></script>
+    <link href="/css/board/boardWrite.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    {% include "nav.html" %}
-    <h3>News Write</h3>
-    <from method="post" action="/">
-        <table>
-            <tr>
-                <td>subject : </td>
-                <td id="subject">
-                    <input type="text" name="communitySubject" id="communitySubject">
-                </td>
-            </tr>
-            <tr>
-                <td>writer : </td>
-                <td id="writer"></td>
-            </tr>
-            <tr>
-                <td>date : </td>
-                <td id="date"></td>
-            </tr>
-            <tr>
-                <td>content : </td>
-                <td id="content">
-                    <textarea type="text" name="newsContent" id="newsContent"></textarea>
-                </td>
-            </tr>
-        </table>
-        <input type="submit" value="Submit" id="submit">
-    </from>
+    <div id="wrap">
+        {% include "nav.html" %}
+        <div id="label">
+            <span>NEWS</span>
+        </div>
+        <form method="post" action="/board/news/write" enctype="multipart/form-data" id="writeFrm"> 
+            <table>
+                <tr>
+                    <td>Subject</td>
+                    <td>
+                        <input type="text" name="communitySubject" id="communitySubject">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>
+                        <textarea type="text" name="communityContent" id="communityContent"></textarea>
+                    </td>
+                </tr>
+                <input type="hidden" name="idx" id={idx}>
+            </table>
+            <div id="button">
+                <input type="submit" value="Submit" id="submit">
+            </div>
+            <!-- <img src="" id="src"> -->
+        </form>
+    </div>
 </body>
 </html>

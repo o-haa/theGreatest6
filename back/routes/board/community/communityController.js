@@ -116,6 +116,7 @@ exports.communityWrite = async (req,res) =>{
 }
 
 exports.communityView = async (req,res) => {
+
     const{boardIdx}=req.params;
     const prepare = [boardIdx];
     const hitResult = await pool.execute(sql.updateHit,prepare);
