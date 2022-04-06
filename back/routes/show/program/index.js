@@ -9,7 +9,7 @@ const multer = require('multer')
 const upload = multer({
     storage : multer.diskStorage({
         destination : (req,file,done)=>{
-            done(null,'public/uploads//s_uploads')
+            done(null,'uploads//s_uploads')
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname)
