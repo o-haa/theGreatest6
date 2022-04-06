@@ -11,10 +11,13 @@ exports.showWrite = async (req,res)=>{
     // console.log('req.body : ',req.body) //텍스트
     
     const {category, xrated, title, place, showCast1, showCast2, showDirector,showCompany,showContent,showMonth,showDate,showHour,ticketMonth,ticketDate,ticketHour} = req.body
-    //show_idx 필요함
-    
+    console.log('/write 체크용 ----> req.body', req.body)
+    //ticket 들어온거 확인함.
+
     let now = new Date()
     let thisYear = now.getFullYear()
+
+    //timestamp 형식으로 가공하는 함수
     const timestampShow = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
     const timestampTicket = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
     
@@ -36,15 +39,12 @@ exports.showWrite = async (req,res)=>{
         VALUES (?,?,?,?,?)`
 
     try{
-        const [resultShow] = await pool.execute(sqlShow,prespareShow) //
-
+        const [resultShow] = await pool.execute(sqlShow,prespareShow)
         let insertShowId = resultShow.insertId
-        console.log(insertShowId)
 
         const prespareOption = [insertShowId, timestampShow, place, showCast1, showCast2]
         const [resultOption] = await pool.execute(sqlOption,prespareOption)
         let insertOptionId = resultOption.insertId
-        console.log('insertOptionId --> ',insertOptionId)
 
         const fileOriginalname = req.file.originalname;
         const fileStoredname = req.file.filename;
@@ -64,7 +64,6 @@ exports.showWrite = async (req,res)=>{
 
         if(req.file.size > 0){
             const [resultFile] = await pool.execute(fileSql,filePrepare);
-            console.log('resultFile --> ',resultFile)
 
             response = {
                 result:{
@@ -117,8 +116,7 @@ exports.showView = async (req,res)=>{
     console.log('back / showView 라우터 접속!')
 
     const {idx} = req.params
-    console.log(idx)
-    const sql = `SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    const sql = `SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx} `
 
@@ -128,7 +126,6 @@ exports.showView = async (req,res)=>{
             result,
             error:0,
         }
-        console.log('체크용 ----->',response)
         res.json(response)
     }
     catch(e){
@@ -143,7 +140,7 @@ exports.showModifyGetInfo = async (req,res)=>{
     console.log('idx : ',idx)
     
     const sqlGetShows = `
-    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx}`
 
@@ -164,7 +161,40 @@ exports.showModifyGetInfo = async (req,res)=>{
 //새로 입력받은 값을 update하는 라우터
 exports.showModifyView = async (req,res)=>{
     console.log('showModifyView 접속!')
-    res.json(response)
+    let {show_idx,category,xrated,title,place,showCast1,showCast2,showDirector,showCompany,showContent,timestampShow,timestampTicket} = req.body
+
+    const sqlUpdate = `
+    UPDATE shows AS s INNER JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    SET
+        s.show_title='${title}',
+        s.show_category_idx=${category},
+        s.show_xrated=${xrated},
+        s.show_company='${showCompany}',
+        s.show_director='${showDirector}',
+        s.show_date_open='${timestampTicket}',
+        s.show_content='${showContent}',
+        o.show_date='${timestampShow}',
+        o.show_place='${place}',
+        o.show_cast1='${showCast1}',
+        o.show_cast2='${showCast2}' 
+    WHERE s.show_idx=${show_idx}
+    `
+
+    try{
+        const [result] = await pool.execute(sqlUpdate)
+        console.log('insertId가 뭐더라',result)
+        response = {
+            result,
+            show_idx,
+            error:0
+        }
+        res.json(response)
+    }
+    catch(e){
+        console.log(e)
+    }
+    // res.json(response)
 }
 
 exports.showDelete = async (req,res)=>{
@@ -180,15 +210,39 @@ exports.showDelete = async (req,res)=>{
     }
 }
 
-exports.showCalendar = (req,res)=>{
+exports.showCalendar = async (req,res)=>{
     console.log('back / showCalendar 라우터 접속!')
+    const {year,month,date} = req.body
+    let sqlCheck=``
+    if(month<10){
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month+1}%")`
+    } else if(month+1>=10){
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-${month+1}%"))`
+    }else if(month+1>12){
+        month=1
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month}%")`
+    }else{
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+        FROM shows AS s LEFT JOIN s_option AS o
+        ON s.show_idx = o.shows_idx
+        WHERE (select * from s_option where (show_date like "${year}-${month}%" OR show_date like "${year}-${month+1}%")`
+    }
+
     try{
-        // const [result] = await pool.execute(sql)
+        const [result] = await pool.execute(sqlCheck)
         response = {
             result,
             error:0,
         }
-        console.log('체크용 ----->',response)
         res.json(response)
     }
     catch(e){

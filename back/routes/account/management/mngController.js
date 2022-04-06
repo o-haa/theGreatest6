@@ -65,10 +65,10 @@ exports.myBenefit = async (req, res) => {
     };
     try{
         const prepare = [req.body.userIdx];
-        const [ result ] = await pool.execute(sql.myBenefit,prepare);
+        const  [result]  = await pool.execute(sql.myBenefit,prepare);
         response = {
             ...response,
-            result,
+            result:result,
             errno: 0
         };
     } catch (e){

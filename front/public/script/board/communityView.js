@@ -116,9 +116,7 @@ async function init() {
             user_nickname: user_nickname,
             cmt_date: '2022-04-04'
         }
-
         replay.push(body)
-        // 
 
         try {
             const insert = await axios.post(`/comment/${boardiidx}`, body)
@@ -186,7 +184,6 @@ async function init() {
             const msg = document.createElement('span')
             msg.style.color='brown';
             msg.innerHTML = '본인이 작성한 글만 삭제 가능합니다'
-
             commentContent.appendChild(msg)
             throw new Error('댓글 작성자 아님')
         }
@@ -227,7 +224,6 @@ async function init() {
             const data = {
                 updateComment,
             }
-
             try {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data)
                 if (response.data.errno !== 0) throw new Error
@@ -237,31 +233,8 @@ async function init() {
                 console.log('/communityview', e.message)
             }
         }
-        // newarr[index].cmt_update_flag = 0
-        // console.log(cmtidx, newarr)
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // CommentList()     
-
-
     CommentList()
-
-
-
-
 };
 
 
@@ -295,4 +268,4 @@ async function init() {
     // const imgN = response.data.result[0].file
     // const fileImg = document.createElement('img');
     // fileImg.src = `/uploads/c_uploads/${imgName}`
-    // console.log(fileImg.src)
+    // console.log(fileImg.src) 

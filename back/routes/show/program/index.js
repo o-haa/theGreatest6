@@ -9,7 +9,7 @@ const multer = require('multer')
 const upload = multer({
     storage : multer.diskStorage({
         destination : (req,file,done)=>{
-            done(null,'/Users/hancoco/workspace/theGreatest6/s_uploads/')
+            done(null,'public/uploads//s_uploads')
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname)
@@ -28,7 +28,7 @@ router.post('/showcalendar', programController.showCalendar)
 router.post('/showwrite', upload.single('upload'), programController.showWrite)
 router.post('/showview/:idx', programController.showView)
 router.post('/showmodify/:idx',  upload.single('upload'), programController.showModifyGetInfo)
-router.post('/showmodify/:idx',  upload.single('upload'), programController.showModifyView)
+router.post('/showmodifygoinfo/:idx',  upload.single('upload'), programController.showModifyView)
 router.post('/showdelete/:idx', programController.showDelete)
 
 

@@ -14,36 +14,50 @@ const uparam = `u.user_idx,user_nickname,user_level`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 exports.communityList = async (req, res) => {
-    console.log('1')
     const { prepare } = req.body;
-
     console.log(prepare)
-    let sql ='';
     switch (prepare.length) {
         case 1:
-            sql = `SELECT * FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = ? ORDER BY board_idx DESC`;
+            sql = `SELECT * 
+            FROM board AS b 
+            LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE b.show_category_idx = ? 
+            ORDER BY b.board_idx DESC`;
             break;
 
         case 2:
-            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} 
+            FROM board AS b 
+            LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE (b.show_category_idx = ?  OR b.show_category_idx = ?)
+            ORDER BY b.board_idx DESC`;
             break;
 
         case 3:
-            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} 
+            FROM board AS b 
+            LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE (b.show_category_idx = ? OR b.show_category_idx = ?  OR b.show_category_idx = ? )
+            ORDER BY b.board_idx DESC`;
             break;
         case 4:
-            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
+            sql = `SELECT ${bparam},${uparam},${date} 
+            FROM board AS b LEFT OUTER JOIN user AS u 
+            ON b.user_idx = u.user_idx 
+            WHERE (b.show_category_idx = ? OR b.show_category_idx = ?  OR b.show_category_idx = ?  OR b.show_category_idx = ? )
+            ORDER BY b.board_idx DESC`;
             break;
     }
     try {
-        // console.log(sql)
         const [result] = await pool.execute(sql, prepare);
         response = {
             ...response,
             result,
             errno: 0
         } 
-        console.log(result)
         // console.log(response.result)
     } catch (e) {
         console.log('/communitylist',e.message);
@@ -54,19 +68,18 @@ exports.communityList = async (req, res) => {
 
 
 exports.communityWrite = async (req,res) =>{                                
-    const {select}=req.body;
-    const sql = "SELECT show_category_idx FROM s_category WHERE show_category = ?";
-    const prepare = [select];
+    const { category, userIdx,subject,content }=req.body;
+    const sql = 'SELECT show_category_idx FROM s_category WHERE show_category = ?';
+    const prepare = [category];
+    console.log(prepare)
 
-    const result = await pool.execute(sql,prepare);
-    const [idx] = result[0];
-    const {subject,content}=req.body;
-    
-    const categoryIdx = idx.show_category_idx;
-    const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)';
-    
-    const prepare2 = ['134',subject,content,categoryIdx];
+    const [[result]] = await pool.execute(sql,prepare);
+    const categoryIdx = result.show_category_idx;
 
+    const sql2 = `INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) 
+                VALUES(?,?,?,?)`;
+    
+    const prepare2 = [userIdx,subject,content,categoryIdx];
     try{
         const [result] = await pool.execute(sql2,prepare2);
         response = {
@@ -110,7 +123,7 @@ exports.communityWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywright',e.message);
+        console.log('/communitywrite',e);
     };
 }
 

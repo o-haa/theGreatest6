@@ -20,7 +20,7 @@ async function init() {
         aElement.innerHTML = v.show_title
 
         tdElement[0].innerHTML = v.show_idx
-        tdElement[1].innerHTML = v.show_category_idx
+        tdElement[1].innerHTML = getCategory(v.show_category_idx)
         tdElement[2].innerHTML = v.show_xrated
         tdElement[3].innerHTML = ''
         tdElement[3].append(aElement)
@@ -75,5 +75,26 @@ async function init() {
         month+=1 // 달이 넘어가지 않는 이슈 해결
         let now = new Date(year,month)
         createCalendar(now)
+    }
+    function getCategory(v){
+        switch(v){
+            case 3 :
+                return show_category = 'musical'
+            break;
+            case 6 :
+                return show_category = 'concert'
+            break;
+            case 2 :
+                return how_category = 'classic'
+            break;
+            case 5 :
+                return show_category = 'ballet'
+            break;
+            case 4:
+                return show_category = 'Opera'
+            default:
+                console.log('show_category 오류 발생')
+            break;
+        }
     }
 }
