@@ -170,6 +170,12 @@
 .dotAdmin_small{
     height: 3px;
     width: 3px;
+    margin-right: 4px;
+    border-radius: 100%;
+}
+.on.dotAdmin_small{
+    height: 3px;
+    width: 3px;
     background: #DB6039;
     margin-right: 4px;
     border-radius: 100%;

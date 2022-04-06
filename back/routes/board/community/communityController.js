@@ -125,7 +125,7 @@ exports.communityWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywrite',e);
+        console.log('/communitywrite',e.message);
     };
 }
 
