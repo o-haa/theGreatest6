@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community List</title>
+    <script src="/script/board/radioList.js"></script>
+    <link href="/css/board/boardList.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
+</head>
+<body>
+    <div id="wrap">
+        {% include "nav.html" %}
+        <div id="label">
+            <span>COMMUNITY</span>
+        </div>        
+        <div id="category">
+                    <ul>
+                        <li>
+                            <label for ="classic"><input type="radio" name="category" id="classic" value="1">Classic</label>
+                        </li>
+                        <li>
+                            <label for ="musical"><input type="radio" name="category" id="musical" value="2" >Musical</label>
+                        </li>
+                        <li>
+                            <label for ="opera"><input type="radio" name="category" id="opera" value="3" >Opera</label>
+                        </li>
+                        <li>
+                            <label for ="ballet"><input type="radio" name="category" id="ballet" value="4" checked>Ballet</label>
+                        </li>
+                        <li>
+                            <label for ="Etc"><input type="radio" name="category" id="Etc" value="5" checked>Etc</label>
+                        </li>
+                    </ul>
+                </div>
+                <table cellspacing="0" cellpadding="0" id="communityBoard">
+                    <thead>
+                        <tr>
+                            <th>Num</th>
+                            <th>Category</th>
+                            <th>Subject</th>
+                            <th>Writer</th>
+                            <th>Date</th>
+                            <th id="eye">
+                                <img src="/img/border/eye_hit.png">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="communityListRow">
+                        
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="box">
+                    <button type="button" id="bBtn"><a href="write" >write</a></button>
+                </div>
+                <div id="pagingDiv">
+                    <ul id="paging">
+                
+                    </ul>
+                </div>
+                <template id="communityBoardRow">
+                    <tr>
+                        <td>{idx}</td>
+                        <td>{category}</td>
+                        <td id="td1"></td>
+                        <td>{nickname}</td>
+                        <td>{date}</td>
+                        <td>{hit}</td>
+                    </tr>
+                </template>
+          </div>
+    </div>
+</body>
+</html>

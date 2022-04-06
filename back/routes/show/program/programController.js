@@ -246,10 +246,34 @@ exports.showCalendar = async (req,res)=>{
         res.json(response)
     }
     catch(e){
-        console.log('/showview',e.message)
+        console.log('/showview',e.message);
     }
+}
+
+
+
+exports.getCategories = async(req,res)=>{
+    console.log('1111')
+    let response = {
+        result:[],
+        errno:1
+    };
+    try{
+        const [result] = await pool.execute(sql.getCategories);
+        response = {
+            ...response,
+            result,
+            errno:0
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+<<<<<<< HEAD
 }
 
 exports.optionUpdate = async (req,res)=>{
 
+=======
+    res.json(response)
+>>>>>>> 7ed7d79630e817d5e790ec4c1936e522a1009ffc
 }

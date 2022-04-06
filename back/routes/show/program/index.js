@@ -24,6 +24,7 @@ router.post('/showlist', programController.showList)
 router.post('/showcard', programController.showCard)
 router.post('/showcalendar', programController.showCalendar)
 
+router.post('/getcategories',programController.getCategories)
 router.post('/showwrite', upload.single('upload'), programController.showWrite)
 router.post('/showview/:idx', programController.showView)
 router.post('/showmodify/:idx',  upload.single('upload'), programController.showModifyGetInfo)

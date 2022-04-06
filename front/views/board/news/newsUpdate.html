@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Update</title>
+    <script src="/script/board/newsUpdate.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="/css/board/boardUpdate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    {% include "nav.html" %}
+    <div id="label">
+        <span>NEWS</span>
+    </div>
+    <form method="post" action="/board/news/update"  id="updateFrm"> 
+        <table>
+            <tr>
+                <td>Subject</td>
+                <td>
+                    <input type="text" name="updateSubject" id="updateSubject">
+                </td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>
+                    <textarea type="text" name="updateContent" id="updateContent"></textarea>
+                </td>
+            </tr>
+            <input type="hidden" name="idx" id={idx}>
+        </table>
+        <div id="button">
+            <input type="submit" value="Submit" id="submit">
+        </div>
+    </form>
+</body>
+</html>

@@ -4,7 +4,10 @@ exports.newsList = (req,res)=>{
 
 exports.newsWrite = (req,res)=>{
     res.render('./board/news/newsWrite')
+}
 
+exports.newsUpdate = (req,res)=>{
+    res.render('./board/news/newsUpdate')
 }
 
 exports.newsView = (req,res)=>{
