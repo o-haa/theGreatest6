@@ -1,0 +1,6 @@
+@import url('../index/_fontLayout.css');
+@import url('../index/_settingLayout.css');
+
+#wrap{
+    background-color: #080c31;
+}

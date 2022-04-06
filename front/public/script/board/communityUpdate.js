@@ -14,7 +14,7 @@ async function init() {
 
     const [{board_subject,board_content,user_idx}]=response1.data.result;
 
-    document.querySelector('#useridx').value = user_idx
+    // document.querySelector('#useridx').value = user_idx
     document.querySelector('#updateSubject').value = board_subject
     document.querySelector('#updateContent').value = board_content;
 

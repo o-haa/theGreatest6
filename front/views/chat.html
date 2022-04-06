@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT</title>
+    <link rel="stylesheet" href="/chat.css" type="text/css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/script/chat.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="chat">
+            <div class="admin">
+                <span class="admin1">관리자</span>
+                <span class="aChat"></span>
+            </div>
+            <div class="me">
+                <span class="me1">oha</span>
+                <span class="mChat"></span>
+            </div>
+        </div>
+        <div id="chatinput">
+            > <input type="text" id="chatBox" placeholder="messege wright here :)">
+            <button onclick="send()">Send</button>
+        </div>
+    </div>
+</body>
+</html>

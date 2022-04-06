@@ -10,7 +10,7 @@ async function init() {
     
     const [{news_subject,news_content,news_idx}]=response1.data.result;
 
-    document.querySelector('#useridx').value = news_idx
+    // document.querySelector('#useridx').value = news_idx
     document.querySelector('#updateSubject').value = news_subject
     document.querySelector('#updateContent').value = news_content;
 
