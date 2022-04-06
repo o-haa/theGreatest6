@@ -18,7 +18,7 @@ const param = `board_idx,show_category_idx, board_subject, board_content, board_
 exports.communityList = async (req, res) => {
     const { prepare } = req.body;
     console.log(prepare)
-    switch (prepare.length) {
+    switch (prepare) {
         case 1:
             sql = `SELECT * 
             FROM board AS b 
@@ -60,7 +60,6 @@ exports.communityList = async (req, res) => {
             result,
             errno: 0
         } 
-        // console.log(response.result)
     } catch (e) {
         console.log('/communitylist',e.message);
     }
@@ -73,17 +72,14 @@ exports.communityWrite = async (req,res) =>{
     const { category, userIdx,subject,content }=req.body;
     const sql = 'SELECT show_category_idx FROM s_category WHERE show_category = ?';
     const prepare = [category];
-    console.log(prepare)
 
     const [[result]] = await pool.execute(sql,prepare);
     const categoryIdx = result.show_category_idx;
 
-    const sql2 = `INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) 
-                VALUES(?,?,?,?)`;
     
     const prepare2 = [userIdx,subject,content,categoryIdx];
     try{
-        const [result] = await pool.execute(sql2,prepare2);
+        const [result] = await pool.execute(sql.communityWrite,prepare2);
         response = {
             result:{
                 row:result.affectedRows,
@@ -98,22 +94,12 @@ exports.communityWrite = async (req,res) =>{
         const fileSize = req.file.size;
         const fileDate = new Date();
         const fileDltF = '0';
-        const fSql = `INSERT INTO b_file (
-                                            board_idx,
-                                            file_originalname,
-                                            file_storedname,
-                                            file_size,
-                                            file_date,
-                                            file_dlt_flag
-                                            )
-                                    VALUES(?,?,?,?,?,?)`;
-
         const boardIdx = result.insertId;
         const fPrepare = [boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];                   
 
         if(req.file.size > 0){
 
-            const [result] = await pool.execute(fSql,fPrepare);
+            const [result] = await pool.execute(Sql.communityWriteFile,fPrepare);
             response = {
                 result:{
                     row:result.affectedRows,
@@ -125,34 +111,23 @@ exports.communityWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywrite',e);
+        console.log('/communitywrite',e.message);
     };
 }
 
 exports.communityView = async (req,res) => {
-    const{idx}=req.params;
-    const prepare = [idx];
+    const{boardIdx}=req.params;
+    const prepare = [boardIdx];
+    const hitResult = await pool.execute(sql.updateHit,prepare);
 
-    const hitSql = `UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ${idx}`
-    const hitResult = await pool.execute(hitSql);
- 
-    const sql = `SELECT
-                a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
-                b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
-                ,${datetime} 
-                FROM board AS a LEFT OUTER JOIN b_file AS b 
-                ON a.board_idx = b.board_idx 
-                WHERE a.board_idx = ?`;
-    
     // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
     // const imgPrepare = [idx]
 
     // const imgIdx = await pool.execute(imgSql,imgPrepare)
     // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
 
-   
     try{
-        const [result] = await pool.execute(sql,prepare);
+        const [result] = await pool.execute(sql.communityViewFile,prepare);
         response = {
             result,
             errno:0
@@ -166,12 +141,9 @@ exports.communityView = async (req,res) => {
 }
 
 exports.communityDelete = async (req,res) =>{
-    const{idx}=req.params;
-    const sql = `DELETE FROM board WHERE board_idx = ? `;
-    const prepare = [idx];
-    console.log(idx)
+    const prepare = [ req.params.boardIdx ];
     try{
-        const [result] = await pool.execute(sql,prepare);
+        const [result] = await pool.execute(sql.communityDelete,prepare);
         response = {
                 result,
                 errno:0
@@ -186,22 +158,20 @@ exports.communityDelete = async (req,res) =>{
 }
 
 exports.communityUpdate = async (req,res)=>{
-    const{idx}=req.params;
-    const {select}=req.body;
-    const selectPre = [select];
-    const [[result]] = await pool.execute(sql.getCategory,selectPre);
+    const{boardIdx}=req.params;
+    const prepare1 = [ req.body.select ];
+    const [[getCategory]] = await pool.execute(sql.getCategory,prepare1);
 
     const {subject,content}=req.body;
-    const categoryIdx = result.show_category_idx
-    const prepare2 = [subject,content,categoryIdx,idx];
+    const categoryIdx = getCategory.show_category_idx
+    const prepare2 = [subject,content,categoryIdx,boardIdx];
 
     try{
-        
-        const [result] = await pool.execute(sql.communityUpdate,prepare2);
+        const [result1] = await pool.execute(sql.communityUpdate,prepare2);
         const response = {
             result:{
-                row:result.affectedRows,
-                insertId:result.insertId
+                row:result1.affectedRows,
+                insertId:result1.insertId
             },
             errno:0    
         };
@@ -224,12 +194,12 @@ exports.communityUpdate = async (req,res)=>{
 
         if(req.file.size > 0){
 
-            const [result] = await pool.execute(sql.communityUpdateFile,fPrepare);
+            const [result2] = await pool.execute(sql.communityUpdateFile,fPrepare);
 
             response = {
                 result:{
-                    row:result.affectedRows,
-                    insertId:result.insertId
+                    row:result2.affectedRows,
+                    insertId:result2.insertId
                 },
                 errno:0    
             };
@@ -242,10 +212,9 @@ exports.communityUpdate = async (req,res)=>{
 }
 
 exports.communityComment = async (req,res)=>{
-    const{idx}=req.params;
+    const{ boardIdx }=req.params;
     const { userIdx, ccontent } = req.body
-    
-    const prepare = [userIdx,idx,ccontent]
+    const prepare = [userIdx,boardIdx,ccontent]
     
     try{
         const [result] = await pool.execute(sql.commentWrite,prepare);
@@ -270,8 +239,8 @@ exports.communityComment = async (req,res)=>{
 }
 
 exports.communityCoList = async (req,res)=>{
-    const {idx}=req.params;
-    const prepare = [idx]
+    const {boardIdx}=req.params;
+    const prepare = [boardIdx]
 
     // const boardIdxPre = idx;
     // const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
@@ -291,8 +260,8 @@ exports.communityCoList = async (req,res)=>{
 }
 
 exports.communityCoDlt = async (req,res)=>{
-    const{idx}=req.params;
-    const prepare = [idx];
+    const{cmtIdx}=req.params;
+    const prepare = [cmtIdx];
     try{
         const [result] = await pool.execute(sql.commentDelete,prepare);
         response = {
