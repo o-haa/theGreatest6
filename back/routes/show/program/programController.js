@@ -20,7 +20,7 @@ exports.showWrite = async (req,res)=>{
     //timestamp 형식으로 가공하는 함수
     const timestampShow = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
     const timestampTicket = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
-    
+
     const sqlShow = `INSERT INTO shows(
         show_title,
         show_category_idx,
@@ -248,4 +248,8 @@ exports.showCalendar = async (req,res)=>{
     catch(e){
         console.log('/showview',e.message)
     }
+}
+
+exports.optionUpdate = async (req,res)=>{
+
 }

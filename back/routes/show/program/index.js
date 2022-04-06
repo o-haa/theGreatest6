@@ -30,6 +30,8 @@ router.post('/showmodify/:idx',  upload.single('upload'), programController.show
 router.post('/showmodifygoinfo/:idx',  upload.single('upload'), programController.showModifyView)
 router.post('/showdelete/:idx', programController.showDelete)
 
+router.post('/adminupdate',programController.optionUpdate)
+
 
 module.exports = router
 

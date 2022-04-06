@@ -63,6 +63,27 @@ async function init() {
     }
 
     function makeOption(){
+        //show_category
+        const selectCategory = document.querySelector('#category')
+        let optionCategory = ['musical','concert','classic','ballet','opera']
+        optionCategory.forEach(v=>{
+            let optionElement = document.createElement('option')
+            optionElement.setAttribute('value',`${v}`)
+            optionElement.innerHTML = `${v}`
+            selectCategory.appendChild(optionElement)
+        })
+
+        //show_xrated
+        const selectXrated = document.querySelector('#xrated')
+        let optionXrated = ['전체관람','청소년','청소년 불가']
+        optionXrated.forEach(v=>{
+            let optionElement = document.createElement('option')
+            optionElement.setAttribute('value',`${v}`)
+            optionElement.innerHTML = `${v}`
+            selectXrated.appendChild(optionElement)
+        })
+
+
         //예매일
         const ticketMonth = document.querySelector('#ticketMonth')
         const ticketDate = document.querySelector('#ticketDate')
