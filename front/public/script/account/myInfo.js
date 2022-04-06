@@ -8,19 +8,19 @@ async function init() {
     axios.defaults.withCredentials = true;
 
     //템플릿
-    const maincal = document.querySelector('#maincal')
-    const tableBox = document.querySelector('#tableBox')
-    const requiredOn = document.querySelector('#requiredOn')  //필수 정보
-    const whiteBlock = document.querySelector('#prevent')   //블로킹
-    const userOptionFrm = document.querySelector('#optionalOff')    //유저 선택 정보 없는 경우
-    const optionalBox = document.querySelector('#optionalOn')  //유저 선택 정보 있는 경우
+    const maincal = document.querySelector('#maincal');
+    const tableBox = document.querySelector('#tableBox');
+    const requiredOn = document.querySelector('#requiredOn');  //필수 정보
+    const whiteBlock = document.querySelector('#prevent');   //블로킹
+    const userOptionFrm = document.querySelector('#optionalOff');    //유저 선택 정보 없는 경우
+    const optionalBox = document.querySelector('#optionalOn');  //유저 선택 정보 있는 경우
 
 
-    const checked = document.querySelectorAll('#itemBox input')
-    checked.forEach(v => v.addEventListener('click', checkedHandler))
+    const checked = document.querySelectorAll('#itemBox input');
+    checked.forEach(v => v.addEventListener('click', checkedHandler));
 
     async function checkedHandler(e) {
-        const showMetheScreen = e.target.id
+        const showMetheScreen = e.target.id;
         switch (showMetheScreen) {
             case 'myProfile':
                 location.href = '/account/management/myInfo';
@@ -42,12 +42,15 @@ async function init() {
         }
     }
 
+    // const a = '%EC%B2%9C%ED%98%B8%EB%8C%80%EB%A1%9C+995'
+    // console.log(a.toString('hex'))
+
 
     // const tableBox = document.querySelector('#tableBox')
     // const requiredOn = document.querySelector('#requiredOn')
-    const requiredClone = document.importNode(requiredOn.content, true)
+    const requiredClone = document.importNode(requiredOn.content, true);
     const requiredInfo = requiredClone.querySelectorAll('.infoValue');
-    tableBox.appendChild(requiredClone)
+    tableBox.appendChild(requiredClone);
     try {
         //유저 필수 정보 렌더하기 위해 가져오기 ok
         const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
@@ -73,6 +76,7 @@ async function init() {
         //     const response = await axios.post('http://localhost:3001/account/member/destroycookie',null)
         //     console.log(response.data)
         // }
+
 
 
         const data = {
@@ -101,7 +105,39 @@ async function init() {
                 function insertBtnHandler() {
                     insertInfo.style.display = 'none';
                     submitBtn.style.display = 'inline-block';
+
+                    //주소등록
+                    const kakaoAddress = document.querySelector('#kakaoAddress')
+                    kakaoAddress.addEventListener('click', getUserAddress)
+
+
+                    async function getUserAddress() {
+                        const keyAddress = document.querySelector('#userAddress').value;
+                        const data = {
+                            keyAddress
+                        };
+                        try {
+                            const response = await axios.post('http://localhost:5001/address/kakao', data)
+                            const address = response.data.result[0].road_address
+                            if (response.data.errno !== 0) throw new Error('카카오 주소 불러오기 오류')
+                            console.log(address)
+                            const userAddress = {
+                                u_add_name: address.address_name,
+                                user_add_region1: address.region_1depth_name,
+                                user_add_region2: address.region_2depth_name,
+                                user_add_region3: address.region_3depth_name,
+                                user_add_road: address.road_name,
+                                user_add_main_bd: address.building_name,
+                                user_add_sub_bd: address.main_building_no,
+                                user_add_detail: '',
+                                u_add_zipcode: address.zone_no,
+                            }
+                        } catch (e) {
+                            console.log(e.message)
+                        }
+                    }
                 }
+
 
                 //폼 서브밋
                 submitFrm.addEventListener('submit', submitHandler)
@@ -138,25 +174,25 @@ async function init() {
 
 async function submitHandler(e) {
     e.preventDefault();
-    const userName = document.querySelector('#userNameInput').value
-    const inputDob01 = document.querySelector('#userDob01').value
-    const inputDob02 = document.querySelector('#userDob02').value
-    const inputDob03 = document.querySelector('#userDob03').value
-    const userDob = inputDob01 + inputDob02 + inputDob03
+    const userName = document.querySelector('#userNameInput').value;
+    const inputDob01 = document.querySelector('#userDob01').value;
+    const inputDob02 = document.querySelector('#userDob02').value;
+    const inputDob03 = document.querySelector('#userDob03').value;
+    const userDob = inputDob01 + inputDob02 + inputDob03;
 
-    const userGender = document.querySelector('input[name=userGender]:checked').value
-    const inputsMobile01 = document.querySelector('#userMobile01').value
-    const inputsMobile02 = document.querySelector('#userMobile02').value
-    const inputsMobile03 = document.querySelector('#userMobile03').value
+    const userGender = document.querySelector('input[name=userGender]:checked').value;
+    const inputsMobile01 = document.querySelector('#userMobile01').value;
+    const inputsMobile02 = document.querySelector('#userMobile02').value;
+    const inputsMobile03 = document.querySelector('#userMobile03').value;
     const userMobile = inputsMobile01 + inputsMobile02 + inputsMobile03;
-    const userAddress = document.querySelector('#userAddress').value
+    // const userAddress = document.querySelector('#userAddress').value;
 
-    let msg = document.querySelector('#msg')
+    let msg = document.querySelector('#msg');
 
-    let today = new Date()
-    let year = today.getFullYear()
+    let today = new Date();
+    let year = today.getFullYear();
 
-    const expYear = await new RegExp(`/^(?=.*[1900-${year}]).{2}$/;`, "g")
+    const expYear = await new RegExp(`/^(?=.*[1900-${year}]).{2}$/;`, "g");
     const expMonth = /^(?=.*[01-12]).{2}$/;
     const expDay = /^(?=.*[01-31]).{2}$/;
     const exp010 = /^(?=.*[010]).{3}$/;
@@ -169,7 +205,7 @@ async function submitHandler(e) {
         userGender,
         userMobile,
         userAddress
-    }
+    };
 
     try {
         // if (
@@ -181,11 +217,11 @@ async function submitHandler(e) {
         //     || await (!expMobile.test(inputsMobile03))
         // ) { throw new Error('입력 정보 확인') };
 
-        const response2 = await axios.post('/optionalinfo', data)
-        if (response2.data.errno !== 0) throw new Error('선택 정보 등록 에러')
-        location.href = '/account/management/myinfo'
+        const response2 = await axios.post('/optionalinfo', data);
+        if (response2.data.errno !== 0) throw new Error('선택 정보 등록 에러');
+        location.href = '/account/management/myinfo';
     } catch (e) {
-        console.log(e)
+        console.log('/myInfo', e.message);
     }
 }
 

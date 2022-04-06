@@ -2,7 +2,8 @@ const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
-
+const bparam = `board_idx,b.user_idx,show_category_idx, board_subject, board_content, board_hit`
+const uparam = `u.user_idx,user_nickname,user_level`
 
 module.exports = {
     //account
@@ -45,6 +46,24 @@ WHERE user_idx = ?`,
     //board
 
 
+    listsql: `SELECT * 
+    FROM board AS b 
+    LEFT OUTER JOIN user AS u 
+    ON b.user_idx = u.user_idx 
+    WHERE b.show_category_idx = ? 
+    ORDER BY b.board_idx DESC`,
+
+
+
+    // WHERE s.show_category = ?
+
+    communityList: `SELECT board_idx, b.show_category_idx, board_subject, board_content, board_hit,${date}, show_category
+    FROM board As b
+    LEFT OUTER JOIN s_category AS S
+    ON b.show_category_idx = s.show_category_idx
+    ORDER BY board_idx DESC`,
+
+
     communityList1: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`,
     communityList2: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`,
     communityList3: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
@@ -54,6 +73,7 @@ WHERE user_idx = ?`,
     communityWrite: 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)',
 
     communityWriteFile: `INSERT INTO b_file (
+
         board_idx,
         file_originalname,
         file_storedname,
@@ -68,13 +88,14 @@ VALUES(?,?,?,?,?,?)`,
                 a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
                 b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
                 ,${datetime} 
-                FROM board AS a LEFT OUTER JOIN b_file AS b 
+                FROM board AS a 
+                LEFT OUTER JOIN b_file AS b 
                 ON a.board_idx = b.board_idx 
                 WHERE a.board_idx = ?`,
 
     communityDelete: 'DELETE FROM board WHERE board_idx = ? ',
     getCategory: 'SELECT * FROM s_category WHERE show_category = ?',
-    getCategories: 'SELECT * FROM s_category',
+    getCategories: 'SELECT * FROM s_category ORDER BY show_category_idx',
 
 
 
