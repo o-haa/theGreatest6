@@ -148,7 +148,7 @@
 
 #content > #mainContent > #mainCal {
     width: 85%;
-    height: 68%;
+    height: 70%;
     border: 3px solid #E3E7EA;
     margin: 50px 0 0 35px;
     border-radius: 20px;
@@ -205,8 +205,8 @@
 
 .requiredBox{
     width: 50%;
-    height: 83%;
-    padding: 3%;
+    height: 85%;
+    padding: 2%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -216,7 +216,7 @@
 
 .optionalBox{
     width: 50%;
-    height: 83%;
+    height: 85%;
     padding: 3%;
     box-sizing: border-box;
     display: flex;
@@ -311,10 +311,10 @@
     /* height: 40px; */
 }
 
-/* #userDoj{
-    line-height:500%  !important;
-
-} */
+.userAddressBox > span{
+    min-width: 200px;
+    background: 465D58;
+}
 
 
 .optionalBox .optionalInfo{
@@ -338,6 +338,20 @@
     opacity: 0.9;
 }
 
+.userAddressBox{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 60%;
+    /* height: 70%; */
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: end;
+    background: #465D58;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
 
 
 #insertCheck{
@@ -347,7 +361,7 @@
 #insertInfo{
     position: absolute;
     width: 27%;
-    height: 50%;
+    height: 55%;
     left:60%;
     /* right: 164px; */
     /* bottom: 78px; */
@@ -459,6 +473,17 @@ input {
     background: none;
     border: 1px solid #465D58;
     margin-top: 6%;
+    margin-right: 50px;
     text-align: center;
     font-weight: 600;
 }
+
+#kakaoAddress{
+    position: absolute;
+    bottom: 75px;
+    right: 200px;
+    width: 80px;
+    background: #465D58;
+    color: black;
+}
+

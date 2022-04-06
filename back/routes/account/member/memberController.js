@@ -47,8 +47,6 @@ exports.nickNameCheck = async (req, res) => {
 }
 
 
-
-
 exports.signUp = async (req, res) => {
   let response = {
     result: [],
