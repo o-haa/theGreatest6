@@ -115,41 +115,23 @@
                     <!-- 카드 컨텐츠 박스 -->
                     <div id="scrollBox">
                         <ul class="ulCard">
-                            <!-- 개별 카드 -->
-                            <li>
-                                <div class="textBox">
-                                    <span class="cardTag"></span>
-                                    <span class="cardTitle"></span>
-                                </div>
-                                <div class="imgBox first"></div>
-                            </li>
-                            <li>
-                                <div class="textBox">
-                                    <span class="cardTag"></span>
-                                    <span class="cardTitle"></span>
-                                </div>
-                                <div class="imgBox sec"></div>
-                            </li>
-                            <li>
-                                <div class="textBox">
-                                    <span class="cardTag"></span>
-                                    <span class="cardTitle"></span>
-                                </div>
-                                <div class="imgBox thrd"></div>
-                            </li>
-                            <li>
-                                <div class="textBox">
-                                    <span class="cardTag"></span>
-                                    <span class="cardTitle"></span>
-                                </div>
-                                <div class="imgBox four"></div>
-                            </li>
                         </ul>
                     </div>
+
+                    <!-- 개별 카드 -->
+                    <template>
+                        <li>
+                            <div class="textBox">
+                                <span class="cardTag"></span>
+                                <span class="cardTitle"></span>
+                            </div>
+                            <div class="imgBox"></div>
+                        </li>
+                    </template>
+
                     <!-- 카드 부가설명 박스 -->
                     <div class="infoCard">
                         <div id="info">
-                            <!-- sqld에서 가져온 설명글 -->
                         </div>
                         <button id="bookBtn">예매하기</button>
                     </div>

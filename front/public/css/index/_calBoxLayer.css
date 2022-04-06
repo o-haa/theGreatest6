@@ -169,7 +169,7 @@
 }
 
 /* admin 일정 유무 옵션 */
-.on.dotAdmin_small{
+.dotAdmin_small.on{
     height: 3px;
     width: 3px;
     background: #DB6039;
@@ -178,7 +178,7 @@
 }
 
 /* costmer 일정 유무 옵션 */
-.on.dotCustomer_small{
+.dotCustomer_small.on{
     height: 3px;
     width: 3px;
     background: #465D59;
