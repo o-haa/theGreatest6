@@ -167,12 +167,8 @@
     padding-top: 4px;
     box-sizing: border-box;
 }
-.dotAdmin_small{
-    height: 3px;
-    width: 3px;
-    margin-right: 4px;
-    border-radius: 100%;
-}
+
+/* admin 일정 유무 옵션 */
 .on.dotAdmin_small{
     height: 3px;
     width: 3px;
@@ -181,7 +177,8 @@
     border-radius: 100%;
 }
 
-.dotCustomer_small{
+/* costmer 일정 유무 옵션 */
+.on.dotCustomer_small{
     height: 3px;
     width: 3px;
     background: #465D59;
