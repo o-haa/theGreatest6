@@ -1,8 +1,27 @@
+const { createToken, createSignature } = require('./utils/createJWT')
+
+
 const chatServer = (io)=>{
+
 const chat = io.of('/chat')
 chat.on('connection',(socket)=>{
     // 새로운 유저가 접속했을 경우 다른 소켓에게 알려줌.
     socket.on('newUser',(name)=>{
+        
+            const header = socket.handshake.headers.cookie
+            console.log(header)
+            const [,token] = header.split(';')
+            console.log(token) 
+            const [h, payload, sign] = token.split('.');
+            // console.log(cookie.split('.'))
+            // console.log(payload)
+            // const signature = createSignature(header, payload);
+            // if (sign !== signature) throw new Error('토큰 불일치');
+            const user = Buffer.from(payload, 'base64').toString('utf-8')
+            console.log(user)
+            console.log(user.user_nickname)
+        
+
         console.log(name +'님이 접속하였습니다.')
         // 소켓에 이름 저장
         socket.name = name

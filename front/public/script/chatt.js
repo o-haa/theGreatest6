@@ -1,6 +1,3 @@
-axios.defaults.baseURL = 'http://localhost:4001/chat';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
 let socket
 socket = io.connect(`http://localhost:4001/chat`,{
     transports: ['websocket']
@@ -56,7 +53,4 @@ function send(){
     //서버로 message 이벤트 전달 + 데이터와 함께
     socket.emit('message',{type:'message', message:message})
 }
-
-
-
 
