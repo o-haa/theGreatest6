@@ -7,9 +7,9 @@ async function init() {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
     const checks = document.querySelectorAll('#category ul li input');
-    checks.forEach(v => {
-        v.addEventListener('click', checkedHandler)
-    })
+    // checks.forEach(v => {
+    //     v.addEventListener('click', checkedHandler)
+    // })
 
     const checked = document.querySelector('#category ul li input:checked')
 
@@ -17,37 +17,32 @@ async function init() {
         category: checked.id
     }
     let response = await axios.post('/list', data1)
-    response = response.data
-
     // response = await axios.post('http://localhost:4001/show/program/getcategories',null)
     // const categories = response.data.result;
     //checked를 만들기 위해서 가져옴 >>나중에 시간 남으면 하자
 
     test = {
-        ...response
+        ...response.data
     };
 
 
-    const totalRecords = response.result.length
-
+    const totalRecords = response.data.result.length
     recordsPerPage = 5;
     pagesPerBlock = 10;
 
     const totalPage = Math.ceil(totalRecords / recordsPerPage)
     const totalBlock = Math.ceil(totalPage / pagesPerBlock)
-    console.log(totalPage)
 
     let page = 1;
     currentBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock;
 
-    console.log(currentBlock)
 
     startPageperBlock = [Math.ceil(page / pagesPerBlock) - 1] * pagesPerBlock
     endPageperBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock
-    console.log(startPageperBlock, endPageperBlock)
+
+    console.log(startPageperBlock, endPageperBlock);
+
     if (endPageperBlock > totalPage) endPageperBlock = totalPage;
-
-
     const paging = document.querySelector('#paging');
 
     //페이징 시작....
@@ -63,10 +58,9 @@ async function init() {
 
 
     // 레코드 자르기
-    const Nodes = response.result.slice((page - 1) * recordsPerPage, page * recordsPerPage);
+    const Nodes = response.data.result.slice((page - 1) * recordsPerPage, page * recordsPerPage);
     const tr = document.querySelector('#communityBoardRow');
     const tbody = document.querySelector('tbody')
-
 
     await Nodes.forEach(v => {
         const showCategory = v.show_category_idx
@@ -113,15 +107,17 @@ async function init() {
         Nodes.forEach(v => { });
         tbody.innerHTML = template;
 
-        // for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
-        //     const liElement = document.createElement('li');
-        //     const aElement = document.createElement('a');
+        paging.innerHTML = '';
 
-        //     aElement.setAttribute(`onClick`, pages(`${i}`));
-        //     aElement.innerHTML = `[${i}]`;
-        //     liElement.appendChild(aElement);
-        //     paging.appendChild(liElement);
-        // }
+        for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
+            const liElement = document.createElement('li');
+            const aElement = document.createElement('a');
+
+            aElement.setAttribute(`onClick`, pages(`${i}`));
+            aElement.innerHTML = `[${i}]`;
+            liElement.appendChild(aElement);
+            paging.appendChild(liElement);
+        }
     })
 
 
@@ -158,6 +154,7 @@ async function checkedHandler(e) {
         if (endBlock > totalPage) endBlock = totalPage;
 
         const paging = document.querySelector('#paging');
+
 
         for (let i = block + 1; i <= endBlock; i++) {
             const liElement = document.createElement('li');
@@ -218,6 +215,7 @@ async function checkedHandler(e) {
             Nodes.forEach(v => { });
             tbody.innerHTML = template;
 
+            paging.innerHTML = '';
             for (let i = block + 1; i <= endBlock; i++) {
                 const liElement = document.createElement('li');
                 const aElement = document.createElement('a');
@@ -228,8 +226,6 @@ async function checkedHandler(e) {
                 paging.appendChild(liElement);
             }
         })
-
-
     }
     catch (e) {
         console.log('/communitylist', e)
@@ -237,28 +233,21 @@ async function checkedHandler(e) {
 }
 
 
-
-
-
-
 async function pages(num) {
-    // console.log(test)
-    // console.log('num', num)
+    console.log(test)
+    console.log('num', num)
     const tr = document.querySelector('#communityBoardRow');
-    // const value = test.result;
+    const value = test.result;
 
-    // const aElement = document.createElement('a');
-    // aElement.href = '/board/community//view' + value.board_idx;
-    // aElement.innerHTML = value.board_subject;
+    const aElement = document.createElement('a');
+    aElement.href = '/board/community//view' + value.board_idx;
+    aElement.innerHTML = value.board_subject;
 
     const viewRows = 10;
     const Nodes = test.result.slice((num - 1) * viewRows, num * viewRows);
     const tbody = document.querySelector('table > tbody');
 
 
-    let template = '';
-    await Nodes.forEach(v => { });
-    tbody.innerHTML = template;
 
     await Nodes.forEach(v => {
         const showCategory = v.show_category_idx
@@ -267,8 +256,6 @@ async function pages(num) {
         const aElement = document.createElement('a');
         aElement.href = '/board/community/view/' + v.board_idx;
         aElement.innerHTML = v.board_subject;
-
-
         td[0].innerHTML = v.board_idx;
         switch (showCategory) {
             case 1:
@@ -289,15 +276,11 @@ async function pages(num) {
                 break;
         }
         td[2].appendChild(aElement);
-
-        td[3].innerHTML = '흠?';
+        td[3].innerHTML = '저기요?'
         td[4].innerHTML = v.board_date;
         td[5].innerHTML = v.board_hit;
 
-        const tbody1 = document.querySelector('table > tbody');
-        tbody1.appendChild(clone);
+        tbody.appendChild(clone);
+
     })
 }
-
-
-

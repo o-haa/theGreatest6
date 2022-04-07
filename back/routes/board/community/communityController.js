@@ -32,8 +32,13 @@ exports.communityWrite = async (req,res) =>{
     const [[result]] = await pool.execute(sql,prepare);
     const categoryIdx = result.show_category_idx;
 
-    
+
     const prepare2 = [userIdx,subject,content,categoryIdx];
+    console.log(sql.communityWrite)
+
+//    communityWrite: 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)',
+    console.log(prepare2)
+
     try{
         const [result] = await pool.execute(sql.communityWrite,prepare2);
         response = {
@@ -73,8 +78,8 @@ exports.communityWrite = async (req,res) =>{
 
 exports.communityView = async (req,res) => {
 
-    const{boardIdx}=req.params;
-    const prepare = [boardIdx];
+    const{ boardIdx }=req.params;
+    const prepare = [ boardIdx ];
     const hitResult = await pool.execute(sql.updateHit,prepare);
 
     // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
@@ -84,7 +89,7 @@ exports.communityView = async (req,res) => {
     // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
 
     try{
-        const [result] = await pool.execute(sql.communityViewFile,prepare);
+        const [ result ] = await pool.execute(sql.communityViewFile,prepare);
         response = {
             result,
             errno:0
