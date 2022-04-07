@@ -1,18 +1,27 @@
 document.addEventListener('DOMContentLoaded', init);
 
+let response = {
+    result:[],
+    errno:1
+}
+
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/admin/show/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    
+    const catListB = document.querySelector('.beforeBox > .catList')
+    const catListA = document.querySelector('.afterBox > .catList')
+    const temp = document.querySelector('template')
+    const responseGet = await axios.post('categorymgt')
+    const delBtn = document.querySelector('.delBtn')
 
-    const catList = document.querySelector('.catList')
+    let resCat = responseGet.data //
+    makebefore(resCat, catListB)
+    makeafter()
+
     const newCat = document.querySelector('.newCat')
     let cats = [];
     let id = 0;
-
-    const response = await axios.post('categorymgt')
-    console.log('1')
-
-
 
     // enter()
 
@@ -68,4 +77,45 @@ async function init() {
     //         }
     //     })
     // }
+
+    function makebefore(resCat, catList){
+        resCat.forEach(v=>{
+            const clone = document.importNode(temp.content,true)
+            const catName = clone.querySelector('.catName')
+            catName.innerHTML = `${v.show_category}`
+            catList.append(clone)
+        })
+    }
+
+    function makeafter(){
+        makebefore(resCat, catListA)
+        const catLi = document.querySelectorAll('.afterBox > .catList > li')
+        for(let i=2; i<catLi.length; i++){
+            catLi[i].addEventListener('dblclick',(e)=>{
+                const etarget = e.target //<div class="className"></>
+                const einput = e.target.innerHTML //ballet   
+                const catInput = document.createElement('input')
+                catInput.value = einput
+                catInput.classList.add('edit-input'); //class에 추가
+                catLi[i].innerHTML = '<input class="edit-input">'+'</input>'
+                catLi[i].addEventListener('keypress', pressE)
+            })
+            console.log(i)
+        }
+    }
+
+    function pressE(e){
+        if(e.key === 'Enter') {
+            // const clone = document.importNode(temp.content,true)
+            const checkbox = document.querySelector('.checkbox')
+            const catName = document.querySelector('.catName')
+            const delBtn = document.querySelector('.delBtn')
+            catName.innerHTML = `${e.target.value}`
+            const parent = e.target.parentNode
+            e.target.parentNode.innerHTML=''
+            parent.append(checkbox)
+            parent.append(catName)
+            parent.append(delBtn)
+        }
+    }
 }

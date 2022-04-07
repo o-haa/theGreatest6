@@ -18,40 +18,26 @@
                     <!-- <div id="notice"> * 별표가 있는 항목은 필수 항목 입니다</div> -->
                     <tr>
                         <th>공연 분류 *</th>
-                            <td class="beforeBox">
-                                <ul class="catList">
-                                    <li >수정 전 </li>
-                                    <li>
-                                        <input type="text" class="newCat" placeholder="추가할 카테고리명을 입력하세요">
-                                    </li>
-                                    <li class="todo-item">
-                                        <div class="checkbox"></div>
-                                        <div class="todo">두번째 할 일</div>
-                                        <button class="delBtn">x</button>
-                                    </li>
-                                </ul> 
-                                <span class="info">확인키를 누르면 입력이 종료됩니다</span>
-                            </td>
-                        </form>
 
-                        <template class="temp">
-                            <li class="ing">
-                                <div class="checkbox"></div>
-                                <div class="todo">두번째 할 일</div>
-                                <button class="delBtn">x</button>
-                            </li>
-                        </template>
+                        <!-- 입력전 -->
+                        <td class="beforeBox">
+                            <ul class="catList">
+                                <li >수정 전 </li>
+                            </ul> 
+                            <span class="info">확인키를 누르면 입력이 종료됩니다</span>
+                        </td>
 
                         <td class="midBox">
                             <span>>><span> 
                         </td>
+
+                        <!-- 입력후 -->
                         <td class="afterBox">
-                            <ul>
+                            <ul class="catList">
                                 <li>수정 후 : </li>
-                                <li>concert</li>
-                                <li>oprea </li>
-                                <li>musical</li>
-                                <li>ballet</li>
+                                <li>
+                                    <input type="text" class="newCat" placeholder="추가할 카테고리명을 입력하세요">
+                                </li>
                             </ul>
                             <span class="info">반영하기를 눌러야 실제 사이트에 적용됩니다</span>
                             <div class="btnBox">
@@ -60,6 +46,14 @@
                         </td>
                     </tr>
                 </table>
+
+                <template class="temp">
+                    <li>
+                        <div class="checkbox"></div>
+                        <div class="catName">두번째 할 일 </div>
+                        <button class="delBtn">x</button>
+                    </li>
+                </template>
                 <!-- <div id="submitWriteBtn">
                     <input type="submit" value="작성하기">
                 </div> -->

@@ -63,7 +63,7 @@ td > ul{
     border: 1px solid #465D59;
     border-radius: 3px;
 }
-td > ul > li{
+td > ul > li, .temp>li{
     margin-bottom: 2px;
     padding: 4px;
     display: flex;
