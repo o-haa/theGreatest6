@@ -83,23 +83,4 @@ async function init() {
         let now = new Date(year,month)
         createCalendar(now)
     }
-    function getCategory(v){ //sql에서 받아오도록 수정
-        switch(v){
-            case 7 :
-                return show_category = 'musical'
-            break;
-            case 8 :
-                return show_category = 'concert'
-            break;
-            case 9 :
-                return how_category = 'classic'
-            break;
-            case 10 :
-                return show_category = 'ballet'
-            break;
-            default:
-                console.log('show_category 오류 발생')
-            break;
-        }
-    }
 }

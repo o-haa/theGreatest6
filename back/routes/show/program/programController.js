@@ -23,7 +23,7 @@ exports.showWrite = async (req,res)=>{
 
     const sqlShow = `INSERT INTO shows(
         show_title,
-        show_category_idx,
+        show_category,
         show_xrated,
         show_company,
         show_director,
@@ -82,7 +82,7 @@ exports.showWrite = async (req,res)=>{
 exports.showList = async (req,res)=>{
     console.log('back / showList 라우터 접속!')
 
-    const sql = `SELECT show_idx, show_title, show_category_idx, show_xrated FROM shows ORDER BY show_idx DESC`
+    const sql = `SELECT show_idx, show_title, show_category, show_xrated FROM shows ORDER BY show_idx DESC`
 
     try{
         const [result] = await pool.execute(sql)
@@ -116,7 +116,7 @@ exports.showView = async (req,res)=>{
     console.log('back / showView 라우터 접속!')
 
     const {idx} = req.params
-    const sql = `SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    const sql = `SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx} `
 
@@ -140,7 +140,7 @@ exports.showModifyGetInfo = async (req,res)=>{
     console.log('idx : ',idx)
     
     const sqlGetShows = `
-    SELECT s.show_idx, s.show_title, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
     FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
     WHERE s.show_idx=${idx}`
 
@@ -168,7 +168,7 @@ exports.showModifyView = async (req,res)=>{
     ON s.show_idx = o.shows_idx
     SET
         s.show_title='${title}',
-        s.show_category_idx=${category},
+        s.show_category=${category},
         s.show_xrated=${xrated},
         s.show_company='${showCompany}',
         s.show_director='${showDirector}',
@@ -253,13 +253,14 @@ exports.showCalendar = async (req,res)=>{
 
 
 exports.getCategories = async(req,res)=>{
-    console.log('1111')
+    let sql = `SELECT show_category from s_category`
     let response = {
         result:[],
         errno:1
     };
     try{
-        const [result] = await pool.execute(sql.getCategories);
+        const [result] = await pool.execute(sql);
+        console.log(result)
         response = {
             ...response,
             result,

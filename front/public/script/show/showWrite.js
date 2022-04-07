@@ -11,7 +11,15 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'multipart/form-data';
     axios.defaults.withCredentials= true;
-    
+
+    //관리자 레벨 2가 아닐경우 작성불가
+    // const resinfo = await axios.post('http://localhost:3001/account/management/getuserinfo',null)
+    // const userinfo = resinfo.data.result.user
+    // if(userinfo.user_level>2){
+    //     const writeBtn = document.querySelector('#writeBtn > a')
+    //     writeBtn.setAttribute("class","notAllow")
+    // }
+
     makeOption()
     
     const writeForm = document.querySelector('#writeForm');
@@ -62,16 +70,18 @@ async function init() {
         }
     }
 
-    function makeOption(){
+    async function makeOption(){
         //show_category
-        const selectCategory = document.querySelector('#category')
-        let optionCategory = ['musical','concert','classic','ballet','opera']
-        optionCategory.forEach(v=>{
-            let optionElement = document.createElement('option')
-            optionElement.setAttribute('value',`${v}`)
-            optionElement.innerHTML = `${v}`
-            selectCategory.appendChild(optionElement)
-        })
+       const selectCategory = document.querySelector('#category')
+       const responseMake = await axios.post('getcategories')
+       let optionCategory = responseMake.data.result
+
+       optionCategory.forEach(v=>{
+           let optionElement = document.createElement('option')
+           optionElement.setAttribute('value',`${v.show_category}`)
+           optionElement.innerHTML = `${v.show_category}`
+           selectCategory.appendChild(optionElement)
+       })
 
         //show_xrated
         const selectXrated = document.querySelector('#xrated')
