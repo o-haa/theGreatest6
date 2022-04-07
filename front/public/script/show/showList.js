@@ -20,6 +20,8 @@ async function init() {
     let trInner = document.querySelector('#showList_row').innerHTML;
     const tbody = document.querySelector("table > tbody")
 
+    console.log(Nodes)
+
     let template=''
     Nodes.forEach(v=>{
         const clone = document.importNode(trElement.content,true)
@@ -28,8 +30,15 @@ async function init() {
         aElement.setAttribute(`href`,`showview/${v.show_idx}`)
         aElement.innerHTML = v.show_title
 
+        switch(v.show_xrated){
+            case 1: v.show_xrated = '전체관람'
+                    break;
+            case 0: v.show_xrated = '청소년 불가'
+                    break;
+        }
+        
         tdElement[0].innerHTML = v.show_idx
-        tdElement[1].innerHTML = getCategory(v.show_category_idx)
+        tdElement[1].innerHTML = v.show_category
         tdElement[2].innerHTML = v.show_xrated
         tdElement[3].innerHTML = ''
         tdElement[3].append(aElement)
