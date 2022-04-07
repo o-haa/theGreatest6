@@ -226,8 +226,6 @@ async function checkedHandler(e) {
                 paging.appendChild(liElement);
             }
         })
-
-
     }
     catch (e) {
         console.log('/communitylist', e)
