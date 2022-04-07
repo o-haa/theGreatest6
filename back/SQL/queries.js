@@ -1,3 +1,5 @@
+const { getMaxListeners } = require("../db")
+
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
@@ -81,6 +83,8 @@ WHERE p.user_idx = ?`,
     ORDER BY board_idx DESC`,
 
 
+    admin: `INSERT INTO user VALUE ('admin@gmail.com','admin','관리자',2,1,now(),130)`,
+
     communityList1: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`,
     communityList2: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`,
     communityList3: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
@@ -141,9 +145,22 @@ VALUES(?,?,?,?,?,?)`,
 
 
     commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
-    commentUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?'
-
+    commentUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
 
     //show
 
+    showWrite: `INSERT INTO shows(
+        show_title,
+        show_category_idx,
+        show_xrated,
+        show_company,
+        show_director,
+        show_like,
+        show_date_open,
+        show_content
+        ) VALUES( ?,?,?,?,?,1,?,? )`,
+
+    showOption: `INSERT
+        INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
+        VALUES (?,?,?,?,?)`
 }

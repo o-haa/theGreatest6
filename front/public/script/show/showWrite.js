@@ -85,7 +85,7 @@ async function init() {
 
         //show_xrated
         const selectXrated = document.querySelector('#xrated')
-        let optionXrated = ['전체관람','청소년','청소년 불가']
+        let optionXrated = ['전체관람','청소년 불가']
         optionXrated.forEach(v=>{
             let optionElement = document.createElement('option')
             optionElement.setAttribute('value',`${v}`)
@@ -148,12 +148,12 @@ async function init() {
         let ititle = document.querySelector('#title').value
         let iplace = document.querySelector('#place').value
         let ishowCast1 = document.querySelector('#showCast1').value
-        let ishowCast2 = document.querySelector('#showCast2').value
+        // let ishowCast2 = document.querySelector('#showCast2').value
         let ishowDirector = document.querySelector('#showDirector').value
         let ishowCompamy = document.querySelector('#showCompany').value
         let ishowContent = document.querySelector('#showContent').value
 
-        if(ititle===''||iplace===''||ishowCast1===''||ishowCast2===''||ishowDirector===''||ishowCompamy===''||ishowContent===''){return 1}
+        if(ititle===''||iplace===''||ishowCast1===''||ishowDirector===''||ishowCompamy===''||ishowContent===''){return 1}
         else {return 0}
     }
 }
