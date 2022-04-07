@@ -5,14 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/css/account/account.css" rel="stylesheet" type="text/css">  
+    <link href="/css/admin/categoryMgt.css" rel="stylesheet" type="text/css">  
     <script src="/script/admin/accountMgt.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <main id="wrap">
+    <div id="wrap">
         {% include "nav.html" %}
+        <div id="content">
+            <div id="mainContent">
+                <h1 style="font-family: 'korFontBold' !important;">이달의 공연 소식</h1>
 
-    </main>
+                <!-- 리스트 검색창 -->
+                <div id="listSearchBox">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon" id="searchIcon">
+                        <path d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z" fill="#A8BEBF"></path>
+                    </svg>
+                    <form method="post" action="#" id="listSearchForm">
+                        <input type="text" onkeyup="enterkey()" placeholder="봄바람 살랑일땐 연극이죠" id="listSearchInput">            
+                    </form>
+                </div>
+
+                <!-- 리스트 테이블 시작 -->
+                <table class="listTable">
+                    <thead>
+                        <tr>
+                            <th>회원번호</th>
+                            <th>아이디</th>
+                            <th>닉네임</th>
+                            <th>가입날짜</th>
+                            <th>레벨</th>
+                            <th>활동상태</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <template id="adminList_row">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <select name="level" id="level">
+                            </select>
+                        </td>
+                        <td>
+                            <select name="active" id="active">
+                            </select>
+                        </td>
+                    </tr>
+                </template>
+               </script>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
