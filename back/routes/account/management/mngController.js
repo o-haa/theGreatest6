@@ -1,4 +1,5 @@
 const pool = require('../../../db');
+const { personalInfo } = require('../../../SQL/queries.js');
 const sql = require('../../../SQL/queries.js')
 
 exports.myInfo = async (req, res) => {
@@ -10,7 +11,9 @@ exports.myInfo = async (req, res) => {
         errno: 1,
     };
     try{
-        const [ result ] = await pool.execute(sql.myInfo,prepare);
+        console.log(sql.personalInfo)
+        const [ result ] = await pool.execute(sql.personalInfo,prepare);
+        console.log(result)
         if( result == 0 ) throw new Error ('optional value 없음');
         response = {
             result,
@@ -23,21 +26,37 @@ exports.myInfo = async (req, res) => {
 }
 
 exports.optionalInfo = async(req,res) => {
-    let response = {
+    let response= {
         result: {},
         errno: 1
     };
 
-    const { userIdx, userName, userDob, userGender, userMobile, userAddress } = req.body;
-    const prepare = [ userIdx, userName, userDob, userGender, userMobile ];
+    // 모바일
+    const { userIdx } = req.body
+    const { mobile1 ,mobile2, mobile3 } = req.body.userMobile
+    const prepare1 = [ mobile1 ,mobile2, mobile3 ,userIdx]
     try{
-        const result = pool.execute(sql.optionalInfo,prepare);
+        const [ result1 ] = await pool.execute(sql.mobileInfo, prepare1)
+        const userMobileIdx = result1.insertId
+
+    //주소
+    const {u_add_name, u_add_region1,u_add_region2, u_add_region3, u_add_road, u_add_bd_name,u_add_bd_no,u_add_detail,u_add_zipcode} = req.body.userAddress;
+    const prepare2 = [ userIdx, u_add_name, u_add_region1,u_add_region2, u_add_region3, u_add_road, u_add_bd_name,u_add_bd_no,u_add_detail,u_add_zipcode ];
+
+        const [result2] = await pool.execute(sql.addressInfo,prepare2)
+        const userAddressIdx = result2.insertId
+
+    // 옵션 정보 입력
+    const { userName, userDob, userGender } = req.body;
+    const prepare3 = [ userIdx, userName, userDob, userGender, userMobileIdx, userAddressIdx ];
+
+        const result3 = await pool.execute(sql.optionalInfo,prepare3);
         response = {
-            result,
+            result3,
             errno: 0
         };
     }
-    catch{
+    catch (e) {
         console.log('/optionalInfo',e.message);
     }
     res.json(response);
