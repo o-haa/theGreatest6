@@ -29,7 +29,7 @@ res.render('./show/program/showModify')
 }
 
 exports.ticketOpen = (req,res)=>{
-
+    res.render('./show/program/ticketOpen')
 }
 
 exports.test = (req,res)=>{
