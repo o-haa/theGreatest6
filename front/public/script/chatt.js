@@ -1,14 +1,20 @@
-let socket = io.connect(`http://localhost:3001`,{
+axios.defaults.baseURL = 'http://localhost:4001/chat';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+let socket
+socket = io.connect(`http://localhost:4001/chat`,{
     transports: ['websocket']
 })
 
-//접속 되었을 때 실행
+// //접속 되었을 때 실행
 socket.on('connect',()=>{
     socket.emit('newUser',name)
 })
+    
 
 //서버로부터 데이터 받은 경우
 socket.on('update',(data)=>{
+
     const chat =document.querySelector('#chat')
     const message = document.createElement('div')
     const node = document.createTextNode(`${data.user_nickname}: ${data.message}`)
@@ -50,5 +56,7 @@ function send(){
     //서버로 message 이벤트 전달 + 데이터와 함께
     socket.emit('message',{type:'message', message:message})
 }
+
+
 
 

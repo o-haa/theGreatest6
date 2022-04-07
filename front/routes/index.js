@@ -8,7 +8,7 @@ const adminRouter = require('./admin');
 const { auth } = require('./account/member/Auth');
 const OauthRouter = require('./Oauth');
 const aboutRouter = require('./about')
-// const chatRouter = require('./chat')
+const chatRouter = require('./chat')
 
 router.get('/', mainController);
 router.use('/board',boardRouter);
@@ -17,7 +17,7 @@ router.use('/account',accountRouter);
 router.use('/admin',adminRouter);
 router.use('/oauth',OauthRouter);
 router.use('/about', aboutRouter);
-// router.use('/chat',chatRouter)
+router.use('/chat',chatRouter)
 
 
 module.exports = router;

@@ -1,3 +1,3 @@
 exports.chat= (req,res) =>{
-    res.render('./chat.html')
+    res.render('chat')
 }

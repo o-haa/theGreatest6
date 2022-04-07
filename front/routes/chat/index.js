@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const chatRouter = require('./chatcontroller')
+const chatRouter = require('./chatController')
 const { auth } = require('../account/member/auth')
 
 
-router.use('/chat', chatRouter.chat)
+router.use('/', chatRouter.chat)
 
 
 module.exports = router
