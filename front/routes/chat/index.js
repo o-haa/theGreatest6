@@ -4,7 +4,7 @@ const chatRouter = require('./chatController')
 const { auth } = require('../account/member/auth')
 
 
-router.use('/', chatRouter.chat)
+router.use('/', auth, chatRouter.chat)
 
 
 module.exports = router
