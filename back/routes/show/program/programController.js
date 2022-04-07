@@ -268,12 +268,5 @@ exports.getCategories = async(req,res)=>{
     } catch (e) {
         console.log(e.message);
     }
-<<<<<<< HEAD
-}
-
-exports.optionUpdate = async (req,res)=>{
-
-=======
     res.json(response)
->>>>>>> 7ed7d79630e817d5e790ec4c1936e522a1009ffc
 }

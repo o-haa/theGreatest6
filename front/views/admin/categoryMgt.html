@@ -4,15 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="/css/account/account.css" rel="stylesheet" type="text/css">  
+    <title>Category Management</title>
+    <link href="/css/admin/categoryMgt.css" rel="stylesheet" type="text/css">  
     <script src="/script/admin/categoryMgt.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <main id="wrap">
+    <div id="wrap">
         {% include "nav.html" %}
 
-    </main>
+        <div id="content">
+                <table id="modifyForm">
+                    <!-- <div id="notice"> * 별표가 있는 항목은 필수 항목 입니다</div> -->
+                    <tr>
+                        <th>공연 분류 *</th>
+                            <td class="beforeBox">
+                                <ul class="catList">
+                                    <li >수정 전 </li>
+                                    <li>
+                                        <input type="text" class="newCat" placeholder="추가할 카테고리명을 입력하세요">
+                                    </li>
+                                    <li class="todo-item">
+                                        <div class="checkbox"></div>
+                                        <div class="todo">두번째 할 일</div>
+                                        <button class="delBtn">x</button>
+                                    </li>
+                                </ul> 
+                                <span class="info">확인키를 누르면 입력이 종료됩니다</span>
+                            </td>
+                        </form>
+
+                        <template class="temp">
+                            <li class="ing">
+                                <div class="checkbox"></div>
+                                <div class="todo">두번째 할 일</div>
+                                <button class="delBtn">x</button>
+                            </li>
+                        </template>
+
+                        <td class="midBox">
+                            <span>>><span> 
+                        </td>
+                        <td class="afterBox">
+                            <ul>
+                                <li>수정 후 : </li>
+                                <li>concert</li>
+                                <li>oprea </li>
+                                <li>musical</li>
+                                <li>ballet</li>
+                            </ul>
+                            <span class="info">반영하기를 눌러야 실제 사이트에 적용됩니다</span>
+                            <div class="btnBox">
+                                <button class="after btn fin">반영하기</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <!-- <div id="submitWriteBtn">
+                    <input type="submit" value="작성하기">
+                </div> -->
+            </form>
+        </div>
+    </div>
 </body>
 </html>
