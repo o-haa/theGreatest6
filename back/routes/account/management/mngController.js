@@ -11,9 +11,7 @@ exports.myInfo = async (req, res) => {
         errno: 1,
     };
     try{
-        console.log(sql.personalInfo)
         const [ result ] = await pool.execute(sql.personalInfo,prepare);
-        console.log(result)
         if( result == 0 ) throw new Error ('optional value 없음');
         response = {
             result,

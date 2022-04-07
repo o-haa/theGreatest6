@@ -6,7 +6,7 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
-    // const user_nickname = user.user_nickname;
+
 
     const [, , , , bIdx] = location.pathname.split('/');
     const boardIdx = document.querySelector('#idx');
@@ -27,12 +27,13 @@ async function init() {
         withCredentials: true,
     });
 
-    console.log(response.data)
-
     const showCategory = response.data.result[0].show_category_idx
 
     if (response.data.errno === 0) {
         const [{ board_subject, board_date, board_hit, board_content, board_file_idx }] = response.data.result;
+        const writer_nickname =response.data.result[0].user_nickname;
+
+        
         switch (showCategory) {
             case 1:
                 category.innerHTML = 'Classic';
@@ -54,7 +55,7 @@ async function init() {
 
         boardIdx.innerHTML = bIdx;
         subject.innerHTML = board_subject;
-        nickname.innerHTML = user_nickname
+        nickname.innerHTML = writer_nickname;
         date.innerHTML = board_date;
         hit.innerHTML = board_hit;
         content.innerHTML = board_content;
@@ -118,7 +119,7 @@ async function init() {
             user: user,
             ccontent: hello.value,
             userIdx: user.user_idx,
-            user_nickname: user_nickname,
+            user_nickname: user.user_nickname,
             cmt_date: '2022-04-04'
         }
         replay.push(body)
@@ -137,7 +138,6 @@ async function init() {
     async function CommentList() {
         const responseList = await axios.post(`/commentList/${boardiidx}`)
         const {cmtList} = responseList.data
-        console.log(cmtList)
         commentBox.innerHTML = ''
         createForm()
 
@@ -186,11 +186,9 @@ async function init() {
     async function deleteHandler(e) {
         const uidx = e.target.parentNode.querySelector('input[id=uidx]').value
         if (user.user_idx != uidx) {
-            const commentContent = e.target.parentNode
-            const msg = document.createElement('span')
-            msg.style.color='brown';
-            msg.innerHTML = '본인이 작성한 글만 삭제 가능합니다'
-            commentContent.appendChild(msg)
+            console.log(msg)
+            msg.innerHTML='';
+            createMsg()
             throw new Error('댓글 작성자 아님')
         }
         const cmtidx = e.target.parentNode.querySelector('input').value
@@ -206,11 +204,13 @@ async function init() {
         const uidx = e.target.parentNode.querySelector('input[id=uidx]').value
         if (user.user_idx != uidx) {
             const commentContent = e.target.parentNode
-            const msg = document.createElement('span')
+            const msgBox = document.createElement('span')
+            const msg = document.createElement('p')
             msg.style.color='brown';
             msg.innerHTML = '본인이 작성한 글만 수정 가능합니다'
 
-            commentContent.appendChild(msg)
+            msgBox.appendChild(msg)
+            commentContent.appendChild(msgBox)
             throw new Error('댓글 작성자 아님')
         }
         const cmtidx = e.target.parentNode.querySelector('input[id=cidx]').value
@@ -242,6 +242,17 @@ async function init() {
     }
     CommentList()
 };
+
+function createMsg(){
+    const commentContent = e.target.parentNode;
+    const msgBox = document.createElement('span');
+    const msg = document.createElement('p');
+    msg.style.color='brown';
+    msg.innerHTML = '본인이 작성한 글만 삭제 가능합니다';
+    msgBox.appendChild(msg);
+    commentContent.appendChild(msgBox);
+}
+
 
 
 // const uploadedFile = file.files[0];
