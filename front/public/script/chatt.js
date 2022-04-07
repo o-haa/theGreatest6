@@ -1,4 +1,4 @@
-let socket = io.connect(`http://localhost:3001/chat`,{
+let socket = io.connect(`http://localhost:3001`,{
     transports: ['websocket']
 })
 

@@ -11,9 +11,7 @@ nunjucks.configure('views',{
     watch:true
 })
 
-app.get('/',(req,res)=>{
-    res.render('./chat.html')
-})
+
 
 const server = app.listen(port,_=>{
     console.log(`front server running on localhost:${port}`);
@@ -23,10 +21,15 @@ const io = require('socket.io')(server,{
     cors: { origin: '*' },
 })
 
-const chat = io.of('/')
+app.get('/',(req,res)=>{
+    res.render('./chat.html')
+})
+
+const chat = io.of('/chat')
+
 
 console.log(chat)
-chat.on('connection',(socket)=>{
+io.on('connection',(socket)=>{
     // 새로운 유저가 접속했을 경우 다른 소켓에게 알려줌.
     socket.on('newUser',(name)=>{
         console.log(name +'님이 접속하였습니다.')
