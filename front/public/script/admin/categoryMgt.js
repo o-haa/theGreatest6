@@ -13,7 +13,6 @@ async function init() {
     const catListA = document.querySelector('.afterBox > .catList')
     const temp = document.querySelector('template')
     const responseGet = await axios.post('categorymgt')
-    const delBtn = document.querySelector('.delBtn')
 
     let resCat = responseGet.data //
     makebefore(resCat, catListB)
@@ -23,66 +22,13 @@ async function init() {
     let cats = [];
     let id = 0;
 
-    // enter()
-
-    // function setCats(newCats){
-    //     cats = newCats
-    // }
-    // function getCats(){
-    //     return cats
-    // }
-    // function appendCat(){
-    //     const newId = id++
-    //     const newCats = getCats().concat({id: newId, isCompleted: false, content: text })
-    //     setCats(newTodos)
-    //     makeCats();
-    // }
-    // function makeCats(){
-    //     catList.innerHTML = null; //todoListElem 요소 안의 HTML 초기화
-    //     const allTodos = getAllTodos() // todos 배열 가져오기
-
-    //     allTodos.forEach(todo => { 
-    //         const todoItemElem = document.createElement('li');
-    //         todoItemElem.classList.add('todo-item');
-
-    //         const checkboxElem = document.createElement('div');
-    //         checkboxElem.classList.add('checkbox');
-
-    //         const todoElem = document.createElement('div');
-    //         todoElem.classList.add('todo');
-    //         todoElem.innerText = todo.content;
-
-    //         const delBtnElem = document.createElement('button');
-    //         delBtnElem.classList.add('delBtn');
-    //         delBtnElem.innerHTML = 'X';
-
-    //         if(todo.isChecked) {
-    //             todoItemElem.classList.add('checked');
-    //             checkboxElem.innerText = '✔';
-    //         }
-
-    //         todoItemElem.appendChild(checkboxElem);
-    //         todoItemElem.appendChild(todoElem);
-    //         todoItemElem.appendChild(delBtnElem);
-
-    //         todoListElem.appendChild(todoItemElem);
-    //     })
-    // }
-    
-
-    // function enter(){
-    //     newCat.addEventListener('keypress', (e) =>{
-    //         if( e.key === 'Enter' ){
-    //             appendTodos(e.target.value); newCat.value ='';
-    //         }
-    //     })
-    // }
-
     function makebefore(resCat, catList){
         resCat.forEach(v=>{
             const clone = document.importNode(temp.content,true)
             const catName = clone.querySelector('.catName')
             catName.innerHTML = `${v.show_category}`
+            const del = clone.querySelector('button')
+            del.addEventListener('click',catDelet)
             catList.append(clone)
         })
     }
@@ -98,15 +44,28 @@ async function init() {
                 catInput.value = einput
                 catInput.classList.add('edit-input'); //class에 추가
                 catLi[i].innerHTML = '<input class="edit-input">'+'</input>'
-                catLi[i].addEventListener('keypress', pressE)
+                catLi[i].addEventListener('keypress', catModify)
             })
             console.log(i)
         }
     }
 
-    function pressE(e){
+    newCat.addEventListener("keydown",catAdd)
+
+    function catAdd(e){
+        const ul = document.querySelector('.afterBox > .catList')
+        if(e.key === 'Enter'){
+            const newCat = document.querySelector('.newCat')
+            const clone = document.importNode(temp.content,true)
+            const catName = clone.querySelector('.catName')
+            catName.innerHTML = newCat.value
+            ul.appendChild(clone)
+            newCat.innerHTML=''
+        }
+    }
+    
+    function catModify(e){
         if(e.key === 'Enter') {
-            // const clone = document.importNode(temp.content,true)
             const checkbox = document.querySelector('.checkbox')
             const catName = document.querySelector('.catName')
             const delBtn = document.querySelector('.delBtn')
@@ -116,6 +75,34 @@ async function init() {
             parent.append(checkbox)
             parent.append(catName)
             parent.append(delBtn)
+        }else{
+            
         }
+    }
+
+    const delBtn = document.querySelector('.delBtn')
+    delBtn.addEventListener('click',catDelet)
+
+    function catDelet(e){
+        const delt = e.target.parentNode
+        delt.innerHTML = ''
+        const catLi = document.querySelectorAll('.afterBox > .catList > li')
+        console.log(catLi)
+    }
+
+    const btnFin = document.querySelector('.btnBox > button')
+    btnFin.addEventListener('click',submitHandelr)
+    
+    async function submitHandelr(){
+        const catLi = document.querySelectorAll('.afterBox > .catList > li > .catName')
+        const arr = []
+        let j
+        for(let i=0; i<catLi.length; i++){
+            arr.push(catLi[i].innerHTML)
+            console.log(catLi[i].innerHTML)
+        }
+        console.log('arr ----> ',arr)
+        const response = await axios.post('categorysave',arr)
+        console.log(response)
     }
 }
