@@ -73,8 +73,8 @@ exports.communityWrite = async (req,res) =>{
 
 exports.communityView = async (req,res) => {
 
-    const{boardIdx}=req.params;
-    const prepare = [boardIdx];
+    const{ boardIdx }=req.params;
+    const prepare = [ boardIdx ];
     const hitResult = await pool.execute(sql.updateHit,prepare);
 
     // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
@@ -84,7 +84,7 @@ exports.communityView = async (req,res) => {
     // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
 
     try{
-        const [result] = await pool.execute(sql.communityViewFile,prepare);
+        const [ result ] = await pool.execute(sql.communityViewFile,prepare);
         response = {
             result,
             errno:0

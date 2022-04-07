@@ -5,8 +5,6 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-
-
     const checks = document.querySelectorAll('#category ul li input');
     const checked = document.querySelectorAll('#category ul li input:checked');
     const prepare = [];
@@ -19,6 +17,7 @@ async function init() {
         const data = {
             prepare
         };
+        
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
     } catch (e) {
