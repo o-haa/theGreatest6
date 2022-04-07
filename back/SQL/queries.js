@@ -7,15 +7,33 @@ const uparam = `u.user_idx,user_nickname,user_level`
 
 module.exports = {
     //account
-    myInfo: `SELECT 
+    personalInfo: `SELECT 
     u_name, 
     DATE_FORMAT(u_dob, '%Y-%m-%d') AS u_dob,
     u_gender,
-    u_mobile,
-    u_address_idx
-FROM u_personal 
-WHERE user_idx = ?`,
-    optionalInfo: 'INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile) VALUES (?,?,?,?,?)',
+    a.u_add_name,
+    a.u_add_bd_name,
+    a.u_add_detail,
+    a.u_add_zipcode,
+    m.u_mobile1,
+    m.u_mobile2,
+    m.u_mobile3
+FROM u_personal AS p
+LEFT OUTER JOIN u_address AS a
+ON p.u_address_idx = a.user_address_idx
+LEFT OUTER JOIN u_mobile AS m
+ON p.u_mobile_idx = m.u_mobile_idx
+WHERE p.user_idx = ?`,
+
+
+    mobileInfo: `INSERT INTO u_mobile (u_mobile1, u_mobile2, u_mobile3, user_idx ) VALUES (?,?,?,?)`,
+
+    addressInfo: `INSERT INTO u_address (user_idx,u_add_name, u_add_region1,u_add_region2, u_add_region3, u_add_road, u_add_bd_name, u_add_bd_no, u_add_detail, u_add_zipcode)
+    VALUES (?,?,?,?,?,?,?,?,?,?)`,
+
+
+    optionalInfo: 'INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile_idx, u_address_idx) VALUES (?,?,?,?,?,?)',
+    
     myBenefit: `SELECT user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_net  
                 FROM u_point 
                 WHERE user_idx = ?`,
@@ -36,7 +54,6 @@ WHERE user_idx = ?`,
     user_active
   FROM user 
   WHERE user_id = ? AND user_password = ?`,
-
 
 
 
@@ -85,13 +102,16 @@ VALUES(?,?,?,?,?,?)`,
 
     updateHit: 'UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ?',
     communityViewFile: `SELECT
-                a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
-                b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
-                ,${datetime} 
-                FROM board AS a 
-                LEFT OUTER JOIN b_file AS b 
-                ON a.board_idx = b.board_idx 
-                WHERE a.board_idx = ?`,
+                b.user_idx, b.show_category_idx, b.board_subject, b.board_content, b.board_date, b.board_hit,
+                f.board_file_idx, f.board_idx, f.file_originalname, f.file_storedname, f.file_size, f.file_date, f.file_dlt_flag
+                ,${datetime},
+                u.user_id, u.user_nickname, u.user_level, u.user_active, u.user_doj
+                FROM board AS b 
+                LEFT OUTER JOIN b_file AS f
+                ON b.board_idx = f.board_idx 
+                LEFT OUTER JOIN user AS u 
+                ON b.user_idx = u.user_idx 
+                WHERE b.board_idx = ?`,
 
     communityDelete: 'DELETE FROM board WHERE board_idx = ? ',
     getCategory: 'SELECT * FROM s_category WHERE show_category = ?',

@@ -110,6 +110,7 @@ async function init() {
                     kakaoAddress.addEventListener('click', getUserAddress)
                 }
                 //폼 서브밋
+
                 submitFrm.addEventListener('submit', submitHandler)
                 tableBox.appendChild(optionalOffClone)
 
@@ -120,15 +121,15 @@ async function init() {
                 const userOption = optionalValue.data.result
 
                 const optionalInfo = optionalOnClone.querySelectorAll('.infoValue')
-
                 userOption.filter(v => {
+                    console.log(v)
                     if (v.user_gender === 0) v.user_gender = "여성";
                     else v.user_gender = "남성";
                     optionalInfo[0].innerHTML = v.u_name
                     optionalInfo[1].innerHTML = v.u_dob
                     optionalInfo[2].innerHTML = v.u_gender
-                    optionalInfo[3].innerHTML = v.u_mobile
-                    optionalInfo[4].innerHTML = v.u_address_idx
+                    optionalInfo[3].innerHTML = `${v.u_mobile1} - ${v.u_mobile1} - ${v.u_mobile3}`
+                    optionalInfo[4].innerHTML = v.u_add_name + v.u_add_bd_name + v.u_add_detail
                 })
                 const tableBox = document.querySelector('#tableBox')
                 tableBox.appendChild(optionalOnClone)
@@ -153,13 +154,13 @@ async function getUserAddress() {
         if (response.data.errno !== 0) throw new Error('카카오 주소 불러오기 오류')
         userAddress = {
             u_add_name: address.address_name,
-            user_add_region1: address.region_1depth_name,
-            user_add_region2: address.region_2depth_name,
-            user_add_region3: address.region_3depth_name,
-            user_add_road: address.road_name,
-            user_add_main_bd: address.building_name,
-            user_add_sub_bd: address.main_building_no,
-            user_add_detail: '',
+            u_add_region1: address.region_1depth_name,
+            u_add_region2: address.region_2depth_name,
+            u_add_region3: address.region_3depth_name,
+            u_add_road: address.road_name,
+            u_add_bd_name: address.building_name,
+            u_add_bd_no: address.main_building_no,
+            u_add_detail: '',
             u_add_zipcode: address.zone_no,
         }
         const userAddressBox = document.querySelector('.userAddressBox')
@@ -171,7 +172,8 @@ async function getUserAddress() {
         userAddressBox.prepend(spanElement)
 
         //값을 줬는데
-        keyAddress.value='write details!'
+        console.log(keyAddress.value)
+        keyAddress.value='';
         keyAddress.setAttribute('placeholder','write details!')
 
     } catch (e) {
@@ -182,6 +184,7 @@ async function getUserAddress() {
 
 async function submitHandler(e) {
     e.preventDefault();
+
     const userName = document.querySelector('#userNameInput').value;
     const inputDob01 = document.querySelector('#userDob01').value;
     const inputDob02 = document.querySelector('#userDob02').value;
@@ -189,17 +192,15 @@ async function submitHandler(e) {
     const userDob = inputDob01 + inputDob02 + inputDob03;
 
     const userGender = document.querySelector('input[name=userGender]:checked').value;
-    const inputsMobile01 = document.querySelector('#userMobile01').value;
-    const inputsMobile02 = document.querySelector('#userMobile02').value;
-    const inputsMobile03 = document.querySelector('#userMobile03').value;
-    const userMobile = inputsMobile01 + inputsMobile02 + inputsMobile03;
+    const mobile1 = document.querySelector('#userMobile01').value;
+    const mobile2 = document.querySelector('#userMobile02').value;
+    const mobile3 = document.querySelector('#userMobile03').value;
 
-    //널값이 나오는 이유는?
-    const userAddDetail = document.querySelector('keyAddress').value
-    console.log(userAddDetail)
+    const userMobile = { mobile1 ,mobile2, mobile3 };
+    const u_add_detail = keyAddress.value
     userAddress = {
         ...userAddress,
-        userAddDetail
+        u_add_detail
     }    
     // let msg = document.querySelector('#msg');
 
@@ -220,7 +221,6 @@ async function submitHandler(e) {
         userMobile,
         userAddress
     };
-console.log(data)
 
     try {
         // if (
@@ -232,11 +232,12 @@ console.log(data)
         //     || await (!expMobile.test(inputsMobile03))
         // ) { throw new Error('입력 정보 확인') };
 
-        // const response2 = await axios.post('/optionalinfo', data);
+        const response2 = await axios.post('/optionalinfo', data);
         if (response2.data.errno !== 0) throw new Error('선택 정보 등록 에러');
+        console.log(response.data)
         location.href = '/account/management/myinfo';
     } catch (e) {
-        console.log('/myInfo', e.message);
+        console.log('/myInfo', e);
     }
 }
 
