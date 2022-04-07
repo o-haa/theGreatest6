@@ -1,6 +1,6 @@
 //공연 관리하는 페이지
 exports.categoryMgt = (req,res) =>{
-    res.send('categoryMgt')
+    res.render('admin/categoryMgt')
 }
 
 //공연 관리하는 페이지

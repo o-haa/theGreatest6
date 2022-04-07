@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', init)
 
 async function init() {
+
+    // //관리자 레벨 2가 아닐경우 작성불가
+    // const resinfo = await axios.post('http://localhost:3001/account/management/getuserinfo',null)
+    // const userinfo = resinfo.data.result.user
+    // if(userinfo.user_level>2){
+    //     const writeBtn = document.querySelector('#writeBtn > a')
+    //     writeBtn.setAttribute("class","notAllow")
+    // }
+
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -43,8 +52,6 @@ async function init() {
     const listGrid = document.querySelector('#listGrid')
     const listCalendar = document.querySelector('#listCalendar')
 
-    // btnLeft.addEventListener('click', btnLeftHandler)
-    // btnRight.addEventListener('click', btnRightHandler)
     homeBtn.addEventListener('click', moveHome)
     aboutBtn.addEventListener('click', moveAbout)
     listBtn.addEventListener('click', listBtnHandler)
@@ -75,24 +82,5 @@ async function init() {
         month+=1 // 달이 넘어가지 않는 이슈 해결
         let now = new Date(year,month)
         createCalendar(now)
-    }
-    function getCategory(v){ //sql에서 받아오도록 수정
-        switch(v){
-            case 7 :
-                return show_category = 'musical'
-            break;
-            case 8 :
-                return show_category = 'concert'
-            break;
-            case 9 :
-                return how_category = 'classic'
-            break;
-            case 10 :
-                return show_category = 'ballet'
-            break;
-            default:
-                console.log('show_category 오류 발생')
-            break;
-        }
     }
 }

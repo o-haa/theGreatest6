@@ -32,8 +32,13 @@ exports.communityWrite = async (req,res) =>{
     const [[result]] = await pool.execute(sql,prepare);
     const categoryIdx = result.show_category_idx;
 
-    
+
     const prepare2 = [userIdx,subject,content,categoryIdx];
+    console.log(sql.communityWrite)
+
+//    communityWrite: 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)',
+    console.log(prepare2)
+
     try{
         const [result] = await pool.execute(sql.communityWrite,prepare2);
         response = {

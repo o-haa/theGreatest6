@@ -100,20 +100,20 @@ async function init() {
     const commentList = document.querySelector('#commentList')  //템플릿
     const commentInput = document.querySelector('#commentInput') //업데이트??
 
-    const replay = []
-    commentBox.appendChild(commentForm)
+    const replay = [];
+    commentBox.appendChild(commentForm);
     function createForm() {
-        const clone = document.importNode(commentForm.content, true)
-        const writeRow = clone.querySelector('#writeRow')
-        const form = clone.querySelector('form')
-        commentBox.appendChild(writeRow)
-        form.addEventListener('submit', submitHandler)
+        const clone = document.importNode(commentForm.content, true);
+        const writeRow = clone.querySelector('#writeRow');
+        const form = clone.querySelector('form');
+        commentBox.appendChild(writeRow);
+        form.addEventListener('submit', submitHandler);
     }
 
 
     async function submitHandler(e) {
-        e.preventDefault()
-        const { hello } = e.target
+        e.preventDefault();
+        const { hello } = e.target;
 
         const body = {
             user: user,
@@ -121,137 +121,125 @@ async function init() {
             userIdx: user.user_idx,
             user_nickname: user.user_nickname,
             cmt_date: '2022-04-04'
-        }
-        replay.push(body)
+        };
+        replay.push(body);
 
         try {
-            const insert = await axios.post(`/comment/${boardiidx}`, body)
-            location.href = `/board/community/view/${bIdx}`
+            const insert = await axios.post(`/comment/${boardiidx}`, body);
+            location.href = `/board/community/view/${bIdx}`;
         } catch (e) {
-            console.log('/communityviewcmt', e.message)
+            console.log('/communityviewcmt', e.message);
         }
 
         hello.value = '';
-        CommentList()
+        CommentList();
     }
 
     async function CommentList() {
-        const responseList = await axios.post(`/commentList/${boardiidx}`)
-        const {cmtList} = responseList.data
-        commentBox.innerHTML = ''
-        createForm()
+        const responseList = await axios.post(`/commentList/${boardiidx}`);
+        const {cmtList} = responseList.data;
+        commentBox.innerHTML = '';
+        createForm();
 
-        const count = document.querySelector('details summary span')
-        count.innerHTML = `(${cmtList.length})`
+        const count = document.querySelector('details summary span');
+        count.innerHTML = `(${cmtList.length})`;
 
         // 
         cmtList.forEach(v => {
-            const row = document.importNode(commentList.content, true)
-            const commentContent = row.querySelector('.commentContent')
-            const writerInfo = row.querySelectorAll('.commentRow > .writerInfo > span')
+            const row = document.importNode(commentList.content, true);
+            const commentContent = row.querySelector('.commentContent');
+            const writerInfo = row.querySelectorAll('.commentRow > .writerInfo > span');
             if (v.cmt_update_flag === 1) {
-                const spanElement = document.createElement('span')
-                spanElement.innerHTML = v.cmt_content
-                spanElement.addEventListener('click', updateHandler)
-                const deleteBtn = commentContent.querySelector('.commentDeleteBtn')
-                deleteBtn.addEventListener('click', deleteHandler)
-                commentContent.prepend(spanElement)
+                const spanElement = document.createElement('span');
+                spanElement.innerHTML = v.cmt_content;
+                spanElement.addEventListener('click', updateHandler);
+                const deleteBtn = commentContent.querySelector('.commentDeleteBtn');
+                deleteBtn.addEventListener('click', deleteHandler);
+                commentContent.prepend(spanElement);
             } else {
-                const clone = document.importNode(commentInput.content, true)
-                clone.querySelector('input').value = v.cmt_content
+                const clone = document.importNode(commentInput.content, true);
+                clone.querySelector('input').value = v.cmt_content;
                 // clone.querySelector('input').addEventListener('keypress',updateSubmitHandler)
-                row.prepend(clone)
+                row.prepend(clone);
             }
-
-            commentContent.querySelector('input[id=cidx]').value = v.cmt_idx
-            commentContent.querySelector('input[id=uidx]').value = v.user_idx
-
-
-
+            commentContent.querySelector('input[id=cidx]').value = v.cmt_idx;
+            commentContent.querySelector('input[id=uidx]').value = v.user_idx;
             //
+            writerInfo[0].innerHTML = v.user_nickname;
+            writerInfo[1].innerHTML = v.cmt_date;
 
-            writerInfo[0].innerHTML = v.user_nickname
-            writerInfo[1].innerHTML = v.cmt_date
-
-            commentBox.appendChild(row)
+            commentBox.appendChild(row);
         })
 
         try {
-            await axios.post(`/commentList/${boardiidx}`)
+            await axios.post(`/commentList/${boardiidx}`);
         } catch (e) {
-            console.log('/communityviewcmtlist', e.message)
+            console.log('/communityviewcmtlist', e.message);
         }
     }
 
     async function deleteHandler(e) {
-        const uidx = e.target.parentNode.querySelector('input[id=uidx]').value
+        const uidx = e.target.parentNode.querySelector('input[id=uidx]').value;
         if (user.user_idx != uidx) {
-            console.log(msg)
-            msg.innerHTML='';
-            createMsg()
-            throw new Error('댓글 작성자 아님')
+            const commentContent = e.target.parentNode;
+            const msgBox = document.createElement('span');
+            const msg = document.createElement('p');
+            msg.style.color='brown';
+            msg.innerHTML = '본인이 작성한 댓글만 삭제 가능합니다';
+            msgBox.appendChild(msg);
+            commentContent.appendChild(msgBox);
+            throw new Error('댓글 작성자 아님');
         }
-        const cmtidx = e.target.parentNode.querySelector('input').value
+        const cmtidx = e.target.parentNode.querySelector('input').value;
         try {
-            const test = await axios.post(`/commentListDlt/${cmtidx}`)
-            location.href = `/board/community/view/${bIdx}`
+            const test = await axios.post(`/commentListDlt/${cmtidx}`);
+            location.href = `/board/community/view/${bIdx}`;
         } catch (e) {
-            console.log('/cmtdelete', e.message)
+            console.log('/cmtdelete', e.message);
         }
     }
 
     async function updateHandler(e) {
-        const uidx = e.target.parentNode.querySelector('input[id=uidx]').value
+        const uidx = e.target.parentNode.querySelector('input[id=uidx]').value;
         if (user.user_idx != uidx) {
-            const commentContent = e.target.parentNode
-            const msgBox = document.createElement('span')
-            const msg = document.createElement('p')
+            const commentContent = e.target.parentNode;
+            const msgBox = document.createElement('span');
+            const msg = document.createElement('p');
             msg.style.color='brown';
-            msg.innerHTML = '본인이 작성한 글만 수정 가능합니다'
+            msg.innerHTML = '본인이 작성한 댓글만 수정 가능합니다';
 
-            msgBox.appendChild(msg)
-            commentContent.appendChild(msgBox)
-            throw new Error('댓글 작성자 아님')
+            msgBox.appendChild(msg);
+            commentContent.appendChild(msgBox);
+            throw new Error('댓글 작성자 아님');
         }
-        const cmtidx = e.target.parentNode.querySelector('input[id=cidx]').value
+        const cmtidx = e.target.parentNode.querySelector('input[id=cidx]').value;
 
-        const commentInput = document.querySelector('#commentInput')
-        const clone = document.importNode(commentInput.content, true)
-        const Frm = clone.querySelector('form')
-        Frm[0].cmt_update_Flag = 0
-        e.target.parentNode.prepend(clone)
+        const commentInput = document.querySelector('#commentInput');
+        const clone = document.importNode(commentInput.content, true);
+        const Frm = clone.querySelector('form');
+        Frm[0].cmt_update_Flag = 0;
+        e.target.parentNode.prepend(clone);
 
 
-        Frm.addEventListener('submit', commentSubmitHandler)
+        Frm.addEventListener('submit', commentSubmitHandler);
 
         async function commentSubmitHandler(e) {
-            e.preventDefault()
-            const updateComment = (e.target[0]).value
+            e.preventDefault();
+            const updateComment = (e.target[0]).value;
             const data = {
                 updateComment,
-            }
+            };
             try {
-                const response = await axios.post(`/commentListUp/${cmtidx}`, data)
-                if (response.data.errno !== 0) throw new Error
-                console.log(response.data)
-                location.href = `/board/community/view/${bIdx}`
+                const response = await axios.post(`/commentListUp/${cmtidx}`, data);
+                if (response.data.errno !== 0) throw new Error;
+                location.href = `/board/community/view/${bIdx}`;
             } catch (e) {
-                console.log('/communityview', e.message)
+                console.log('/communityview', e.message);
             }
         }
     }
-    CommentList()
+    CommentList();
 };
-
-function createMsg(){
-    const commentContent = e.target.parentNode;
-    const msgBox = document.createElement('span');
-    const msg = document.createElement('p');
-    msg.style.color='brown';
-    msg.innerHTML = '본인이 작성한 글만 삭제 가능합니다';
-    msgBox.appendChild(msg);
-    commentContent.appendChild(msgBox);
-}
 
 
 

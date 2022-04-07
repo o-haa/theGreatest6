@@ -1,0 +1,156 @@
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+@import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
+@import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
+
+/*
+    현진 작성 CSS 읽는 방법!
+    가로세로 -> 여백 -> 정렬순 -> 그 외 꾸밈(box-sixing, 선굵기 등)
+    이 순서대로 작성하기 때문에 만약 여백이 먼저 작성되었다면 가로세로 값은 없다는 뜻이에요!
+*/
+
+#wrap{
+    /* overflow: hidden; */
+    margin: 0 auto;
+}
+
+/* 헤더 #header */
+
+/* 본문 #content */
+
+/*
+css  box-sizing 다 뭉개져있음.
+정리하면서 맞춰놓을것. 임시적 사용
+*/
+#content{
+    padding-top: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#modifyForm{
+    width: 580px;
+    height: 100%;
+    font-size: 18px;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+tr{
+    height: 100%;
+    width: 100%;
+    color: #465D59;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+th{
+    text-align: left;
+    padding-left: 30px;
+    width: 25%;
+    box-sizing: border-box;
+}
+td{
+    height: 100%;
+    box-sizing: border-box;
+}
+
+td > ul{
+    height:300px;
+    padding:5px;
+    box-sizing: border-box;
+    border: 1px solid #465D59;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: auto;
+}
+td > ul > li, .temp>li{
+    margin-bottom: 2px;
+    padding: 4px;
+    display: flex;
+    box-sizing: border-box;
+}
+td > ul > li:first-child{
+    border-bottom: 1px solid #465D59;
+}
+td > ul > li:not(:first-child):hover{
+    /* content:''; */
+    /* border-bottom: 1px solid #465D59; */
+    margin-bottom: 2px;
+    padding: 4px;
+    background: #A8BEBF;
+    color: #fff;
+    box-sizing: border-box;
+}
+td > ul > li{
+    display: flex;
+    justify-content: space-between;
+}
+.checkbox{
+    display: none;
+}
+td > ul > li > input{
+    width:100%;
+    padding: 4px;
+    border: 1px solid #465D59;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+.info{
+    font-size: 9px;
+}
+
+button{
+    cursor: pointer;
+}
+
+.beforeBox, .afterBox{
+    width: 35%;
+    height: 150px;
+}
+.midBox{
+    width: 5%;
+    height: 100%;
+    /* 중앙 맞춰놓기. 지금 이거 어거지수치 */
+    padding-top:15%;
+    margin: 0px 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    border: none;
+    box-sizing: border-box;
+}
+.btnBox{
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-end;
+    height: 30px;
+}
+.btn{
+    height: 28px;
+    margin-left: 5px;
+    border-radius: 3px;
+    border: 1px solid #465D59;
+}
+.btnBox > .before.btn{ width:20%; }
+.btnBox > .after.btn{ width:33%; }
+
+#writeForm > #submitWriteBtn > input{
+    margin: 20px 30px;
+    text-align: center;
+    height: 50px;
+    width: 100%;
+    padding: 5px 20px 5px 20px;
+    /* box-sizing: border-box; */
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background: #465D59;
+    box-sizing: border-box;
+}
+
+.off{
+    display: block;
+}
