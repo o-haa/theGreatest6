@@ -12,6 +12,7 @@ async function init() {
     console.log(user)
 
     const [, , , , idx] = location.pathname.split('/');
+    console.log(idx)
     const boardIdx = document.querySelector('#idx');
     const subject = document.querySelector('#subject');
     const nickname = document.querySelector('#writer');
