@@ -102,13 +102,16 @@ VALUES(?,?,?,?,?,?)`,
 
     updateHit: 'UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ?',
     communityViewFile: `SELECT
-                a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
-                b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
-                ,${datetime} 
-                FROM board AS a 
-                LEFT OUTER JOIN b_file AS b 
-                ON a.board_idx = b.board_idx 
-                WHERE a.board_idx = ?`,
+                b.user_idx, b.show_category_idx, b.board_subject, b.board_content, b.board_date, b.board_hit,
+                f.board_file_idx, f.board_idx, f.file_originalname, f.file_storedname, f.file_size, f.file_date, f.file_dlt_flag
+                ,${datetime},
+                u.user_id, u.user_nickname, u.user_level, u.user_active, u.user_doj
+                FROM board AS b 
+                LEFT OUTER JOIN b_file AS f
+                ON b.board_idx = f.board_idx 
+                LEFT OUTER JOIN user AS u 
+                ON b.user_idx = u.user_idx 
+                WHERE b.board_idx = ?`,
 
     communityDelete: 'DELETE FROM board WHERE board_idx = ? ',
     getCategory: 'SELECT * FROM s_category WHERE show_category = ?',
