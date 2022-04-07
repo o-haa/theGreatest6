@@ -1,5 +1,5 @@
 exports.communityList = (req,res) =>{
-    res.render('./board/community/radioList')
+    res.render('./board/community/communityList')
 }
 
 exports.communityWrite = (req,res) =>{
