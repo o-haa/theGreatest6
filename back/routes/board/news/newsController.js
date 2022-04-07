@@ -10,7 +10,11 @@ const date = `DATE_FORMAT(news_date, '%Y-%m-%d') AS news_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
 
 exports.newsList = async (req, res) => {
-    const sql = `SELECT *,${date} FROM b_news`;
+    const sql = `SELECT *,${date} 
+                FROM b_news AS n 
+                LEFT OUTER JOIN user AS u
+                ON n.user_idx = u.user_idx
+                ORDER BY n.board_news_idx DESC`;
     try {
         // console.log(sql)
         const [result] = await pool.execute(sql);
@@ -75,7 +79,7 @@ exports.newsView = async (req,res) => {
 
 exports.newsDelete = async (req,res) =>{
     const{idx}=req.params;
-    const sql = `DELETE b_news FROM b_news b INNER JOIN user u ON b.user_idx = u.user_idx WHERE board_news_idx = ? `;
+    const sql = `DELETE FROM b_news WHERE board_news_idx = ? `;
     const prepare = [idx];
     try{
         const [result] = await pool.execute(sql,prepare);

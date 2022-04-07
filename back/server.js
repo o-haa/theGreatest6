@@ -2,10 +2,11 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const http = require('http')
 
 require('dotenv').config();
 const port = process.env.PORT || '4001';
-const router = require('./routes');
+// const router = require('./routes');
 
 app.set('view engine', 'html');
 
@@ -23,8 +24,19 @@ const options = {
 };
 
 app.use(cors(options));
-app.use(router);
 
-app.listen(port, _ => {
+
+
+
+const server = app.listen(port, _ => {
     console.log(`back server running on localhost:${port}`);
 })
+
+const io = require('socket.io')(server,{
+    cors:{origin:'*'},
+    credentials:true
+})
+
+const router = require('./routes')
+require('./chatS')(io);
+app.use(router);

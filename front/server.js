@@ -19,6 +19,7 @@ app.use(cors({
     credentials:true,
     allowedHeaders:['Content-type','Authorization'],
 }))
+
 app.use(express.static('public'));
 app.use('/img',express.static('uploads'));
 
@@ -26,6 +27,7 @@ app.use('/img',express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(router);
+
 
 app.listen(port,_=>{
     console.log(`front server running on localhost:${port}`);

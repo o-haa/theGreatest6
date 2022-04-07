@@ -77,3 +77,22 @@ body{
     position: relative;
     font-size: 28px;
 }
+
+#chatB{
+    width:50px;
+    height: 50px;
+    margin-left:95%;
+}
+
+#chatBtn{
+    width:100%;
+    height: 100%;
+}
+
+#chatBtn img {
+    width:100%;
+    height: 100%;
+    filter: opacity(0.5) drop-shadow(0 0 0 #fff);
+
+
+}
