@@ -19,7 +19,7 @@ exports.accountMgt = async (req,res) =>{
                 ORDER BY user_idx DESC`
     try{
         const [result] = await pool.execute(sql);
-        console.log(result)
+        // console.log(result)
 
         response = {
             ...response,
@@ -30,6 +30,17 @@ exports.accountMgt = async (req,res) =>{
         console.log(e.message);
     }
     res.json(response)
+}
+
+exports.accountUpdate = async (req,res) =>{
+    console.log(req.body)
+    const {valueLevel, activeLevel, idx} = req.body
+    const sql = `UPDATE user
+                SET user_level=${valueLevel}, user_active=${activeLevel}
+                WHERE user_idx=${idx}
+                `
+    const [result] = await pool.execute(sql)
+    res.json(result)
 }
 
 //혜택 관리하는 페이지
