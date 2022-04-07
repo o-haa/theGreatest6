@@ -18,21 +18,14 @@ async function init() {
     axios.defaults.withCredentials = true;
 
     const response = await axios.post('accountmgt')
-    let result = response.data.result
+    let nodes = response.data.result
     
     const temp = document.querySelector('#adminList_row')
-    const clone = document.importNode(temp.content,true)
-    const tdElement = clone.querySelectorAll('td')
-    console.log('---------> ',tdElement)
+    
+
+    const tbody = document.querySelector('tbody')
+    const newOption = document.createElement('option')
 
     let i = 0
-    result.forEach(v=>{
-        i+=1
-        tdElement[i].innerHtml = v.user_idx
-        tdElement[i+1].innerHtml = v.user_id
-        tdElement[i+2].innerHtml = v.user_nickname
-        tdElement[i+3].innerHtml = v.user_doj
-        tdElement[i+4].innerHtml = v.user_level
-        tdElement[i+5].innerHtml = v.user_active
-    })  
+    
 }
