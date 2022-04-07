@@ -7,15 +7,33 @@ const uparam = `u.user_idx,user_nickname,user_level`
 
 module.exports = {
     //account
-    myInfo: `SELECT 
+    personalInfo: `SELECT 
     u_name, 
     DATE_FORMAT(u_dob, '%Y-%m-%d') AS u_dob,
     u_gender,
-    u_mobile,
-    u_address_idx
-FROM u_personal 
-WHERE user_idx = ?`,
-    optionalInfo: 'INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile) VALUES (?,?,?,?,?)',
+    a.u_add_name,
+    a.u_add_bd_name,
+    a.u_add_detail,
+    a.u_add_zipcode,
+    m.u_mobile1,
+    m.u_mobile2,
+    m.u_mobile3
+FROM u_personal AS p
+LEFT OUTER JOIN u_address AS a
+ON p.u_address_idx = a.user_address_idx
+LEFT OUTER JOIN u_mobile AS m
+ON p.u_mobile_idx = m.u_mobile_idx
+WHERE p.user_idx = ?`,
+
+
+    mobileInfo: `INSERT INTO u_mobile (u_mobile1, u_mobile2, u_mobile3, user_idx ) VALUES (?,?,?,?)`,
+
+    addressInfo: `INSERT INTO u_address (user_idx,u_add_name, u_add_region1,u_add_region2, u_add_region3, u_add_road, u_add_bd_name, u_add_bd_no, u_add_detail, u_add_zipcode)
+    VALUES (?,?,?,?,?,?,?,?,?,?)`,
+
+
+    optionalInfo: 'INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile_idx, u_address_idx) VALUES (?,?,?,?,?,?)',
+    
     myBenefit: `SELECT user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_net  
                 FROM u_point 
                 WHERE user_idx = ?`,
@@ -36,7 +54,6 @@ WHERE user_idx = ?`,
     user_active
   FROM user 
   WHERE user_id = ? AND user_password = ?`,
-
 
 
 
