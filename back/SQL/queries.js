@@ -210,16 +210,6 @@ VALUES(?,?,?,?,?,?)`,
 
 
 
-    // showModifyGetInfo: `SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
-    // FROM shows AS s 
-    // LEFT JOIN s_option AS o 
-    // ON s.show_idx = o.shows_idx
-    // LEFT OUTER JOIN s_category AS c
-
-    // WHERE s.show_idx= ? `
-
-
-
     //admin
 
 
@@ -231,5 +221,20 @@ VALUES(?,?,?,?,?,?)`,
 
     deletePoint: `DELETE FROM u_point WHERE u_point_idx = ?`,
 
+
+    //book_idx, book_date, book_seat_idx,show_idx,user_idx
+    ticketOpen: `SELECT `,
+
+
+    selectBookInfo: `SELECT s.show_category_idx, s.show_title, s.show_xrated, s.show_company, o.show_date, o.show_place
+    FROM shows AS s
+    LEFT OUTER JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    WHERE s.show_idx
+    `,
+
+    InsertBookInfo: `INSERT INTO `
+
+    
 
 }

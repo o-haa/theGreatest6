@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const bookController = require('./bookController')
+const bookRouter = require('./book')
+const paymentRouter = require('./payment')
 
-router.use('/',bookController._1)
+
+router.use('/book',bookRouter)
+router.use('/payment',paymentRouter)
 
 module.exports = router;

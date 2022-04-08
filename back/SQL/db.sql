@@ -31,3 +31,16 @@ SELECT * FROM board
 AS board LEFT OUTER JOIN s_category AS s
 
 ON board.show_category_idx = s.show_category;
+
+
+
+
+//좌석
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (1,1,100000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (1,2,100000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (1,3,100000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (1,4,100000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (1,5,100000);
+
+
+
