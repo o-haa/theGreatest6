@@ -17,6 +17,54 @@ async function init() {
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit')
     
+    const xhr = new XMLHttpRequest();
+    const like = document.querySelector('.like')
+    let useridxx = document.querySelector('#viewHead > td > input')
+    useridxx.value = user.user_idx
+    const likeUserIdx = useridxx.value
+    const likeDB = await axios.post(`/likelist/${bIdx}`)
+    if(user.user_idx == likeUserIdx){
+        like.addEventListener('click',likeHandler)
+        async function likeHandler(){
+            if(likeDB.data.result.length === 0){
+                try{
+                    const data = {
+                        likeUserIdx
+                    }
+                    const insert = await axios.post(`/likeinsert/${bIdx}`,data)
+                    like.innerHTML = '❤️'
+                    location.reload()
+                } catch(e){
+                    console.log('/communitylikeinsert',e.message)
+                };
+            }else if (likeDB.data.result.length > 0){
+                const likeDB = await axios.post(`/likelist/${bIdx}`)
+                let likedata = likeDB.data.result  
+                let flag = likedata.result[0].like_board_flag
+                if(flag === 0){
+                    like.innerHTML = '❤️'
+                } else {
+                    like.innerHTML = '❤️‍🩹' 
+                };
+                try{
+                    const data = {
+                        likeUserIdx,
+                        likedata
+                    }
+                    const insert = await axios.post(`/likeupdate/${bIdx}`,data)
+                } catch(e){
+                    console.log('/communitylike',e.message)
+                };
+            };
+        };
+    };
+
+    
+        
+    
+        
+
+        
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
@@ -27,7 +75,6 @@ async function init() {
     const response = await axios.post(`/view/${bIdx}`, {
         withCredentials: true,
     });
-
     const showCategory = response.data.result[0].show_category_idx
 
     if (response.data.errno === 0) {
@@ -233,7 +280,6 @@ async function init() {
             try {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data);
                 console.log(response)
-                console.log('1')
                 // if (response.data.errno !== 0) throw new Error;
                 location.href = `/board/community/view/${bIdx}`;
             } catch (e) {

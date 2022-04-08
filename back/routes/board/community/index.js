@@ -28,6 +28,8 @@ router.post(`/comment/:boardIdx`,communityController.communityComment)
 router.post(`/commentList/:boardIdx`,communityController.communityCoList)
 router.post(`/commentListDlt/:cmtIdx`,communityController.communityCoDlt)                                 
 router.post(`/commentListUp/:cmtIdx`,communityController.communityCoUp)
-router.post(`/like/:boardIdx`,communityController.communityLike)
+router.post(`/likeupdate/:boardIdx`,communityController.communityLikeUp)
+router.post(`/likelist/:boardIdx`,communityController.communityLikeList)
+router.post(`/likeinsert/:boardIdx`,communityController.communityLikeInsert)
 
 module.exports = router
