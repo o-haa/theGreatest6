@@ -10,6 +10,7 @@ async function init(e) {
     console.log("접속")
 
     year_month.innerHTML = `${calMonth} ${year}`
+    year_month.innerHTML = `${calMonth} ${year}`
 
     const liElement = document.querySelector()
     let clone = document.importNode(template.content,true)
@@ -32,6 +33,8 @@ async function init(e) {
     listBtn.addEventListener('click', listBtnHandler)
     listGrid.addEventListener('click', gridBtnHandler)
     listCalendar.addEventListener('click', calBtnHandler)
+
+    
 
     function listBtnHandler(){ 
         window.location.href = 'http://localhost:3001/show/program/showlist'; 
