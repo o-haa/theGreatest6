@@ -1,4 +1,5 @@
 const pool = require('../../../db');
+const sql = require ('../../../SQL/queries')
 
 let response = {
     result:[],
@@ -49,12 +50,10 @@ exports.insertPoint = async (req,res) =>{
         result: {},
         errno: 1
     };
-    const { userIdx, pointIn, pointOut, pointDescription, u_point_net } = req.body;
-    const prepare =  [ userIdx, pointIn, pointOut, pointDescription,u_point_net ];
-    const sql = `INSERT INTO u_point(user_idx,u_point_in,u_point_out,u_point_description,u_point_net) VALUES(?,?,?,?,?) `
+    const { userIdx, pointIn, pointOut, pointDescription} = req.body;
+    const prepare =  [ userIdx, pointIn, pointOut, pointDescription];
     try { 
-        const [result] = await pool.execute(sql,prepare);
-        console.log('도착?')
+        const [result] = await pool.execute(sql.insertPoint, prepare);
         response = {
             ...response,
             result: {
@@ -63,7 +62,6 @@ exports.insertPoint = async (req,res) =>{
             },
             errno: 0
         };
-        console.log('도착?22222222')
     } catch (e) {
         console.log('/insertPoint',e.message);
     }
