@@ -93,6 +93,9 @@ async function init() {
     for(let i=0; i < checks.length; i++){
         checks[i].addEventListener('click',checkedHandler)
     }
+    // checks.forEach(v=>{
+    //     console.log('check',v)
+    // })
 }
 
 

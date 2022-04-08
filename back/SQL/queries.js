@@ -71,13 +71,18 @@ WHERE p.user_idx = ?`,
     //board
 
 
-    listsql: `SELECT * 
+    // listsql: `SELECT * 
+    // FROM board AS b 
+    // LEFT OUTER JOIN user AS u 
+    // ON b.user_idx = u.user_idx 
+    // WHERE b.show_category_idx = ? 
+    // ORDER BY b.board_idx DESC`,
+
+    allListsql: `SELECT * 
     FROM board AS b 
     LEFT OUTER JOIN user AS u 
     ON b.user_idx = u.user_idx 
-    WHERE b.show_category_idx = ? 
     ORDER BY b.board_idx DESC`,
-
 
 
     // WHERE s.show_category = ?
@@ -156,7 +161,10 @@ VALUES(?,?,?,?,?,?)`,
     commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
     commentUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
     
-    communityLike: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
+    communityLikeUp1: 'UPDATE like_board SET like_board_flag = 1 WHERE board_idx = ?',
+    communityLikeUp0: 'UPDATE like_board SET like_board_flag = 0 WHERE board_idx = ?',
+    communityLikeInsert: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
+    communityLikeList: 'SELECT * FROM like_board WHERE board_idx = ?',
 
     //show
 

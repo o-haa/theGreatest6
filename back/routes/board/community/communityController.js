@@ -28,6 +28,9 @@ exports.communityList = async (req, res) => {
             case 4:
                 listsql = sql.communityList4;
             break;
+            case 5:
+                listsql = sql.allListsql;
+            break;
 
         }
         const [result] = await pool.execute(listsql);
@@ -47,7 +50,6 @@ exports.communityList = async (req, res) => {
 
 exports.communityWrite = async (req,res) =>{                                
     const { category, userIdx,subject,content }=req.body;
-    console.log(req.body)
     const categoryIdx = `SELECT show_category_idx FROM s_category WHERE show_category = ?`
     const prepare = [category]
 
@@ -121,7 +123,6 @@ exports.communityView = async (req,res) => {
 exports.communityDelete = async (req,res) =>{
     const{ boardIdx }=req.params;
     const prepare = [ boardIdx ];
-    console.log(prepare)
 
     try{
         const [result] = await pool.execute(sql.communityDelete,prepare);
@@ -269,14 +270,23 @@ exports.communityCoUp = async (req,res)=>{
     
 }
 
-exports.communityLike = async (req,res)=>{
-    const{boardIdx}=req.params;
-    const { userIdx } = req.body
-    const prepare = [userIdx,boardIdx]
 
+
+let likeup
+exports.communityLikeUp = async (req,res)=>{
+    const{boardIdx}=req.params;
+    const { likeUserIdx } = req.body
+    const prepare = [boardIdx]
+    const flag = req.body.likedata.result[0].like_board_flag
     try{
-        const [result] = await pool.execute(sql.communityLike,prepare)
-        response = {
+        if(flag == '0'){
+            likeup = sql.communityLikeUp1
+        } else{
+            likeup = sql.communityLikeUp0
+        }
+
+        const [result] = await pool.execute(likeup,prepare) 
+        response1 = {
             ...response,
             result,
             errno: 0
@@ -284,6 +294,48 @@ exports.communityLike = async (req,res)=>{
     }catch(e){
         console.log('communityLike',e.message)
     }
-    res.json(response)
+    res.json(response1)
     
+}
+
+exports.communityLikeInsert = async (req,res)=>{
+    const{boardIdx}=req.params;
+    const { likeUserIdx } = req.body
+    const prepare = [likeUserIdx,boardIdx]
+
+    try{
+        
+        const [result] = await pool.execute(sql.communityLikeInsert,prepare)
+        response = {
+            ...response,
+            result,
+            errno: 0
+        } 
+        
+
+    }catch(e){
+        console.log('/likeinsert',e.message)
+    }
+    res.json(response)
+}
+
+exports.communityLikeList= async (req,res)=>{
+    const{boardIdx}=req.params;
+    const prepare = [boardIdx]
+    
+    try{
+        const [result] = await pool.execute(sql.communityLikeList,prepare)
+        const length = result.length
+        response = {
+            ...response,
+            result:{
+                result,
+                length
+            },
+            errno: 0
+        }  
+    }catch(e){
+        console.log('communityLikeList',e.message)
+    }
+    res.json(response)
 }
