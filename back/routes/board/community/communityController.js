@@ -28,6 +28,9 @@ exports.communityList = async (req, res) => {
             case 4:
                 listsql = sql.communityList4;
             break;
+            case 5:
+                listsql = sql.allListsql;
+            break;
 
         }
         const [result] = await pool.execute(listsql);
@@ -47,7 +50,6 @@ exports.communityList = async (req, res) => {
 
 exports.communityWrite = async (req,res) =>{                                
     const { category, userIdx,subject,content }=req.body;
-    console.log(req.body)
     const categoryIdx = `SELECT show_category_idx FROM s_category WHERE show_category = ?`
     const prepare = [category]
 
@@ -121,7 +123,6 @@ exports.communityView = async (req,res) => {
 exports.communityDelete = async (req,res) =>{
     const{ boardIdx }=req.params;
     const prepare = [ boardIdx ];
-    console.log(prepare)
 
     try{
         const [result] = await pool.execute(sql.communityDelete,prepare);
@@ -274,9 +275,7 @@ exports.communityCoUp = async (req,res)=>{
 let likeup
 exports.communityLikeUp = async (req,res)=>{
     const{boardIdx}=req.params;
-    console.log(boardIdx)
     const { likeUserIdx } = req.body
-    console.log(likeUserIdx)
     const prepare = [boardIdx]
     const flag = req.body.likedata.result[0].like_board_flag
     try{
@@ -301,9 +300,7 @@ exports.communityLikeUp = async (req,res)=>{
 
 exports.communityLikeInsert = async (req,res)=>{
     const{boardIdx}=req.params;
-    console.log(boardIdx)
     const { likeUserIdx } = req.body
-    console.log(likeUserIdx)
     const prepare = [likeUserIdx,boardIdx]
 
     try{
@@ -320,6 +317,7 @@ exports.communityLikeInsert = async (req,res)=>{
         console.log('/likeinsert',e.message)
     }
     res.json(response)
+    await axios.get(`http://localhost:3001/board/community/view/${boardIdx}`)
     
 }
 

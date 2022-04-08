@@ -33,7 +33,7 @@ async function init() {
                     }
                     const insert = await axios.post(`/likeinsert/${bIdx}`,data)
                     like.innerHTML = '❤️'
-                    location.reload();
+                    await axios.get(`http://localhost:3001/board/community/view/${bIdx}`)
                 } catch(e){
                     console.log('/communitylikeinsert',e.message)
                 };
@@ -280,7 +280,6 @@ async function init() {
             try {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data);
                 console.log(response)
-                console.log('1')
                 // if (response.data.errno !== 0) throw new Error;
                 location.href = `/board/community/view/${bIdx}`;
             } catch (e) {

@@ -71,13 +71,18 @@ WHERE p.user_idx = ?`,
     //board
 
 
-    listsql: `SELECT * 
+    // listsql: `SELECT * 
+    // FROM board AS b 
+    // LEFT OUTER JOIN user AS u 
+    // ON b.user_idx = u.user_idx 
+    // WHERE b.show_category_idx = ? 
+    // ORDER BY b.board_idx DESC`,
+
+    allListsql: `SELECT * 
     FROM board AS b 
     LEFT OUTER JOIN user AS u 
     ON b.user_idx = u.user_idx 
-    WHERE b.show_category_idx = ? 
     ORDER BY b.board_idx DESC`,
-
 
 
     // WHERE s.show_category = ?
