@@ -18,25 +18,32 @@ async function init() {
 
     const userImgFrm = document.querySelector('#userImgFrm')
     userImgFrm.addEventListener('submit',userImgSubmitHandler)
-    console.log(userImgFrm)
+    const imgBox = document.querySelector('#imgBox')
+    const imgElement = document.createElement('img')
+    imgElement.src = 'http://localhost:4001/uploads/u_uploads/IMG_0928_1649388930111.JPG'
+    imgBox.appendChild(imgElement)
+
+
     async function userImgSubmitHandler(e) {
         e.preventDefault();
         
         const userImg = document.querySelector('#userImg')
         let formData = new FormData(userImgFrm);
         formData.append('upload',userImg)
-        console.log(formData)
+        
+        const data = {
+            userIdx: user.user_idx,
+            formData
+        }
 
         try {
-            const insertImg = await axios.post('insertUserImg',formData)
+            const insertImg = await axios.post( '/insertUserImg', data )
         }
-        catch {
-
+        catch (e) {
+            console.log('/myinfo userImg',e.message)
         }
     }
-
-
-
+    
 
 
     const checked = document.querySelectorAll('#itemBox input');
@@ -64,9 +71,6 @@ async function init() {
                 break;
         }
     }
-
-    // const a = '%EC%B2%9C%ED%98%B8%EB%8C%80%EB%A1%9C+995'
-    // console.log(a.toString('hex'))
 
 
     // const tableBox = document.querySelector('#tableBox')
