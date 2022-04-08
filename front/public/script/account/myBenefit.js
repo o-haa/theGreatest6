@@ -160,25 +160,26 @@ async function init() {
             for(let i=6; i<12; i++){
                 tdlist[i].setAttribute("class","pointRow edit off")
             }
-            
+            const pointIdx = point.u_point_idx
             const inputList = parentNode.querySelectorAll('input')
             const pointDescription = inputList[0].value 
             const pointIn = inputList[1].value 
             const pointOut = inputList[2].value 
-            const u_point_net = inputList[3].value 
+            // const u_point_net = inputList[3].value 
             const userIdx = user.user_idx
             
             try {
                 const data = {
+                    pointIdx,
                     userIdx,
                     pointIn,
                     pointOut,
                     pointDescription,
-                    u_point_net //함수 받기 전 임시
                 }
+                console.log(data)
                 const updatePoint = await axios.post('http://localhost:4001/admin/account/updatepoint', data)
                 console.log(updatePoint.data)
-                // location.href = '/account/management/myBenefit'
+                location.href = '/account/management/myBenefit'
             } catch (e) {
                 console.log('/AdmBenefitMgt', e.message)
             }

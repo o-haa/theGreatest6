@@ -117,7 +117,6 @@ exports.myBenefit = async (req, res) => {
             result:result,
             errno: 0
         };
-        console.log(result)
     } catch (e){
         console.log('/mybenefit',e.message);
     }
