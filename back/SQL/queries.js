@@ -36,14 +36,14 @@ WHERE p.user_idx = ?`,
 
     optionalInfo: 'INSERT INTO u_personal (user_idx, u_name, u_dob, u_gender, u_mobile_idx, u_address_idx) VALUES (?,?,?,?,?,?)',
     
-    myBenefit: `SELECT u_point_idx, user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_net  
+    myBenefit: `SELECT u_point_idx, user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_in - u_point_out AS u_point_net
                 FROM u_point 
                 WHERE user_idx = ?`,
 
 
     //유저 이미지 넣기
     insertUserImg: `INSERT INTO u_file (user_idx, file_originalname, file_storedname, file_size, file_dlt_flag)
-                    VALUES (?, ?, ?, ?, ?)`,
+                    xVALUES (?, ?, ?, ?, ?)`,
 
 
 
@@ -214,11 +214,13 @@ VALUES(?,?,?,?,?,?)`,
 
 
     //admin
-    insertPoint: `INSERT INTO u_point (user_idx, u_point_in, u_point_out, u_point_net, u_point_description) 
-                    VALUES (?, ?, ?, u_point_in - u_point_out, ?)`,  //net 부분 다시 봐야함 
+
+
+    insertPoint: `INSERT INTO u_point (user_idx, u_point_in, u_point_out, u_point_description) 
+                    VALUES (?, ?, ?, ?)`,
     
-    updatePoint: `UPDATE u_point (u_point_in, u_point_out, u_point_net, u_point_description)
-                    SET (?, ?, u_point_in - u_point_out, ?)
+    updatePoint: `UPDATE u_point (u_point_in, u_point_out, u_point_description)
+                    SET (?, ?, ?)
                     WHERE u_point_idx = ?`,
 
     deletePoint: `DELETE FROM u_point WHERE u_point_idx = ?`,
