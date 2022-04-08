@@ -36,6 +36,7 @@ async function init() {
     const writeFrm = document.querySelector('#writeFrm');
     
     writeFrm.addEventListener('submit',writeSubmit);
+    
     async function writeSubmit (e){
         e.preventDefault();
         const {communitySubject,communityContent,select} = e.target;
