@@ -149,6 +149,8 @@ VALUES(?,?,?,?,?,?)`,
 
     commentDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
     commentUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
+    
+    communityLike: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
 
     //show
 

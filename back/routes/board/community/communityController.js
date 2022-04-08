@@ -268,3 +268,22 @@ exports.communityCoUp = async (req,res)=>{
     }
     
 }
+
+exports.communityLike = async (req,res)=>{
+    const{boardIdx}=req.params;
+    const { userIdx } = req.body
+    const prepare = [userIdx,boardIdx]
+
+    try{
+        const [result] = await pool.execute(sql.communityLike,prepare)
+        response = {
+            ...response,
+            result,
+            errno: 0
+        }   
+    }catch(e){
+        console.log('communityLike',e.message)
+    }
+    res.json(response)
+    
+}
