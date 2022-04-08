@@ -74,7 +74,6 @@ async function init() {
         const point = responseBenefit.data.result;
         
         point.forEach(v=>{
-            console.log('a ------->>>> ',v);
             const pointRows = document.importNode(potintTable.content,true);
             const pointRow = pointRows.querySelectorAll('.pointRow');
 
@@ -151,27 +150,24 @@ async function init() {
         async function updateBtnHandler(e){
             const td = e.target.parentNode
             const parentNode = td.parentNode
-            console.log(parentNode)
             const tdlist = parentNode.querySelectorAll('td')
             for(let i=0; i<6; i++){
                 tdlist[i].setAttribute("class","pointRow")
             }
-
+            
             for(let i=6; i<12; i++){
                 tdlist[i].setAttribute("class","pointRow edit off")
             }
-            const pointIdx = point.u_point_idx
+            const pointIdx = tdlist[0].innerHTML
             const inputList = parentNode.querySelectorAll('input')
             const pointDescription = inputList[0].value 
             const pointIn = inputList[1].value 
             const pointOut = inputList[2].value 
-            // const u_point_net = inputList[3].value 
-            const userIdx = user.user_idx
+            // const userIdx = user.user_idx
             
             try {
                 const data = {
                     pointIdx,
-                    userIdx,
                     pointIn,
                     pointOut,
                     pointDescription,
