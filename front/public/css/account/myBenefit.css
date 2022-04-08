@@ -9,6 +9,7 @@
 #wrap{
     overflow: hidden;
     margin: 0 auto;
+    font-size: 13px;
 }
 
 
@@ -17,6 +18,7 @@
 /* 본문 #content */
 /* 본문 왼쪽 달력 박스  : #content > #calContent */
 /* 본문 오른쪽 박스  : #content > #mainContent */
+
 
 /* 카드 컨텐츠 타이틀 */
 #content > #mainContent > #mainContentTitle{

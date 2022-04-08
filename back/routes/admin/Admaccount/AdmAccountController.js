@@ -76,8 +76,19 @@ exports.updatePoint = async (req,res) =>{
     };
     const { pointIdx, userIdx, pointIn, pointOut, pointDescription } = req.body;
     const prepare =  [ pointIn, pointOut, pointDescription, pointIdx ];
+<<<<<<< HEAD
+    const sql = `UPDATE user
+                SET
+                u_point_in=${pointIn}
+                u_point_out=${pointOut}
+                u_point_description=${pointDescription}
+                WHERE
+                user_idx=${userIdx}
+                `
+=======
     console.log(prepare)
 
+>>>>>>> 8f523fc183ad9dbd120294ca6d3c91eb604e9f29
     try { 
         const [ result ] = await pool.execute( sql.updatePoint, prepare );
         response = {

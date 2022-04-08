@@ -74,6 +74,7 @@ async function init() {
         const point = responseBenefit.data.result;
         
         point.forEach(v=>{
+            console.log('a ------->>>> ',v);
             const pointRows = document.importNode(potintTable.content,true);
             const pointRow = pointRows.querySelectorAll('.pointRow');
 
@@ -85,7 +86,7 @@ async function init() {
             btnEdit.addEventListener('click',editBtnHandler)
             btnFin.addEventListener('click',updateBtnHandler)
 
-            pointRow[0] = '';       //인덱스...개개인의 거래 인덱스?
+            pointRow[0].innerHTML = v.u_point_idx;
             pointRow[1].innerHTML = v.u_point_date;
             pointRow[2].innerHTML = v.u_point_description;
             pointRow[3].innerHTML = v.u_point_in;
@@ -150,6 +151,7 @@ async function init() {
         async function updateBtnHandler(e){
             const td = e.target.parentNode
             const parentNode = td.parentNode
+            console.log(parentNode)
             const tdlist = parentNode.querySelectorAll('td')
             for(let i=0; i<6; i++){
                 tdlist[i].setAttribute("class","pointRow")
@@ -165,7 +167,7 @@ async function init() {
             const pointOut = inputList[2].value 
             // const u_point_net = inputList[3].value 
             const userIdx = user.user_idx
-
+            
             try {
                 const data = {
                     pointIdx,
