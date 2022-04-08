@@ -16,6 +16,28 @@ async function init() {
     const userOptionFrm = document.querySelector('#optionalOff');    //유저 선택 정보 없는 경우
     const optionalBox = document.querySelector('#optionalOn');  //유저 선택 정보 있는 경우
 
+    const userImgFrm = document.querySelector('#userImgFrm')
+    userImgFrm.addEventListener('submit',userImgSubmitHandler)
+    console.log(userImgFrm)
+    async function userImgSubmitHandler(e) {
+        e.preventDefault();
+        
+        const userImg = document.querySelector('#userImg')
+        let formData = new FormData(userImgFrm);
+        formData.append('upload',userImg)
+        console.log(formData)
+
+        try {
+            const insertImg = await axios.post('insertUserImg',formData)
+        }
+        catch {
+
+        }
+    }
+
+
+
+
 
     const checked = document.querySelectorAll('#itemBox input');
     checked.forEach(v => v.addEventListener('click', checkedHandler));

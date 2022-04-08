@@ -248,3 +248,7 @@ td{
     margin: 50px 0 0 35px;
     border-radius: 20px;
 }
+
+.off{
+    display: none;
+}

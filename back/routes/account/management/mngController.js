@@ -60,6 +60,35 @@ exports.optionalInfo = async(req,res) => {
     res.json(response);
 }
 
+exports.showUserImg = async (req,res) => {
+    
+}
+
+exports.insertUserImg = async (req,res) => {
+    console.log(req.file)
+        
+   
+    const { originalname, filename, size, encoding, mimetype} = req.file
+    const prepare = [ originalname, filename, size ]
+
+    const result = await pool.execute(sql.insertUserImg,prepare)
+    
+}
+
+
+exports.updateUserImg = async (req,res) => {
+
+}
+
+exports.deleteUserImg = async (req,res) => {
+
+}
+
+
+
+
+
+///
 
 exports.myTicket = (req, res) => {
     res.send('내 티켓');
