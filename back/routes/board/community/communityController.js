@@ -52,8 +52,8 @@ exports.communityWrite = async (req,res) =>{
     const prepare = [category]
 
     const [result1] = await pool.execute(categoryIdx,prepare);
-    const cIdx = result1.show_category_idx;
-
+   
+    const cIdx = result1[0].show_category_idx;
     const prepare2 = [userIdx,subject,content,cIdx];
 
     try{

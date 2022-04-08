@@ -49,9 +49,11 @@ async function init() {
     for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
         const liElement = document.createElement('li');
         const aElement = document.createElement('a');
-
+      
         aElement.setAttribute(`onClick`, pages(`${i}`));
+       
         aElement.innerHTML = `[${i}]`;
+
         liElement.appendChild(aElement);
         paging.appendChild(liElement);
     }
@@ -212,11 +214,11 @@ async function checkedHandler(e) {
             tbody.appendChild(clone);
 
 
-            let endBlock = block + pagingBlock;
-            if (endBlock > totalPage) endBlock = totalPage;
+            // let endBlock = block + pagingBlock;
+            // if (endBlock > totalPage) endBlock = totalPage;
 
 
-            const paging = document.querySelector('#paging');
+            // const paging = document.querySelector('#paging');
 
 
             let template = '';
@@ -224,7 +226,7 @@ async function checkedHandler(e) {
             tbody.innerHTML = template;
 
             paging.innerHTML = '';
-            for (let i = block + 1; i <= endBlock; i++) {
+            for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
                 const liElement = document.createElement('li');
                 const aElement = document.createElement('a');
 
@@ -248,7 +250,8 @@ async function pages(num) {
     console.log('test',test)
     console.log('num', num)
     const tr = document.querySelector('#communityBoardRow');
-    const value = test.data.result;
+    console.log(test)
+    const value = test.result;
     console.log('value',value)
 
     const aElement = document.createElement('a');
@@ -256,7 +259,7 @@ async function pages(num) {
     aElement.innerHTML = value.board_subject;
 
     const viewRows = 10;
-    const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows);
+    const Nodes = test.result.slice((num - 1) * viewRows, num * viewRows);
     const tbody = document.querySelector('table > tbody');
 
     let template = '';
