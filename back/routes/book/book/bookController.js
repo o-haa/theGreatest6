@@ -15,10 +15,10 @@ exports.selectBookInfo = async (req,res) => {
 }
 
 exports.InsertBookInfo = async (req,res) => {
-    prepare
-    const [ result ] = await axios.post( '/InsertBookInfo', prepare)
+    const prepare = [ ]
 
     try{
+        const [ result ] = await axios.post( '/InsertBookInfo', prepare)
 
     } catch (e) {
 
@@ -30,14 +30,5 @@ exports.selectSeatInfo = (req,res) => {
 
     } catch (e) {
         
-    }
-}
-
-exports.InsertSeatInfo = (req,res) => {
-
-    try{
-
-    } catch (e) {
-
     }
 }
