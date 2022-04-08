@@ -49,9 +49,9 @@ exports.insertPoint = async (req,res) =>{
         result: {},
         errno: 1
     };
-    const { userIdx, pointIn, pointOut, pointDescription, u_point_net } = req.body;
-    const prepare =  [ userIdx, pointIn, pointOut, pointDescription,u_point_net ];
-    const sql = `INSERT INTO u_point(user_idx,u_point_in,u_point_out,u_point_description,u_point_net) VALUES(?,?,?,?,?) `
+    const { userIdx, pointIn, pointOut, pointDescription } = req.body;
+    const prepare =  [ userIdx, pointIn, pointOut, pointDescription];
+    const sql = `INSERT INTO u_point(user_idx,u_point_in,u_point_out,u_point_description) VALUES(?,?,?,?) `
     try { 
         const [result] = await pool.execute(sql,prepare);
         console.log('도착?')
@@ -83,7 +83,6 @@ exports.updatePoint = async (req,res) =>{
                 SET
                 u_point_in=${pointIn}
                 u_point_out=${pointOut}
-                u_point_net=${activeLevel}
                 u_point_description=${pointDescription}
                 WHERE
                 user_idx=${userIdx}

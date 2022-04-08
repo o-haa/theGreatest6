@@ -72,6 +72,7 @@ async function init() {
         console.log(responseBenefit.data);
         if(responseBenefit.data.errno !==0 )throw new Error;
         const point = responseBenefit.data.result;
+        console.log(point.u_point_idx)
         
         point.forEach(v=>{
             const pointRows = document.importNode(potintTable.content,true);
@@ -85,12 +86,13 @@ async function init() {
             btnEdit.addEventListener('click',editBtnHandler)
             btnFin.addEventListener('click',updateBtnHandler)
 
-            pointRow[0] = '';       //인덱스...개개인의 거래 인덱스?
+            pointRow[0].innerHTML = v.u_point_idx  ;
             pointRow[1].innerHTML = v.u_point_date;
             pointRow[2].innerHTML = v.u_point_description;
             pointRow[3].innerHTML = v.u_point_in;
             pointRow[4].innerHTML = v.u_point_out;
-            pointRow[5].innerHTML = v.u_point_net  ;
+            pointRow[5].innerHTML = v.u_point_net;
+            
             tbody.appendChild(pointRows);
                 })
                 console.log(point)
@@ -110,7 +112,6 @@ async function init() {
             const pointDescription = tdAddList[0].value 
             const pointIn = tdAddList[1].value 
             const pointOut = tdAddList[2].value 
-            const u_point_net = tdAddList[3].value 
             const userIdx = user.user_idx
 
             try {
@@ -119,7 +120,6 @@ async function init() {
                     pointIn,
                     pointOut,
                     pointDescription,
-                    u_point_net //함수 받기 전 임시
                 }
                 const insertPoint = await axios.post('http://localhost:4001/admin/account/insertpoint', data)
                 console.log(insertPoint.data)
@@ -165,7 +165,6 @@ async function init() {
             const pointOut = inputList[2].value 
             const u_point_net = inputList[3].value 
             const userIdx = user.user_idx
-
             try {
                 const data = {
                     userIdx,

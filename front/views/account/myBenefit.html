@@ -64,25 +64,20 @@
                                     <td class="pointRow">인</td>
                                     <td class="pointRow">아웃</td>
                                     <td class="pointRow">넷</td>
+                                    <td class="pointRow"></td>
+                                    <!-- point_idx 자리 -->
+                                    <td class="pointRow"></td>
                                 </tr>
                                 <tr class="trAdd">
                                     <td></td>
                                     <td></td>
-                                    <td>
-                                        <input type="text" class="inputRow">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="inputRow">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="inputRow">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="inputRow">
-                                    </td>
-                                    <td>
-                                        <button class="btnAdd">추가</button>
-                                    </td>
+                                    <td><input type="text" class="inputRow"></td>
+                                    <td><input type="text" class="inputRow"></td>
+                                    <td><input type="text" class="inputRow"></td>
+                                    <td></td>
+                                    <!-- 6, 7 -->
+                                    <td><button class="btnAdd">추가</button></td>
+                                    <td type="hidden" class="point_idx"></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -93,7 +88,9 @@
                                     <td>point in</td>
                                     <td>point out</td>
                                     <td>point net</td>
-                                    <td> </td>
+                                    <!-- 6, 7 -->
+                                    <td class="off"></td>
+                                    <td type="hidden" class="point_idx"></td>
                                 </tr>
                             </tbody>
                             <template id="pointTable">
@@ -110,12 +107,14 @@
                                     <td class="pointRow edit off"><input type="text"></td>
                                     <td class="pointRow edit off"><input type="text"></td>
                                     <td class="pointRow edit off"><input type="text"></td>
-                                    <td class="pointRow edit off"><input type="text"></td>
+                                    <td class="pointRow edit off"></td>
+                                    <!-- 6, 7 -->
                                     <td>
                                         <button class="btnAdd">추가</button>
                                         <button class="btnEdit off">수정</button>
                                         <button class="btnFin off">완료</button>
                                     </td>
+                                    <td type="hidden" class="point_idx">111</td>
                                 </tr>
                             </template>
                         </table>
