@@ -76,6 +76,8 @@ exports.updatePoint = async (req,res) =>{
     };
     const { pointIdx, pointIn, pointOut, pointDescription } = req.body;
     const prepare =  [ pointIn, pointOut, pointDescription, pointIdx ];
+    console.log('aaaaaa ------> ',prepare)
+
     try { 
         const [ result ] = await pool.execute( sql.updatePoint, prepare );
         response = {
