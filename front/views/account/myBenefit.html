@@ -58,28 +58,6 @@
                             <caption>💰My Point💰</caption>
                             <thead>
                                 <tr>
-                                    <td>index</td>
-                                    <td>date</td>
-                                    <td>description</td>
-                                    <td>point in</td>
-                                    <td>point out</td>
-                                    <td>point net</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <template id="pointTable">
-                                    <tr class = 'pointRows'>
-                                        <td class="pointRow"></td>
-                                        <td class="pointRow"></td>
-                                        <td class="pointRow"></td>
-                                        <td class="pointRow"></td>
-                                        <td class="pointRow"></td>
-                                        <td class="pointRow"></td>
-                                    </tr>
-                                </template>
-                            </tbody>
-                            <tfoot>
-                                <tr>
                                     <td class="pointRow"></td>
                                     <td class="pointRow"></td>
                                     <td class="pointRow"></td>
@@ -87,7 +65,59 @@
                                     <td class="pointRow">아웃</td>
                                     <td class="pointRow">넷</td>
                                 </tr>
-                            </tfoot>
+                                <tr class="trAdd">
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <input type="text" class="inputRow">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="inputRow">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="inputRow">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="inputRow">
+                                    </td>
+                                    <td>
+                                        <button class="btnAdd">추가</button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="total">
+                                    <td>index</td>
+                                    <td>date</td>
+                                    <td>description</td>
+                                    <td>point in</td>
+                                    <td>point out</td>
+                                    <td>point net</td>
+                                    <td> </td>
+                                </tr>
+                            </tbody>
+                            <template id="pointTable">
+                                <tr class = 'pointRows'>
+                                    <td class="pointRow"></td>
+                                    <td class="pointRow"></td>
+                                    <td class="pointRow"></td>
+                                    <td class="pointRow"></td>
+                                    <td class="pointRow"></td>
+                                    <td class="pointRow"></td>
+
+                                    <td class="pointRow edit off"></td>
+                                    <td class="pointRow edit off"></td>
+                                    <td class="pointRow edit off"><input type="text"></td>
+                                    <td class="pointRow edit off"><input type="text"></td>
+                                    <td class="pointRow edit off"><input type="text"></td>
+                                    <td class="pointRow edit off"><input type="text"></td>
+                                    <td>
+                                        <button class="btnAdd">추가</button>
+                                        <button class="btnEdit off">수정</button>
+                                        <button class="btnFin off">완료</button>
+                                    </td>
+                                </tr>
+                            </template>
                         </table>
                     </div>
                 </div>

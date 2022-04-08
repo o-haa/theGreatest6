@@ -77,6 +77,14 @@ async function init() {
             const pointRows = document.importNode(potintTable.content,true);
             const pointRow = pointRows.querySelectorAll('.pointRow');
 
+            const btnAdd = pointRows.querySelector('.btnAdd')
+            const btnEdit = pointRows.querySelector('.btnEdit')
+            const btnFin = pointRows.querySelector('.btnFin')
+            btnAdd.setAttribute("class","btnAdd off")
+            btnEdit.setAttribute("class","btnEdit")
+            btnEdit.addEventListener('click',editBtnHandler)
+            btnFin.addEventListener('click',updateBtnHandler)
+
             pointRow[0] = '';       //인덱스...개개인의 거래 인덱스?
             pointRow[1].innerHTML = v.u_point_date;
             pointRow[2].innerHTML = v.u_point_description;
@@ -86,14 +94,97 @@ async function init() {
             tbody.appendChild(pointRows);
                 })
                 console.log(point)
-            const balance = document.querySelectorAll('tfoot td');
+            const balance = document.querySelectorAll('.tfoot > td');
                 balance[3].innerHTML = point.u_point_in
                 balance[4].innerHTML = point.u_point_out
                 balance[5].innerHTML = point.u_point_net
 
-    } catch (e){
-        console.log('/mybenefit',e.message);
+        } catch (e){
+            console.log('/mybenefit',e.message);
+        }
+    
+        const pntInsertBtn = document.querySelector('.btnAdd')
+        pntInsertBtn.addEventListener('click',insertBtnHandler)
+        async function insertBtnHandler(e){
+            const tdAddList = document.querySelectorAll('.inputRow')
+            const pointDescription = tdAddList[0].value 
+            const pointIn = tdAddList[1].value 
+            const pointOut = tdAddList[2].value 
+            const u_point_net = tdAddList[3].value 
+            const userIdx = user.user_idx
 
-    }
+            try {
+                const data = {
+                    userIdx,
+                    pointIn,
+                    pointOut,
+                    pointDescription,
+                    u_point_net //함수 받기 전 임시
+                }
+                const insertPoint = await axios.post('http://localhost:4001/admin/account/insertpoint', data)
+                console.log(insertPoint.data)
+            } catch (e) {
+                console.log('/AdmBenefitMgt', e.message)
+            }
+        }
+        
+        async function editBtnHandler(e){
+            const td = e.target.parentNode
+            const parentNode = td.parentNode
+            const tdlist = parentNode.querySelectorAll('td')
+            for(let i=0; i<6; i++){
+                tdlist[i].setAttribute("class","pointRow off")
+            }
+
+            for(let i=6; i<12; i++){
+                tdlist[i].setAttribute("class","pointRow edit")
+            }
+            console.log(parentNode)
+            
+            const btnEdit = parentNode.querySelector('.btnEdit')
+            btnEdit.setAttribute("class","btnEdit off")
+            const btnFin = parentNode.querySelector('.btnFin')
+            btnFin.setAttribute("class","btnFin")
+        }
+
+        async function updateBtnHandler(e){
+            const td = e.target.parentNode
+            const parentNode = td.parentNode
+            const tdlist = parentNode.querySelectorAll('td')
+            for(let i=0; i<6; i++){
+                tdlist[i].setAttribute("class","pointRow")
+            }
+
+            for(let i=6; i<12; i++){
+                tdlist[i].setAttribute("class","pointRow edit off")
+            }
+            
+            const inputList = parentNode.querySelectorAll('input')
+            const pointDescription = inputList[0].value 
+            const pointIn = inputList[1].value 
+            const pointOut = inputList[2].value 
+            const u_point_net = inputList[3].value 
+            const userIdx = user.user_idx
+
+            try {
+                const data = {
+                    userIdx,
+                    pointIn,
+                    pointOut,
+                    pointDescription,
+                    u_point_net //함수 받기 전 임시
+                }
+                const updatePoint = await axios.post('http://localhost:4001/admin/account/updatepoint', data)
+                console.log(updatePoint.data)
+                // location.href = '/account/management/myBenefit'
+            } catch (e) {
+                console.log('/AdmBenefitMgt', e.message)
+            }
+
+            const btnEdit = parentNode.querySelector('.btnEdit')
+            btnEdit.setAttribute("class","btnEdit")
+            const btnFin = parentNode.querySelector('.btnFin')
+            btnFin.setAttribute("class","btnFin off")
+        }
 
 }

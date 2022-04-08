@@ -49,10 +49,12 @@ exports.insertPoint = async (req,res) =>{
         result: {},
         errno: 1
     };
-    const { userIdx, pointIn, pointOut, pointDescription } = req.body;
-    const prepare =  [ userIdx, pointIn, pointOut, pointDescription ];
+    const { userIdx, pointIn, pointOut, pointDescription, u_point_net } = req.body;
+    const prepare =  [ userIdx, pointIn, pointOut, pointDescription,u_point_net ];
+    const sql = `INSERT INTO u_point(user_idx,u_point_in,u_point_out,u_point_description,u_point_net) VALUES(?,?,?,?,?) `
     try { 
-        const result = await pool.execute(sql.insertPoint,prepare);
+        const [result] = await pool.execute(sql,prepare);
+        console.log('도착?')
         response = {
             ...response,
             result: {
@@ -61,6 +63,7 @@ exports.insertPoint = async (req,res) =>{
             },
             errno: 0
         };
+        console.log('도착?22222222')
     } catch (e) {
         console.log('/insertPoint',e.message);
     }
@@ -76,6 +79,15 @@ exports.updatePoint = async (req,res) =>{
     };
     const { pointIdx, userIdx, pointIn, pointOut, pointDescription } = req.body;
     const prepare =  [ pointIn, pointOut, pointDescription, pointIdx ];
+    const sql = `UPDATE user
+                SET
+                u_point_in=${pointIn}
+                u_point_out=${pointOut}
+                u_point_net=${activeLevel}
+                u_point_description=${pointDescription}
+                WHERE
+                user_idx=${userIdx}
+                `
     try { 
         const [ result ] = await pool.execute( sql.updatePoint, prepare );
         response = {
