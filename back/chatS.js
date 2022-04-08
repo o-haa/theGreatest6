@@ -23,6 +23,8 @@ chat.on('connection',(socket)=>{
             socket.name = name
             console.log('socket',socket.name)
             //모든 소켓에게 전송
+            const time = new Date()
+            console.log(time)
             io.of('/chat').emit('update',{type:'connect', name:'>>',message: name + '님이 접속하였습니다.'})
         })
     

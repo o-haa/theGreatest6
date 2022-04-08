@@ -6,10 +6,11 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    const checks = document.querySelectorAll('#category ul li input');
-    // checks.forEach(v => {
-    //     v.addEventListener('click', checkedHandler)
-    // })
+    const checks = document.querySelectorAll('#category ul li label input');
+    checks.forEach(v => {
+        console.log(v)
+        v.addEventListener('click', checkedHandler)
+    })
 
     const checked = document.querySelector('#category ul li input:checked')
 

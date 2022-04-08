@@ -78,23 +78,26 @@ WHERE p.user_idx = ?`,
 
     communityList: `SELECT board_idx, b.show_category_idx, board_subject, board_content, board_hit,${date}, show_category
     FROM board As b
-    LEFT OUTER JOIN s_category AS S
+    LEFT OUTER JOIN s_category AS s
     ON b.show_category_idx = s.show_category_idx
     ORDER BY board_idx DESC`,
 
 
     admin: `INSERT INTO user VALUE ('admin@gmail.com','admin','관리자',2,1,now(),130)`,
 
-    communityList1: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ?) ORDER BY board_idx DESC`,
-    communityList2: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`,
-    communityList3: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
-    communityList4: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
+    // communityList1: `SELECT ${param},${date} FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`,
+    // communityList2: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`,
+    // communityList3: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
+    // communityList4: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
+    communityList1: `SELECT ${param},${date} FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`,
+    communityList2: `SELECT ${param},${date} FROM board WHERE show_category_idx = 2 ORDER BY board_idx DESC`,
+    communityList3: `SELECT ${param},${date} FROM board WHERE show_category_idx = 3 ORDER BY board_idx DESC`,
+    communityList4: `SELECT ${param},${date} FROM board WHERE show_category_idx = 4 ORDER BY board_idx DESC`,
     getCategoryIdx: 'SELECT show_category_idx FROM s_category WHERE show_category = ?',
 
     communityWrite: 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)',
 
     communityWriteFile: `INSERT INTO b_file (
-
         board_idx,
         file_originalname,
         file_storedname,

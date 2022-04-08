@@ -231,10 +231,12 @@ async function init() {
             };
             try {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data);
-                if (response.data.errno !== 0) throw new Error;
+                console.log(response)
+                console.log('1')
+                // if (response.data.errno !== 0) throw new Error;
                 location.href = `/board/community/view/${bIdx}`;
             } catch (e) {
-                console.log('/communityview', e.message);
+                console.log('/commentlistUp', e.message);
             }
         }
     }

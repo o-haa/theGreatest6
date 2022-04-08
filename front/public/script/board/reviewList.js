@@ -2,11 +2,12 @@ let test = {};
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
-    axios.defaults.baseURL = 'http://localhost:4001/board/community';
+    axios.defaults.baseURL = 'http://localhost:4001/board/review';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
+    console.log(response1)
     const user_nickname = user.user_nickname;
 
     const checks = document.querySelectorAll('#category ul li input');
@@ -24,7 +25,7 @@ async function init() {
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
     } catch (e) {
-        console.log('communitylistinit', e.message);
+        console.log('reivewlistinit', e.message);
     }
 
     test = {
