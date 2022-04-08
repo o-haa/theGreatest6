@@ -64,16 +64,19 @@ exports.showUserImg = async (req,res) => {
     
 }
 
-exports.insertUserImg = async (req,res) => {
+exports.insertUserImg = async (req, res) => {
     console.log(req.file)
-        
-   
-    const { originalname, filename, size, encoding, mimetype} = req.file
-    const prepare = [ originalname, filename, size ]
+    console.log(req.body)
 
-    const [result] = await pool.execute(sql.insertUserImg,prepare)
-    console.og(result.affectedRows, result.insertId)
-    
+    const { originalname, filename, size, encoding, mimetype } = req.file
+    const prepare = [originalname, filename, size]
+    console.log(prepare)
+    try {
+        const [result] = await pool.execute(sql.insertUserImg, prepare)
+        console.log(result.affectedRows, result.insertId)
+    } catch (e) {
+        console.log('/insertUserImg', e.message)
+    }
 }
 
 

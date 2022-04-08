@@ -161,17 +161,18 @@ exports.showList = async (req, res) => {
 
         let { show_idx, xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, timestampShow, timestampTicket } = req.body
 
-        console.log(categoryIdx)
-    const prepare2 = [ title, categoryIdx, xrated, showCompany, showDirector,timestampTicket, showContent, timestampShow, place, showCast1, showCast2, show_idx ]
-
+    const prepare2 = [ show_idx, title, categoryIdx, xrated, showCompany, showDirector,timestampTicket, showContent, timestampShow, place, showCast1, showCast2 ]
+        console.log(prepare2)
         try {
+            console.log(sql.showUpdate)
             const [result] = await pool.execute(sql.showUpdate, prepare2)
             response = {
+                ...response,
                 result,
                 show_idx,
                 error: 0
             }
-            console.log(result)
+            console.log(result,'dddddd')
             res.json(response)
         }
         catch (e) {
