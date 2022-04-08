@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/script/book/bookinfo.js"></script>
+    <script src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
     <title>Ticket Booking</title>
 </head>
 <body>
@@ -24,7 +26,6 @@
                 <li>박열(공연정보)</li>
                 <li>청소년관람가(관람연령)</li>
                 <li>장소</li>
-                <li>공연기간</li>
                 <li>공연기간</li>
             </ul>
         </div>
@@ -48,7 +49,14 @@
         </div>
         <div>
             <!-- 선택한 정보 몰아보는 페이지 -->
-            <ul class="finalShowInfo"></ul>
+            <ul class="finalShowInfo">
+                <li>타이틀</li>
+                <li>예매시간</li>
+                <li>예매좌석</li>
+                <li>예매가격</li>
+                <li>공연장소</li>
+                <li>알림사항</li>
+            </ul>
         </div>
         <button>결제하기</button>
     </body>

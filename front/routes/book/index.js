@@ -4,7 +4,4 @@ const bookController = require('./bookController')
 
 router.use('/',bookController._1)
 
-
-
-
 module.exports = router;
