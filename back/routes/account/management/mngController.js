@@ -71,7 +71,8 @@ exports.insertUserImg = async (req,res) => {
     const { originalname, filename, size, encoding, mimetype} = req.file
     const prepare = [ originalname, filename, size ]
 
-    const result = await pool.execute(sql.insertUserImg,prepare)
+    const [result] = await pool.execute(sql.insertUserImg,prepare)
+    console.og(result.affectedRows, result.insertId)
     
 }
 
