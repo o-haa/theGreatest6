@@ -13,7 +13,6 @@ exports.communityList = async (req, res) => {
     const prepare = [category]
 
     const [result1] = await pool.execute(sql.getCategoryIdx,prepare)
-    console.log(result1[0])
     const showIdx = result1[0].show_category_idx
     try {
         switch (showIdx){
