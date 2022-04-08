@@ -4,7 +4,6 @@ const mngController = require('./mngController');
 const multer = require('multer');
 const path = require('path');
 
-
 const upload = multer({
     storage:multer.diskStorage({
         destination:(req,file,done)=>{
@@ -12,7 +11,7 @@ const upload = multer({
         },
         filename:(req,file,done)=>{
             const ext = path.extname(file.originalname);
-            const filename = path.basename(file.originalname,ext) + '-' + ext;
+            const filename = path.basename(file.originalname,ext) + `_${Date.now()}` + ext;
             done(null,filename);
         }
     }),
@@ -26,6 +25,11 @@ router.post('/mypic',mngController.myPic);
 router.post('/mycalendar',mngController.myCalendar);
 router.post('/myact',mngController.myAct);
 router.post('/mybenefit',mngController.myBenefit);
+router.post('/insertUserImg',upload.single('upload'), mngController.insertUserImg)
+router.post('/updateUserImg',upload.single('upload'), mngController.updateUserImg)
+router.post('/deleteUserImg',upload.single('upload'), mngController.deleteUserImg)
+
+
 
 
 module.exports = router;
