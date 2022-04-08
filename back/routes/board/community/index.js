@@ -22,7 +22,7 @@ const upload = multer({
 router.post('/list',communityController.communityList);
 router.post('/write',upload.single('upload'),communityController.communityWrite);  //어드민만 버튼 보이게 해서 이동할 수 있도록
 router.post(`/view/:boardIdx`,communityController.communityView);
-router.post(`/delete/:bordIdx`,communityController.communityDelete);
+router.post(`/delete/:boardIdx`,communityController.communityDelete);
 router.post(`/update/:boardIdx`,upload.single('upload'),communityController.communityUpdate);
 router.post(`/comment/:boardIdx`,communityController.communityComment)
 router.post(`/commentList/:boardIdx`,communityController.communityCoList)

@@ -7,11 +7,6 @@ async function init() {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
     const checks = document.querySelectorAll('#category ul li label input');
-    // checks.forEach(v => {
-    //     console.log('v',v)
-    //     v.addEventListener('click', checkedHandler)
-    // })
-
     const checked = document.querySelector('#category ul li label input:checked')
     
     const data1 = {
@@ -40,20 +35,15 @@ async function init() {
     let startPageperBlock = [Math.ceil(page / pagesPerBlock) - 1] * pagesPerBlock
     let endPageperBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock
 
-    console.log(startPageperBlock, endPageperBlock);
-
     if (endPageperBlock > totalPage) endPageperBlock = totalPage;
     const paging = document.querySelector('#paging');
 
     //페이징 시작....
     for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
-        const liElement = document.createElement('li');
+        const liElement = document.createElement('li'); 
         const aElement = document.createElement('a');
-      
         aElement.setAttribute(`onClick`, pages(`${i}`));
-       
-        aElement.innerHTML = `[${i}]`;
-
+        aElement.innerHTML = `[${i}]`
         liElement.appendChild(aElement);
         paging.appendChild(liElement);
     }
@@ -98,40 +88,12 @@ async function init() {
         tbody.appendChild(clone);
 
     })
+  
 
     for(let i=0; i < checks.length; i++){
         checks[i].addEventListener('click',checkedHandler)
     }
 }
-
-        // let endPageperBlock = startPageperBlock + pagesPerBlock;
-        // if (endPageperBlock > totalPage) endPageperBlock = totalPage;
-
-
-        // const paging = document.querySelector('#paging');
-
-
-        // let template = '';
-        // Nodes.forEach(v => { });
-        // tbody.innerHTML = template;
-
-        // paging.innerHTML = '';
-
-        // for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
-        //     const liElement = document.createElement('li');
-        //     const aElement = document.createElement('a');
-
-        //     aElement.setAttribute(`onClick`, pages(`${i}`));
-        //     aElement.innerHTML = `[${i}]`;
-        //     liElement.appendChild(aElement);
-        //     paging.appendChild(liElement);
-        // }
-    
-
-
-
-
-
 
 
 async function checkedHandler(e) {
@@ -141,7 +103,6 @@ async function checkedHandler(e) {
     try {
         let response = await axios.post('/list', data)
         response = response.data
-        console.log('click re',response.result)
         test = {
             ...response
         };
@@ -159,8 +120,6 @@ async function checkedHandler(e) {
         let startPageperBlock = [Math.ceil(page / pagesPerBlock) - 1] * pagesPerBlock
         let endPageperBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock
 
-        console.log(startPageperBlock, endPageperBlock);
-
         if (endPageperBlock > totalPage) endPageperBlock = totalPage;
         const paging = document.querySelector('#paging');
 
@@ -173,10 +132,10 @@ async function checkedHandler(e) {
             aElement.innerHTML = `[${i}]`;
             liElement.appendChild(aElement);
             paging.appendChild(liElement);
+
         }
 
         const Nodes = response.result.slice((page - 1) * recordsPerPage, page * recordsPerPage);
-        console.log('Nodes',response.result)
         const tr = document.querySelector('#communityBoardRow');
         const tbody = document.querySelector('table > tbody');
 
@@ -247,12 +206,8 @@ test = {
 
 
 async function pages(num) {
-    console.log('test',test)
-    console.log('num', num)
     const tr = document.querySelector('#communityBoardRow');
-    console.log(test)
     const value = test.result;
-    console.log('value',value)
 
     const aElement = document.createElement('a');
     aElement.href = '/board/community//view' + value.board_idx;

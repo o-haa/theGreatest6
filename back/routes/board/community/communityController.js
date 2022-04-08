@@ -119,10 +119,13 @@ exports.communityView = async (req,res) => {
 }
 
 exports.communityDelete = async (req,res) =>{
-    const prepare = req.params.bordIdx;
+    const{ boardIdx }=req.params;
+    const prepare = [ boardIdx ];
+    console.log(prepare)
 
     try{
         const [result] = await pool.execute(sql.communityDelete,prepare);
+        console.log(result)
         response = {
                 result,
                 errno:0

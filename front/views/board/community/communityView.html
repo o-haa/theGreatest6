@@ -27,6 +27,7 @@
                     <th id="eye">
                         <img src="/img/border/eye_hit.png">
                     </th>
+                    <th>👇🏻</th>
                 </tr>
                 <tr id="viewHead">
                     <td id="idx"></td>
@@ -34,6 +35,20 @@
                     <td id="writer"></td>
                     <td id="date"></td>
                     <td id="hit"></td>
+                    <td>
+                        <button class = "like" type="button" onclick="change()">❤️‍🩹</button>
+                        <script>
+                            function change(){
+                                const like = document.querySelector('.like')  
+                                if(like.innerHTML === '❤️‍🩹'){
+                                    like.innerHTML = '❤️'
+                                } else {
+                                    like.innerHTML = '❤️‍🩹'
+                                };
+                            };
+                        </script>
+
+                    </td>
                 </tr>
             </table>
             <div id="viewContent">

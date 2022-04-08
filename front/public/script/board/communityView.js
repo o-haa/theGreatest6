@@ -15,7 +15,8 @@ async function init() {
     const nickname = document.querySelector('#writer');
     const date = document.querySelector('#date');
     const content = document.querySelector('#bContent');
-    const hit = document.querySelector('#hit');
+    const hit = document.querySelector('#hit')
+    
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
