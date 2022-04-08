@@ -8,11 +8,11 @@ async function init() {
 
     const checks = document.querySelectorAll('#category ul li label input');
     checks.forEach(v => {
-        console.log(v)
+        console.log('v',v)
         v.addEventListener('click', checkedHandler)
     })
 
-    const checked = document.querySelector('#category ul li input:checked')
+    const checked = document.querySelector('#category ul li label input:checked')
 
     const data1 = {
         category: checked.id
