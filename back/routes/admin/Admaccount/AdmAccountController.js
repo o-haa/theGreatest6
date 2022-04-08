@@ -43,8 +43,68 @@ exports.accountUpdate = async (req,res) =>{
     res.json(result)
 }
 
-//혜택 관리하는 페이지
-exports.benefitMgt = (req,res) =>{
-    res.send('어드민 혜택 관리')
+//포인트 추가 페이지
+exports.insertPoint = async (req,res) =>{
+    let response = {
+        result: {},
+        errno: 1
+    };
+    const { userIdx, pointIn, pointOut, pointDescription } = req.body;
+    const prepare =  [ userIdx, pointIn, pointOut, pointDescription ];
+    try { 
+        const result = await pool.execute(sql.insertPoint,prepare);
+        response = {
+            ...response,
+            result: {
+                affectedRows: result.affectedRows,
+                insertId: result.insertId
+            },
+            errno: 0
+        };
+    } catch (e) {
+        console.log('/insertPoint',e.message);
+    }
+    res.json(response);
+}
 
+
+//포인트 수정
+exports.updatePoint = async (req,res) =>{
+    let response = {
+        result: {},
+        errno: 1
+    };
+    const { pointIdx, userIdx, pointIn, pointOut, pointDescription } = req.body;
+    const prepare =  [ pointIn, pointOut, pointDescription, pointIdx ];
+    try { 
+        const [ result ] = await pool.execute( sql.updatePoint, prepare );
+        response = {
+            result,
+            errno: 0
+        };
+        console.log(result);
+    } catch (e) {
+        console.log('/updatePoint',e.message);
+    }
+    res.json(response);
+}
+
+exports.deletePoint = async (req,res) =>{
+    let response = {
+        result: {},
+        errno: 1
+    };
+    const { pointIdx } = req.body;
+    const prepare =  [ pointIdx ];
+    try { 
+        const [ result ] = await pool.execute( sql.deletePoint, prepare );
+        response = {
+            result,
+            errno: 0
+        };
+        console.log(result);
+    } catch (e) {
+        console.log('/deletePoint',e.message);
+    }
+    res.json(response);
 }

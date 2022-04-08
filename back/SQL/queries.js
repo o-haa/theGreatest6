@@ -191,7 +191,7 @@ VALUES(?,?,?,?,?,?)`,
         o.show_place=?,
         o.show_cast1=?,
         o.show_cast2=?
-    WHERE s.show_category_idx = ?`
+    WHERE s.show_category_idx = ?`,
 
 
 
@@ -202,4 +202,16 @@ VALUES(?,?,?,?,?,?)`,
     // LEFT OUTER JOIN s_category AS c
 
     // WHERE s.show_idx= ? `
+
+
+
+    //admin
+    insertPoint: `INSERT INTO u_point (user_idx, u_point_in, u_point_out, u_point_net, u_point_description) 
+                    VALUES (?, ?, ?, u_point_in - u_point_out, ?)`,  //net 부분 다시 봐야함 
+    
+    updatePoint: `UPDATE u_point (u_point_in, u_point_out, u_point_net, u_point_description)
+                    SET (?, ?, u_point_in - u_point_out, ?)
+                    WHERE u_point_idx = ?`,
+
+    deletePoint: `DELETE FROM u_point WHERE u_point_idx = ?`,
 }
