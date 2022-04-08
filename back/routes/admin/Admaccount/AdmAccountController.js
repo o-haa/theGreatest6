@@ -34,7 +34,6 @@ exports.accountMgt = async (req,res) =>{
 }
 
 exports.accountUpdate = async (req,res) =>{
-    console.log(req.body)
     const {valueLevel, activeLevel, idx} = req.body
     const sql = `UPDATE user
                 SET user_level=${valueLevel}, user_active=${activeLevel}
@@ -77,22 +76,14 @@ exports.updatePoint = async (req,res) =>{
     };
     const { pointIdx, userIdx, pointIn, pointOut, pointDescription } = req.body;
     const prepare =  [ pointIn, pointOut, pointDescription, pointIdx ];
-    const sql = `UPDATE user
-                SET
-                u_point_in=${pointIn}
-                u_point_out=${pointOut}
-                u_point_net=${activeLevel}
-                u_point_description=${pointDescription}
-                WHERE
-                user_idx=${userIdx}
-                `
+    console.log(prepare)
+
     try { 
         const [ result ] = await pool.execute( sql.updatePoint, prepare );
         response = {
             result,
             errno: 0
         };
-        console.log(result);
     } catch (e) {
         console.log('/updatePoint',e.message);
     }
@@ -106,6 +97,8 @@ exports.deletePoint = async (req,res) =>{
     };
     const { pointIdx } = req.body;
     const prepare =  [ pointIdx ];
+    console.log(prepare)
+
     try { 
         const [ result ] = await pool.execute( sql.deletePoint, prepare );
         response = {
