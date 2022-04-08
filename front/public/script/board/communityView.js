@@ -17,7 +17,7 @@ async function init() {
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit')
     
-    
+    const xhr = new XMLHttpRequest();
     const like = document.querySelector('.like')
     let useridxx = document.querySelector('#viewHead > td > input')
     useridxx.value = user.user_idx
@@ -33,7 +33,7 @@ async function init() {
                     }
                     const insert = await axios.post(`/likeinsert/${bIdx}`,data)
                     like.innerHTML = '❤️'
-                    await axios.get(`http://localhost:3001/board/community/view/${bIdx}`)
+                    location.reload()
                 } catch(e){
                     console.log('/communitylikeinsert',e.message)
                 };

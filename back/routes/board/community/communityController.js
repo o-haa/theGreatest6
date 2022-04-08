@@ -317,8 +317,6 @@ exports.communityLikeInsert = async (req,res)=>{
         console.log('/likeinsert',e.message)
     }
     res.json(response)
-    await axios.get(`http://localhost:3001/board/community/view/${boardIdx}`)
-    
 }
 
 exports.communityLikeList= async (req,res)=>{
