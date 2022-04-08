@@ -51,7 +51,7 @@ th:nth-child(1){
     width:5%;
 }
 th:nth-child(2){
-    width:50%;
+    width:45%;
 }
 th:nth-child(3){
     width:15%;
@@ -73,6 +73,44 @@ th:nth-child(4){
     box-sizing: border-box;
     align-items: center;
 }
+
+th:nth-child(6){
+    width:3%;
+}
+
+.like {
+    font-size: 25px;
+	-webkit-animation: like 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: like 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+ @-webkit-keyframes like {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes like {
+    0% {
+      -webkit-filter: blur(12px);
+              filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-filter: blur(0px);
+              filter: blur(0px);
+      opacity: 1;
+    }
+  }
+  
+  
+  
 
 #categoryBox{
     width:80%;

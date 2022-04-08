@@ -23,6 +23,8 @@ chat.on('connection',(socket)=>{
             socket.name = name
             console.log('socket',socket.name)
             //모든 소켓에게 전송
+            const time = new Date()
+            console.log(time)
             io.of('/chat').emit('update',{type:'connect', name:'>>',message: name + '님이 접속하였습니다.'})
         })
     
@@ -33,6 +35,7 @@ chat.on('connection',(socket)=>{
     
             //보낸 사람을 제외한 나머지 유저에게 메시지 전송
             socket.broadcast.emit('update',data);
+            console.log('전송',socket.broadcast.emit('update',data))
         })
     
         socket.on('disconnect',()=>{

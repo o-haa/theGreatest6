@@ -15,7 +15,8 @@ async function init() {
     const nickname = document.querySelector('#writer');
     const date = document.querySelector('#date');
     const content = document.querySelector('#bContent');
-    const hit = document.querySelector('#hit');
+    const hit = document.querySelector('#hit')
+    
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
@@ -231,10 +232,12 @@ async function init() {
             };
             try {
                 const response = await axios.post(`/commentListUp/${cmtidx}`, data);
-                if (response.data.errno !== 0) throw new Error;
+                console.log(response)
+                console.log('1')
+                // if (response.data.errno !== 0) throw new Error;
                 location.href = `/board/community/view/${bIdx}`;
             } catch (e) {
-                console.log('/communityview', e.message);
+                console.log('/commentlistUp', e.message);
             }
         }
     }

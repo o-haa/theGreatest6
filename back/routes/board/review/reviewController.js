@@ -13,11 +13,17 @@ const uparam = `u.user_idx,user_nickname,user_level`
 const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 
 exports.reviewList = async (req, res) => {
-    const { prepare } = req.body;
+    const {category} = req.body;
+    const categoryIdx = `SELECT show_category_idx FROM s_category WHERE show_category = ?`
+    const prepare = [category]
+
+    const [result1] = await pool.execute(categoryIdx,prepare)
+    const showIdx = result1[0].show_category_idx
+    
     let sql ='';
     switch (prepare.length) {
         case 1:
-            sql = `SELECT * FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = ? ORDER BY board_idx DESC`;
+            sql = `SELECT *, ${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = ? ORDER BY board_idx DESC`;
             break;
 
         case 2:
@@ -33,16 +39,16 @@ exports.reviewList = async (req, res) => {
     }
     try {
         // console.log(sql)
-        const [result] = await pool.execute(sql, prepare);
+        const [result] = await pool.execute(sql, showIdx);
         response = {
             ...response,
             result,
             errno: 0
         } 
-        console.log(result)
+        console.log('result',result)
         // console.log(response.result)
     } catch (e) {
-        console.log('/communitylist',e.message);
+        console.log('/reviewlist',e.message);
     }
     res.json(response);
 }
@@ -106,7 +112,7 @@ exports.reviewWrite = async (req,res) =>{
         };
 
     }catch(e){
-        console.log('/communitywright',e.message);
+        console.log('/reviewwright',e.message);
     };
 }
 
@@ -141,7 +147,7 @@ exports.reviewView = async (req,res) => {
         res.json(response);
         // console.log(response)
     } catch(e) {
-        console.log('/communityview',e.message);
+        console.log('/reivewview',e.message);
     };
 
 }
@@ -160,7 +166,7 @@ exports.reviewDelete = async (req,res) =>{
         res.json(response);
        
     } catch (e) {
-        console.log('communitydelete',e.message);
+        console.log('reviewdelete',e.message);
         
     };
    
@@ -221,7 +227,7 @@ exports.reviewUpdate = async (req,res)=>{
         };
 
     }catch(e){
-        console.log('communityupdate',e.message);
+        console.log('reviewupdate',e.message);
     }
 }
 
@@ -244,7 +250,7 @@ exports.reviewComment = async (req,res)=>{
         
 
     }catch(e){
-        console.log('communitycontent',e.message)
+        console.log('reviewcomment',e.message)
     }
     res.json(response)
     
@@ -271,7 +277,7 @@ exports.communityCoList = async (req,res)=>{
         console.log('start',cmtListResult)
 
     }catch(e){
-        console.log('communitycolist',e.message)
+        console.log('reviewcolist',e.message)
     }
     res.json(response)
     
@@ -288,7 +294,7 @@ exports.communityCoDlt = async (req,res)=>{
             };
         res.json(response);
     } catch (e) {
-        console.log('commentdelete',e.message);
+        console.log('reviewcodelete',e.message);
     };
     
 }

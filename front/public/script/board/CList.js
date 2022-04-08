@@ -8,20 +8,18 @@ async function init() {
     const checks = document.querySelectorAll('#category ul li input');
     const checked = document.querySelectorAll('#category ul li input:checked');
     const prepare = [];
-    console.log(checked)
+
     let response;
     try {
         for (i = 0; i < checked.length; i++) {
-            console.log('i',i)
             await prepare.push(checked[i].value);
         }
         const data = {
             prepare
         };
-        console.log(prepare)
+        
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
-        
     } catch (e) {
         console.log('communitylistinit', e.message);
     }
@@ -29,8 +27,7 @@ async function init() {
     test = {
         ...response
     };
-
-
+    console.log(response)
     const totalRows = response.data.result.length;
     const viewRows = 10;
     const pagingBlock = 10;

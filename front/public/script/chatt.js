@@ -1,3 +1,4 @@
+
 let socket
 socket = io.connect(`http://localhost:4001/chat`,{
     transports: ['websocket']
@@ -14,7 +15,6 @@ socket.on('update',(data)=>{
 
     const chat =document.querySelector('#chat')
     const message = document.createElement('div')
-    console.log(message)
     const node = document.createTextNode(`${data.name}: ${data.message}`)
     let className = ''
 
@@ -36,23 +36,31 @@ socket.on('update',(data)=>{
     chat.appendChild(message)
 })
 
+
 //메시지 전송 함수
-function send(){
+function send(data){
+    console.log(socket)
     const message = document.querySelector('#chatV').value 
 
     //메세지 보내면 빈칸으로 변경
     document.querySelector('#chatV').value  = ''
-
     //내가 전송한 메시지 창에 표시
     var chat = document.querySelector('#chat')
     var msg = document.createElement('div')
-    var node = document.createTextNode(message)
+    var node = document.createTextNode(` ${message}`)
     msg.classList.add('me')
     msg.appendChild(node)
     chat.appendChild(msg)
 
     //서버로 message 이벤트 전달 + 데이터와 함께
-    socket.emit('message',{type:'message', message:message})
-    console.log(socket.emit('message',{type:'message', message:message}))
+    socket.on('message',(data)=>{
+        data.name = socket.name
+        socket.emit('message',{type:'message', name: data.name, message:message})
+        console.log('내가보냄',socket.emit('message',{type:'message', name: data.name, message:message}).subs)
+    })
+    
 }
+
+
+
 

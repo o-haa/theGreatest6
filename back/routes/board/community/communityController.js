@@ -7,16 +7,36 @@ result: [],
 errno: 1
 };
 
+let listsql 
 exports.communityList = async (req, res) => {
     const {category} = req.body;
     const prepare = [category]
+
+    const [result1] = await pool.execute(sql.getCategoryIdx,prepare)
+    const showIdx = result1[0].show_category_idx
     try {
-        const [result] = await pool.execute(sql.communityList,prepare);
-        response = {
-            ...response,
-            result,
-            errno: 0
-        } 
+        switch (showIdx){
+            case 1:
+                listsql = sql.communityList1;
+            break;
+            case 2:
+                listsql = sql.communityList2;
+            break;
+            case 3:
+                listsql = sql.communityList3;
+            break;
+            case 4:
+                listsql = sql.communityList4;
+            break;
+
+        }
+        const [result] = await pool.execute(listsql);
+                response = {
+                    ...response,
+                    result,
+                    errno: 0
+                } 
+
     } catch (e) {
         console.log('/communitylist',e.message);
     }
@@ -27,17 +47,14 @@ exports.communityList = async (req, res) => {
 
 exports.communityWrite = async (req,res) =>{                                
     const { category, userIdx,subject,content }=req.body;
-    const prepare = [category];
+    console.log(req.body)
+    const categoryIdx = `SELECT show_category_idx FROM s_category WHERE show_category = ?`
+    const prepare = [category]
 
-    const [[result]] = await pool.execute(sql,prepare);
-    const categoryIdx = result.show_category_idx;
-
-
-    const prepare2 = [userIdx,subject,content,categoryIdx];
-    console.log(sql.communityWrite)
-
-//    communityWrite: 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)',
-    console.log(prepare2)
+    const [result1] = await pool.execute(categoryIdx,prepare);
+   
+    const cIdx = result1[0].show_category_idx;
+    const prepare2 = [userIdx,subject,content,cIdx];
 
     try{
         const [result] = await pool.execute(sql.communityWrite,prepare2);
@@ -60,11 +77,11 @@ exports.communityWrite = async (req,res) =>{
 
         if(req.file.size > 0){
 
-            const [result] = await pool.execute(sql.communityWriteFile,fPrepare);
+            const [result2] = await pool.execute(sql.communityWriteFile,fPrepare);
             response = {
                 result:{
-                    row:result.affectedRows,
-                    insertId:result.insertId
+                    row:result2.affectedRows,
+                    insertId:result2.insertId
                 },
                 errno:0    
             };
@@ -102,9 +119,13 @@ exports.communityView = async (req,res) => {
 }
 
 exports.communityDelete = async (req,res) =>{
-    const prepare = [ req.params.boardIdx ];
+    const{ boardIdx }=req.params;
+    const prepare = [ boardIdx ];
+    console.log(prepare)
+
     try{
         const [result] = await pool.execute(sql.communityDelete,prepare);
+        console.log(result)
         response = {
                 result,
                 errno:0
@@ -142,15 +163,6 @@ exports.communityUpdate = async (req,res)=>{
         const fileStoredname = req.file.filename;
         const fileSize = req.file.size;
         const fileDate = new Date();
-        const fSql = `UPDATE b_file SET 
-                                    file_originalname = ?,
-                                    file_storedname = ?,
-                                    file_size = ?,
-                                    file_date = ?,
-                                    WHERE
-                                    board_idx = ?
-                                    `;
-
         const fPrepare = [fileOriginalname,fileStoredname,fileSize,fileDate,idx];                          
 
         if(req.file.size > 0){
@@ -250,8 +262,28 @@ exports.communityCoUp = async (req,res)=>{
             },
             errno: 0
         }
+       
     }catch(e){
         console.log('/commentup',e.message)
     }
+    
+}
+
+exports.communityLike = async (req,res)=>{
+    const{boardIdx}=req.params;
+    const { userIdx } = req.body
+    const prepare = [userIdx,boardIdx]
+
+    try{
+        const [result] = await pool.execute(sql.communityLike,prepare)
+        response = {
+            ...response,
+            result,
+            errno: 0
+        }   
+    }catch(e){
+        console.log('communityLike',e.message)
+    }
+    res.json(response)
     
 }

@@ -6,52 +6,44 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/community';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-    const checks = document.querySelectorAll('#category ul li input');
-    // checks.forEach(v => {
-    //     v.addEventListener('click', checkedHandler)
-    // })
-
-    const checked = document.querySelector('#category ul li input:checked')
-
+    const checks = document.querySelectorAll('#category ul li label input');
+    const checked = document.querySelector('#category ul li label input:checked')
+    
     const data1 = {
         category: checked.id
     }
+    console.log('data',data1)
     let response = await axios.post('/list', data1)
     // response = await axios.post('http://localhost:4001/show/program/getcategories',null)
     // const categories = response.data.result;
     //checked를 만들기 위해서 가져옴 >>나중에 시간 남으면 하자
 
     test = {
-        ...response.data
+        ...response
     };
 
-
     const totalRecords = response.data.result.length
-    recordsPerPage = 5;
-    pagesPerBlock = 10;
+    const recordsPerPage = 10;
+    const pagesPerBlock = 10;
 
     const totalPage = Math.ceil(totalRecords / recordsPerPage)
     const totalBlock = Math.ceil(totalPage / pagesPerBlock)
 
     let page = 1;
-    currentBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock;
+    const currentBlock = Math.ceil(page / pagesPerBlock);
 
-
-    startPageperBlock = [Math.ceil(page / pagesPerBlock) - 1] * pagesPerBlock
-    endPageperBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock
-
-    console.log(startPageperBlock, endPageperBlock);
+    let startPageperBlock = [Math.ceil(page / pagesPerBlock) - 1] * pagesPerBlock
+    let endPageperBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock
 
     if (endPageperBlock > totalPage) endPageperBlock = totalPage;
     const paging = document.querySelector('#paging');
 
     //페이징 시작....
     for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
-        const liElement = document.createElement('li');
+        const liElement = document.createElement('li'); 
         const aElement = document.createElement('a');
-
         aElement.setAttribute(`onClick`, pages(`${i}`));
-        aElement.innerHTML = `[${i}]`;
+        aElement.innerHTML = `[${i}]`
         liElement.appendChild(aElement);
         paging.appendChild(liElement);
     }
@@ -60,7 +52,7 @@ async function init() {
     // 레코드 자르기
     const Nodes = response.data.result.slice((page - 1) * recordsPerPage, page * recordsPerPage);
     const tr = document.querySelector('#communityBoardRow');
-    const tbody = document.querySelector('tbody')
+    const tbody = document.querySelector('table > tbody')
 
     await Nodes.forEach(v => {
         const showCategory = v.show_category_idx
@@ -89,41 +81,19 @@ async function init() {
                 break;
         }
         td[2].appendChild(aElement);
-        td[3].innerHTML = '저기요?'
+        td[3].innerHTML = v.user_nickname
         td[4].innerHTML = v.board_date;
         td[5].innerHTML = v.board_hit;
 
         tbody.appendChild(clone);
 
-
-        let endPageperBlock = startPageperBlock + pagesPerBlock;
-        if (endPageperBlock > totalPage) endPageperBlock = totalPage;
-
-
-        const paging = document.querySelector('#paging');
-
-
-        let template = '';
-        Nodes.forEach(v => { });
-        tbody.innerHTML = template;
-
-        paging.innerHTML = '';
-
-        for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
-            const liElement = document.createElement('li');
-            const aElement = document.createElement('a');
-
-            aElement.setAttribute(`onClick`, pages(`${i}`));
-            aElement.innerHTML = `[${i}]`;
-            liElement.appendChild(aElement);
-            paging.appendChild(liElement);
-        }
     })
+  
 
-
-
+    for(let i=0; i < checks.length; i++){
+        checks[i].addEventListener('click',checkedHandler)
+    }
 }
-
 
 
 async function checkedHandler(e) {
@@ -133,30 +103,28 @@ async function checkedHandler(e) {
     try {
         let response = await axios.post('/list', data)
         response = response.data
-
         test = {
             ...response
         };
+        const totalRecords = response.result.length
+        const recordsPerPage = 10;
+        const pagesPerBlock = 10;
 
-        const totalRows = response.result.length;
-        const viewRows = 10;
-        const pagingBlock = 10;
 
-
-        const totalPage = Math.ceil(totalRows / viewRows);
-        const blockBox = Math.ceil(totalPage / pagingBlock);
+        const totalPage = Math.ceil(totalRecords / recordsPerPage)
+        const totalBlock = Math.ceil(totalPage / pagesPerBlock)
 
         let page = 1;
-        const currentBlock = Math.ceil(page / pagingBlock);
-        const block = ((currentBlock - 1) * pagingBlock);
+        const currentBlock = Math.ceil(page / pagesPerBlock);
 
-        let endBlock = block + pagingBlock;
-        if (endBlock > totalPage) endBlock = totalPage;
+        let startPageperBlock = [Math.ceil(page / pagesPerBlock) - 1] * pagesPerBlock
+        let endPageperBlock = Math.ceil(page / pagesPerBlock) * pagesPerBlock
 
+        if (endPageperBlock > totalPage) endPageperBlock = totalPage;
         const paging = document.querySelector('#paging');
 
 
-        for (let i = block + 1; i <= endBlock; i++) {
+        for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
             const liElement = document.createElement('li');
             const aElement = document.createElement('a');
 
@@ -164,9 +132,10 @@ async function checkedHandler(e) {
             aElement.innerHTML = `[${i}]`;
             liElement.appendChild(aElement);
             paging.appendChild(liElement);
+
         }
 
-        const Nodes = response.result.slice((page - 1) * viewRows, page * viewRows);
+        const Nodes = response.result.slice((page - 1) * recordsPerPage, page * recordsPerPage);
         const tr = document.querySelector('#communityBoardRow');
         const tbody = document.querySelector('table > tbody');
 
@@ -197,18 +166,18 @@ async function checkedHandler(e) {
                     break;
             }
             td[2].appendChild(aElement);
-            td[3].innerHTML = '저기요?'
+            td[3].innerHTML = v.user_nickname
             td[4].innerHTML = v.board_date;
             td[5].innerHTML = v.board_hit;
 
             tbody.appendChild(clone);
 
 
-            let endBlock = block + pagingBlock;
-            if (endBlock > totalPage) endBlock = totalPage;
+            // let endBlock = block + pagingBlock;
+            // if (endBlock > totalPage) endBlock = totalPage;
 
 
-            const paging = document.querySelector('#paging');
+            // const paging = document.querySelector('#paging');
 
 
             let template = '';
@@ -216,7 +185,7 @@ async function checkedHandler(e) {
             tbody.innerHTML = template;
 
             paging.innerHTML = '';
-            for (let i = block + 1; i <= endBlock; i++) {
+            for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
                 const liElement = document.createElement('li');
                 const aElement = document.createElement('a');
 
@@ -231,11 +200,12 @@ async function checkedHandler(e) {
         console.log('/communitylist', e)
     }
 }
+test = {
+    ...response
+};
 
 
 async function pages(num) {
-    console.log(test)
-    console.log('num', num)
     const tr = document.querySelector('#communityBoardRow');
     const value = test.result;
 
@@ -247,6 +217,9 @@ async function pages(num) {
     const Nodes = test.result.slice((num - 1) * viewRows, num * viewRows);
     const tbody = document.querySelector('table > tbody');
 
+    let template = '';
+        await Nodes.forEach(v => { });
+        tbody.innerHTML = template;
 
 
     await Nodes.forEach(v => {
@@ -276,10 +249,11 @@ async function pages(num) {
                 break;
         }
         td[2].appendChild(aElement);
-        td[3].innerHTML = '저기요?'
+        td[3].innerHTML = v.user_nickname
         td[4].innerHTML = v.board_date;
         td[5].innerHTML = v.board_hit;
 
+        const tbody = document.querySelector('table > tbody');
         tbody.appendChild(clone);
 
     })
