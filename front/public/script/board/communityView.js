@@ -17,16 +17,49 @@ async function init() {
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit')
     
+    
+    
     const like = document.querySelector('.like')
-    like.addEventListener('change',likeHandler)
-    function likeHandler(v){
-        const like = document.querySelector('.like')  
-        if(like.innerHTML === '❤️‍🩹'){
-            like.innerHTML = '❤️'
-        } else {
-            like.innerHTML = '❤️‍🩹'
-        };
-    } 
+    let useridxx = document.querySelector('#viewHead > td > input')
+    useridxx.value = user.user_idx
+    const likeUserIdx = useridxx.value
+    if(user.user_idx == likeUserIdx){
+        like.addEventListener('click',likeHandler)
+        async function likeHandler(){
+            const likeDB = await axios.post(`/likelist/${bIdx}`)
+            let likedata = likeDB.data.result[0]
+            if(likedata === undefined){
+                try{
+                    const data = {
+                        likeUserIdx,
+                        likedata
+                    }
+                    const insert = await axios.post(`/like/${bIdx}`,data)
+                } catch(e){
+                    console.log('/communitylikeinsert',e.message)
+                }
+            }
+
+            let flag = likeDB.data.result[0].like_board_flag
+            console.log(flag)
+            if(flag == '0'){
+                like.innerHTML = '❤️'
+            } else {
+                like.innerHTML = '❤️‍🩹' 
+            };
+            try{
+                const data = {
+                    likeUserIdx,
+                    likedata
+                }
+                console.log(data)
+                const insert = await axios.post(`/like/${bIdx}`,data)
+            } catch(e){
+                console.log('/communitylike',e.message)
+            }
+            }    
+        
+    }
         
 
     const upElement = document.querySelector('#update');
@@ -38,7 +71,6 @@ async function init() {
     const response = await axios.post(`/view/${bIdx}`, {
         withCredentials: true,
     });
-
     const showCategory = response.data.result[0].show_category_idx
 
     if (response.data.errno === 0) {

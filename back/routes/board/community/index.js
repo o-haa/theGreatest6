@@ -29,5 +29,5 @@ router.post(`/commentList/:boardIdx`,communityController.communityCoList)
 router.post(`/commentListDlt/:cmtIdx`,communityController.communityCoDlt)                                 
 router.post(`/commentListUp/:cmtIdx`,communityController.communityCoUp)
 router.post(`/like/:boardIdx`,communityController.communityLike)
-
+router.post(`/likelist/:boardIdx`,communityController.communityLikeList)
 module.exports = router
