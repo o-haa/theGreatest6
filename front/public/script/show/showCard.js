@@ -2,16 +2,31 @@ document.addEventListener('DOMContentLoaded', init)
 
 async function init(e) {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
-    axios.defaults.headers.post['Content-Type'] = 'application/json';;
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+    //오늘의 정보를 알려주는 함수
+    let today = new Date()
+    let year = today.getFullYear() // 올해
+    let month = today.getMonth() // 이번달
+    let date = today.getDate() //오늘
+
     const year_month = document.querySelector('.year-month')
+    try{
+        const response = await axios.post('showCard')
+        console.log(response)
+        console.log("접속")
+    }
+    catch(e){
+        console.log('error')
+    }
 
-    const response = await axios.post('showCard')
-    console.log(response)
-    console.log("접속")
-
+    console.log('aaaaaaaa')
+    const res = await axios.post('showUpload')
+    console.log('출력 : ',res)
+    console.log('bbbbbbbb')
+    
     year_month.innerHTML = `${calMonth} ${year}`
-
-    const liElement = document.querySelector()
+    const template = document.querySelector('.bigCard')
     let clone = document.importNode(template.content,true)
     // 작품갯수 먼저 다 채우고 거기에 링크 걸어서 갯수만큼 자동으로 생성하게 만들기
     let img = clone.querySelector('imgBox')
@@ -32,6 +47,7 @@ async function init(e) {
     listBtn.addEventListener('click', listBtnHandler)
     listGrid.addEventListener('click', gridBtnHandler)
     listCalendar.addEventListener('click', calBtnHandler)
+    
 
     function listBtnHandler(){ 
         window.location.href = 'http://localhost:3001/show/program/showlist'; 

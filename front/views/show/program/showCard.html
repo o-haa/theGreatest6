@@ -64,22 +64,18 @@
                         <div id="monthlyTitle">Monthly</div>
                         <div id="monthTitleSmall">MAR</div>
                         <div id="menuSmall">
+                            <!-- 이 안에 작성 -->
+                        </div>
+                            
+                        <template class="monthlyTemp">
                             <div class="monthlyCard">
-                                <div id="pic1"></div>
-                                <div class="news">
-                                    <span>뮤지컬 : THE MUSE (더 뮤즈)</span>
-                                    <span>예매 시작일 : 3월 12일</span>
-                                </div>
-                            </div>
-    
-                            <div class="monthlyCard">
-                                <div id="pic2"></div>
+                                <div class="pic"></div>
                                 <div class="news">
                                     <span>뮤지컬 : BROADWAY (브로드웨이)</span>
                                     <span>예매 시작일 : 3월 28일</span>
                                 </div>
                             </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
                 
@@ -119,7 +115,7 @@
                     </div>
 
                     <!-- 개별 카드 -->
-                    <template>
+                    <template class="bigCard">
                         <li>
                             <div class="textBox">
                                 <span class="cardTag"></span>
@@ -139,5 +135,8 @@
             </div>
         </div>
     </div>
+
+    <div>{{result.subject}}</div>
+    <img src="{{result.filePath}}" alt="" style="width:100px; height:100px;">
 </body>
 </html>
