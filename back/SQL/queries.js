@@ -219,7 +219,7 @@ VALUES(?,?,?,?,?,?)`,
     insertPoint: `INSERT INTO u_point (user_idx, u_point_in, u_point_out, u_point_description) 
                     VALUES (?, ?, ?, ?)`,
     
-    updatePoint: `UPDATE u_point SET u_point_in = ?, u_point_out =? , u_point_description) = ?
+    updatePoint: `UPDATE u_point SET u_point_in = ?, u_point_out =? , u_point_description = ?
                     WHERE u_point_idx = ?`,
 
     deletePoint: `DELETE FROM u_point WHERE u_point_idx = ?`,

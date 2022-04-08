@@ -74,17 +74,18 @@ async function init() {
         const point = responseBenefit.data.result;
         
         point.forEach(v=>{
-            console.log('a ------->>>> ',v);
             const pointRows = document.importNode(potintTable.content,true);
             const pointRow = pointRows.querySelectorAll('.pointRow');
 
             const btnAdd = pointRows.querySelector('.btnAdd')
             const btnEdit = pointRows.querySelector('.btnEdit')
             const btnFin = pointRows.querySelector('.btnFin')
+            const btnDel = pointRows.querySelector('.btnDel')
             btnAdd.setAttribute("class","btnAdd off")
             btnEdit.setAttribute("class","btnEdit")
             btnEdit.addEventListener('click',editBtnHandler)
             btnFin.addEventListener('click',updateBtnHandler)
+            btnDel.addEventListener('click',deleteBtnHandler)
 
             pointRow[0].innerHTML = v.u_point_idx;
             pointRow[1].innerHTML = v.u_point_date;
@@ -108,10 +109,10 @@ async function init() {
         pntInsertBtn.addEventListener('click',insertBtnHandler)
         async function insertBtnHandler(e){
             const tdAddList = document.querySelectorAll('.inputRow')
+            console.log('nnnnnnnn   ---> ',tdAddList)
             const pointDescription = tdAddList[0].value 
             const pointIn = tdAddList[1].value 
             const pointOut = tdAddList[2].value 
-            const u_point_net = tdAddList[3].value 
             const userIdx = user.user_idx
 
             try {
@@ -120,9 +121,9 @@ async function init() {
                     pointIn,
                     pointOut,
                     pointDescription,
-                    u_point_net //함수 받기 전 임시
                 }
                 const insertPoint = await axios.post('http://localhost:4001/admin/account/insertpoint', data)
+                location.href = '/account/management/myBenefit'
                 console.log(insertPoint.data)
             } catch (e) {
                 console.log('/AdmBenefitMgt', e.message)
@@ -133,11 +134,11 @@ async function init() {
             const td = e.target.parentNode
             const parentNode = td.parentNode
             const tdlist = parentNode.querySelectorAll('td')
-            for(let i=0; i<6; i++){
+            for(let i=0; i<7; i++){
                 tdlist[i].setAttribute("class","pointRow off")
             }
 
-            for(let i=6; i<12; i++){
+            for(let i=7; i<14; i++){
                 tdlist[i].setAttribute("class","pointRow edit")
             }
             console.log(parentNode)
@@ -151,27 +152,25 @@ async function init() {
         async function updateBtnHandler(e){
             const td = e.target.parentNode
             const parentNode = td.parentNode
-            console.log(parentNode)
             const tdlist = parentNode.querySelectorAll('td')
-            for(let i=0; i<6; i++){
+            for(let i=0; i<7; i++){
                 tdlist[i].setAttribute("class","pointRow")
             }
-
-            for(let i=6; i<12; i++){
+            
+            for(let i=7; i<14; i++){
                 tdlist[i].setAttribute("class","pointRow edit off")
             }
-            const pointIdx = point.u_point_idx
+            const pointIdx = tdlist[1].innerHTML
             const inputList = parentNode.querySelectorAll('input')
+            console.log('bbbbbbb', inputList)
             const pointDescription = inputList[0].value 
             const pointIn = inputList[1].value 
             const pointOut = inputList[2].value 
-            // const u_point_net = inputList[3].value 
-            const userIdx = user.user_idx
+            // const userIdx = user.user_idx
             
             try {
                 const data = {
                     pointIdx,
-                    userIdx,
                     pointIn,
                     pointOut,
                     pointDescription,
@@ -188,6 +187,24 @@ async function init() {
             btnEdit.setAttribute("class","btnEdit")
             const btnFin = parentNode.querySelector('.btnFin')
             btnFin.setAttribute("class","btnFin off")
+        }
+
+        async function deleteBtnHandler(e){
+            const td = e.target.parentNode
+            const parentNode = td.parentNode
+            const tdList = parentNode.querySelectorAll('td')
+            const pointIdx = tdList[1].innerText
+            console.log('a  ----->',pointIdx)
+            try {
+                const data = {
+                    pointIdx,
+                }
+                const deletePoint = await axios.post('http://localhost:4001/admin/account/deletepoint', data)
+                console.log(deletePoint.data)
+                location.href = '/account/management/myBenefit'
+            } catch (e) {
+                console.log('/AdmBenefitMgt', e.message)
+            }
         }
 
 }
