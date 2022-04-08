@@ -180,44 +180,65 @@ async function init() {
 
         flagAdmin = response.data.result
         flagAdmin.forEach(v=>{
-        let dayString = ((new Date(v.show_date)).toLocaleDateString())
+            let dayString = ((new Date(v.show_date)).toLocaleDateString())
 
-
-        //시간
-        let timeString = JSON.stringify((new Date(v.show_date)).toLocaleTimeString()) // 한국기준시간 문자열
-        let timeLine = timeString.slice(1,3) //오전,오후 문자열
-        let hour = (timeString.slice(4,6)).padStart(2,"0") //시각 문자열
-        console.log(hour)
-        if(timeLine=='오후'){ hour = `${parseInt(hour)+12}`} //24시 기준 시간표현 문자열
+            //시간
+            let timeString = JSON.stringify((new Date(v.show_date)).toLocaleTimeString()) // 한국기준시간 문자열
+            let timeLine = timeString.slice(1,3) //오전,오후 문자열
+            let hour = (timeString.slice(4,6)).padStart(2,"0") //시각 문자열
+            // console.log('시간!!!!!!!!!',hour)
+            if(timeLine=='오후'){ hour = `${parseInt(hour)+12}`} //24시 기준 시간표현 문자열
         
-        //만약 일정정보가 있다면,
-        if(v!==''){
-            //4월10일 timestamp에서 날짜만 split
-            let showlistRecord = ((v.show_date).split('T'))[0]
+            //만약 일정정보가 있다면,
+            if(v!==''){
+                const idx = v.show_idx
+                //4월10일 timestamp에서 날짜만 split
+                let showlistRecord = ((v.show_date).split('T'))[0]
 
-            //clone한 li에서 button만 리스트로 가져옴
-            const btnList = document.querySelectorAll('.dates_small > li > button')
-            const adminList = document.querySelectorAll('.dates_small > li > .dot_small')
+                //clone한 li에서 button만 리스트로 가져옴
+                const btnList = document.querySelectorAll('.dates_small > li > button')
+                const adminList = document.querySelectorAll('.dates_small > li > .dot_small')
 
-            let i = 0
-            btnList.forEach(v=>{
-                let calInfo = v
-                let listName = (btnList[i].className) //날짜에서 가져온 class명
-                let listSplit = ((listName.split('_'))[1]).split('-') //연,월,일,요일
+                let i = 0
+                btnList.forEach(v=>{
+                    let calInfo = v
+                    let listName = (btnList[i].className) //날짜에서 가져온 class명
+                    let listSplit = ((listName.split('_'))[1]).split('-') //연,월,일,요일
 
-                year = listSplit[0]
-                month = listSplit[1].padStart(2,"0") //두자리로 만들어주는 함수
-                date = listSplit[2].padStart(2,"0")
-                let listDate = `${year}-${month}-${date}` //연,월,일
+                    year = listSplit[0]
+                    month = listSplit[1].padStart(2,"0") //두자리로 만들어주는 함수
+                    date = listSplit[2].padStart(2,"0")
+                    let listDate = `${year}-${month}-${date}` //연,월,일
 
-                if(showlistRecord === listDate){ 
-                    let adminDot = adminList[i].querySelector('.dotAdmin_small')
-                    adminDot.setAttribute("class","on dotAdmin_small")
-                    // adminDot.innerHTML = `${v.show_title}`
-                }
-                i += 1
-            })
-        }
+                    if(showlistRecord === listDate){ 
+                        let adminDot = adminList[i].querySelector('.dotAdmin_small')
+                        adminDot.setAttribute("class","on dotAdmin_small")
+                    }
+                    i += 1
+                })
+            
+
+                //만약 일정정보가 있다면
+                weeklyCard(v,hour)
+            }
         })
     }
+
+    //위클리 카드 생성하는 함수
+    async function weeklyCard(v,hour){
+        const temp = document.querySelector('.monthlyTemp')
+        console.log(temp.content)
+        const clone = document.importNode(temp.content,true)
+        const pic = clone.querySelector('img')
+        const title = clone.querySelectorAll('span')
+        //idx를 사용해서 사진 가져오기
+        // const response = await axios.post('',idx)
+
+        // console.log(v)
+        title[0].innerHTML = v.show_title
+        title[1].innerHTML = `장소 : ${v.show_place} | 공연 : ${hour}시`
+
+        const menuSmall = document.querySelector('#menuSmall')
+        menuSmall.append(clone)
+    } 
 }
