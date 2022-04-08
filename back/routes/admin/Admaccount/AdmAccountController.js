@@ -50,14 +50,8 @@ exports.insertPoint = async (req,res) =>{
         result: {},
         errno: 1
     };
-<<<<<<< HEAD
-    const { userIdx, pointIn, pointOut, pointDescription } = req.body;
-    const prepare =  [ userIdx, pointIn, pointOut, pointDescription];
-    const sql = `INSERT INTO u_point(user_idx,u_point_in,u_point_out,u_point_description) VALUES(?,?,?,?) `
-=======
     const { userIdx, pointIn, pointOut, pointDescription} = req.body;
     const prepare =  [ userIdx, pointIn, pointOut, pointDescription];
->>>>>>> 4430b90649921954ec0cf0cf0cfaa11a37ccc917
     try { 
         const [result] = await pool.execute(sql.insertPoint, prepare);
         response = {
