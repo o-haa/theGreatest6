@@ -1,4 +1,4 @@
-exports.selectBookInfo = async(req,res) => {
+exports.selectBookInfo = async (req,res) => {
     let response = {
         result: {},
         errno: 1
@@ -14,7 +14,7 @@ exports.selectBookInfo = async(req,res) => {
     }
 }
 
-exports.InsertBookInfo = (req,res) => {
+exports.InsertBookInfo = async (req,res) => {
     prepare
     const [ result ] = await axios.post( '/InsertBookInfo', prepare)
 
