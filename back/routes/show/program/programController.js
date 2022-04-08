@@ -31,8 +31,8 @@ exports.showWrite = async (req, res) => {
         const timestampShow = `${thisYear}-${showMonth}-${showDate} ${showHour}:00`
         const timestampTicket = `${thisYear}-${ticketMonth}-${ticketDate} ${ticketHour}:00`
 
-        if (xrated == '전체관람') xratedIdx = 0;
-        if (xrated == '청소년 불가') xratedIdx = 1;
+        if (xrated == '전체관람') xratedIdx = 1;
+        if (xrated == '청소년 불가') xratedIdx = 0;
 
         const prespareShow = [title, categoryIdx, xratedIdx, showCompany, showDirector, timestampTicket, showContent]
 
@@ -81,11 +81,8 @@ exports.showWrite = async (req, res) => {
 
 exports.showList = async (req, res) => {
         console.log('back / showList 라우터 접속!')
-
-        const sql = `SELECT show_idx, show_title, show_category, show_xrated FROM shows ORDER BY show_idx DESC`
-
         try {
-            const [result] = await pool.execute(sql)
+            const [result] = await pool.execute(sql.showList)
 
             response = {
                 result,
@@ -113,40 +110,30 @@ exports.showList = async (req, res) => {
     }
 
     exports.showView = async (req, res) => {
-        console.log('back / showView 라우터 접속!')
-
-        const { idx } = req.params
-        const sql = `SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
-    FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
-    WHERE s.show_idx=${idx} `
-
+        console.log('back / showView 라우터 접속!');
+        const { showIdx } = req.params;
+        const prepare = [ showIdx ];
         try {
-            const [result] = await pool.execute(sql)
+            const [result] = await pool.execute(sql.showView, prepare);
             response = {
                 result,
                 error: 0,
-            }
-            res.json(response)
+            };
+            res.json(response);
         }
         catch (e) {
-            console.log('/showview', e.message)
+            console.log('/showview', e.message);
         }
     }
 
     //입력받은 기존 값을 불러오는 라우터
     exports.showModifyGetInfo = async (req, res) => {
         console.log('showModifyGetInfo 접속')
-        const { idx } = req.params
-        console.log('idx : ', idx)
-
-        const sqlGetShows = `
-    SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
-    FROM shows AS s LEFT JOIN s_option AS o ON s.show_idx = o.shows_idx
-    WHERE s.show_idx=${idx}`
+        const { showIdx } = req.params
+        const prepare = [ showIdx ]
 
         try {
-            const [result] = await pool.execute(sqlGetShows)
-
+            const [result] = await pool.execute(sql.showView, prepare)
             response = {
                 result,
                 error: 0
@@ -161,34 +148,30 @@ exports.showList = async (req, res) => {
     //새로 입력받은 값을 update하는 라우터
     exports.showModifyView = async (req, res) => {
         console.log('showModifyView 접속!')
-        let { show_idx, category, xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, timestampShow, timestampTicket } = req.body
 
-        const sqlUpdate = `
-    UPDATE shows AS s INNER JOIN s_option AS o
-    ON s.show_idx = o.shows_idx
-    SET
-        s.show_title='${title}',
-        s.show_category=${category},
-        s.show_xrated=${xrated},
-        s.show_company='${showCompany}',
-        s.show_director='${showDirector}',
-        s.show_date_open='${timestampTicket}',
-        s.show_content='${showContent}',
-        o.show_date='${timestampShow}',
-        o.show_place='${place}',
-        o.show_cast1='${showCast1}',
-        o.show_cast2='${showCast2}' 
-    WHERE s.show_idx=${show_idx}
-    `
+        const { category } = req.body;
+        const prepare1 = [category];
+        let categoryIdx;
+        try {
+            const [[getCategory]] = await pool.execute(sql.getCategory, prepare1)
+            categoryIdx = getCategory.show_category_idx
+        } catch (e){
+            console.log('/showWrite getcategory',e.message)
+        }
+
+        let { show_idx, xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, timestampShow, timestampTicket } = req.body
+
+        console.log(categoryIdx)
+    const prepare2 = [ title, categoryIdx, xrated, showCompany, showDirector,timestampTicket, showContent, timestampShow, place, showCast1, showCast2, show_idx ]
 
         try {
-            const [result] = await pool.execute(sqlUpdate)
-            console.log('insertId가 뭐더라', result)
+            const [result] = await pool.execute(sql.showUpdate, prepare2)
             response = {
                 result,
                 show_idx,
                 error: 0
             }
+            console.log(result)
             res.json(response)
         }
         catch (e) {
@@ -253,14 +236,12 @@ exports.showList = async (req, res) => {
 
 
     exports.getCategories = async (req, res) => {
-        let sql = `SELECT show_category from s_category`
         let response = {
             result: [],
             errno: 1
         };
         try {
-            const [result] = await pool.execute(sql);
-            console.log(result)
+            const [result] = await pool.execute(sql.getFullCategories);
             response = {
                 ...response,
                 result,

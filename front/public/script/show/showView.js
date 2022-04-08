@@ -46,7 +46,6 @@ async function init() {
         const tdElements = document.querySelectorAll('.viewContent')
         
         showViewList(showResult)
-        console.log(showResult[0])
 
         const leftBtn = document.querySelector('#leftBtn')
         const rightBtn = document.querySelector('#rightBtn')
@@ -60,12 +59,21 @@ async function init() {
         deleteBtn.addEventListener('click',deleteBtnHandler)
         goViewList.addEventListener('click',goListBtnHandler)
         
+        console.log(showResult)
+
         async function showViewList(showResult){
             showResult.forEach(v=>{
                 let i=0
 
-                show_category = getCategory(v.show_category_idx)
-                show_xrated = getXrated(v.show_xrated)
+                switch(v.show_xrated){
+                    case 1: v.show_xrated = '전체관람'
+                            break;
+                    case 0: v.show_xrated = '청소년 불가'
+                            break;
+                }
+
+                show_category = v.show_category
+                show_xrated = v.show_xrated
                 show_date_open = makeDate(v.show_date_open) //예매일
                 show_date = makeDate(v.show_date) //공연일
 
@@ -101,43 +109,6 @@ async function init() {
             let list = [year,month,date,hour]
 
             return list
-        }
-
-        function getCategory(v){
-            switch(v){
-                case 7 :
-                    return show_category = 'musical'
-                break;
-                case 8 :
-                    return show_category = 'concert'
-                break;
-                case 9 :
-                    return how_category = 'classic'
-                break;
-                case 10 :
-                    return show_category = 'ballet'
-                break;
-                default:
-                    console.log('show_category 오류 발생')
-                break;
-            }
-        }
-
-        function getXrated(v){
-            switch(v){
-                case 1 :
-                    return show_xrated = '전체관람가'
-                break;
-                case 2 :
-                    return show_xrated = '청소년'
-                break;
-                case 3 :
-                    return show_xrated = '청소년불가'
-                break;
-                default:
-                    console.log('show_xrated 오류 발생')
-                break;
-            }
         }
 
         async function leftBtnHandler(){

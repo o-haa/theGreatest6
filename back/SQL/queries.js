@@ -123,7 +123,7 @@ VALUES(?,?,?,?,?,?)`,
     communityDelete: 'DELETE FROM board WHERE board_idx = ? ',
     getCategory: 'SELECT * FROM s_category WHERE show_category = ?',
     getCategories: 'SELECT * FROM s_category ORDER BY show_category_idx',
-
+    getFullCategories: 'SELECT * FROM s_category ORDER BY show_category_idx',
 
 
     communityUpdate: 'UPDATE board SET board_subject=?, board_content=?, show_category_idx=? WHERE board_idx=?',
@@ -152,6 +152,7 @@ VALUES(?,?,?,?,?,?)`,
 
     //show
 
+    showList : 'SELECT * FROM shows AS s LEFT OUTER JOIN s_category AS c ON s.show_category_idx = c.show_category_idx',
     showWrite: `INSERT INTO shows(
         show_title,
         show_category_idx,
@@ -165,5 +166,40 @@ VALUES(?,?,?,?,?,?)`,
 
     showOption: `INSERT
         INTO s_option(shows_idx, show_date, show_place, show_cast1, show_cast2)
-        VALUES (?,?,?,?,?)`
+        VALUES (?,?,?,?,?)`,
+
+
+    showView: `SELECT s.show_idx, s.show_title, c.show_category, s.show_category_idx, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    FROM shows AS s 
+    LEFT OUTER JOIN s_option AS o 
+    ON s.show_idx = o.shows_idx
+    LEFT OUTER JOIN s_category as c
+    ON s.show_category_idx = c.show_category_idx
+    WHERE s.show_idx= ? `,
+
+    showUpdate : `UPDATE shows AS s 
+    INNER JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    SET s.show_title=?,
+    s.show_category_idx=?,
+        s.show_xrated=?,
+        s.show_company=?,
+        s.show_director=?,
+        s.show_date_open=?,
+        s.show_content=?,
+        o.show_date=?,
+        o.show_place=?,
+        o.show_cast1=?,
+        o.show_cast2=?
+    WHERE s.show_category_idx = ?`
+
+
+
+    // showModifyGetInfo: `SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
+    // FROM shows AS s 
+    // LEFT JOIN s_option AS o 
+    // ON s.show_idx = o.shows_idx
+    // LEFT OUTER JOIN s_category AS c
+
+    // WHERE s.show_idx= ? `
 }

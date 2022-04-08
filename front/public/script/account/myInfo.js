@@ -69,15 +69,6 @@ async function init() {
         userLevel.innerHTML = user.user_level;
         userName.innerHTML = user.user_nickname;
 
-        // const signOut = document.querySelector('#signOut')
-        // signOut.innerHTML = 'sign out';
-
-        // signOut.addEventListener('click',signOutHandler)
-        // async function signOutHandler(){
-        //     const response = await axios.post('http://localhost:3001/account/member/destroycookie',null)
-        //     console.log(response.data)
-        // }
-
         const data = {
             userIdx: user.user_idx
         };

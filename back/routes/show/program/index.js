@@ -26,8 +26,8 @@ router.post('/showcalendar', programController.showCalendar)
 
 router.post('/getcategories',programController.getCategories)
 router.post('/showwrite', upload.single('upload'), programController.showWrite)
-router.post('/showview/:idx', programController.showView)
-router.post('/showmodify/:idx',  upload.single('upload'), programController.showModifyGetInfo)
+router.post('/showview/:showIdx', programController.showView)
+router.post('/showmodify/:showIdx',  upload.single('upload'), programController.showModifyGetInfo)
 router.post('/showmodifygoinfo/:idx',  upload.single('upload'), programController.showModifyView)
 router.post('/showdelete/:idx', programController.showDelete)
 
