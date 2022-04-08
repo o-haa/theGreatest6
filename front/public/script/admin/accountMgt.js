@@ -22,6 +22,7 @@ async function init() {
     
     const temp = document.querySelector('#adminList_row')
     const tbody = document.querySelector('tbody')
+    const btnPoint = document.querySelector('.point')
 
     let i=0
     nodes.forEach(async (v)=>{
@@ -47,66 +48,110 @@ async function init() {
         let activeArr = ['0','1'] // 활동상태가 1
         activeArr.forEach(v=>{
             let optionElement = document.createElement('option')
-            switch(v){
-                case 0:
-                    optionElement.innerHTML = '활동가능'
-                break;
-                case 1:
-                    optionElement.innerHTML = `활동중지`
-                break;
-                default:
-                    console.log('예외 값 입력')
-                break;
-            }
+            
+            optionElement.innerHTML = `${v}`
             active.appendChild(optionElement)
         })
 
+        const btnEdit = clone.querySelector('.edit')
+        const btnDone = clone.querySelector('.done')
+        btnEdit.addEventListener('click',btnEditHandler)
+        function btnEditHandler(e){
+            const event = e.target.parentNode
+            console.log(event.parentNode)
+            const tdElement = (event.parentNode).querySelectorAll('td')
+            console.log(tdElement)
+            tdElement[4].setAttribute("class","off")
+            tdElement[5].setAttribute("class","off")
+            tdElement[6].setAttribute("class","")
+            tdElement[7].setAttribute("class","")
+            tdElement[8].setAttribute("class","")
+            tdElement[9].setAttribute("class","off")
+            tdElement[10].setAttribute("class","")
+            btnPoint.setAttribute("class","point")
+        }
+
+        btnDone.addEventListener('click',btnDoneHandler)
+        async function btnDoneHandler(e){
+            const event = e.target.parentNode
+            const td = (event.parentNode)
+            const tdElement = td.querySelectorAll('td')
+            console.log(tdElement)
+            tdElement[4].setAttribute("class","")
+            tdElement[5].setAttribute("class","")
+            tdElement[6].setAttribute("class","off")
+            tdElement[7].setAttribute("class","off")
+            tdElement[8].setAttribute("class","off")
+            tdElement[9].setAttribute("class","")
+            tdElement[10].setAttribute("class","off")
+            btnPoint.setAttribute("class","point off")
+
+            const level = td.querySelector('#level')
+            const active = td.querySelector('#active')
+            const idx = tdElement[0].innerText
+            const valueLevel = level.value
+            const activeLevel = active.value
+
+            const option = {
+                valueLevel,
+                activeLevel,
+                idx
+            }
+            const response = await axios.post('accountupdate',option)
+            window.location.href="http://localhost:3001/admin/account/accountmgt"
+        }
         tbody.append(clone)
     })
 
-    const btnEdit = document.querySelector('.edit')
-    btnEdit.addEventListener('click',btnEditHandler)
-    function btnEditHandler(e){
-        const event = e.target.parentNode
-        console.log(event.parentNode)
-        const tdElement = (event.parentNode).querySelectorAll('td')
-        console.log(tdElement)
-        tdElement[4].setAttribute("class","off")
-        tdElement[5].setAttribute("class","off")
-        tdElement[6].setAttribute("class","")
-        tdElement[7].setAttribute("class","")
-        tdElement[8].setAttribute("class","off")
-        tdElement[9].setAttribute("class","")
-    }
+    
+    // const btnEdit = document.querySelector('.edit')
+    // const btnPoint = document.querySelector('.point')
+    // btnEdit.addEventListener('click',btnEditHandler)
+    // function btnEditHandler(e){
+    //     const event = e.target.parentNode
+    //     console.log(event.parentNode)
+    //     const tdElement = (event.parentNode).querySelectorAll('td')
+    //     console.log(tdElement)
+    //     tdElement[4].setAttribute("class","off")
+    //     tdElement[5].setAttribute("class","off")
+    //     tdElement[6].setAttribute("class","")
+    //     tdElement[7].setAttribute("class","")
+    //     tdElement[8].setAttribute("class","")
+    //     tdElement[9].setAttribute("class","off")
+    //     tdElement[10].setAttribute("class","")
+    //     btnPoint.setAttribute("class","point")
+    // }
 
-    const btnDone = document.querySelector('.done')
-    btnDone.addEventListener('click',btnDoneHandler)
-    async function btnDoneHandler(e){
-        const event = e.target.parentNode
-        const td = (event.parentNode)
-        const tdElement = td.querySelectorAll('td')
-        console.log(tdElement)
-        tdElement[4].setAttribute("class","")
-        tdElement[5].setAttribute("class","")
-        tdElement[6].setAttribute("class","off")
-        tdElement[7].setAttribute("class","off")
-        tdElement[8].setAttribute("class","")
-        tdElement[9].setAttribute("class","off")
+    // const btnDone = document.querySelector('.done')
+    // btnDone.addEventListener('click',btnDoneHandler)
+    // async function btnDoneHandler(e){
+    //     const event = e.target.parentNode
+    //     const td = (event.parentNode)
+    //     const tdElement = td.querySelectorAll('td')
+    //     console.log(tdElement)
+    //     tdElement[4].setAttribute("class","")
+    //     tdElement[5].setAttribute("class","")
+    //     tdElement[6].setAttribute("class","off")
+    //     tdElement[7].setAttribute("class","off")
+    //     tdElement[8].setAttribute("class","off")
+    //     tdElement[9].setAttribute("class","")
+    //     tdElement[10].setAttribute("class","off")
+    //     btnPoint.setAttribute("class","point off")
 
-        const level = td.querySelector('#level')
-        const active = td.querySelector('#active')
-        const idx = tdElement[0].innerText
-        const valueLevel = level.value
-        const activeLevel = active.value
+    //     const level = td.querySelector('#level')
+    //     const active = td.querySelector('#active')
+    //     const idx = tdElement[0].innerText
+    //     const valueLevel = level.value
+    //     const activeLevel = active.value
 
-        const option = {
-            valueLevel,
-            activeLevel,
-            idx
-        }
-        const response = await axios.post('accountupdate',option)
-        window.location.href="http://localhost:3001/admin/account/accountmgt"
-    }
+    //     const option = {
+    //         valueLevel,
+    //         activeLevel,
+    //         idx
+    //     }
+    //     const response = await axios.post('accountupdate',option)
+    //     window.location.href="http://localhost:3001/admin/account/accountmgt"
+    // }
 
 
 }
