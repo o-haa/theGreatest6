@@ -47,17 +47,8 @@ async function init() {
         let activeArr = ['0','1'] // 활동상태가 1
         activeArr.forEach(v=>{
             let optionElement = document.createElement('option')
-            switch(v){
-                case 0:
-                    optionElement.innerHTML = '활동가능'
-                break;
-                case 1:
-                    optionElement.innerHTML = `활동중지`
-                break;
-                default:
-                    console.log('예외 값 입력')
-                break;
-            }
+            
+            optionElement.innerHTML = `${v}`
             active.appendChild(optionElement)
         })
 
