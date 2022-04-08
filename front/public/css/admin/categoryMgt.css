@@ -24,8 +24,11 @@
 /* 헤더 #header */
 
 /* 본문 #content */
-/* 본문 왼쪽 달력 박스  : #content > #calContent */
-/* 본문 오른쪽 박스  : #content > #mainContent */
+#content > #mainContent{
+    width: 100%;
+    padding:30px 90px;
+    box-sizing: border-box;
+}
 
 /* 무엇이든 물어보세요 검색창 */
 #content > #mainContent > #listSearchBox{
@@ -102,14 +105,8 @@ tr:not(:first-child){
     border-bottom: 1px solid #A8BEBF;
 }
 td{
-    padding:16px;
-}
-td:not(:nth-child(3)){
     text-align: center;
-}
-td:nth-child(3){
-    padding-left: 20px;
-    box-sizing: border-box;
+    padding:16px;
 }
 
 #writeBtn {
@@ -129,4 +126,8 @@ td:nth-child(3){
     border: none;
     background: #465D59;
     box-sizing: border-box;
+}
+
+.off{
+    display: none;
 }
