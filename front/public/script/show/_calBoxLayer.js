@@ -217,19 +217,22 @@ async function init() {
                     i += 1
                 })
             
-
                 //만약 일정정보가 있다면
                 weeklyCard(v,hour)
             }
         })
     }
 
+    const temp = document.querySelector('.monthlyTemp')
     //위클리 카드 생성하는 함수
     async function weeklyCard(v,hour){
-        const temp = document.querySelector('.monthlyTemp')
-        console.log(temp.content)
         const clone = document.importNode(temp.content,true)
-        const pic = clone.querySelector('img')
+        const monthlyCard = clone.querySelector('.monthlyCard')
+        monthlyCard.addEventListener('click',moveHandler)
+        function moveHandler(){
+            window.location.href='#'
+        }
+        const pic = clone.querySelector('.pic')
         const title = clone.querySelectorAll('span')
         //idx를 사용해서 사진 가져오기
         // const response = await axios.post('',idx)

@@ -20,6 +20,20 @@ exports.showWrite = async (req, res) => {
         console.log('req.file : ', req.file) //파일
         console.log('req.body : ', req.body) //텍스트
 
+        let board =[]
+        try{
+            console.log('a')
+            const {filename} = req.file
+            const {subject} = req.body
+            const filePath = `http://localhost:4001/${filename}`
+            const data = {subject, filePath}
+            board.push(data);
+            console.log('입력받음 :',board)
+            // res.json('ok')
+        }catch(e){console.log('에러 : ',e)}
+            
+
+
         const { xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, showMonth, showDate, showHour, ticketMonth, ticketDate, ticketHour } = req.body
         console.log('/write 체크용 ----> req.body', req.body.category)
         //ticket 들어온거 확인함.
@@ -80,176 +94,174 @@ exports.showWrite = async (req, res) => {
     }
 
 exports.showList = async (req, res) => {
-        console.log('back / showList 라우터 접속!')
-        try {
-            const [result] = await pool.execute(sql.showList)
+    console.log('back / showList 라우터 접속!')
+    try {
+        const [result] = await pool.execute(sql.showList)
 
-            response = {
-                result,
-                error: 0,
-            }
-            res.json(response)
-        }
-        catch (e) {
-            console.log('/showlist', e.message)
-        }
-
-    }
-
-    exports.showCard = (req, res) => {
-        console.log('showCard : ', req.body)
-        //아이디가 있다고 치고,
-    }
-
-    exports.showCalendar = (req, res) => {
-        console.log('back / showCalendar 라우터 접속!')
-    }
-
-    exports.showHome = async (req, res) => {
-        console.log('Home')
-    }
-
-    exports.showView = async (req, res) => {
-        console.log('back / showView 라우터 접속!');
-        const { showIdx } = req.params;
-        const prepare = [ showIdx ];
-        try {
-            const [result] = await pool.execute(sql.showView, prepare);
-            response = {
-                result,
-                error: 0,
-            };
-            res.json(response);
-        }
-        catch (e) {
-            console.log('/showview', e.message);
-        }
-    }
-
-    //입력받은 기존 값을 불러오는 라우터
-    exports.showModifyGetInfo = async (req, res) => {
-        console.log('showModifyGetInfo 접속')
-        const { showIdx } = req.params
-        const prepare = [ showIdx ]
-
-        try {
-            const [result] = await pool.execute(sql.showView, prepare)
-            response = {
-                result,
-                error: 0
-            }
-            res.json(response)
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }
-
-    //새로 입력받은 값을 update하는 라우터
-    exports.showModifyView = async (req, res) => {
-        console.log('showModifyView 접속!')
-
-        const { category } = req.body;
-        const prepare1 = [category];
-        let categoryIdx;
-        try {
-            const [[getCategory]] = await pool.execute(sql.getCategory, prepare1)
-            categoryIdx = getCategory.show_category_idx
-        } catch (e){
-            console.log('/showWrite getcategory',e.message)
-        }
-
-        let { show_idx, xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, timestampShow, timestampTicket } = req.body
-
-    const prepare2 = [ show_idx, title, categoryIdx, xrated, showCompany, showDirector,timestampTicket, showContent, timestampShow, place, showCast1, showCast2 ]
-        console.log(prepare2)
-        try {
-            console.log(sql.showUpdate)
-            const [result] = await pool.execute(sql.showUpdate, prepare2)
-            response = {
-                ...response,
-                result,
-                show_idx,
-                error: 0
-            }
-            console.log(result,'dddddd')
-            res.json(response)
-        }
-        catch (e) {
-            console.log(e)
-        }
-        // res.json(response)
-    }
-
-    exports.showDelete = async (req, res) => {
-        console.log('back / showDelete 라우터 접속!')
-        let { idx } = req.params
-
-        try {
-            const sql = `DELETE FROM shows WHERE show_idx='${idx}'`
-            const [result] = await pool.execute(sql)
-        }
-        catch (e) {
-            console.log('/showmodify', e.message)
-        }
-    }
-
-    exports.showCalendar = async (req, res) => {
-        console.log('back / showCalendar 라우터 접속!')
-        const { year, month, date } = req.body
-        let sqlCheck = ``
-        if (month < 10) {
-            sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
-        FROM shows AS s LEFT JOIN s_option AS o
-        ON s.show_idx = o.shows_idx
-        WHERE (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month + 1}%")`
-        } else if (month + 1 >= 10) {
-            sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
-        FROM shows AS s LEFT JOIN s_option AS o
-        ON s.show_idx = o.shows_idx
-        WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-${month + 1}%"))`
-        } else if (month + 1 > 12) {
-            month = 1
-            sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
-        FROM shows AS s LEFT JOIN s_option AS o
-        ON s.show_idx = o.shows_idx
-        WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month}%")`
-        } else {
-            sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
-        FROM shows AS s LEFT JOIN s_option AS o
-        ON s.show_idx = o.shows_idx
-        WHERE (select * from s_option where (show_date like "${year}-${month}%" OR show_date like "${year}-${month + 1}%")`
-        }
-
-        try {
-            const [result] = await pool.execute(sqlCheck)
-            response = {
-                result,
-                error: 0,
-            }
-            res.json(response)
-        }
-        catch (e) {
-            console.log('/showview', e.message);
-        }
-    }
-
-
-
-    exports.getCategories = async (req, res) => {
-        let response = {
-            result: [],
-            errno: 1
-        };
-        try {
-            const [result] = await pool.execute(sql.getFullCategories);
-            response = {
-                ...response,
-                result,
-                errno: 0
-            }
-        } catch (e) {
-            console.log(e.message);
+        response = {
+            result,
+            error: 0,
         }
         res.json(response)
     }
+    catch (e) {
+        console.log('/showlist', e.message)
+    }
+
+}
+
+exports.showCard = (req, res) => {
+    console.log('showCard -------> ', req.body)
+    const response = 'hello'
+    res.json(response)
+    console.log('bye')
+}
+
+exports.showHome = async (req, res) => {
+    console.log('Home')
+}
+
+exports.showView = async (req, res) => {
+    console.log('back / showView 라우터 접속!');
+    const { showIdx } = req.params;
+    const prepare = [ showIdx ];
+    try {
+        const [result] = await pool.execute(sql.showView, prepare);
+        response = {
+            result,
+            error: 0,
+        };
+        res.json(response);
+    }
+    catch (e) {
+        console.log('/showview', e.message);
+    }
+}
+
+//입력받은 기존 값을 불러오는 라우터
+exports.showModifyGetInfo = async (req, res) => {
+    console.log('showModifyGetInfo 접속')
+    const { showIdx } = req.params
+    const prepare = [ showIdx ]
+
+    try {
+        const [result] = await pool.execute(sql.showView, prepare)
+        response = {
+            result,
+            error: 0
+        }
+        res.json(response)
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+//새로 입력받은 값을 update하는 라우터
+exports.showModifyView = async (req, res) => {
+    console.log('showModifyView 접속!')
+
+    const { category } = req.body;
+    const prepare1 = [category];
+    let categoryIdx;
+    try {
+        const [[getCategory]] = await pool.execute(sql.getCategory, prepare1)
+        categoryIdx = getCategory.show_category_idx
+    } catch (e){
+        console.log('/showWrite getcategory',e.message)
+    }
+
+    let { show_idx, xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, timestampShow, timestampTicket } = req.body
+
+const prepare2 = [ show_idx, title, categoryIdx, xrated, showCompany, showDirector,timestampTicket, showContent, timestampShow, place, showCast1, showCast2 ]
+    console.log(prepare2)
+    try {
+        console.log(sql.showUpdate)
+        const [result] = await pool.execute(sql.showUpdate, prepare2)
+        response = {
+            ...response,
+            result,
+            show_idx,
+            error: 0
+        }
+        console.log(result,'dddddd')
+        res.json(response)
+    }
+    catch (e) {
+        console.log(e)
+    }
+    // res.json(response)
+}
+
+exports.showDelete = async (req, res) => {
+    console.log('back / showDelete 라우터 접속!')
+    let { idx } = req.params
+
+    try {
+        const sql = `DELETE FROM shows WHERE show_idx='${idx}'`
+        const [result] = await pool.execute(sql)
+    }
+    catch (e) {
+        console.log('/showmodify', e.message)
+    }
+}
+
+exports.showCalendar = async (req, res) => {
+    console.log('back / showCalendar 라우터 접속!')
+    const { year, month, date } = req.body
+    let sqlCheck = ``
+    if (month < 10) {
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+    FROM shows AS s LEFT JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    WHERE (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month + 1}%")`
+    } else if (month + 1 >= 10) {
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+    FROM shows AS s LEFT JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-${month + 1}%"))`
+    } else if (month + 1 > 12) {
+        month = 1
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+    FROM shows AS s LEFT JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    WHERE (select * from s_option where (show_date like "${year}-0${month}%" OR show_date like "${year}-0${month}%")`
+    } else {
+        sqlCheck = `SELECT s.show_idx, s.show_title, o.show_place, o.show_date
+    FROM shows AS s LEFT JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    WHERE (select * from s_option where (show_date like "${year}-${month}%" OR show_date like "${year}-${month + 1}%")`
+    }
+
+    try {
+        const [result] = await pool.execute(sqlCheck)
+        response = {
+            result,
+            error: 0,
+        }
+        res.json(response)
+    }
+    catch (e) {
+        console.log('/showview', e.message);
+    }
+}
+
+
+
+exports.getCategories = async (req, res) => {
+    let response = {
+        result: [],
+        errno: 1
+    };
+    try {
+        const [result] = await pool.execute(sql.getFullCategories);
+        response = {
+            ...response,
+            result,
+            errno: 0
+        }
+    } catch (e) {
+        console.log(e.message);
+    }
+    res.json(response)
+}
