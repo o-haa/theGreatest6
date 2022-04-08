@@ -6,7 +6,7 @@ const paymentController = require('./paymentController')
 router.get('/payment_1',paymentController.payment_1)
 
 //포인트 사용 시 차액을 제외한 결제 금액과 무통장 계좌번호 확인됨
-router.post('/payment_2',paymentController.payment_2)
+router.get('/payment_2',paymentController.payment_2)
 
 
 module.exports = router;
