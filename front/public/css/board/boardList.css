@@ -100,7 +100,14 @@ th{
 
 
 #pagingDiv{
-    margin-top:1%;
+    width:80%;
+    margin:1% auto;
+}
+
+#paging>li>a{
+    color:#465d59;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 #box{

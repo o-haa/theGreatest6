@@ -78,11 +78,7 @@ WHERE p.user_idx = ?`,
     // WHERE b.show_category_idx = ? 
     // ORDER BY b.board_idx DESC`,
 
-    allListsql: `SELECT * 
-    FROM board AS b 
-    LEFT OUTER JOIN user AS u 
-    ON b.user_idx = u.user_idx 
-    ORDER BY b.board_idx DESC`,
+    
 
 
     // WHERE s.show_category = ?
@@ -105,6 +101,11 @@ WHERE p.user_idx = ?`,
     communityList3: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 3 ORDER BY board_idx DESC`,
     communityList4: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 4 ORDER BY board_idx DESC`,
     getCategoryIdx: 'SELECT show_category_idx FROM s_category WHERE show_category = ?',
+    allListsql: `SELECT *,${date}
+    FROM board AS b 
+    LEFT OUTER JOIN user AS u 
+    ON b.user_idx = u.user_idx 
+    ORDER BY b.board_idx DESC`,
 
     communityWrite: 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)',
 
