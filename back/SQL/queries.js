@@ -158,7 +158,7 @@ VALUES(?,?,?,?,?,?)`,
     
     communityLikeUp1: 'UPDATE like_board SET like_board_flag = 1 WHERE board_idx = ?',
     communityLikeUp0: 'UPDATE like_board SET like_board_flag = 0 WHERE board_idx = ?',
-    communityLike: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
+    communityLikeInsert: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
     communityLikeList: 'SELECT * FROM like_board WHERE board_idx = ?',
 
     //show

@@ -154,3 +154,21 @@ input[type="checkbox"]+label{
 #td1 a {
     color:#000000;
 }
+
+
+/* news list width */
+#newsNum {
+    width:7%;
+}
+
+#newsSub {
+    width: 57%;
+}
+
+#newsWrite {
+    width:15%;
+}
+
+#newsDate {
+    width: 15%;
+}

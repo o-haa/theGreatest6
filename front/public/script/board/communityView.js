@@ -23,7 +23,6 @@ async function init() {
     useridxx.value = user.user_idx
     const likeUserIdx = useridxx.value
     const likeDB = await axios.post(`/likelist/${bIdx}`)
-    console.log(likeDB.data.result.length)
     if(user.user_idx == likeUserIdx){
         like.addEventListener('click',likeHandler)
         async function likeHandler(){
