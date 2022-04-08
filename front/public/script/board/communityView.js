@@ -17,6 +17,17 @@ async function init() {
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit')
     
+    const like = document.querySelector('.like')
+    like.addEventListener('change',likeHandler)
+    function likeHandler(v){
+        const like = document.querySelector('.like')  
+        if(like.innerHTML === '❤️‍🩹'){
+            like.innerHTML = '❤️'
+        } else {
+            like.innerHTML = '❤️‍🩹'
+        };
+    } 
+        
 
     const upElement = document.querySelector('#update');
     const aElement = document.createElement('a');
