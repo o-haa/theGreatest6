@@ -271,43 +271,23 @@ exports.communityCoUp = async (req,res)=>{
 
 
 
-
+let likeup
 exports.communityLike = async (req,res)=>{
     const{boardIdx}=req.params;
     console.log(boardIdx)
     const { likeUserIdx } = req.body
     console.log(likeUserIdx)
-    const upPrepare = [boardIdx]
-    const prepare = [likeUserIdx,boardIdx]
-
-
-    const likeBoardIdx = req.body.likedata.board_idx
-    const flag = req.body.likedata.like_board_flag
-    
-    try{
-        if(likeBoardIdx != undefined){
-            const [result] = await poll.execute(sql.communityLike,prepare)
-            response = {
-                ...response,
-                result,
-                errno: 0
-            } 
-        }
-
-    }catch(e){
-        console.log('/likeinsert',e.message)
-    }
-    res.json(response)
-    
+    const prepare = [boardIdx]
+    const flag = req.body.likedata.result[0].like_board_flag
     // const [result] = await pool.execute(sql.communityLike,prepare)
     try{
         if(flag == '0'){
-            let likeup = await pool.execute(sql.communityLikeUp1,upPrepare)
+            likeup = sql.communityLikeUp1
         } else{
-            let likeup = await pool.execute(sql.communityLikeUp0,upPrepare) 
+            likeup = sql.communityLikeUp0
         }
 
-        const [result] = await pool.execute(likeup,upPrepare) 
+        const [result] = await pool.execute(likeup,prepare) 
         response1 = {
             ...response,
             result,
@@ -320,14 +300,43 @@ exports.communityLike = async (req,res)=>{
     
 }
 
-exports.communityLikeList= async (req,res)=>{
+exports.communityLikeIn = async (req,res)=>{
     const{boardIdx}=req.params;
-    const prepare = [boardIdx]
+    console.log(boardIdx)
+    const { likeUserIdx } = req.body
+    console.log(likeUserIdx)
+    const prepare = [likeUserIdx,boardIdx]
+
     try{
-        const [result] = await pool.execute(sql.communityLikeList,prepare)
+        
+        const [result] = await pool.execute(sql.communityLike,prepare)
         response = {
             ...response,
             result,
+            errno: 0
+        } 
+        
+
+    }catch(e){
+        console.log('/likeinsert',e.message)
+    }
+    res.json(response)
+    
+}
+
+exports.communityLikeList= async (req,res)=>{
+    const{boardIdx}=req.params;
+    const prepare = [boardIdx]
+    
+    try{
+        const [result] = await pool.execute(sql.communityLikeList,prepare)
+        const length = result.length
+        response = {
+            ...response,
+            result:{
+                result,
+                length
+            },
             errno: 0
         }  
     }catch(e){
