@@ -43,7 +43,7 @@ WHERE p.user_idx = ?`,
 
     //유저 이미지 넣기
     insertUserImg: `INSERT INTO u_file (user_idx, file_originalname, file_storedname, file_size, file_dlt_flag)
-                    xVALUES (?, ?, ?, ?, ?)`,
+                    VALUES (?, ?, ?, ?, ?)`,
 
 
 
@@ -187,9 +187,9 @@ VALUES(?,?,?,?,?,?)`,
 
     showUpdate : `UPDATE shows AS s 
     INNER JOIN s_option AS o
-    ON s.show_idx = o.shows_idx
+    ON s.show_idx = o.shows_idx AND s.show_idx = ?
     SET s.show_title=?,
-    s.show_category_idx=?,
+        s.show_category_idx=?,
         s.show_xrated=?,
         s.show_company=?,
         s.show_director=?,
@@ -198,8 +198,7 @@ VALUES(?,?,?,?,?,?)`,
         o.show_date=?,
         o.show_place=?,
         o.show_cast1=?,
-        o.show_cast2=?
-    WHERE s.show_category_idx = ?`,
+        o.show_cast2=?`,
 
 
 

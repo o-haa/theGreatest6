@@ -48,6 +48,16 @@ async function init() {
         let timestampShow = `${ticketDay[0]}-${showMonth}-${showDate}T${showHour}:00:00`
         let timestampTicket = `${ticketDay[0]}-${ticketMonth}-${ticketDate}T${ticketHour}:00:00`
 
+
+
+        switch(xrated){
+            case '전체관람': xrated = 1
+                    break;
+            case '청소년 불가': xrated = 0
+                    break;
+        }
+
+
         try{
             let option = {
                 show_idx,category,xrated,title,place,showCast1,showCast2,showDirector,showCompany,showContent,timestampShow, timestampTicket
