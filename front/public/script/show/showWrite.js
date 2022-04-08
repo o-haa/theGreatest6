@@ -73,7 +73,7 @@ async function init() {
     async function makeOption(){
         //show_category
        const selectCategory = document.querySelector('#category')
-       const responseMake = await axios.post('getcategories')
+       const responseMake = await axios.post('/getcategories')
        let optionCategory = responseMake.data.result
 
        optionCategory.forEach(v=>{
