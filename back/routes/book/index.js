@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const showBookRouter = require('./show')
+const bookRouter = require('./book')
 const paymentRouter = require('./payment')
 
-router.use('/show',showBookRouter)
+router.use('/book',bookRouter)
 router.use('/payment',paymentRouter)
 
 
