@@ -7,48 +7,35 @@ result: [],
 errno: 1
 };
 
+let listsql 
 exports.communityList = async (req, res) => {
     const {category} = req.body;
     const prepare = [category]
 
-    const [result] = await pool.execute(sql.getCategoryIdx,prepare)
-    const showIdx = result[0].show_category_idx
+    const [result1] = await pool.execute(sql.getCategoryIdx,prepare)
+    const showIdx = result1[0].show_category_idx
     try {
         switch (showIdx){
             case 1:
-                const [result1] = await pool.execute(sql.communityList1);
-                response = {
-                    ...response,
-                    result1,
-                    errno: 0
-                } 
+                listsql = sql.communityList1;
             break;
             case 2:
-                const [result2] = await pool.execute(sql.communityList2);
-                response = {
-                    ...response,
-                    result2,
-                    errno: 0
-                } 
+                listsql = sql.communityList2;
             break;
             case 3:
-                const [result3] = await pool.execute(sql.communityList3);
-                response = {
-                    ...response,
-                    result3,
-                    errno: 0
-                } 
+                listsql = sql.communityList3;
             break;
             case 4:
-                const [result4] = await pool.execute(sql.communityList4);
-                response = {
-                    ...response,
-                    result4,
-                    errno: 0
-                } 
+                listsql = sql.communityList4;
             break;
 
         }
+        const [result] = await pool.execute(listsql);
+                response = {
+                    ...response,
+                    result,
+                    errno: 0
+                } 
 
     } catch (e) {
         console.log('/communitylist',e.message);
