@@ -241,9 +241,8 @@ VALUES(?,?,?,?,?,?)`,
     myBenefit: `SELECT u_point_idx, user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_in - u_point_out AS u_point_net
                 FROM u_point 
                 WHERE user_idx = ?`,
-    checkPoint: `SELECT u_point_idx, user_idx, SUM(u_point_in), SUM(u_point_out), SUM(u_point_in) - SUM(u_point_out) AS u_point_net
-                FROM u_point 
-                WHERE user_idx = ?`,
-}
+    checkPoint: `SELECT user_idx, SUM(u_point_in) AS sum_p_in, SUM(u_point_out) As sum_p_out FROM u_point WHERE user_idx = ? GROUP BY user_idx`,
 
 
+
+    }
