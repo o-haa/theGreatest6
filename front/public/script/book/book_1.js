@@ -1,4 +1,3 @@
-let test = {};
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -7,4 +6,12 @@ async function init() {
     axios.defaults.withCredentials = true;
 
 
+
+
+    const next = document.querySelector('#next')
+    next.addEventListener('click',moveToPayment_2Hanlder)
+
+    function moveToPayment_2Hanlder(){
+        location.href='/book/payment/payment_1'
+    }
 }

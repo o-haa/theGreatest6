@@ -34,6 +34,7 @@ body{
 }
 
 
+
 .line{
     border-left: 1px solid black;
     padding-left: 20px;
@@ -88,41 +89,10 @@ table{
     border: 1px solid black;
 }
 
-.notice{
-    color: brown;
-    font-size: 15px;
-    padding: 10px;
-}
-
-.answer{
-    display: flex;
-    justify-content: space-between;
-    width: 100px;
-}
-
-.point{
-    border: 1px solid black;
-    width: 250px;
-    height: 45%;
-    margin-bottom: 13px;
-}
-
-#pointCheckBox{
-    display: none;
-}
-
 #next{
     float: right;
     margin-right: 20px;
     padding-top: 5px;
     font-size: 20px;
     background: none;
-}
-
-#usablePoint{
-    width: 120px;
-    height: 30px;
-    /* background: white; */
-    font-size: 20px;
-    padding-left: 10px;
 }

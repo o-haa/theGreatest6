@@ -1,4 +1,3 @@
-let test = {};
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
