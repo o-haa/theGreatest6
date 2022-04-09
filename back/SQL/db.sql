@@ -62,3 +62,9 @@ INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_s
 INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,3,30000);
 INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,4,30000);
 INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,5,30000);
+
+
+
+INSERT INTO bank (bank_account, bank_number) VAlUES ('신한은행',110502607216);
+INSERT INTO bank (bank_account, bank_number) VAlUES ('카카오뱅크',3333101822445);
+INSERT INTO bank (bank_account, bank_number) VAlUES ('하나은행',59991031852507);
