@@ -14,7 +14,7 @@
         {% include "nav.html" %}
         <div id="content">
             <div id="mainContent">
-                <h1 style="font-family: 'korFontBold' !important;">회원 정보 수정</h1>
+                <h1 style="font-family: 'korFontBold' !important;">티켓 오픈일</h1>
 
                 <!-- 리스트 검색창 -->
                 <div id="listSearchBox">
@@ -30,14 +30,10 @@
                 <table class="listTable">
                     <thead>
                         <tr>
-                            <th>회원번호</th>
-                            <th>아이디</th>
-                            <th>닉네임</th>
-                            <th>가입날짜</th>
-                            <th>레벨</th>
-                            <th>활동상태</th>
-                            <th class="point off">포인트 관리</th>
-                            <th>수정</th>
+                            <th>넘버</th>
+                            <th>공연 제목</th>
+                            <th>공연 주최</th>
+                            <th>티켓 오픈일</th>
                         </tr>
                     </thead>
     
@@ -48,32 +44,9 @@
                 <template id="adminList_row">
                     <tr>
                         <td>{idx}</td>
-                        <td>{id}</td>
-                        <td>{nick}</td>
-                        <td>{doj}</td>
-                        <td>
-                            {level}
-                        </td>
-                        <td>
-                            {active}
-                        </td>
-                        <td class="off">
-                            <select name="level" id="level">
-                            </select>
-                        </td>
-                        <td class="off">
-                            <select name="active" id="active">
-                            </select>
-                        </td>
-                        <td class="off">
-                            <button>포인트 관리</button>
-                        </td>
-                        <td>
-                            <button class="edit">수정</button>
-                        </td>
-                        <td class="off">
-                            <button class="done">완료</button>
-                        </td>
+                        <td>{title}</td>
+                        <td>{company}</td>
+                        <td>{ticket open date}</td>
                     </tr>
                 </template>
                </script>

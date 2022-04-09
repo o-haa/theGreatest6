@@ -113,8 +113,6 @@ exports.showCard = (req, res) => {
     res.json(response)
 }
 
-
-
 exports.showView = async (req, res) => {
     const { showIdx } = req.params;
     const prepare = [ showIdx ];
@@ -232,13 +230,7 @@ exports.showCalendar = async (req, res) => {
     }
 }
 
-
-
 exports.getCategories = async (req, res) => {
-    let response = {
-        result: [],
-        errno: 1
-    };
     try {
         const [result] = await pool.execute(sql.getFullCategories);
         response = {
@@ -258,17 +250,15 @@ exports.ticketOpenDate = async (req,res) =>{
         errno:1
     }
     try{
-        const [[ result ]] = await pool.execute(sql.ticketOpenDate)
-        
+        const [ result ] = await pool.execute(sql.ticketOpenDate)
         response = {
             result,
             errno:0
         }
-        console.log(result)
-
     }
     catch (e) {
         console.log('/ticketopendate',e.message)
     }
+    console.log(response)
     res.json(response)
 }
