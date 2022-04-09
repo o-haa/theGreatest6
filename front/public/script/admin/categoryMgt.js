@@ -14,7 +14,8 @@ async function init() {
     const temp = document.querySelector('template')
     const responseGet = await axios.post('categorymgt')
 
-    let resCat = responseGet.data //
+    //리스트를 만들 자료 resCat
+    let resCat = responseGet.data 
     makebefore(resCat, catListB)
     makeafter()
 
@@ -22,6 +23,7 @@ async function init() {
     let cats = [];
     let id = 0;
 
+    //수정 전 리스트
     function makebefore(resCat, catList){
         resCat.forEach(v=>{
             const clone = document.importNode(temp.content,true)
@@ -33,6 +35,7 @@ async function init() {
         })
     }
 
+    //수정 후 리스트
     function makeafter(){
         makebefore(resCat, catListA)
         const catLi = document.querySelectorAll('.afterBox > .catList > li')
@@ -85,7 +88,7 @@ async function init() {
 
     function catDelet(e){
         const delt = e.target.parentNode
-        delt.innerHTML = ''
+        delt.remove()
         const catLi = document.querySelectorAll('.afterBox > .catList > li')
         console.log(catLi)
     }
@@ -102,6 +105,7 @@ async function init() {
             console.log(catLi[i].innerHTML)
         }
         console.log('arr ----> ',arr)
+        //sql을 바꿀 코드
         const response = await axios.post('categorysave',arr)
         console.log(response)
     }
