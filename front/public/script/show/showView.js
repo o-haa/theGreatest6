@@ -97,6 +97,15 @@ async function init() {
                 tdElements[i+10].innerHTML = v.show_content
             })
         }
+
+        const bookBtn = document.querySelector('#book')
+        bookBtn.addEventListener('click', bookBtnHandler)
+
+        async function bookBtnHandler(){
+            location.href=`/book/book/book_1/${idx}`
+        }
+
+
         
         //날짜 분리해주는 함수
         function makeDate(v){

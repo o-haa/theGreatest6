@@ -10,8 +10,10 @@ async function init() {
 
     const next = document.querySelector('#next')
     next.addEventListener('click',moveToPayment_2Hanlder)
+}
 
-    function moveToPayment_2Hanlder(){
-        location.href='/book/payment/payment_1'
-    }
+
+
+function moveToPayment_2Hanlder() {
+    location.href = '/book/payment/payment_1'
 }
