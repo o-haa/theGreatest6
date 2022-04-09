@@ -18,7 +18,7 @@ exports.InsertBookInfo = async (req,res) => {
     const prepare = [ ]
 
     try{
-        const [ result ] = await axios.post( '/InsertBookInfo', prepare)
+        const [ result ] = await axios.post( '/insertBookInfo', prepare)
 
     } catch (e) {
 

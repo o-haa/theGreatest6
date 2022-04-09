@@ -9,6 +9,5 @@ router.post('/insertbookinfo', bookController.InsertBookInfo)
 //좌석 정보 확인
 router.post('/selectseatinfo', bookController.selectSeatInfo)
 //좌석 정보 입력
-router.post('/insertseatinfo', bookController.InsertSeatInfo)
 
 module.exports = router;

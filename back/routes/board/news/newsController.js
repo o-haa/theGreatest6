@@ -16,7 +16,6 @@ exports.newsList = async (req, res) => {
                 ON n.user_idx = u.user_idx
                 ORDER BY n.board_news_idx DESC`;
     try {
-        // console.log(sql)
         const [result] = await pool.execute(sql);
         response = {
             ...response,
@@ -46,7 +45,6 @@ exports.newsWrite = async (req,res) =>{
             },
             errno:0    
         };
-        console.log(result)
         res.json(response)
     }catch(e){
         console.log('/newswright',e.message);
@@ -56,7 +54,6 @@ exports.newsWrite = async (req,res) =>{
 exports.newsView = async (req,res) => {
     const{idx}=req.params;
     const prepare = [idx];
-    console.log(idx)
 
     const hitSql = `UPDATE b_news SET news_hit = news_hit + 1 WHERE board_news_idx = ${idx}`
     const hitResult = await pool.execute(hitSql);

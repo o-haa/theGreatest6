@@ -22,7 +22,6 @@ exports.showWrite = async (req, res) => {
 
         let board =[]
         try{
-            console.log('a')
             const {filename} = req.file
             const {subject} = req.body
             const filePath = `http://localhost:4001/${filename}`
@@ -94,7 +93,6 @@ exports.showWrite = async (req, res) => {
     }
 
 exports.showList = async (req, res) => {
-    console.log('back / showList 라우터 접속!')
     try {
         const [result] = await pool.execute(sql.showList)
 
@@ -111,18 +109,13 @@ exports.showList = async (req, res) => {
 }
 
 exports.showCard = (req, res) => {
-    console.log('showCard -------> ', req.body)
     const response = 'hello'
     res.json(response)
-    console.log('bye')
 }
 
-exports.showHome = async (req, res) => {
-    console.log('Home')
-}
+
 
 exports.showView = async (req, res) => {
-    console.log('back / showView 라우터 접속!');
     const { showIdx } = req.params;
     const prepare = [ showIdx ];
     try {
@@ -140,7 +133,6 @@ exports.showView = async (req, res) => {
 
 //입력받은 기존 값을 불러오는 라우터
 exports.showModifyGetInfo = async (req, res) => {
-    console.log('showModifyGetInfo 접속')
     const { showIdx } = req.params
     const prepare = [ showIdx ]
 
@@ -159,7 +151,6 @@ exports.showModifyGetInfo = async (req, res) => {
 
 //새로 입력받은 값을 update하는 라우터
 exports.showModifyView = async (req, res) => {
-    console.log('showModifyView 접속!')
 
     const { category } = req.body;
     const prepare1 = [category];
@@ -174,9 +165,7 @@ exports.showModifyView = async (req, res) => {
     let { show_idx, xrated, title, place, showCast1, showCast2, showDirector, showCompany, showContent, timestampShow, timestampTicket } = req.body
 
 const prepare2 = [ show_idx, title, categoryIdx, xrated, showCompany, showDirector,timestampTicket, showContent, timestampShow, place, showCast1, showCast2 ]
-    console.log(prepare2)
     try {
-        console.log(sql.showUpdate)
         const [result] = await pool.execute(sql.showUpdate, prepare2)
         response = {
             ...response,
@@ -184,7 +173,6 @@ const prepare2 = [ show_idx, title, categoryIdx, xrated, showCompany, showDirect
             show_idx,
             error: 0
         }
-        console.log(result,'dddddd')
         res.json(response)
     }
     catch (e) {
@@ -194,7 +182,6 @@ const prepare2 = [ show_idx, title, categoryIdx, xrated, showCompany, showDirect
 }
 
 exports.showDelete = async (req, res) => {
-    console.log('back / showDelete 라우터 접속!')
     let { idx } = req.params
 
     try {
@@ -207,7 +194,6 @@ exports.showDelete = async (req, res) => {
 }
 
 exports.showCalendar = async (req, res) => {
-    console.log('back / showCalendar 라우터 접속!')
     const { year, month, date } = req.body
     let sqlCheck = ``
     if (month < 10) {
@@ -261,7 +247,7 @@ exports.getCategories = async (req, res) => {
             errno: 0
         }
     } catch (e) {
-        console.log(e.message);
+        console.log('getCategories',e.message);
     }
     res.json(response)
 }

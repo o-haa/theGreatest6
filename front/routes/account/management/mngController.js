@@ -35,19 +35,13 @@ exports.myTicket = (req, res) => {
 
 }
 
-exports.myPick = (req, res) => {
-    res.render('./account/myPick');
-
-}
 
 exports.myCalendar = (req, res) => {
     res.render('./account/myCalendar');
 
 }
 
-exports.myAct = (req, res) => {
-    res.render('./account/myAct');
-}
+
 
 exports.myBenefit = (req, res) => {
     res.render('./account/myBenefit');

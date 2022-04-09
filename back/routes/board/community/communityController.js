@@ -101,12 +101,7 @@ exports.communityView = async (req,res) => {
     const prepare = [ boardIdx ];
     const hitResult = await pool.execute(sql.updateHit,prepare);
 
-    // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
-    // const imgPrepare = [idx]
-
-    // const imgIdx = await pool.execute(imgSql,imgPrepare)
-    // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
-
+   
     try{
         const [ result ] = await pool.execute(sql.communityViewFile,prepare);
         response = {
@@ -126,7 +121,6 @@ exports.communityDelete = async (req,res) =>{
 
     try{
         const [result] = await pool.execute(sql.communityDelete,prepare);
-        console.log(result)
         response = {
                 result,
                 errno:0
