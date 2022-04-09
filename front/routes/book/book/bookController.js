@@ -1,5 +1,5 @@
 exports.book = (req,res) => {
-    res.render('bookInfo')
+    res.render('./show/payment/bookInfo')
 }
 
 

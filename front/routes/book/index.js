@@ -7,7 +7,4 @@ const paymentRouter = require('./payment')
 router.use('/book',bookRouter)
 router.use('/payment',paymentRouter)
 
-
-
-
 module.exports = router;

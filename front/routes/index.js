@@ -9,7 +9,7 @@ const { auth } = require('./account/member/Auth');
 const OauthRouter = require('./Oauth');
 const aboutRouter = require('./about');
 const chatRouter = require('./chat');
-const bookRouter = require('./book')
+const bookRouter = require('./book');
 
 router.get('/', mainController);
 router.use('/board',boardRouter);

@@ -1,0 +1,17 @@
+@import url('../index/_settingLayout.css'); /* html 기본 세팅 */
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+
+#wrap{
+    width:1100px;
+    height: 700px;
+    background: brown;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    height: 50px;
+    padding-top: 30px;
+    background: yellow;
+    box-sizing: border-box;
+}
