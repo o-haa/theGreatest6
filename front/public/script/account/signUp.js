@@ -115,7 +115,7 @@ async function init() {
                 const response = await axios.post('/signup', data);
                 if (response.data.errno === 1) throw new Error('회원가입 에러');
                 // alert('welcome!');
-                // location.href='/'
+                location.href='http://localhost:3001/account/member/welcome'
             } catch (e) {
                 console.log(e.message);
             }

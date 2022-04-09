@@ -5,31 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+    <script src="/script/account/welcome.js"></script>
     <link href="/css/account/welcome.css" rel="stylesheet" type="text/css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>   
 </head>
 <body>
     <div id="wrap">
         {% include "nav.html" %}
         <div id="join_info">
-            <div><p>{{info.nickname}}님 환영합니다.</p></div>
+            <div><span id="wuserNickname"></span>님 환영합니다.</div>
             <div><p>가입하신 정보를 확인해주세요.</p></div>
             <table>
                 <tr>
                     <td>ID</td>
-                    <td>{{info.userid}}</td>
+                    <td id="userId"></td>
                 </tr>
                 <tr>
                     <td>Nickname</td>
-                    <td>{{info.nickname}}</td>
+                    <td id="userNickname"></td>
                 </tr>
             </table> 
             <div>
                 <div id="notice">
                     <p>🩰 NOTICE 🩰</p>
-                    <p>예매하실 회원님께서는</p>
-                    <p><a href="/management/myinfo">My Page</a> 에서 추가 정보를 입력해 주시면 
-                    <p>이용하실 수 있습니다.</p>    
+                    <p>예매하실 회원님께서는 Login 하신 후, </p>
+                    <p>"My Page"에서 추가 정보를 입력해 주시면 이용하실 수 있습니다.</p>
                     <p>감사합니다.</p>
                 </div>
             </div>       
