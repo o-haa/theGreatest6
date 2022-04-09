@@ -8,4 +8,5 @@ router.get('/privacypolicy',memberController.privacyPolicy)
 router.post('/destroycookie',memberController.destroyCookie)
 
 
+
 module.exports = router;

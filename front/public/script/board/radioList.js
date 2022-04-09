@@ -1,5 +1,5 @@
 let test = {};
-let rows = [];
+// let rows = [];
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -14,9 +14,6 @@ async function init() {
     }
     console.log('data',data1)
     let response = await axios.post('/list', data1)
-    // response = await axios.post('http://localhost:4001/show/program/getcategories',null)
-    // const categories = response.data.result;
-    //checked를 만들기 위해서 가져옴 >>나중에 시간 남으면 하자
 
     test = {
         ...response
@@ -42,7 +39,7 @@ async function init() {
     for (let i = startPageperBlock + 1; i <= endPageperBlock; i++) {
         const liElement = document.createElement('li'); 
         const aElement = document.createElement('a');
-        aElement.setAttribute(`onClick`, pages(`${i}`));
+        aElement.setAttribute(`onClick`, `pages(${i})`);
         aElement.innerHTML = `[${i}]`
         liElement.appendChild(aElement);
         paging.appendChild(liElement);
@@ -93,9 +90,6 @@ async function init() {
     for(let i=0; i < checks.length; i++){
         checks[i].addEventListener('click',checkedHandler)
     }
-    // checks.forEach(v=>{
-    //     console.log('check',v)
-    // })
 }
 
 
@@ -103,12 +97,12 @@ async function checkedHandler(e) {
     const data = {
         category: e.target.value
     }
-    try {
-        let response = await axios.post('/list', data)
+    let response = await axios.post('/list', data)
         response = response.data
         test = {
             ...response
         };
+    
         const totalRecords = response.result.length
         const recordsPerPage = 10;
         const pagesPerBlock = 10;
@@ -131,7 +125,7 @@ async function checkedHandler(e) {
             const liElement = document.createElement('li');
             const aElement = document.createElement('a');
 
-            aElement.setAttribute(`onClick`, pages(`${i}`));
+            aElement.setAttribute(`onClick`, `pages(${i})`);
             aElement.innerHTML = `[${i}]`;
             liElement.appendChild(aElement);
             paging.appendChild(liElement);
@@ -175,14 +169,6 @@ async function checkedHandler(e) {
 
             tbody.appendChild(clone);
 
-
-            // let endBlock = block + pagingBlock;
-            // if (endBlock > totalPage) endBlock = totalPage;
-
-
-            // const paging = document.querySelector('#paging');
-
-
             let template = '';
             Nodes.forEach(v => { });
             tbody.innerHTML = template;
@@ -192,38 +178,129 @@ async function checkedHandler(e) {
                 const liElement = document.createElement('li');
                 const aElement = document.createElement('a');
 
-                aElement.setAttribute(`onClick`, pages(`${i}`));
+                aElement.setAttribute(`onClick`, `pages2(${i})`);
                 aElement.innerHTML = `[${i}]`;
                 liElement.appendChild(aElement);
                 paging.appendChild(liElement);
             }
         })
-    }
-    catch (e) {
-        console.log('/communitylist', e)
-    }
+    
+    //라디오 선택시 랜더되는 첫 화면
+    const Nodes1 = response.result.slice((page - 1) * recordsPerPage, page * recordsPerPage);
+    const tr1 = document.querySelector('#communityBoardRow');
+    const tbody1 = document.querySelector('table > tbody')
+
+    await Nodes1.forEach(v => {
+        const showCategory = v.show_category_idx
+        const clone = document.importNode(tr1.content, true);
+        const td = clone.querySelectorAll('td');
+        const aElement = document.createElement('a');
+        aElement.href = '/board/community/view/' + v.board_idx;
+        aElement.innerHTML = v.board_subject;
+        td[0].innerHTML = v.board_idx;
+        switch (showCategory) {
+            case 1:
+                td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
+                break;
+            case 2:
+                td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
+                break;
+            case 3:
+                td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
+                break;
+            case 4:
+                td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
+                break;
+        }
+        td[2].appendChild(aElement);
+        td[3].innerHTML = v.user_nickname
+        td[4].innerHTML = v.board_date;
+        td[5].innerHTML = v.board_hit;
+
+        tbody1.appendChild(clone);
+
+    })
+
 }
-test = {
-    ...response
-};
 
 
 async function pages(num) {
+    
     const tr = document.querySelector('#communityBoardRow');
-    const value = test.result;
-
+    const value = test.data.result
+  
     const aElement = document.createElement('a');
     aElement.href = '/board/community//view' + value.board_idx;
     aElement.innerHTML = value.board_subject;
 
     const viewRows = 10;
-    const Nodes = test.result.slice((num - 1) * viewRows, num * viewRows);
+    const Nodes = value.slice((num - 1) * viewRows, num * viewRows);
     const tbody = document.querySelector('table > tbody');
 
     let template = '';
-        await Nodes.forEach(v => { });
-        tbody.innerHTML = template;
+    await Nodes.forEach(v => { });
+    tbody.innerHTML = template;
+ 
 
+    await Nodes.forEach(v => {
+        const showCategory = v.show_category_idx
+        const clone = document.importNode(tr.content, true);
+        const td = clone.querySelectorAll('td');
+        const aElement = document.createElement('a');
+        aElement.href = '/board/community/view/' + v.board_idx;
+        aElement.innerHTML = v.board_subject;
+        td[0].innerHTML = v.board_idx;
+        switch (showCategory) {
+            case 1:
+                td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
+                break;
+            case 2:
+                td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
+                break;
+            case 3:
+                td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
+                break;
+            case 4:
+                td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
+                break;
+        }
+        td[2].appendChild(aElement);
+        td[3].innerHTML = v.user_nickname
+        td[4].innerHTML = v.board_date;
+        td[5].innerHTML = v.board_hit;
+
+        const tbody = document.querySelector('table > tbody');
+        tbody.appendChild(clone);
+
+    })
+}
+
+
+async function pages2(num) {
+    
+    const tr = document.querySelector('#communityBoardRow');
+    const value = test.result
+  
+    const aElement = document.createElement('a');
+    aElement.href = '/board/community//view' + value.board_idx;
+    aElement.innerHTML = value.board_subject;
+
+    const viewRows = 10;
+    const Nodes = value.slice((num - 1) * viewRows, num * viewRows);
+    const tbody = document.querySelector('table > tbody');
+
+    let template = '';
+    await Nodes.forEach(v => { });
+    tbody.innerHTML = template;
+ 
 
     await Nodes.forEach(v => {
         const showCategory = v.show_category_idx

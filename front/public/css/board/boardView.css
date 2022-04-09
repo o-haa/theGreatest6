@@ -123,6 +123,7 @@ th:nth-child(6){
     padding:7px 14px;
     box-sizing: border-box;
     font-size:18px;
+    border:dotted 1px #fff;
 }
 
 #viewContent{
@@ -152,21 +153,22 @@ th:nth-child(6){
     justify-content: space-between;
 }
 
-.list .update .delete{ 
-    padding: 7px 12px;
-    background-color: #465d59;
-}
-
 #button button a{
-    color: #465d59 !important;
+    padding: 7px 12px;
+    color: #fff !important;
     font-size: 16px;
-    border-bottom: 1px solid #465d59;
+    border: 1px dotted #fff;
+    background: #64cbe6;
+    border-radius: 20px;
 }
 
 .delete{
-    color: #465d59 !important;
+    padding: 7px 12px;
+    color: #fff !important;
     font-size: 16px;
-    border-bottom: 1px solid #465d59;
+    border: 1px dotted #fff;
+    background: #64cbe6;
+    border-radius: 20px;
 }
 
 #commentBox {

@@ -17,7 +17,6 @@ async function init() {
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit')
     
-    const xhr = new XMLHttpRequest();
     const like = document.querySelector('.like')
     let useridxx = document.querySelector('#viewHead > td > input')
     useridxx.value = user.user_idx
