@@ -6,6 +6,8 @@ async function init() {
 
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
+    const userIdx = user.user_idx
+    const userNickname = user.user_nickname
 
 
     const [, , , , bIdx] = location.pathname.split('/');
@@ -59,18 +61,6 @@ async function init() {
     };
 
     
-        
-    
-        
-
-        
-
-    const upElement = document.querySelector('#update');
-    const aElement = document.createElement('a');
-    aElement.href = `/board/community/update/` + `${bIdx}`;
-    aElement.innerHTML = 'Edit';
-    upElement.appendChild(aElement);
-
     const response = await axios.post(`/view/${bIdx}`, {
         withCredentials: true,
     });
@@ -78,8 +68,19 @@ async function init() {
 
     if (response.data.errno === 0) {
         const [{ board_subject, board_date, board_hit, board_content, board_file_idx }] = response.data.result;
-        const writer_nickname =response.data.result[0].user_nickname;
+        const writerNickname =response.data.result[0].user_nickname;
+        const writerIdx = response.data.result[0].user_idx;
 
+        if(userIdx === writerIdx || userNickname === 'admin'){
+            const upElement = document.querySelector('#update');
+            const aElement = document.createElement('a');
+            aElement.href = `/board/community/update/` + `${bIdx}`;
+            aElement.innerHTML = 'Edit';
+            upElement.appendChild(aElement);
+        }else {
+            const deleteFrm = document.querySelector('#deleteFrm');
+            deleteFrm.innerHTML = ""
+        }
         
         switch (showCategory) {
             case 1:
@@ -102,7 +103,7 @@ async function init() {
 
         boardIdx.innerHTML = bIdx;
         subject.innerHTML = board_subject;
-        nickname.innerHTML = writer_nickname;
+        nickname.innerHTML = writerNickname;
         date.innerHTML = board_date;
         hit.innerHTML = board_hit;
         content.innerHTML = board_content;
@@ -125,9 +126,6 @@ async function init() {
         async function deleteSubmit(e) {
             e.preventDefault();
             const uidx = e.target.parentNode.querySelector('input[id=useridx]').value
-            if(user.user_idx != uidx){
-                
-            }
             
             try {
 
