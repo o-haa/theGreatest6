@@ -22,6 +22,59 @@ async function init(e) {
         console.log(alert)
     }
 
+    const makeScedule = document.querySelector('.makeScedule')
+    const sMonth = document.querySelector('.sMonth')
+    const sDate = document.querySelector('.sDate')
+    const sHour = document.querySelector('.sHour')
+    const memo = document.querySelector('.memo')
+
+    makeDatelist(sMonth,sDate,sHour)
+
+    const makeBtn = document.querySelector('.makeBtn')
+    makeBtn.addEventListener('click',makeHandelr)
+    async function makeHandelr(){
+        const makeScedule = document.querySelector('.makeScedule')
+        console.log('a')
+        makeScedule.setAttribute("value","1")
+        console.log(makeScedule.innerHTML)
+        // makeScedule.setAttribute('class', 'makeScedule on')
+    }
+
+    //드롭다운 만드는 함수
+    function makeDatelist(month,date,hour){
+        //달력배열을 만들 배열 선언
+        let monthlist=[] 
+        let datelist=[]
+        let hourlist=[]
+        
+        for(let i=1; i<=12; i++){ monthlist.push(`${i}`) ;} //열두달 채워넣기
+        for(let i=1; i<=31; i++){ datelist.push(`${i}`) ;} //31일 채워넣기
+        hourlist = ['10','13','18'] //3회 공연
+
+        monthlist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`
+            month.options.add(newOption)
+        })
+
+        datelist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`
+            date.options.add(newOption)
+        })
+
+        hourlist.forEach(v=>{
+            const newOption = document.createElement("option")
+            newOption.text = `${v}`
+            newOption.value = `${v}`
+            hour.options.add(newOption)
+        })
+
+        return month,date,hour
+    }
+
     //오늘의 정보를 알려주는 함수
     let today = new Date()
     let year = today.getFullYear() // 올해
@@ -238,5 +291,4 @@ async function init(e) {
             }
         })
     }
-
 }
