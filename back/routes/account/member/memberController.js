@@ -58,7 +58,7 @@ exports.signUp = async (req, res) => {
     const result = await pool.execute(sql.signUp, prepare);
     response = {
       ...response,
-      result: result,
+      result,
       errno: 0
     };
   } catch (e) {
