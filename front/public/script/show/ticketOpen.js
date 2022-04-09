@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init);
+let user;
 
+//인잇
 async function init() {
 
     // //관리자 레벨 2가 아닐경우 작성불가
@@ -10,96 +12,95 @@ async function init() {
     //     writeBtn.setAttribute("class","notAllow")
     // }
 
-    axios.defaults.baseURL = 'http://localhost:4001/show/program/';
+
+    axios.defaults.baseURL = 'http://localhost:4001/admin/account/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.withCredentials = true;
 
-    const response = await axios.post('showlist')
-    const Nodes = response.data.result
+    const response = await axios.post('accountmgt')
+    let nodes = response.data.result
     
-    let trElement = document.querySelector('#showList_row');
-    let trInner = document.querySelector('#showList_row').innerHTML;
-    const tbody = document.querySelector("table > tbody")
+    const temp = document.querySelector('#adminList_row')
+    const tbody = document.querySelector('tbody')
+    const btnPoint = document.querySelector('.point')
 
-    let template=''
-    Nodes.forEach(v=>{
-        const clone = document.importNode(trElement.content,true)
-        let tdElement = clone.querySelectorAll('td')
-        const aElement = document.createElement('a')
-        aElement.setAttribute(`href`,`showview/${v.show_idx}`)
-        aElement.innerHTML = v.show_title
-
-        tdElement[0].innerHTML = v.show_idx
-        tdElement[1].innerHTML = getCategory(v.show_category_idx)
-        tdElement[2].innerHTML = v.show_xrated
-        tdElement[3].innerHTML = ''
-        tdElement[3].append(aElement)
-        tdElement[4].innerHTML = "관리자"
+    let i=0
+    nodes.forEach(async (v)=>{
+        const clone = document.importNode(temp.content,true)
+        const tdElement = clone.querySelectorAll('td')
         
+        tdElement[i].innerText = v.user_idx
+        tdElement[i+1].innerText = v.user_id
+        tdElement[i+2].innerText = v.user_nickname
+        tdElement[i+3].innerText = v.user_doj
+        tdElement[i+4].innerText = v.user_level
+        tdElement[i+5].innerText = v.user_active
+
+        const level = clone.querySelector('#level')
+        let levelArr = ['1','2','3']
+        levelArr.forEach(v=>{
+            let optionElement = document.createElement('option')
+            optionElement.innerHTML = `${v}`
+            level.appendChild(optionElement)
+        })
+
+        const active = clone.querySelector('#active')
+        let activeArr = ['0','1'] // 활동상태가 1
+        activeArr.forEach(v=>{
+            let optionElement = document.createElement('option')
+            
+            optionElement.innerHTML = `${v}`
+            active.appendChild(optionElement)
+        })
+
+        const btnEdit = clone.querySelector('.edit')
+        const btnDone = clone.querySelector('.done')
+        btnEdit.addEventListener('click',btnEditHandler)
+        function btnEditHandler(e){
+            const event = e.target.parentNode
+            console.log(event.parentNode)
+            const tdElement = (event.parentNode).querySelectorAll('td')
+            console.log(tdElement)
+            tdElement[4].setAttribute("class","off")
+            tdElement[5].setAttribute("class","off")
+            tdElement[6].setAttribute("class","")
+            tdElement[7].setAttribute("class","")
+            tdElement[8].setAttribute("class","")
+            tdElement[9].setAttribute("class","off")
+            tdElement[10].setAttribute("class","")
+            btnPoint.setAttribute("class","point")
+        }
+
+        btnDone.addEventListener('click',btnDoneHandler)
+        async function btnDoneHandler(e){
+            const event = e.target.parentNode
+            const td = (event.parentNode)
+            const tdElement = td.querySelectorAll('td')
+            console.log(tdElement)
+            tdElement[4].setAttribute("class","")
+            tdElement[5].setAttribute("class","")
+            tdElement[6].setAttribute("class","off")
+            tdElement[7].setAttribute("class","off")
+            tdElement[8].setAttribute("class","off")
+            tdElement[9].setAttribute("class","")
+            tdElement[10].setAttribute("class","off")
+            btnPoint.setAttribute("class","point off")
+
+            const level = td.querySelector('#level')
+            const active = td.querySelector('#active')
+            const idx = tdElement[0].innerText
+            const valueLevel = level.value
+            const activeLevel = active.value
+
+            const option = {
+                valueLevel,
+                activeLevel,
+                idx
+            }
+            const response = await axios.post('accountupdate',option)
+            window.location.href="http://localhost:3001/admin/account/accountmgt"
+        }
         tbody.append(clone)
-        
-        template += trInner.replace('{show_idx}',v.show_idx)
-                            .replace('{show_title}',v.show_title)
-                            .replace('{show_category_idx}',v.show_category_idx)
-                            .replace('{show_xrated}',v.show_xrated)
     })
 
-
-    // const btnLeft = mainContent.querySelector('.miniBtnL')
-    // const btnRight = mainContent.querySelector('.miniBtnR')
-    const homeBtn = document.querySelector('#home');
-    const aboutBtn = document.querySelector('#about');
-    const listBtn = document.querySelector('#listBtn')
-    const listGrid = document.querySelector('#listGrid')
-    const listCalendar = document.querySelector('#listCalendar')
-
-    homeBtn.addEventListener('click', moveHome)
-    aboutBtn.addEventListener('click', moveAbout)
-    listBtn.addEventListener('click', listBtnHandler)
-    listGrid.addEventListener('click', gridBtnHandler)
-    listCalendar.addEventListener('click', calBtnHandler)
-
-    function listBtnHandler(){ 
-        window.location.href = '#'; 
-    }
-    function gridBtnHandler(){ 
-        window.location.href = 'http://localhost:3001/show/program/showcard'; 
-    }
-    function calBtnHandler(){ 
-        window.location.href = 'http://localhost:3001/show/program/showcalendar'; 
-    }
-    function moveHome(){ 
-        window.location.href = 'http://localhost:3001/'; 
-    }
-    function moveAbout(){
-        window.location.href = 'http://localhost:3001/about';
-    }
-    function btnLeftHandler(){
-        month-=1
-        let now = new Date(year,month)
-        createCalendar(now)
-    }
-    function btnRightHandler(){
-        month+=1 // 달이 넘어가지 않는 이슈 해결
-        let now = new Date(year,month)
-        createCalendar(now)
-    }
-    function getCategory(v){ //sql에서 받아오도록 수정
-        switch(v){
-            case 7 :
-                return show_category = 'musical'
-            break;
-            case 8 :
-                return show_category = 'concert'
-            break;
-            case 9 :
-                return how_category = 'classic'
-            break;
-            case 10 :
-                return show_category = 'ballet'
-            break;
-            default:
-                console.log('show_category 오류 발생')
-            break;
-        }
-    }
 }
