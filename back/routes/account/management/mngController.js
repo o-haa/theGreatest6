@@ -33,7 +33,6 @@ exports.optionalInfo = async(req,res) => {
     const { userIdx } = req.body
     const { mobile1 ,mobile2, mobile3 } = req.body.userMobile
     const prepare1 = [ mobile1 ,mobile2, mobile3 ,userIdx]
-    console.log(prepare1)
     try{
         const [ result1 ] = await pool.execute(sql.mobileInfo, prepare1)
         const userMobileIdx = result1.insertId
@@ -41,14 +40,12 @@ exports.optionalInfo = async(req,res) => {
     //주소
     const {u_add_name, u_add_region1,u_add_region2, u_add_region3, u_add_road, u_add_bd_name,u_add_bd_no,u_add_detail,u_add_zipcode} = req.body.userAddress;
     const prepare2 = [ userIdx, u_add_name, u_add_region1,u_add_region2, u_add_region3, u_add_road, u_add_bd_name,u_add_bd_no,u_add_detail,u_add_zipcode ];
-        console.log(prepare2)
         const [result2] = await pool.execute(sql.addressInfo,prepare2)
         const userAddressIdx = result2.insertId
 
     // 옵션 정보 입력
     const { userName, userDob, userGender } = req.body;
     const prepare3 = [ userIdx, userName, userDob, userGender, userMobileIdx, userAddressIdx ];
-    console.log(prepare3)
         const result3 = await pool.execute(sql.optionalInfo,prepare3);
         response = {
             result3,

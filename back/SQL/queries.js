@@ -39,7 +39,10 @@ WHERE p.user_idx = ?`,
                 FROM u_point 
                 WHERE user_idx = ?`,
                 
-    getPersonalInfo: `SELECT * FROM u_personal WHERE user_idx = ?`,
+    getPersonalInfo: `SELECT * 
+    FROM u_personal AS p
+    LEFT OUTER JOIN u_mobile AS m 
+    ON p.u_mobile_idx = m.u_mobile_idx AND p.user_idx = ?`,
 
 
     //유저 이미지 넣기
@@ -230,5 +233,5 @@ VALUES(?,?,?,?,?,?)`,
 
 
 
-    
+
     }

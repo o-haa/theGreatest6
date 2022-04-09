@@ -251,7 +251,6 @@ async function submitHandler(e) {
 
         const response2 = await axios.post('/optionalinfo', data);
         if (response2.data.errno !== 0) throw new Error('선택 정보 등록 에러');
-        console.log(response.data)
         location.href = '/account/management/myinfo';
     } catch (e) {
         console.log('/myInfo', e);
