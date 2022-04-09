@@ -10,6 +10,17 @@
     <link href="/css/index.css" rel="stylesheet" type="text/css">
     <script src="/script/index.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        video{
+            position: absolute;
+            top:0px;
+            left:0px;
+            width: 100vw;
+            z-index: -1000;
+            overflow: hidden;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,12 +39,15 @@
                 </ul>
             </div>
         </header>
+        <video muted autoplay loop>
+            <source src="../mp4/main.mp4" type="video/mp4">
+        </video>
         <main id="content"></main>
-        <div id="chatB">
+        <!-- <div id="chatB">
             <button id="chatBtn" onclick="window.open('/chat','chat','width=430,height=500,location=no,status=no,scrollbars=yes');">
                 <img src = "../img/icon/icon_chat.png">
             </button>
-        </div>
+        </div> -->
         
     </div>
 </body>
