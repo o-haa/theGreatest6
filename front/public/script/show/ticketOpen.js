@@ -18,24 +18,48 @@ async function init() {
     axios.defaults.withCredentials = true;
 
     const response = await axios.post('ticketopendate')
-    console.log(response)
     let nodes = response.data.result
-    let{show_company,show_date_open,show_title} = nodes
     
     const temp = document.querySelector('#adminList_row')
     const tbody = document.querySelector('tbody')
 
-    let i=0
+    let i = 0
+    let j = 1
     nodes.forEach(async (v)=>{
         const clone = document.importNode(temp.content,true)
         const tdElement = clone.querySelectorAll('td')
+        const title = clone.querySelector('.title')
         
-        tdElement[i].innerText = v.user_idx
+        tdElement[i].innerText = j
         tdElement[i+1].innerText = v.show_title
-        tdElement[i+2].innerText = v.show_compnay
+        tdElement[i+2].innerText = v.show_company
         tdElement[i+3].innerText = v.show_date_open
 
+        title.addEventListener('click',goToView)
+
         tbody.append(clone)
+        j+=1
     })
 
+    async function goToView(e){
+        const titleTxt = (e.target).innerText
+        switch(titleTxt){
+            case '박열':
+                window.location.href="/"
+            break;
+            case '박열':
+                window.location.href="/"
+            break;
+            case '박열':
+                window.location.href="/"
+            break;
+            case '박열':
+                window.location.href="/"
+            break;
+            default:
+                window.location.href="/"
+            break;
+            
+        }
+    }
 }
