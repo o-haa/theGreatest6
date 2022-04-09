@@ -2,14 +2,10 @@
 @import url('../index/_fontLayout.css'); /* 폰트 import */
 @import url('../index/_headerLayout.css'); /* 헤더 레이아웃(nav 포함) */
 @import url('../index/_mainContentLayout.css'); /* 본문 레이아웃 */
-@import url('../index/_calBoxLayer.css'); /* 본문 왼쪽 달력 박스 */
-@import url('../index/_contentLayout.css'); /* 본문 오른쪽 메인박스 틀 */
+/* @import url('../index/_calBoxLayer.css'); 본문 왼쪽 달력 박스 */
+/* @import url('../index/_contentLayout.css'); 본문 오른쪽 메인박스 틀 */
 
-/*
-    현진 작성 CSS 읽는 방법!
-    가로세로 -> 여백 -> 정렬순 -> 그 외 꾸밈(box-sixing, 선굵기 등)
-    이 순서대로 작성하기 때문에 만약 여백이 먼저 작성되었다면 가로세로 값은 없다는 뜻이에요!
-*/
+
 
 /* 글을 쓸 레벨이 되지 않으면 글쓰기 버튼을 숨기는 클래스 */
 .notAllow{
@@ -24,8 +20,11 @@
 /* 헤더 #header */
 
 /* 본문 #content */
-/* 본문 왼쪽 달력 박스  : #content > #calContent */
-/* 본문 오른쪽 박스  : #content > #mainContent */
+#content > #mainContent{
+    width: 100%;
+    padding:30px 90px;
+    box-sizing: border-box;
+}
 
 /* 무엇이든 물어보세요 검색창 */
 #content > #mainContent > #listSearchBox{
@@ -96,20 +95,14 @@ th{
 }
 
 /* 컨텐츠 줄 */
-tr{
+tr:not(:first-child){
     height: 50px;
     font-family: 'basicLight';
     border-bottom: 1px solid #A8BEBF;
 }
 td{
-    padding:16px;
-}
-td:not(:nth-child(3)){
     text-align: center;
-}
-td:nth-child(3){
-    padding-left: 20px;
-    box-sizing: border-box;
+    padding:16px;
 }
 
 #writeBtn {
@@ -129,4 +122,8 @@ td:nth-child(3){
     border: none;
     background: #465D59;
     box-sizing: border-box;
+}
+
+.off{
+    display: none;
 }
