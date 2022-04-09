@@ -45,7 +45,6 @@ exports.reviewList = async (req, res) => {
             result,
             errno: 0
         } 
-        console.log('result',result)
         // console.log(response.result)
     } catch (e) {
         console.log('/reviewlist',e.message);
