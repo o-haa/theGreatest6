@@ -84,25 +84,37 @@
     border-collapse: collapse;
 }
 /* 제목 줄 */
-tr:first-child{
-    height: 40px;
-}
 th{
     height: 40px;
+    font-size: 20px;
     border-top: 1.5px solid #465D59;
     border-bottom: 1.5px solid #465D59;
     color: #465D59;
+    height: 60px;
 }
 
 /* 컨텐츠 줄 */
 tr{
     height: 50px;
     font-family: 'basicLight';
+    font-size: 17px;
     border-bottom: 1px solid #A8BEBF;
 }
 td{
     text-align: center;
     padding:16px;
+}
+td:nth-child(1){
+    width:150px;
+}
+td:nth-child(2){
+    cursor: pointer;
+}
+td:nth-child(3){
+    width:170px;
+}
+td:nth-child(4){
+    width:190px;
 }
 
 #writeBtn {
