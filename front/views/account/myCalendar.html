@@ -16,7 +16,17 @@
         {% include "nav.html" %}
         <div id="content">
             <div id="calContent">
-                 <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
+                <div class="profilBox">
+                    <div class="makeScedule off"">
+                        <div>
+                            <select class="sMonth"></select>
+                            <select class="sDate"></select>   
+                            <select class="sHour"></select>  
+                            <input type="text">
+                        </div>
+                    </div>
+                    <button class="makeBtn">스케쥴 만들기</button>
+                </div>
                  
                 <!-- 소형 캘린더 -->
                 <div id="calSmall">
@@ -57,7 +67,7 @@
                 <!-- 위클리 카드 -->
                 <div id="monthly">
                     <div id="monthlyTitle">Monthly</div>
-                    <div id="monthTitleSmall">MAR</div>
+                    <div id="monthTitleSmall"></div>
                     <div id="menuSmall">
                         <template class="monthlyTemp">
                             <div class="monthlyCard">
@@ -87,7 +97,7 @@
                             <img src="/img/icon/icon_next_2x.png" id="next_arrow">
                         </button>
                     </div>
-                    <div id="mainContentTitleIcon">
+                    <!-- <div id="mainContentTitleIcon">
                         <button class="miniBtn" id="listBtn">
                             <img src="/img/icon/icon_list_2x.png" id="list">
                         </button>
@@ -97,7 +107,7 @@
                         <button class="miniBtn" id="listCalendar">
                             <img src="/img/icon/icon_cal_2x.png" id="calBtn">
                         </button>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div id="mainCal">

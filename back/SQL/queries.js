@@ -317,7 +317,9 @@ VALUES(?,?,?,?,?,?)`,
                 WHERE user_idx = ?`,
     checkPoint: `SELECT user_idx, SUM(u_point_in) AS sum_p_in, SUM(u_point_out) As sum_p_out FROM u_point WHERE user_idx = ? GROUP BY user_idx`,
 
+    getFullBankInfo: `SELECT * from bank`,
 
+    getBankInfo: `SELECT * from bank WHERE bank_idx =?`,
 
-
+    getSeatInfo: `SELECT * from book_seat`
     }

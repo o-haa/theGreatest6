@@ -1,34 +1,47 @@
 const pool = require('../../../db');
-const sql = require('../../../SQL/queries.js')
+const sql = require('../../../SQL/queries.js');
+let response = {
+    result: {},
+    errno: 1
+};
+
 
 //결제 수단 정보 불러오기
-exports.selectPay = (req,res) => {
+exports.getFullBankInfo = async (req,res) => {
     try{
-
+        const [result] = await pool.execute(sql.getFullBankInfo);
+        response = {
+            ...response,
+            result,
+            errno: 0
+        };
     } catch (e) {
-        
+        console.log('/getbankinfo',e.message);
     }
+    res.json(response);
 }
 
-//결제 수단 정보 입력
-exports.insertPay = (req,res) => {
 
+//선택 결제 수단 불러오기
+exports.getBankInfo = async (req,res) => {
     try{
-
+        const [result] = await pool.execute(sql.getBankInfo);
+        response = {
+            ...response,
+            result,
+            errno: 0
+        };
     } catch (e) {
-
+        console.log('/getbankinfo',e.message);
     }
+    res.json(response);
 }
 
 exports.checkPoint = async(req,res) => {
-    let response = {
-        result: {},
-        errno: 1
-    };
-    const { userIdx } = req.body
-    const prepare = [ userIdx ]
+    const { userIdx } = req.body;
+    const prepare = [ userIdx ];
     try{
-        const [[ result ]] = await pool.execute(sql.checkPoint,prepare)
+        const [[ result ]] = await pool.execute(sql.checkPoint,prepare);
         response = {
             ...response,
             result: {
@@ -36,26 +49,21 @@ exports.checkPoint = async(req,res) => {
                 point_net: (result.sum_p_in) - result.sum_p_out
             },
             errno: 0
-        }
+        };
     } catch (e) {
-        console.log('/checkpoint',e.message)
+        console.log('/checkpoint',e.message);
     }
-    res.json(response)
+    res.json(response);
 }
 
 
 // 개인정보 조회
 exports.getPersonalInfo = async(req,res) => {
-    console.log('hey')
-    let response = {
-        result: {},
-        errno:1
-    };
-    const { userIdx } = req.body
-    const prepare = [ userIdx ]
+    const { userIdx } = req.body;
+    const prepare = [ userIdx ];
     try{
-        const [[ result ]] = await pool.execute(sql.getPersonalInfo, prepare)
-        if(result==false) throw new Error('/정보 미등록')
+        const [[ result ]] = await pool.execute(sql.getPersonalInfo, prepare);
+        if(result==false) throw new Error('/정보 미등록');
         response = {
             ...response,
             result: {
@@ -65,26 +73,22 @@ exports.getPersonalInfo = async(req,res) => {
             errno:0
         };
     } catch (e) {
-        console.log('/getpersonalinfo',e.message)
+        console.log('/getpersonalinfo',e.message);
     }
-    res.json(response)
+    res.json(response);
 }
 
 
 
 //포인트 사용하기
 exports.usePoint = (req,res) => {
-    let response = {
-        result: {},
-        errno: 1
-    }
     try{
         // const result =
 
         response = {
             result: {},
             errno: 1
-        }
+        };
     } catch (e) {
 
     }

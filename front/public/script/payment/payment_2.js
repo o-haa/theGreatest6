@@ -28,8 +28,6 @@ async function init() {
     }
 
 
-
-
 //예매 정보 2 - 예매자 정보
     const customer = document.querySelector('#customer')
     const mobile = document.querySelector('#mobile')
@@ -52,11 +50,15 @@ async function init() {
     }
 
 
-// 결제 정보
 
-
-// 결제 상세 정보
+// 결제 정보 및 결제 상세 정보
+const totalPrice = document.querySelector('#totalPrice')
+const fee = document.querySelector('#fee')
+const ticketPrice = document.querySelector('#ticketPrice')
+    getSeatInfo()
     getDeadLine()
+    getbankInfo()
+
 }
 
 
@@ -65,9 +67,29 @@ const getDeadLine = _=>{
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    const today = `${year}년 ${month}월 ${day}일 11시59분`
+    const today = `${year}년 ${month}월 ${day}일 23시 59분`
     const deadLine = document.querySelector('#deadLine')
     deadLine.innerHTML = today
     return today;
+}
 
+
+async function getbankInfo(){
+    const data = {
+        bankIdx
+    }
+    try {
+        const bankInfo = await axios.post('getBankInfo', data)
+        const account = bankInfo.data.result;
+        const number = bankInfo.data.result;
+        bankAccount.innerHTML = `${account}: ${number}`
+
+    } catch (e) {
+        console.log('/payment_2 getbankinfo', e.message)
+    }
+}
+
+async function getSeatInfo(){
+
+    totalPrice.innerHTML = ticketPrice.innerHTML + fee.innerHTML
 }
