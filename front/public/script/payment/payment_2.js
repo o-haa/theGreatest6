@@ -20,11 +20,6 @@ async function init() {
     // 닉네임
     customer.innerHTML = user.user_nickname
 
-
-    const dateaaa = await axios.post('http://localhost:4001/show/program/ticketopendate')
-    console.log(dateaaa.data)
-
-
     const data = {
         userIdx: user.user_idx
     };

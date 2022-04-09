@@ -44,3 +44,21 @@ INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES
 
 
 
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (2,1,75000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,75000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (2,3,75000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (2,4,75000);
+INSERT INTO book_seat (book_seat_row,  book_seat_number, book_seat_price) VALUES (2,5,75000);
+
+
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,1,1,50000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,1,2,50000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,1,3,50000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,1,4,50000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,1,5,50000);
+
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,1,30000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,2,30000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,3,30000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,4,30000);
+INSERT INTO book_seat (book_seat_floor, book_seat_row,  book_seat_number, book_seat_price) VALUES (2,2,5,30000);
