@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Calendar</title>
+    <title>Show Calendar</title>
     <link rel="stylesheet" href="/css/account/myCalendar.css">
     <script src="/script/account/myCalendar.js"></script>
     <script src="/script/show/_calBoxLayer.js"></script>
@@ -59,21 +59,15 @@
                     <div id="monthlyTitle">Monthly</div>
                     <div id="monthTitleSmall">MAR</div>
                     <div id="menuSmall">
-                        <div class="monthlyCard">
-                            <div id="pic1"></div>
-                            <div class="news">
-                                <span>뮤지컬 : THE MUSE (더 뮤즈)</span>
-                                <span>예매 시작일 : 3월 12일</span>
+                        <template class="monthlyTemp">
+                            <div class="monthlyCard">
+                                <div id="pic"></div>
+                                <div class="news">
+                                    <span></span>
+                                    <span></span>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="monthlyCard">
-                            <div id="pic2"></div>
-                            <div class="news">
-                                <span>뮤지컬 : BROADWAY (브로드웨이)</span>
-                                <span>예매 시작일 : 3월 28일</span>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </div>

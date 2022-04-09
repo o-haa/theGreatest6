@@ -14,6 +14,7 @@ async function init() {
     const year_month = document.querySelector('.year-month')
     let dates = document.querySelector('.dates_small')
     let template = document.querySelector('.cal_temp_small')
+    const monthTitleSmall = document.querySelector('#monthTitleSmall')
 
     let clone = document.importNode(template.content,true)
     let btnDate = clone.querySelector('.date_small')
@@ -117,12 +118,19 @@ async function init() {
         month-=1
         let now = new Date(year,month)
         createCalendar(now)
+        const menuSmall = document.querySelector('#menuSmall')
+        // monthTitleSmall = month
+        console.log(month)
+        menuSmall.innerHTML = ''
     }
 
     function btnRightHandler(){
         month+=1 // 달이 넘어가지 않는 이슈 해결
         let now = new Date(year,month)
         createCalendar(now)
+        const menuSmall = document.querySelector('#menuSmall')
+        monthTitleSmall = month
+        menuSmall.innerHTML = ''
     }
 
     function monthThreeWord(v){
@@ -169,8 +177,8 @@ async function init() {
         }
     }
 
-     //일정 그리는 함수
-     async function makedot(year,month,date){
+    //일정 그리는 함수
+    async function makedot(year,month,date){
         let option={
             year,
             month,
@@ -186,7 +194,6 @@ async function init() {
             let timeString = JSON.stringify((new Date(v.show_date)).toLocaleTimeString()) // 한국기준시간 문자열
             let timeLine = timeString.slice(1,3) //오전,오후 문자열
             let hour = (timeString.slice(4,6)).padStart(2,"0") //시각 문자열
-            // console.log('시간!!!!!!!!!',hour)
             if(timeLine=='오후'){ hour = `${parseInt(hour)+12}`} //24시 기준 시간표현 문자열
         
             //만약 일정정보가 있다면,
@@ -216,10 +223,8 @@ async function init() {
                     }
                     i += 1
                 })
-            
-                //만약 일정정보가 있다면
-                weeklyCard(v,hour)
             }
+            weeklyCard(v,hour)
         })
     }
 
@@ -237,7 +242,6 @@ async function init() {
         //idx를 사용해서 사진 가져오기
         // const response = await axios.post('',idx)
 
-        // console.log(v)
         title[0].innerHTML = v.show_title
         title[1].innerHTML = `장소 : ${v.show_place} | 공연 : ${hour}시`
 
