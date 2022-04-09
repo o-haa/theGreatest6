@@ -118,7 +118,8 @@ async function init() {
                 const userNickName = document.querySelector('#userNickName').value;
                 console.log(userId, userNickName)
                 alert('welcome!');
-                location.href='/'
+                location.href='http://localhost:3001/account/member/welcome'
+
             } catch (e) {
                 console.log(e.message);
             }

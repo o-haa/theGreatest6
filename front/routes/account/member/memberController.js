@@ -11,6 +11,10 @@ exports.privacyPolicy = (req,res)=>{
     res.render('./account/privacyPolicy')
 }
 
+exports.welcome = (req,res)=>{
+    res.render('./account/welcome')
+}
+
 exports.destroyCookie = (req,res)=>{
     res.clearCookie('AccessToken')
     res.end()
