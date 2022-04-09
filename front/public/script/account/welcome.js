@@ -11,14 +11,13 @@ async function init() {
     const nickname = document.querySelector('#userNickname');
 
     //join 정보 가지고 오기
-    const response = await axios.post('/signup')
-    console.log('signup',response)
+
 
 
     //정보 넣어주기
-    wNickname.innerHTML = v.user_nickname;
-    id.innerHTML = v.user_id;
-    nickname.innerHTML = v.user_nickname;
+    // wNickname.innerHTML = v.user_nickname;
+    // id.innerHTML = v.user_id;
+    // nickname.innerHTML = v.user_nickname;
 
 
     

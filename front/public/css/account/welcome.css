@@ -7,11 +7,56 @@ body {
 }
 
 #wrap{
-    width:100%;
     margin:0 auto;
+    font-size: 22px;
 }
 
 #join_info{
-    margin-top: 8% auto;
-    width: 60%;
+    width: 40%;
+    margin: 15% auto;
+    margin-bottom: 0;
+    
+}
+
+table{
+    margin-top:3%;
+    border-spacing: 0 3px;
+    background: #a5a5a5;
+    padding:2px 4px;
+    box-sizing: border-box;
+    color:#fae100;
+}
+
+td:nth-child(1){
+    text-align: end;
+}
+
+#notice{
+    margin-top:5%;
+}
+p {
+    margin-top:2%;
+}
+
+#notice_content{
+    margin-top:3%;
+}
+
+#notice_content p span{
+    background: #a5a5a5;
+    padding:2px 4px;
+    box-sizing: border-box;
+    color:#fae100;
+}
+
+
+
+#button{
+    margin-top:10%;
+    text-align: end;
+}
+
+button > a{
+    color:#db6039;
+    font-size: 22px;
 }
