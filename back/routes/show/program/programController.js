@@ -231,10 +231,6 @@ exports.showCalendar = async (req, res) => {
 }
 
 exports.getCategories = async (req, res) => {
-    let response = {
-        result: [],
-        errno: 1
-    };
     try {
         const [result] = await pool.execute(sql.getFullCategories);
         response = {
@@ -246,30 +242,4 @@ exports.getCategories = async (req, res) => {
         console.log('getCategories',e.message);
     }
     res.json(response)
-}
-
-<<<<<<< HEAD
-exports.getTicketOpenInfo = async (req,res)=>{
-    
-=======
-exports.ticketOpenDate = async (req,res) =>{
-    let response = {
-        result: [],
-        errno:1
-    }
-    try{
-        const [[ result ]] = await pool.execute(sql.ticketOpenDate)
-        
-        response = {
-            result,
-            errno:0
-        }
-        console.log(result)
-
-    }
-    catch (e) {
-        console.log('/ticketopendate',e.message)
-    }
-    res.json(response)
->>>>>>> 61e552fa81db633a28f2c50fd3a2a9f1e8778334
 }
