@@ -1,3 +1,6 @@
+const pool = require('../../../db');
+const sql = require('../../../SQL/queries.js')
+
 exports.selectBookInfo = async (req,res) => {
     let response = {
         result: {},
