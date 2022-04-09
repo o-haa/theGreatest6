@@ -1,10 +1,12 @@
 
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
+const rDate = `DATE_FORMAT(review_date, '%Y-%m-%d') AS review_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
+const rDatetime = `DATE_FORMAT(review_date, '%Y-%m-%d %h:%i:%s') AS review_date`
 const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
-const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
 const bparam = `board_idx,b.user_idx,show_category_idx, board_subject, board_content, board_hit`
 const uparam = `u.user_idx,user_nickname,user_level`
+const rparam = `review_idx,r.user_idx,show_category, review_subject, review_content, review_hit`
 
 module.exports = {
     //account
@@ -73,7 +75,6 @@ WHERE p.user_idx = ?`,
 
 
     //board
-
     communityList: `SELECT board_idx, b.show_category_idx, board_subject, board_content, board_hit,${date}, show_category
     FROM board As b
     LEFT OUTER JOIN s_category AS s
@@ -82,7 +83,6 @@ WHERE p.user_idx = ?`,
 
 
     admin: `INSERT INTO user VALUE ('admin@gmail.com','admin','관리자',2,1,now(),130)`,
-
 
     communityList1: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 1 ORDER BY board_idx DESC`,
     communityList2: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 2 ORDER BY board_idx DESC`,
@@ -154,6 +154,92 @@ VALUES(?,?,?,?,?,?)`,
     communityLikeUp0: 'UPDATE like_board SET like_board_flag = 0 WHERE board_idx = ?',
     communityLikeInsert: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
     communityLikeList: 'SELECT * FROM like_board WHERE board_idx = ?',
+
+    //review
+    reviewList: `SELECT review_idx, b.show_category, review_subject, review_content, review_hit,${date},
+    FROM b_review As r
+    LEFT OUTER JOIN s_category AS s
+    ON b.show_category = s.show_category_idx
+    ORDER BY review_idx DESC`,
+
+    reviewList1: `SELECT ${rparam},${uparam},${rDate} FROM b_review AS r LEFT OUTER JOIN user AS u ON r.user_idx = u.user_idx WHERE show_category = 1 ORDER BY review_idx DESC`,
+    reviewList2: `SELECT ${rparam},${uparam},${rDate} FROM b_review AS r LEFT OUTER JOIN user AS u ON r.user_idx = u.user_idx WHERE show_category = 2 ORDER BY review_idx DESC`,
+    reviewList3: `SELECT ${rparam},${uparam},${rDate} FROM b_review AS r LEFT OUTER JOIN user AS u ON r.user_idx = u.user_idx WHERE show_category = 3 ORDER BY review_idx DESC`,
+    reviewList4: `SELECT ${rparam},${uparam},${rDate} FROM b_review AS r LEFT OUTER JOIN user AS u ON r.user_idx = u.user_idx WHERE show_category = 4 ORDER BY review_idx DESC`,
+    reviewGetCategoryIdx: 'SELECT show_category_idx FROM s_category WHERE show_category = ?',
+    allReviewListsql: `SELECT *,${rDate}
+    FROM b_review AS r 
+    LEFT OUTER JOIN user AS u 
+    ON r.user_idx = u.user_idx 
+    ORDER BY r.review_idx DESC`,
+
+    reviewWrite: 'INSERT INTO b_review(user_idx,review_subject,review_content,show_category) VALUES(?,?,?,?)',
+
+//     reviewWriteFile: `INSERT INTO b_file (
+//         board_idx,
+//         file_originalname,
+//         file_storedname,
+//         file_size,
+//         file_date,
+//         file_dlt_flag
+//         )
+// VALUES(?,?,?,?,?,?)`,
+
+    reviewUpdateHit: 'UPDATE b_review SET review_hit = review_hit + 1 WHERE review_idx = ?',
+    // reviewViewFile: `SELECT
+    //             r.user_idx, r.show_category, r.review_subject, r.review_content, r.review_date, r.review_hit,
+    //             f.board_file_idx, f.board_idx, f.file_originalname, f.file_storedname, f.file_size, f.file_date, f.file_dlt_flag
+    //             ,${datetime},
+    //             u.user_id, u.user_nickname, u.user_level, u.user_active, u.user_doj
+    //             FROM board AS b 
+    //             LEFT OUTER JOIN b_file AS f
+    //             ON b.board_idx = f.board_idx 
+    //             LEFT OUTER JOIN user AS u 
+    //             ON b.user_idx = u.user_idx 
+    //             WHERE b.board_idx = ?`,
+    reviewView: `SELECT
+                r.user_idx, r.show_category, r.review_subject, r.review_content, r.review_date, r.review_hit,
+                ,${rDatetime},
+                u.user_id, u.user_nickname, u.user_level, u.user_active, u.user_doj
+                FROM b_review AS r
+                LEFT OUTER JOIN user AS u 
+                ON r.user_idx = u.user_idx 
+                WHERE r.review_idx = ?`,
+
+    reviewDelete: 'DELETE FROM b_review WHERE review_idx = ? ',
+    reviewGetCategory: 'SELECT * FROM s_category WHERE show_category = ?',
+    reviewGetCategories: 'SELECT * FROM s_category ORDER BY show_category_idx',
+    getFullCategories: 'SELECT * FROM s_category ORDER BY show_category_idx',
+
+
+    reviewUpdate: 'UPDATE b_review SET review_subject=?, review_content=?, show_category=? WHERE review_idx=?',
+    // reviewUpdateFile: `UPDATE b_file SET 
+    //     file_originalname = ?,
+    //     file_storedname = ?,
+    //     file_size = ?,
+    //     file_date = ?,
+    //     WHERE
+    //     board_idx = ?
+    //     `,
+
+
+    // commentRWrite: 'INSERT INTO comment(user_idx, board_idx, cmt_content) VALUES(?,?,?)',
+    // commentRList: `SELECT cmt_idx,board_idx, c.user_idx, user_id, user_nickname, user_level, cmt_content, ${cmtDate}, cmt_update_flag
+    //     FROM comment AS c 
+    //     LEFT OUTER JOIN user AS u
+    //     ON c.user_idx = u.user_idx
+    //     WHERE c.board_idx = ?
+    //      `,
+
+
+
+    // commentRDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
+    // commentRUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
+    
+    // reviewLikeUp1: 'UPDATE like_board SET like_board_flag = 1 WHERE board_idx = ?',
+    // reviewLikeUp0: 'UPDATE like_board SET like_board_flag = 0 WHERE board_idx = ?',
+    // reviewLikeInsert: 'INSERT INTO like_board (user_idx, board_idx) VALUES(?,?)',
+    // reviewLikeList: 'SELECT * FROM like_board WHERE board_idx = ?',
 
     //show
 

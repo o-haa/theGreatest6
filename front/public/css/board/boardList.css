@@ -164,6 +164,29 @@ input[type="radio"]+label{
 
 
 /* news list width */
+.newsBoard{
+    width:80%;
+    margin:8% auto 0 auto !important;
+    letter-spacing: 0.5px;
+    border-spacing: 0 3px;
+}
+.newsBoard > thead > tr > th {
+    background-color: #080c31;
+    border-bottom: 2px solid #000;
+    height: 25px;
+    color:#fff;
+}
+
+.newsEye img{
+    width: 20px;
+    padding:1px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    align-items: center;
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
+
 #newsNum {
     width:7%;
 }
@@ -178,4 +201,15 @@ input[type="radio"]+label{
 
 #newsDate {
     width: 15%;
+}
+
+.nBtn{
+    padding: 7px 12px;
+    background-color: #080c31 !important;
+    border-radius: 10px;
+}
+
+.nBtn > a{
+    color: #eee !important;
+    font-size: 16px;
 }
