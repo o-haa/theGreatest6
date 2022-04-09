@@ -12,30 +12,32 @@
 <body>
     <div id="wrap">
         {% include "nav.html" %}
-        <div id="join_info">
-            <div><span id="wuserNickname"></span>님 환영합니다.</div>
-            <div><p>가입하신 정보를 확인해주세요.</p></div>
-            <table>
-                <tr>
-                    <td>ID</td>
-                    <td id="userId"></td>
-                </tr>
-                <tr>
-                    <td>Nickname</td>
-                    <td id="userNickname"></td>
-                </tr>
-            </table> 
-            <div id="notice">
-                <p>🩰 NOTICE 🩰</p>
-                <div id="notice_content">
-                    <p>예매하실 회원님께서는 <span>Login</span> 하신 후, </p>
-                    <p><span>"My Page"</span> 에서 추가 정보를 입력해 주시면 이용하실 수 있습니다.</p>
-                    <p>감사합니다.</p>
+        <div id="join">
+            <div id="join_info">
+                <div><span id="wuserNickname"></span>님 환영합니다.</div>
+                <div><p>가입하신 정보를 확인해주세요.</p></div>
+                <table>
+                    <tr>
+                        <td>ID</td>
+                        <td id="userId"></td>
+                    </tr>
+                    <tr>
+                        <td>Nickname</td>
+                        <td id="userNickname"></td>
+                    </tr>
+                </table> 
+                <div id="notice">
+                    <p>🩰 NOTICE 🩰</p>
+                    <div id="notice_content">
+                        <p>예매하실 회원님께서는 <span>Login</span> 하신 후, </p>
+                        <p><span>"My Page"</span> 에서 추가 정보를 입력해 주시면 이용하실 수 있습니다.</p>
+                        <p>감사합니다.</p>
+                    </div>
                 </div>
+                <div id="button">
+                    <button><a href="/member/signin">Login 바로가기</a></button>
+                </div>       
             </div>
-            <div id="button">
-                <button><a href="/member/signin">Login 바로가기</a></button>
-            </div>       
         </div>
     </div>
 </body>
