@@ -61,6 +61,7 @@ async function init() {
 
         year_month_small.innerHTML = `${calMonth} ${year}`
         year_month.innerHTML = `${calMonth} ${year}`
+        monthTitleSmall.innerHTML = calMonth
 
         //이번달이 일요일로 시작하지 않을 경우
         if(nowFirstDay!==0){
@@ -119,8 +120,6 @@ async function init() {
         let now = new Date(year,month)
         createCalendar(now)
         const menuSmall = document.querySelector('#menuSmall')
-        // monthTitleSmall = month
-        console.log(month)
         menuSmall.innerHTML = ''
     }
 
@@ -129,7 +128,6 @@ async function init() {
         let now = new Date(year,month)
         createCalendar(now)
         const menuSmall = document.querySelector('#menuSmall')
-        monthTitleSmall = month
         menuSmall.innerHTML = ''
     }
 
