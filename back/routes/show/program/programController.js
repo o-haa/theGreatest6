@@ -264,8 +264,6 @@ exports.ticketOpenDate = async (req,res) =>{
             result,
             errno:0
         }
-        console.log(result)
-
     }
     catch (e) {
         console.log('/ticketopendate',e.message)
