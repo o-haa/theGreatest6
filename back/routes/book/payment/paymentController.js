@@ -54,10 +54,14 @@ exports.getPersonalInfo = async(req,res) => {
     const { userIdx } = req.body
     const prepare = [ userIdx ]
     try{
-        const [ result ] = await pool.execute(sql.getPersonalInfo, prepare)
+        const [[ result ]] = await pool.execute(sql.getPersonalInfo, prepare)
         if(result==false) throw new Error('/정보 미등록')
         response = {
-            result,
+            ...response,
+            result: {
+                ...result,
+                u_mobile: `${result.u_mobile1} - ${result.u_mobile2} - ${result.u_mobile3} `
+            },
             errno:0
         };
     } catch (e) {
