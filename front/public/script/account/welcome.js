@@ -22,5 +22,4 @@ async function init() {
     nickname.innerHTML =1
 
 
-    
 }
