@@ -7,8 +7,9 @@ const showRouter = require('./show');
 const adminRouter = require('./admin');
 const { auth } = require('./account/member/Auth');
 const OauthRouter = require('./Oauth');
-const aboutRouter = require('./about')
-const chatRouter = require('./chat')
+const aboutRouter = require('./about');
+const chatRouter = require('./chat');
+const bookRouter = require('./book');
 
 router.get('/', mainController);
 router.use('/board',boardRouter);
@@ -18,6 +19,7 @@ router.use('/admin',adminRouter);
 router.use('/oauth',OauthRouter);
 router.use('/about', aboutRouter);
 router.use('/chat',chatRouter)
+router.use('/book',bookRouter)
 
 
 module.exports = router;

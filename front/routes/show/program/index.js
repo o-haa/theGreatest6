@@ -16,4 +16,7 @@ router.get('/showmodify/:idx', programController.showModify)
 
 router.get('/ticketopen',programController.ticketOpen) //티켓 예매까지만! 결제기능은 payment로 빠짐   
 router.get('/test',programController.test)//my cal test용도
+
+router.get('/showupload',programController.showUpload)
+
 module.exports = router

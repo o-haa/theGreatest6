@@ -36,3 +36,7 @@ exports.test = (req,res)=>{
 res.render('./show/program/myCalendar')
 }
 
+exports.showUpload = async (req,res)=>{
+res.render('./show/program/myCalendar')
+}
+

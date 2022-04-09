@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const adminController = require('./adminController')
 const showRouter = require('./Admshow')
 const accountRouter = require('./Admaccount')
 const boardRouter = require('./Admboard')
@@ -10,6 +9,5 @@ const boardRouter = require('./Admboard')
 router.use('/account',accountRouter)
 router.use('/show',showRouter)
 router.use('/board',boardRouter)
-router.get('/graphicchart',adminController.graphicChart)
 
 module.exports = router

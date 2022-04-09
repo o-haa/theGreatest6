@@ -1,0 +1,123 @@
+@import url('../index/_fontLayout.css'); /* 폰트 import */
+
+*{margin:0; padding:0;}
+ul,li{list-style: none;}
+a{text-decoration: none;}
+input:focus{outline: none;}
+input{border: none;}
+button{border:none; background: none;}
+
+:root {
+    src: url('../../font/NotoSansKR-Light.otf') format('truetype');
+    --vh: 100%;
+}
+body{
+    height: 100vh;
+    height: var(--vh);
+    box-sizing: border-box;
+    /* zoom:75%; */
+}
+
+#wrap{
+    width: 100vw;
+}
+
+#bigBox{
+    width: 750px;
+    height: 450px;
+    background: #efefef;
+    border-radius: 20px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.line{
+    border-left: 1px solid black;
+    padding-left: 20px;
+    box-sizing: border-box;
+    height: 95;
+}
+
+#bigBox > #leftBox{
+    width: 325px;
+    height: 100%;
+    /* background: yellow; */
+    display: flex;
+    flex-direction: column;
+}
+
+
+.botLine{
+    width: 85%;
+    padding: 5px;
+    border-bottom: 1px solid black;
+}
+
+.head{
+    font-size: 20px;
+    padding: 5px;
+
+}
+
+
+#bigBox > #rightBox{
+    width: 325px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background: blue; */
+}
+
+
+th, td {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.pay2Table{
+    margin: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    width: 270px;
+    height: 100px;
+}
+
+/* .notice{
+    color: brown;
+    font-size: 15px;
+    padding: 10px;
+} */
+
+
+
+.point{
+    border: 1px solid black;
+    width: 250px;
+    height: 45%;
+    margin-bottom: 13px;
+}
+
+#pointCheckBox{
+    display: none;
+}
+
+#close{
+    float: right;
+    margin-right: 50px;
+    padding-top: 3px;
+    font-size: 18px;
+    background: none;
+}
+
+#usablePoint{
+    width: 120px;
+    height: 30px;
+    /* background: white; */
+    font-size: 20px;
+    padding-left: 10px;
+}

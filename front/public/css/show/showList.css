@@ -96,7 +96,7 @@ th{
 }
 
 /* 컨텐츠 줄 */
-tr:not(:first-child){
+tr{
     height: 50px;
     font-family: 'basicLight';
     border-bottom: 1px solid #A8BEBF;
@@ -111,7 +111,9 @@ td:nth-child(3){
     padding-left: 20px;
     box-sizing: border-box;
 }
-
+a{
+    color: #080C31;;
+}
 #writeBtn {
     display: flex;
     justify-content: flex-end;

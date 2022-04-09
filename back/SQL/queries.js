@@ -1,4 +1,3 @@
-const { getMaxListeners } = require("../db")
 
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const rDate = `DATE_FORMAT(review_date, '%Y-%m-%d') AS review_date`
@@ -41,6 +40,11 @@ WHERE p.user_idx = ?`,
     myBenefit: `SELECT u_point_idx, user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_in - u_point_out AS u_point_net
                 FROM u_point 
                 WHERE user_idx = ?`,
+                
+    getPersonalInfo: `SELECT * 
+    FROM u_personal AS p
+    LEFT OUTER JOIN u_mobile AS m 
+    ON p.u_mobile_idx = m.u_mobile_idx AND p.user_idx = ?`,
 
 
     //유저 이미지 넣기
@@ -279,16 +283,7 @@ VALUES(?,?,?,?,?,?)`,
         o.show_cast1=?,
         o.show_cast2=?`,
 
-
-
-    // showModifyGetInfo: `SELECT s.show_idx, s.show_title, s.show_category, s.show_xrated, s.show_company, s.show_director, s.show_content, s.show_date_open, o.show_date, o.show_place, o.show_cast1, o.show_cast2 
-    // FROM shows AS s 
-    // LEFT JOIN s_option AS o 
-    // ON s.show_idx = o.shows_idx
-    // LEFT OUTER JOIN s_category AS c
-
-    // WHERE s.show_idx= ? `
-
+    ticketOpenDate: `SELECT show_title, show_company, DATE_FORMAT(show_date_open,'%Y-%m-%d %h:%i:%s') AS show_date_open FROM shows`,
 
 
     //admin
@@ -303,4 +298,26 @@ VALUES(?,?,?,?,?,?)`,
     deletePoint: `DELETE FROM u_point WHERE u_point_idx = ?`,
 
 
-}
+ 
+
+
+    selectBookInfo: `SELECT s.show_category_idx, s.show_title, s.show_xrated, s.show_company, o.show_date, o.show_place
+    FROM shows AS s
+    LEFT OUTER JOIN s_option AS o
+    ON s.show_idx = o.shows_idx
+    WHERE s.show_idx
+    `,
+
+    InsertBookInfo: `INSERT INTO `,
+
+    
+    //payment
+    myBenefit: `SELECT u_point_idx, user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_in - u_point_out AS u_point_net
+                FROM u_point 
+                WHERE user_idx = ?`,
+    checkPoint: `SELECT user_idx, SUM(u_point_in) AS sum_p_in, SUM(u_point_out) As sum_p_out FROM u_point WHERE user_idx = ? GROUP BY user_idx`,
+
+
+
+
+    }
