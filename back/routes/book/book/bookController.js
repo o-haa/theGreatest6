@@ -35,3 +35,11 @@ exports.selectSeatInfo = (req,res) => {
         
     }
 }
+
+exports.getSeatInfo = (req,res) => {
+    try{
+
+    } catch (e) {
+
+    }
+}
