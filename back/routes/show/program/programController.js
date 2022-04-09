@@ -243,3 +243,22 @@ exports.getCategories = async (req, res) => {
     }
     res.json(response)
 }
+
+exports.ticketOpenDate = async (req,res) =>{
+    let response = {
+        result: [],
+        errno:1
+    }
+    try{
+        const [ result ] = await pool.execute(sql.ticketOpenDate)
+        response = {
+            result,
+            errno:0
+        }
+    }
+    catch (e) {
+        console.log('/ticketopendate',e.message)
+    }
+    console.log(response)
+    res.json(response)
+}

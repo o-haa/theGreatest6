@@ -13,17 +13,17 @@ async function init() {
     // }
 
 
-    axios.defaults.baseURL = 'http://localhost:4001/admin/account/';
+    axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.withCredentials = true;
 
-    const response = await axios.post('accountmgt')
+    const response = await axios.post('ticketopendate')
+    console.log(response)
     let nodes = response.data.result
-    console.log(nodes)
+    let{show_company,show_date_open,show_title} = nodes
     
     const temp = document.querySelector('#adminList_row')
     const tbody = document.querySelector('tbody')
-    const btnPoint = document.querySelector('.point')
 
     let i=0
     nodes.forEach(async (v)=>{
@@ -31,76 +31,10 @@ async function init() {
         const tdElement = clone.querySelectorAll('td')
         
         tdElement[i].innerText = v.user_idx
-        tdElement[i+1].innerText = v.user_id
-        tdElement[i+2].innerText = v.user_nickname
-        tdElement[i+3].innerText = v.user_doj
-        tdElement[i+4].innerText = v.user_level
-        tdElement[i+5].innerText = v.user_active
+        tdElement[i+1].innerText = v.show_title
+        tdElement[i+2].innerText = v.show_compnay
+        tdElement[i+3].innerText = v.show_date_open
 
-        const level = clone.querySelector('#level')
-        let levelArr = ['1','2','3']
-        levelArr.forEach(v=>{
-            let optionElement = document.createElement('option')
-            optionElement.innerHTML = `${v}`
-            level.appendChild(optionElement)
-        })
-
-        const active = clone.querySelector('#active')
-        let activeArr = ['0','1'] // 활동상태가 1
-        activeArr.forEach(v=>{
-            let optionElement = document.createElement('option')
-            
-            optionElement.innerHTML = `${v}`
-            active.appendChild(optionElement)
-        })
-
-        const btnEdit = clone.querySelector('.edit')
-        const btnDone = clone.querySelector('.done')
-        btnEdit.addEventListener('click',btnEditHandler)
-        function btnEditHandler(e){
-            const event = e.target.parentNode
-            console.log(event.parentNode)
-            const tdElement = (event.parentNode).querySelectorAll('td')
-            console.log(tdElement)
-            tdElement[4].setAttribute("class","off")
-            tdElement[5].setAttribute("class","off")
-            tdElement[6].setAttribute("class","")
-            tdElement[7].setAttribute("class","")
-            tdElement[8].setAttribute("class","")
-            tdElement[9].setAttribute("class","off")
-            tdElement[10].setAttribute("class","")
-            btnPoint.setAttribute("class","point")
-        }
-
-        btnDone.addEventListener('click',btnDoneHandler)
-        async function btnDoneHandler(e){
-            const event = e.target.parentNode
-            const td = (event.parentNode)
-            const tdElement = td.querySelectorAll('td')
-            console.log(tdElement)
-            tdElement[4].setAttribute("class","")
-            tdElement[5].setAttribute("class","")
-            tdElement[6].setAttribute("class","off")
-            tdElement[7].setAttribute("class","off")
-            tdElement[8].setAttribute("class","off")
-            tdElement[9].setAttribute("class","")
-            tdElement[10].setAttribute("class","off")
-            btnPoint.setAttribute("class","point off")
-
-            const level = td.querySelector('#level')
-            const active = td.querySelector('#active')
-            const idx = tdElement[0].innerText
-            const valueLevel = level.value
-            const activeLevel = active.value
-
-            const option = {
-                valueLevel,
-                activeLevel,
-                idx
-            }
-            const response = await axios.post('accountupdate',option)
-            window.location.href="http://localhost:3001/admin/account/accountmgt"
-        }
         tbody.append(clone)
     })
 
