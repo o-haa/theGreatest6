@@ -17,7 +17,8 @@ exports.showMgt = (req,res) =>{
 exports.categorySave = async (req,res)=>{
     const arr = req.body
     console.log('arr ----> ',arr)
-    const sql = `UPDATE s_category SET show_category=?`
+    const sql = `UPDATE s_category
+                 SET show_category=?`
     const prepare = arr
     const [response] = await pool.execute(sql)
     console.log(response)
