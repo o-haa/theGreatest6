@@ -114,8 +114,12 @@ async function init() {
             try {
                 const response = await axios.post('/signup', data);
                 if (response.data.errno === 1) throw new Error('회원가입 에러');
-                // alert('welcome!');
+                const userId = tempId + mail;
+                const userNickName = document.querySelector('#userNickName').value;
+                console.log(userId, userNickName)
+                alert('welcome!');
                 location.href='http://localhost:3001/account/member/welcome'
+
             } catch (e) {
                 console.log(e.message);
             }
