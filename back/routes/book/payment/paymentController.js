@@ -17,6 +17,26 @@ exports.insertPay = (req,res) => {
     }
 }
 
+exports.checkPoint = async(req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
+    const prepare = [ userIdx ]
+    try{
+        const result = pool.execute(sql.checkPoint,prepare)
+        response = {
+            result,
+            errno: 0
+        }
+        console.log(result)
+    } catch (e) {
+        console.log(e.message)
+    }
+    res.json(response)
+}
+
+
 //포인트 사용하기
 exports.usePoint = (req,res) => {
 

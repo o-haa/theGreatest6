@@ -20,10 +20,12 @@ async function init() {
         }
     }
 
+    pointCheckBtn.addEventListener('click',pointCheckBtnhandler)
+
+    async function pointCheckBtnhandler(){
+        const response = await axios.post('')
 
 
 
-
-
-
+    }
 }
