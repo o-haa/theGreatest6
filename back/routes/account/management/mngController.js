@@ -131,3 +131,4 @@ exports.myAct = (req, res) => {
     res.send('내 활동');
 
 }
+

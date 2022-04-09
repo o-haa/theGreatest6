@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/script/payment/payment_1.js"></script>
-    <link href="/css/payment/payment_1.css" rel="stylesheet" type="text/css">
+    <script src="/script/payment/payment_2.js"></script>
+    <link href="/css/payment/payment_2.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
@@ -16,88 +16,144 @@
         <div id="bigBox">
             <div id="leftBox">
                 <span>
-                    <h3 class="head">결제방식</h3>
+                    <h3 class="head"> 예매정보 </h3>
                 </span>
                 <span class="botLine"></span>
-                <span>
-                    <ul>
-                        <li>
-                            <input type="radio" name="transfer" id="transfer1" checked="checked"><label for="transfer1"> 무통장입금</label>
-                        </li>
-                    </ul>
-                </span>
-                <span>
-                    <ul class ="point" id="answer">
-                        <li>
-                            포인트를 사용하시겠습니까?
-                        </li>
-                        <li class="answer">
-                            <input type="radio" name="answer" id="yes"><label for="yes">네 </label>
-                            <input type="radio" name="answer" id="no" checked="checked"><label for="no">아니오</label>
-                        </li>
-                    </ul>
-                    <ul class ="point" id="pointCheckBox" >
-                        <li>
-                            사용 가능한 포인트 조회
-                        </li>
-                        <li>
-                            <input type="button" value="조회하기" id="pointCheckBtn">
-                            <span id="usablePoint"></span>
-                        </li>
-                    </ul>
-                </span>
-            </div>
-            <span class="line"></span>
-            <div id="rightBox">
-                <span>
-                    <h3 class="head">결제수단 입력</h3>
-                </span>
                 <div>
-                    <table cellspacing="0" cellpadding="0">
+                    <table cellspacing="0" cellpadding="0" class="pay2Table">
                         <thead>
-                            <th>무통장입금</th>
+                            <tr>
+                                <th>예매번호</th>
+                                <td id ="bookNumber">T123456789</td>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>
-                                    입금액
+                                    장소
                                 </td>
-                                <td id="ticketPrice"></td>
+                                <td id="showPlace">예술의 전당 오페라홀</td>
                             </tr>
                             <tr>
                                 <td>
-                                    입금하실 은행
+                                    일시
                                 </td>
-                                <td id="bankOption">
-                                    <select name="bank">
-                                        <option value="국민은행">입금하실 은행을 선택하세요.</option>
-                                        <option value="국민은행">국민은행</option>
-                                        <option value="신한은행">신한은행</option>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="notice">
-                                    <p>은행에 따라 밤 11시 30분 이후로는 </p>
-                                    <p>온라인 입금이 제한 될 수 있습니다.</p>
-                                </td>
+                                <td id="showDate"> 2022년 04월 10일 PM 11:59 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    입금마감시간
+                                    공연명
                                 </td>
-                                <td id="deadLine"></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    예금주명
-                                </td>
-                                <td>
-                                    team6.Ltd
-                                </td>
+                                <td id="bookSeat"> 호두까기 인형 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <input type="button" value="next" id="next">
+                </div>
+                <div>
+                    <table cellspacing="0" cellpadding="0" class="pay2Table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    예매자명
+                                </td>
+                                <td id="customer"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    연락처
+                                </td>
+                                <td id="mobile"> 010 - 1111 -1111</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    티켓 수령 방법
+                                </td>
+                                <td id="willCall"> 현장수령 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <span class="line"></span>
+            <div id="rightBox">
+                <span>
+                    <h3 class="head">결제 정보</h3>
+                </span>
+                <span class="botLine"></span>
+                <div>
+                    <div>
+                        <table cellspacing="0" cellpadding="0" class="pay2Table">
+                            <thead>
+                                <th colspan="2">결제 정보</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        총 결제 금액
+                                    </td>
+                                    <td id="totalPrice"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        티켓금액
+                                    </td>
+                                    <td id="ticketPrice"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        수수료
+                                    </td>
+                                    <td id="fee"></td>
+                                </tr>
+                                <tr>
+                                    <!-- <td colspan="2" class="notice">
+                                        <p>은행에 따라 밤 11시 30분 이후로는 </p>
+                                        <p>온라인 입금이 제한 될 수 있습니다.</p>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table cellspacing="0" cellpadding="0" class="pay2Table">
+                            <thead>
+                                <th colspan="2">결제 상제 정보</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        결제방법
+                                    </td>
+                                    <td> 무통장 입금 </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        입금마감일시
+                                    </td>
+                                    <td> 2022년 04월 10일 PM 11:59 </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        입금계좌
+                                    </td>
+                                    <td> 우리은행: 26109820818219 </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        예금주명
+                                    </td>
+                                    <td> team6.Ltd </td>
+                                </tr>
+                                <!-- <tr>
+                                    <td colspan="2" class="notice">
+                                        <p>은행에 따라 밤 11시 30분 이후로는 </p>
+                                        <p>온라인 입금이 제한 될 수 있습니다.</p>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <input type="button" value="close" id="close">
+                    </div>
                 </div>
             </div>
         </div>

@@ -32,5 +32,6 @@ router.post('/showmodify/:showIdx',  upload.single('upload'), programController.
 router.post('/showmodifygoinfo/:idx',  upload.single('upload'), programController.showModifyView)
 router.post('/showdelete/:idx', programController.showDelete)
 
+router.post('/ticketopendate',programController.ticketOpenDate)
 module.exports = router
 

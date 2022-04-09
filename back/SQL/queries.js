@@ -1,4 +1,3 @@
-const { getMaxListeners } = require("../db")
 
 const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
 const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
@@ -39,6 +38,8 @@ WHERE p.user_idx = ?`,
     myBenefit: `SELECT u_point_idx, user_idx, DATE_FORMAT(u_point_date, '%Y-%m-%d') AS u_point_date, u_point_description, u_point_in, u_point_out, u_point_in - u_point_out AS u_point_net
                 FROM u_point 
                 WHERE user_idx = ?`,
+                
+    getPersonalInfo: `SELECT * FROM u_personal WHERE user_idx = ?`,
 
 
     //유저 이미지 넣기
@@ -70,19 +71,6 @@ WHERE p.user_idx = ?`,
 
     //board
 
-
-    // listsql: `SELECT * 
-    // FROM board AS b 
-    // LEFT OUTER JOIN user AS u 
-    // ON b.user_idx = u.user_idx 
-    // WHERE b.show_category_idx = ? 
-    // ORDER BY b.board_idx DESC`,
-
-    
-
-
-    // WHERE s.show_category = ?
-
     communityList: `SELECT board_idx, b.show_category_idx, board_subject, board_content, board_hit,${date}, show_category
     FROM board As b
     LEFT OUTER JOIN s_category AS s
@@ -92,10 +80,7 @@ WHERE p.user_idx = ?`,
 
     admin: `INSERT INTO user VALUE ('admin@gmail.com','admin','관리자',2,1,now(),130)`,
 
-    // communityList1: `SELECT ${param},${date} FROM board WHERE show_category_idx = 1 ORDER BY board_idx DESC`,
-    // communityList2: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ?) ORDER BY board_idx DESC`,
-    // communityList3: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
-    // communityList4: `SELECT ${param},${date} FROM board WHERE (show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? OR show_category_idx = ? ) ORDER BY board_idx DESC`,
+
     communityList1: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 1 ORDER BY board_idx DESC`,
     communityList2: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 2 ORDER BY board_idx DESC`,
     communityList3: `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = 3 ORDER BY board_idx DESC`,
@@ -209,6 +194,7 @@ VALUES(?,?,?,?,?,?)`,
         o.show_cast1=?,
         o.show_cast2=?`,
 
+    ticketOpenDate: `SELECT show_title, show_company, DATE_FORMAT(show_date_open,'%Y-%m-%d %h:%i:%s') AS show_date_open FROM shows`,
 
 
     //admin
@@ -223,8 +209,7 @@ VALUES(?,?,?,?,?,?)`,
     deletePoint: `DELETE FROM u_point WHERE u_point_idx = ?`,
 
 
-    //book_idx, book_date, book_seat_idx,show_idx,user_idx
-    ticketOpen: `SELECT `,
+ 
 
 
     selectBookInfo: `SELECT s.show_category_idx, s.show_title, s.show_xrated, s.show_company, o.show_date, o.show_place
@@ -245,4 +230,5 @@ VALUES(?,?,?,?,?,?)`,
 
 
 
+    
     }
