@@ -20,6 +20,7 @@ exports.categorySave = async (req,res)=>{
     const sql = `UPDATE s_category
                  SET show_category=?`
     const prepare = arr
-    const [response] = await pool.execute(sql)
+    console.log(prepare)
+    const [response] = await pool.execute(sql,prepare)
     console.log(response)
 }

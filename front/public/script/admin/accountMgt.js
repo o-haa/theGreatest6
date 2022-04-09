@@ -74,6 +74,7 @@ async function init() {
         btnDone.addEventListener('click',btnDoneHandler)
         async function btnDoneHandler(e){
             const event = e.target.parentNode
+            console.log(event)
             const td = (event.parentNode)
             const tdElement = td.querySelectorAll('td')
             console.log(tdElement)
