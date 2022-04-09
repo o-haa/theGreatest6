@@ -1,57 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WELCOME</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="/css/account/privacyPolicy.css" rel="stylesheet" type="text/css">
-    <script src="/script/index.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Welcome</title>
+    <link href="/css/account/welcome.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>    
 </head>
-
 <body>
-    <div id="wrap" class = "backGround">
-        <!-- <header id="header">
-            <div id="nav">
-                <h1 id="logoBox">
-                    <a href="/">
-                        logo
-                    </a>
-                </h1>
-                <ul>
-                    <li><a id="signin" href="/account/member/signin">SIGN IN</a></li>
-                    <li><a href="/show/program/showcard">SHOW</a></li>
-                    <li><a id ="contact" href="/about/list">CONTACT</a></li>
-                </ul>
-            </div>
-        </header> -->
-        <main id="content">
-            <div id ="whiteBox">
-                <span>
-                    <h3> Privacy Policy </h3>
-                </span>
-                <span>
-                    <h4>
-                        <p>Welcome</p>
-                    </h3>
-                </span>
-                <span>
-                    <p></p>
-                </span>
-                <span>
-                    <!-- <form method="get" action="/account/member/signup">
-                        <input type ="checkbox" name="check" id="privacyPolicy">
-                        <label for ="privacyPolicy"> 
-                            <input type = "submit" value ="I understand and agree." id="agree"> 
-                        </label>
-                    </form> -->
-                </span>
-            </div>
-        </main>
+    <div id="wrap">
+        {% include "nav.html" %}
+        <div id="join_info">
+            <div><p>{{info.nickname}}님 환영합니다.</p></div>
+            <div><p>가입하신 정보를 확인해주세요.</p></div>
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td>{{info.userid}}</td>
+                </tr>
+                <tr>
+                    <td>Nickname</td>
+                    <td>{{info.nickname}}</td>
+                </tr>
+            </table> 
+            <div>
+                <div id="notice">
+                    <p>🩰 NOTICE 🩰</p>
+                    <p>예매하실 회원님께서는</p>
+                    <p><a href="/management/myinfo">My Page</a> 에서 추가 정보를 입력해 주시면 
+                    <p>이용하실 수 있습니다.</p>    
+                    <p>감사합니다.</p>
+                </div>
+            </div>       
+        </div>
+        <div id="button">
+            <button><a href="/member/signin">Login</a></button>
+        </div>
     </div>
 </body>
-
 </html>
+    
