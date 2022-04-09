@@ -31,6 +31,5 @@ router.post('/deleteUserImg',upload.single('upload'), mngController.deleteUserIm
 
 
 
-
 module.exports = router;
 
