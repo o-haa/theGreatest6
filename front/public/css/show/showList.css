@@ -111,7 +111,9 @@ td:nth-child(3){
     padding-left: 20px;
     box-sizing: border-box;
 }
-
+a{
+    color: #080C31;;
+}
 #writeBtn {
     display: flex;
     justify-content: flex-end;

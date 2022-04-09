@@ -113,8 +113,6 @@ exports.showCard = (req, res) => {
     res.json(response)
 }
 
-
-
 exports.showView = async (req, res) => {
     const { showIdx } = req.params;
     const prepare = [ showIdx ];
@@ -232,8 +230,6 @@ exports.showCalendar = async (req, res) => {
     }
 }
 
-
-
 exports.getCategories = async (req, res) => {
     let response = {
         result: [],
@@ -250,4 +246,8 @@ exports.getCategories = async (req, res) => {
         console.log('getCategories',e.message);
     }
     res.json(response)
+}
+
+exports.getTicketOpenInfo = async (req,res)=>{
+    
 }

@@ -19,6 +19,7 @@ async function init() {
 
     const response = await axios.post('accountmgt')
     let nodes = response.data.result
+    console.log(nodes)
     
     const temp = document.querySelector('#adminList_row')
     const tbody = document.querySelector('tbody')
