@@ -12,5 +12,9 @@ router.post('/checkpoint',paymentController.checkPoint)
 //포인트 사용
 router.post('/usepoint',paymentController.usePoint)
 
+//개인정보 조회
+router.post('/getpersonalinfo',paymentController.getPersonalInfo)
+
+
 
 module.exports = router;
