@@ -5,6 +5,8 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/news';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+
+
     const checks = document.querySelectorAll('#category ul li input');
     const checked = document.querySelectorAll('#category ul li input:checked');
     const prepare = [];
@@ -20,14 +22,13 @@ async function init() {
         console.log(prepare, 'all categories');
         response = await axios.post('/list', data);
     } catch (e) {
-        console.log('newslistinit', e.message);
+        console.log('communitylistinit', e.message);
     }
 
     test = {
         ...response
     };
 
-    console.log(response)
     const totalRows = response.data.result.length;
     const viewRows = 10;
     const pagingBlock = 10;
@@ -60,18 +61,36 @@ async function init() {
     const tbody = document.querySelector('table > tbody');
 
     await Nodes.forEach(v => {
-        console.log(v)
+        const showCategory = v.show_category_idx
         const clone = document.importNode(tr.content, true);
         const td = clone.querySelectorAll('td');
         const aElement = document.createElement('a');
-        aElement.href = '/board/news/view/' + v.board_news_idx;
-        aElement.innerHTML = v.news_subject;
+        aElement.href = '/board/community/view/' + v.board_idx;
+        aElement.innerHTML = v.board_subject;
 
-        td[0].innerHTML = v.board_news_idx;
-        td[1].appendChild(aElement);
-        td[2].innerHTML = v.user_nickname;
-        td[3].innerHTML = v.news_date;
-        td[4].innerHTML = v.news_hit;
+        td[0].innerHTML = v.board_idx;
+        switch (showCategory) {
+            case 1:
+                td[1].innerHTML = 'Classic';
+                td[1].style.color = "#A5A5A5";
+                break;
+            case 2:
+                td[1].innerHTML = 'Musical';
+                td[1].style.color = "#DB6039";
+                break;
+            case 3:
+                td[1].innerHTML = 'Opera';
+                td[1].style.color = "#64CBE6";
+                break;
+            case 4:
+                td[1].innerHTML = 'Ballet';
+                td[1].style.color = "#FAE100";
+                break;
+        }
+        td[2].appendChild(aElement);
+        td[3].innerHTML = v.user_nickname;
+        td[4].innerHTML = v.board_date;
+        td[5].innerHTML = v.board_hit;
 
         tbody.appendChild(clone);
     })
@@ -135,7 +154,7 @@ async function clickHanlder() {
         // paging.appendChild = liElement;
 
     } catch (e) {
-            console.log('newslist', e.message);
+            console.log('communitylist', e.message);
         }
     }
 
@@ -147,8 +166,8 @@ async function pages(num) {
         const value = test.data.result;
 
         const aElement = document.createElement('a');
-        aElement.href = '/board/news//view' + value.board_news_idx;
-        aElement.innerHTML = value.news_subject;
+        aElement.href = '/board/community//view' + value.board_idx;
+        aElement.innerHTML = value.board_subject;
 
         const viewRows = 10;
         const Nodes = test.data.result.slice((num - 1) * viewRows, num * viewRows);
@@ -160,17 +179,38 @@ async function pages(num) {
         tbody.innerHTML = template;
 
         await Nodes.forEach(v => {
-
+            const showCategory = v.show_category_idx
             const clone = document.importNode(tr.content, true);
             const td = clone.querySelectorAll('td');
             const aElement = document.createElement('a');
-            aElement.href = '/board/news/view/' + v.board_news_idx;
-            aElement.innerHTML = v.news_subject;
-            td[0].innerHTML = v.board_news_idx;
-            td[1].appendChild(aElement);
-            td[2].innerHTML = v.user_nickname
-            td[3].innerHTML = v.news_date;
-            td[4].innerHTML = v.news_hit;
+            aElement.href = '/board/community/view/' + v.board_idx;
+            aElement.innerHTML = v.board_subject;
+
+
+            td[0].innerHTML = v.board_idx;
+            switch (showCategory) {
+                case 1:
+                    td[1].innerHTML = 'Classic';
+                    td[1].style.color = "#A5A5A5";
+                    break;
+                case 2:
+                    td[1].innerHTML = 'Musical';
+                    td[1].style.color = "#DB6039";
+                    break;
+                case 3:
+                    td[1].innerHTML = 'Opera';
+                    td[1].style.color = "#64CBE6";
+                    break;
+                case 4:
+                    td[1].innerHTML = 'Ballet';
+                    td[1].style.color = "#FAE100";
+                    break;
+            }
+            td[2].appendChild(aElement);
+
+            td[3].innerHTML = v.user_nickname
+            td[4].innerHTML = v.board_date;
+            td[5].innerHTML = v.board_hit;
 
             const tbody1 = document.querySelector('table > tbody');
             tbody1.appendChild(clone);

@@ -1,52 +1,45 @@
 const pool = require('../../../db');
-const sql = require('../../../SQL/queries.js')
+let sql = require('../../../SQL/queries.js')
+
+
 let response = {
-    result: [],
-    errno: 1
-    };
+result: [],
+errno: 1
+};
 
-const date = `DATE_FORMAT(board_date, '%Y-%m-%d') AS board_date`
-const datetime = `DATE_FORMAT(board_date, '%Y-%m-%d %h:%i:%s') AS board_date`
-const cmtDate = `DATE_FORMAT(cmt_date, '%Y-%m-%d %h:%i:%s') AS cmt_date`
-const bparam = `board_idx,b.user_idx,show_category_idx, board_subject, board_content, board_hit`
-const uparam = `u.user_idx,user_nickname,user_level`
-const param = `board_idx,show_category_idx, board_subject, board_content, board_hit`
-
+let listsql 
 exports.reviewList = async (req, res) => {
     const {category} = req.body;
-    const categoryIdx = `SELECT show_category_idx FROM s_category WHERE show_category = ?`
     const prepare = [category]
 
-    const [result1] = await pool.execute(categoryIdx,prepare)
+    const [result1] = await pool.execute(sql.reviewGetCategoryIdx,prepare)
     const showIdx = result1[0].show_category_idx
-    
-    let sql ='';
-    switch (prepare.length) {
-        case 1:
-            sql = `SELECT *, ${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE show_category_idx = ? ORDER BY board_idx DESC`;
-            break;
-
-        case 2:
-            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
-            break;
-
-        case 3:
-            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
-            break;
-        case 4:
-            sql = `SELECT ${bparam},${uparam},${date} FROM board AS b LEFT OUTER JOIN user AS u ON b.user_idx = u.user_idx WHERE (show_category_idx = ?) ORDER BY board_idx DESC`;
-            break;
-    }
     try {
-        // console.log(sql)
-        const [result] = await pool.execute(sql, showIdx);
-        response = {
-            ...response,
-            result,
-            errno: 0
-        } 
-        console.log('result',result)
-        // console.log(response.result)
+        switch (showIdx){
+            case 1:
+                listsql = sql.reviewList1;
+            break;
+            case 2:
+                listsql = sql.reviewList2;
+            break;
+            case 3:
+                listsql = sql.reviewList3;
+            break;
+            case 4:
+                listsql = sql.reviewList4;
+            break;
+            case 5:
+                listsql = sql.allReviewListsql;
+            break;
+
+        }
+        const [result] = await pool.execute(listsql);
+                response = {
+                    ...response,
+                    result,
+                    errno: 0
+                } 
+
     } catch (e) {
         console.log('/reviewlist',e.message);
     }
@@ -56,21 +49,18 @@ exports.reviewList = async (req, res) => {
 
 
 exports.reviewWrite = async (req,res) =>{                                
-    const {select}=req.body;
-    const sql = "SELECT show_category_idx FROM s_category WHERE show_category = ?";
-    const prepare = [select];
+    const { category, userIdx,subject,content }=req.body;
+    console.log(req.body)
+    const categoryIdx = `SELECT show_category_idx FROM s_category WHERE show_category = ?`
+    const prepare = [category]
 
-    const result = await pool.execute(sql,prepare);
-    const [idx] = result[0];
-    const {subject,content}=req.body;
-    
-    const categoryIdx = idx.show_category_idx;
-    const sql2 = 'INSERT INTO board(user_idx,board_subject,board_content,show_category_idx) VALUES(?,?,?,?)';
-    
-    const prepare2 = ['134',subject,content,categoryIdx];
+    const [result1] = await pool.execute(categoryIdx,prepare);
+   
+    const cIdx = result1[0].show_category_idx;
+    const prepare2 = [userIdx,subject,content,cIdx];
 
     try{
-        const [result] = await pool.execute(sql2,prepare2);
+        const [result] = await pool.execute(sql.reviewWrite,prepare2);
         response = {
             result:{
                 row:result.affectedRows,
@@ -80,85 +70,58 @@ exports.reviewWrite = async (req,res) =>{
         };
         res.json(response)
         
-        const fileOriginalname = req.file.originalname;
-        const fileStoredname = req.file.filename;
-        const fileSize = req.file.size;
-        const fileDate = new Date();
-        const fileDltF = '0';
-        const fSql = `INSERT INTO b_file (
-                                            board_idx,
-                                            file_originalname,
-                                            file_storedname,
-                                            file_size,
-                                            file_date,
-                                            file_dlt_flag
-                                            )
-                                    VALUES(?,?,?,?,?,?)`;
+        // const fileOriginalname = req.file.originalname;
+        // const fileStoredname = req.file.filename;
+        // const fileSize = req.file.size;
+        // const fileDate = new Date();
+        // const fileDltF = '0';
+        // const boardIdx = result.insertId;
+        // const fPrepare = [boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];                   
 
-        const boardIdx = result.insertId;
-        const fPrepare = [boardIdx,fileOriginalname,fileStoredname,fileSize,fileDate,fileDltF];                   
+        // if(req.file.size > 0){
 
-        if(req.file.size > 0){
-
-            const [result] = await pool.execute(fSql,fPrepare);
-            response = {
-                result:{
-                    row:result.affectedRows,
-                    insertId:result.insertId
-                },
-                errno:0    
-            };
+        //     const [result2] = await pool.execute(sql.reviewWriteFile,fPrepare);
+        //     response = {
+        //         result:{
+        //             row:result2.affectedRows,
+        //             insertId:result2.insertId
+        //         },
+        //         errno:0    
+        //     };
             
-        };
+        // };
 
     }catch(e){
-        console.log('/reviewwright',e.message);
+        console.log('/reviewwrite',e.message);
     };
 }
 
 exports.reviewView = async (req,res) => {
-    const{idx}=req.params;
-    const prepare = [idx];
 
-    const hitSql = `UPDATE board SET board_hit = board_hit + 1 WHERE board_idx = ${idx}`
-    const hitResult = await pool.execute(hitSql);
- 
-    const sql = `SELECT
-                a.board_idx, a.user_idx, a.show_category_idx, a.board_subject, a.board_content, a.board_date, a.board_hit,
-                b.board_file_idx, b.board_idx, b.file_originalname, b.file_storedname, b.file_size, b.file_date, b.file_dlt_flag
-                ,${datetime} 
-                FROM board AS a LEFT OUTER JOIN b_file AS b 
-                ON a.board_idx = b.board_idx 
-                WHERE a.board_idx = ?`;
-    
-    // const imgSql = `SELECT file_storedname FROM b_file WHERE board_idx = ? `
-    // const imgPrepare = [idx]
+    const{ boardIdx }=req.params;
+    const prepare = [ boardIdx ];
+    const hitResult = await pool.execute(sql.reviewUpdateHit,prepare);
 
-    // const imgIdx = await pool.execute(imgSql,imgPrepare)
-    // console.log(`/Users/oo_ha/workspace/project/team6/theGreatest6/c_uploads/${imgIdx}`)
-
-   
     try{
-        const [result] = await pool.execute(sql,prepare);
+        const [ result ] = await pool.execute(sql.reviewView,prepare);
         response = {
             result,
             errno:0
         };
         res.json(response);
-        // console.log(response)
     } catch(e) {
-        console.log('/reivewview',e.message);
+        console.log('/reviewview',e.message);
     };
 
 }
 
 exports.reviewDelete = async (req,res) =>{
-    const{idx}=req.params;
-    const sql = `DELETE FROM board WHERE board_idx = ? `;
-    const prepare = [idx];
-    console.log(idx)
+    const{ boardIdx }=req.params;
+    const prepare = [ boardIdx ];
+
     try{
-        const [result] = await pool.execute(sql,prepare);
+        const [result] = await pool.execute(sql.reviewDelete,prepare);
+        console.log(result)
         response = {
                 result,
                 errno:0
@@ -173,149 +136,181 @@ exports.reviewDelete = async (req,res) =>{
 }
 
 exports.reviewUpdate = async (req,res)=>{
-    const{idx}=req.params;
+    const{boardIdx}=req.params;
+    const prepare1 = [ req.body.select ];
+    const [[getCategory]] = await pool.execute(sql.reviewGetCategory,prepare1);
 
-    const {select}=req.body;
-    const sql = "SELECT * FROM s_category WHERE show_category = ?";
-    const selectPre = [select];
-    const result = await pool.execute(sql,selectPre);
-    
-    const [selectidx] = result[0];
     const {subject,content}=req.body;
-    const categoryIdx = selectidx.show_category_id;
-    const prepare2 = [subject,content,categoryIdx,idx];
+    const categoryIdx = getCategory.show_category_idx
+    const prepare2 = [subject,content,categoryIdx,boardIdx];
 
     try{
-        
-        const [result] = await pool.execute(sql2,prepare2);
+        const [result1] = await pool.execute(sql.reviewUpdate,prepare2);
         const response = {
             result:{
-                row:result.affectedRows,
-                insertId:result.insertId
+                row:result1.affectedRows,
+                insertId:result1.insertId
             },
             errno:0    
         };
         res.json(response);
-
-        const fileOriginalname = req.file.originalname;
-        const fileStoredname = req.file.filename;
-        const fileSize = req.file.size;
-        const fileDate = new Date();
-        const fSql = `UPDATE b_file SET 
-                                    file_originalname = ?,
-                                    file_storedname = ?,
-                                    file_size = ?,
-                                    file_date = ?,
-                                    WHERE
-                                    board_idx = ?
-                                    `;
-
-        const fPrepare = [fileOriginalname,fileStoredname,fileSize,fileDate,idx];                          
-
-        if(req.file.size > 0){
-
-            const [result] = await pool.execute(sql.communityUpdateFile,fPrepare);
-
-            response = {
-                result:{
-                    row:result.affectedRows,
-                    insertId:result.insertId
-                },
-                errno:0    
-            };
-            
-        };
 
     }catch(e){
         console.log('reviewupdate',e.message);
     }
 }
 
-exports.reviewComment = async (req,res)=>{
-    const{idx}=req.params;
-    const { userIdx, ccontent } = req.body
+// exports.reviewComment = async (req,res)=>{
+//     const{ boardIdx }=req.params;
+//     const { userIdx, ccontent } = req.body
+//     const prepare = [userIdx,boardIdx,ccontent]
     
-    const prepare = [userIdx,idx,ccontent]
-    
-    try{
-        const [result] = await pool.execute(sql.commentWrite,prepare);
-        response = {
-            ...response,
-            result: {
-                affectedRows: result.affectedRows,
-                insertId: result.insertId,
-            },
-            errno: 0
-        }
+//     try{
+//         const [result] = await pool.execute(sql.commentWrite,prepare);
+//         response = {
+//             ...response,
+//             result: {
+//                 affectedRows: result.affectedRows,
+//                 insertId: result.insertId,
+//             },
+//             errno: 0
+//         }
         
 
-    }catch(e){
-        console.log('reviewcomment',e.message)
-    }
-    res.json(response)
+//     }catch(e){
+//         console.log('reviewcontent',e.message)
+//     }
+//     res.json(response)
     
 
-    // const cListSql = `SELECT *,${cmtDate} FROM comment WHERE board_idx = ${idx}`
-    // const clistResult = await pool.execute(cListSql)
-}
+//     // const cListSql = `SELECT *,${cmtDate} FROM comment WHERE board_idx = ${idx}`
+//     // const clistResult = await pool.execute(cListSql)
+// }
 
-exports.communityCoList = async (req,res)=>{
-    const {idx}=req.params;
-    const boardIdxPre = idx;
+// exports.reviewCoList = async (req,res)=>{
+//     const {boardIdx}=req.params;
+//     const prepare = [boardIdx]
 
-    console.log('cookie',req.cookies.user)
+//     // const boardIdxPre = idx;
+//     // const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
 
-    const cmtListSql = `SELECT * FROM comment WHERE board_idx = ${idx}`
-
-    try{
-        const [cmtListResult] = await pool.execute(sql.commentList,prepare)
-        response = {
-            ...response,
-            cmtListResult,
-            errno: 0
-        } 
-        console.log('start',cmtListResult)
-
-    }catch(e){
-        console.log('reviewcolist',e.message)
-    }
-    res.json(response)
+//     try{
+//         const [cmtList] = await pool.execute(sql.commentList,prepare)
+//         response = {
+//             ...response,
+//             cmtList,
+//             errno: 0
+//         }   
+//     }catch(e){
+//         console.log('reviewcolist',e.message)
+//     }
+//     res.json(response)
     
-}
+// }
 
-exports.communityCoDlt = async (req,res)=>{
-    const{idx}=req.params;
-    const prepare = [idx];
-    try{
-        const [result] = await pool.execute(sql.commentDelete,prepare);
-        response = {
-                result,
-                errno:0
-            };
-        res.json(response);
-    } catch (e) {
-        console.log('reviewcodelete',e.message);
-    };
+// exports.reviewCoDlt = async (req,res)=>{
+//     const{cmtIdx}=req.params;
+//     const prepare = [cmtIdx];
+//     try{
+//         const [result] = await pool.execute(sql.commentDelete,prepare);
+//         response = {
+//                 result,
+//                 errno:0
+//             };
+//         res.json(response);
+//     } catch (e) {
+//         console.log('commentdelete',e.message);
+//     };
     
-}
+// }
 
-exports.communityCoUp = async (req,res)=>{
-    const{idx}=req.params;
-    const ccontent = req.body[0].cmt_content
-    const prepare = [ccontent,idx]
+// exports.reviewCoUp = async (req,res)=>{
+//     const{cmtIdx}=req.params;
+//     const {updateComment} = req.body
+//     const prepare = [updateComment,cmtIdx]
+//     try{
+//         const [result] = await pool.execute(sql.commentUp,prepare);
+//         response = {
+//             ...response,
+//             result: {
+//                 affectedRows: result.affectedRows,
+//                 insertId: result.insertId,
+//             },
+//             errno: 0
+//         }
+       
+//     }catch(e){
+//         console.log('/commentup',e.message)
+//     }
     
-    try{
-        const [result] = await pool.execute(sql.commentUp,prepare);
-        response = {
-            ...response,
-            result: {
-                affectedRows: result.affectedRows,
-                insertId: result.insertId,
-            },
-            errno: 0
-        }
-    }catch(e){
-        console.log('/commentup',e.message)
-    }
+// }
+
+
+
+// let likeup
+// exports.reviewLikeUp = async (req,res)=>{
+//     const{boardIdx}=req.params;
+//     const { likeUserIdx } = req.body
+//     const prepare = [boardIdx]
+//     const flag = req.body.likedata.result[0].like_board_flag
+//     try{
+//         if(flag == '0'){
+//             likeup = sql.reviewLikeUp1
+//         } else{
+//             likeup = sql.reviewLikeUp0
+//         }
+
+//         const [result] = await pool.execute(likeup,prepare) 
+//         response1 = {
+//             ...response,
+//             result,
+//             errno: 0
+//         }   
+//     }catch(e){
+//         console.log('reviewLike',e.message)
+//     }
+//     res.json(response1)
     
-}
+// }
+
+// exports.reviewLikeInsert = async (req,res)=>{
+//     const{boardIdx}=req.params;
+//     const { likeUserIdx } = req.body
+//     const prepare = [likeUserIdx,boardIdx]
+
+//     try{
+        
+//         const [result] = await pool.execute(sql.reviewLikeInsert,prepare)
+//         response = {
+//             ...response,
+//             result,
+//             errno: 0
+//         } 
+        
+
+//     }catch(e){
+//         console.log('/likeinsert',e.message)
+//     }
+//     res.json(response)
+// }
+
+// exports.reviewLikeList= async (req,res)=>{
+//     const{boardIdx}=req.params;
+//     const prepare = [boardIdx]
+    
+//     try{
+//         const [result] = await pool.execute(sql.reviewLikeList,prepare)
+//         const length = result.length
+//         response = {
+//             ...response,
+//             result:{
+//                 result,
+//                 length
+//             },
+//             errno: 0
+//         }  
+//     }catch(e){
+//         console.log('reviewLikeList',e.message)
+//     }
+//     res.json(response)
+// }
