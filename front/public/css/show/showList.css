@@ -19,6 +19,7 @@
 #wrap{
     overflow-x: hidden;
     margin: 0 auto;
+    position: relative;
 
 }
 
@@ -66,7 +67,7 @@
 /* 검색 입력창 */
 #mainContent > #listSearchBox > #listSearchForm > #listSearchInput{
     height: 100%;
-    width:230%;
+    width:200%;
     margin-left: 16px;
     padding: 0px 10px 0px 0px;
     box-sizing: border-box;
@@ -124,7 +125,7 @@ a{
 #writeBtn {
     display: flex;
     justify-content: flex-end;
-    margin: 15px 3px 0px 0px;
+    margin: 15px 3px 40px 0px;
     height: 40px;
 }
 
@@ -138,4 +139,15 @@ a{
     border: none;
     background: #465D59;
     box-sizing: border-box;
+}
+#footer{
+    margin-top: 40px;
+    width: 328px;
+    margin-top: 20px;
+    /* background: brown; */
+    margin-left: 30px;
+    font-size: 15px;
+    border-right: 1px solid #A8BEBF;
+    opacity: 50%;
+    bottom:-50px;
 }
