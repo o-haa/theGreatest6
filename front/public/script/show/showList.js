@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', init)
 
 async function init() {
-
-    //관리자 레벨 2가 아닐경우 작성불가
-    // const resinfo = await axios.post('http://localhost:3001/account/management/getuserinfo',null)
-    // const userinfo = resinfo.data.result.user
-    // if(userinfo.user_level>2){
-    //     const writeBtn = document.querySelector('#writeBtn > a')
-    //     writeBtn.setAttribute("class","notAllow")
-    // }
-
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+    //오늘의 정보를 알려주는 함수
+    let today = new Date()
+    let year = today.getFullYear() // 올해
+    let month = today.getMonth() // 이번달
+    let date = today.getDate() //오늘
 
     const response = await axios.post('showlist')
     const Nodes = response.data.result
@@ -51,7 +48,6 @@ async function init() {
                             .replace('{show_category_idx}',v.show_category_idx)
                             .replace('{show_xrated}',v.show_xrated)
     })
-
 
     //좌우이동 버튼, 연.월 버튼
     const btnLeft = document.querySelector('.btnLeft_small')

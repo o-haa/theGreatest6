@@ -27,6 +27,26 @@
 /* 본문 왼쪽 달력 박스  : #content > #calContent */
 /* 본문 오른쪽 박스  : #content > #mainContent */
 
+/* 목록 전환 버튼 리스트 or 앨범형 or 달력형 */
+#mainContent > #listEventBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+/* 목록 전환 버튼 이미지 */
+#mainContent > #listEventBox > #mainContentTitleIcon > button > img{
+    width: 20px;
+    height: 20px;
+}
+/* 버튼 공통 속성 */
+.miniBtn{
+    width: 22px;
+    height: 22px;
+    border: 1px solid #080C31;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
 /* 무엇이든 물어보세요 검색창 */
 #content > #mainContent > #listSearchBox{
     width: 100%;
@@ -57,31 +77,10 @@
     font-family: 'basicMid';
 }
 
-/* 목록 전환 버튼 리스트 or 앨범형 or 달력형 */
-#mainContent > #listEventBox{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-/* 목록 전환 버튼 이미지 */
-#mainContent > #listEventBox > #mainContentTitleIcon > button > img{
-    width: 20px;
-    height: 20px;
-}
-/* 버튼 공통 속성 */
-.miniBtn{
-    width: 22px;
-    height: 22px;
-    border: 1px solid #080C31;
-    border-radius: 3px;
-    box-sizing: border-box;
-}
-
 /* 리스트 테이블 높이지정하기 (footer) */
 .showListHeight{
     height: 68%;
 }
-
 /* 리스트 테이블 */
 #mainContent > .showListHeight > .listTable{
     width: 100%;
