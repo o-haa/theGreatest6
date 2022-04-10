@@ -1,3 +1,5 @@
+let [, , , , seatIdx, showIdx, bankIdx, pointOut] = location.pathname.split('/')
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -7,11 +9,6 @@ async function init() {
 
     const userInfo = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = userInfo.data.result;
-
-
-//${seatIdx}/${showIdx}/${bankIdx}/${point}
-    const [,,,,seatIdx,showIdx,bankIdx,pointOut] = location.pathname.split('/')
-    console.log(seatIdx,showIdx,bankIdx,pointOut)
 
     // 예매 정보 1 관련 변수
     const bookNumber = document.querySelector('#bookNumber')
@@ -46,42 +43,42 @@ async function init() {
     };
     try {
         const userPersonallInfo = await axios.post('http://localhost:4001/book/payment/getpersonalinfo', data);
+        if (userPersonallInfo.data.errno === 1) throw new Error('선택 정보 미입력');
         const userInfo = userPersonallInfo.data.result
-
-        if (userInfo.errno === 1) throw new Error('선택 정보 미입력')
         console.log(userInfo.u_mobile)
         customer.innerHTML = userInfo.u_name
         mobile.innerHTML = userInfo.u_mobile
 
     } catch (e) {
         console.log('/getpersonalinfo', e.message)
-        // alert('선택 정보를 입력해주세요')
-        // location.href ='/account/management/myinfo'
+        alert('선택 정보를 입력해주세요')
+        location.href ='/account/management/myinfo'
     }
 
     //좌석 및 가격 정보
-    try{
+    // 결제 정보 및 결제 상세 정보
+    const fee = document.querySelector('#fee');
+    const ticketPrice = document.querySelector('#ticketPrice');
+    const totalPrice = document.querySelector('#totalPrice');
+
+    try {
         const seatInfo = await axios.post(`http://localhost:4001/book/payment/getspecificseatfromidx/${seatIdx}`);
         const seat = seatInfo.data.result
-        bookSeat.innerHTML = seat
+        bookSeat.innerHTML = `1층 ${seat.book_seat_row}열 ${seat.book_seat_number}번 `
+        ticketPrice.innerHTML = seat.book_seat_price
+        fee.innerHTML = 1000
+        totalPrice.innerHTML = ticketPrice.innerHTML + fee.innerHTML
 
-    } catch(e){
-        console.log('/payment_2 getseatinfo',e.message)
+    } catch (e) {
+        console.log('/payment_2 getseatinfo', e)
     }
-
-
-// 결제 정보 및 결제 상세 정보
-const totalPrice = document.querySelector('#totalPrice')
-const fee = document.querySelector('#fee')
-const ticketPrice = document.querySelector('#ticketPrice')
-    getSeatInfo()
     getDeadLine()
     getbankInfo()
 
 }
 
 
-const getDeadLine = _=>{
+const getDeadLine = _ => {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
@@ -93,22 +90,15 @@ const getDeadLine = _=>{
 }
 
 
-async function getbankInfo(){
-    const data = {
-        bankIdx
-    }
+async function getbankInfo() {
     try {
-        const bankInfo = await axios.post('getBankInfo', data)
-        const account = bankInfo.data.result;
-        const number = bankInfo.data.result;
+        const bankInfo = await axios.post(`/getBankInfo/${bankIdx}`)
+        console.log(bankInfo.data)
+        const account = bankInfo.data.result.bank_account;
+        const number = bankInfo.data.result.bank_number;
         bankAccount.innerHTML = `${account}: ${number}`
 
     } catch (e) {
         console.log('/payment_2 getbankinfo', e.message)
     }
-}
-
-async function getSeatInfo(){
-
-    totalPrice.innerHTML = ticketPrice.innerHTML + fee.innerHTML
 }
