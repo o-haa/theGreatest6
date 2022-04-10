@@ -20,7 +20,7 @@ app.use(cors({
 }));
 app.use(router);
 
-app.listen(port,_=>{
-    `api server running on localhost:${port}`;
+app.listen(5001,_=>{
+    `api server running on localhost:5001`;
 })
 
