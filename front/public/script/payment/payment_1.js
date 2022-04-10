@@ -1,6 +1,8 @@
 let seatIdx ;
 let accountIdx;
 let point;
+let pointNet;
+let seatPrice;
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -40,8 +42,8 @@ async function init() {
             userIdx: user.user_idx
         };
         const response = await axios.post('/checkPoint',data);
-        const point = response.data.result.point_net;
-        usablePoint.innerHTML = point;
+        pointNet = response.data.result.point_net;
+        usablePoint.innerHTML = pointNet;
     }
 
 
@@ -77,17 +79,27 @@ async function init() {
     getDeadLine()   //마감기한
 
 
-
-
-
 //넥스트 버튼
     const next = document.querySelector('#next')
-    next.addEventListener('click',moveToPayment_2Hanlder)
+    next.addEventListener('click', moveToPayment_2Hanlder)
 
-    function moveToPayment_2Hanlder(){
-        const bankIdx = bank.value
-        console.log(point)
-        location.href = `/book/payment/payment_2/${seatIdx}/${showIdx}/${bankIdx}/${point}`
+    function moveToPayment_2Hanlder() {
+        try {
+            if (yes.checked) {
+                const bankIdx = bank.value
+                if (point == undefined) point = 0;
+                if (point > pointNet) {
+                    ticketPrice.innerHTML = seatPrice;
+                    throw new Error('가용 포인트 부족')
+                }
+                // location.href = `/book/payment/payment_2/${seatIdx}/${showIdx}/${bankIdx}/${point}`
+            } else {
+                if (point == undefined) point = 0;
+            }
+        } catch (e) {
+            console.log(e.message)
+            alert('포인트를 확인해주세요.')
+        }
     }
 }
 
