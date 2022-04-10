@@ -25,14 +25,14 @@ body{
     padding: 7px 14px;
     box-sizing: border-box;
     background: #f4d3aa;
-    font-size:25px;
+    font-size:22px;
     
 }
 
 table{
     width:80%;
     margin:0.5% auto;
-    font-size:25px;
+    font-size:22px;
     border-spacing: 0 5px;
 }
 
@@ -48,15 +48,12 @@ table{
 th{
     background-color: #a8bebf;
     border-bottom: 2px solid #465d59;
-    height: 25px;
+    height: 22px;
     padding:8px 14px;
     box-sizing: border-box;
     text-align: center;
 }
 
-.newsView{
-    height: 300px !important;
-}
 
 .newsViewTable{
     margin-top: 5%;
@@ -83,12 +80,12 @@ th:nth-child(4){
 
 
 #eye {
-    width:25px;
-    height: 25px;
+    width:22px;
+    height: 22px;
 }
 
 #eye img{
-    width: 25px;
+    width: 22px;
     padding:1px;
     padding-top: 5px;
     box-sizing: border-box;
@@ -96,7 +93,7 @@ th:nth-child(4){
 }
 
 .newsEye img{
-    width: 25px;
+    width: 22px;
     padding:1px;
     padding-top: 5px;
     box-sizing: border-box;
@@ -109,7 +106,7 @@ th:nth-child(6){
 }
 
 .like {
-    font-size: 28px;
+    font-size: 22px;
 	-webkit-animation: like 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: like 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
@@ -149,10 +146,9 @@ th:nth-child(6){
 #category {
     width:fit-content;
     border-radius: 10px;
-    font-size:17px;
     padding:7px 14px;
     box-sizing: border-box;
-    font-size:25px;
+    font-size:22px;
     border:dotted 1px #fff;
 }
 
@@ -161,7 +157,7 @@ th:nth-child(6){
     margin:3% auto 0 auto;
     height:200px;
     border-bottom:1px solid #eee;
-    font-size:25px;
+    font-size:22px;
 }
 
 #img{
@@ -186,7 +182,7 @@ th:nth-child(6){
 #button button a{
     padding: 7px 12px;
     color: #fff !important;
-    font-size: 25px;
+    font-size: 22px;
     border: 1px dotted #fff;
     background: #64cbe6;
     border-radius: 20px;
@@ -195,14 +191,14 @@ th:nth-child(6){
 .delete{
     padding: 7px 12px;
     color: #fff !important;
-    font-size: 25px;
+    font-size: 22px;
     border: 1px dotted #fff;
     background: #64cbe6;
     border-radius: 20px;
 }
 
 .newsButton{
-    padding-bottom: 5%;
+    padding-bottom: 4%;
     box-sizing: border-box;
 }
 
@@ -221,22 +217,27 @@ th:nth-child(6){
     margin-top:2%;
     padding: 1%;
     box-sizing: border-box;
-    font-size: 25px;
+    font-size: 22px;
 }
 
 #hello {
     width:40%;
-    font-size:25px;
+    font-size:22px;
     padding:0.3% 0;
     box-sizing: border-box;
     border-bottom: 1px solid #465d59;
    
 }
 
+#helloAgain{
+    font-size: 22px;
+    color:#a5a5a5;
+}
+
 .commentSubmit {
     color: #465d59 !important;
     padding: 5px 10px;
-    font-size: 20px;
+    font-size: 22px;
     border-radius: 10px;
     box-sizing: border-box;
     text-align: end;
@@ -256,7 +257,7 @@ th:nth-child(6){
 }
 
 .commentDeleteBtn {  
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20px;
     background: #a8bebf;
     border-radius: 3px;
@@ -291,7 +292,7 @@ details{
 
 details summary{
     /* line-height: 30px; */
-    font-size:25px;
+    font-size:22px;
 }
 
 
