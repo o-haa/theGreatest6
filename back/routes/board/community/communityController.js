@@ -261,7 +261,7 @@ exports.communityCoUp = async (req,res)=>{
     }catch(e){
         console.log('/commentup',e.message)
     }
-    
+    res.json(response)
 }
 
 
