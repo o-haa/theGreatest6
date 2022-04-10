@@ -19,170 +19,118 @@
             <div id="calContent">
                 <div class="picbox">
                     <div class="profileImg"></div>
-                    <span class="userId">aaaaaa</span>
+                    <span id="userLevel" class="off"></span>
+                    <span id="userName"></span>
                     <span class="userNick">bbb@gamil.com</span>
                     <div class="line"></div>
                 </div>
-                <!-- <div id="userBadge">
-                    <span id="userLevel"></span>
-                    <span id="userName"></span>
-                </div> -->
-                <!-- <button id="createEventBtn">+ 포인트 구매 </button> -->
-                    <span id="signOut"></span>
-                </div>
-                <button id="createEventBtn">+ 포인트 구매 </button>
-
-                <!-- <div id="calSmall"> -->
-                    <!-- <span class="requiredBox">
-                        <ul class="requiredInfo">
-                            <span>
-                                <li class="infoKey"> ID </li>
-                            </span>
-                            <span>
-                                <li id="userID" class="infoValue requiredValue"></li>
-                            </span>
-                        </ul>
-                        <ul class="requiredInfo">
-                            <span>
-                                <li class="infoKey"> Nickname</li>
-                            </span>
-                            <span>
-                                <li id="userNickName" class="infoValue requiredValue"></li>
-                            </span>
-                        </ul>
-                        <ul class="requiredInfo">
-                            <span>
-                                <li class="infoKey"> JoinDate </li>
-                            </span>
-                            <span>
-                                <li id="userDoj" class="infoValue requiredValue"></li>
-                            </span>
-                        </ul>
-                        <ul class="requiredInfo">
-                            <span>
-                                <li class="infoKey"> Level </li>
-                            </span>
-                            <span>
-                                <li id="userLv" class="infoValue requiredValue"></li>
-                            </span>
-                        </ul>
-                    </span>
-                </div> -->
-            <!-- </div> -->
-
-            <div id="mainContent">
-                <!-- 타이틀 캘린더 -->
-                <h1 style="font-family: 'korFontBold' !important;"> My page </h1>
-
-                <div id="mainContentTitle">
-                    <div id="mainContentTitleMonth">
-                        <!-- <span> items </span> -->
-                        <form method="post" id="itemBox">
+    
+                <div id="menuBox">
+                    <!-- <span> items </span> -->
+                    <form method="post" id="itemBox">
+                        <span>
                             <input type="radio" name="accountMng" id="myProfile" class="miniBtn" checked="checked">
                             <label for="myProfile">My Profile</label>
+                        </span>
+                        <span>
                             <input type="radio" name="accountMng" id="myCalendar" class="miniBtn">
-                            <label for="myCalendar">My Calendar</label>
+                             <label for="myCalendar">My Calendar</label>
+                        </span>
+                        <span>
                             <input type="radio" name="accountMng" id="myBenefit" class="miniBtn">
-                            <label for="myBenefit">My Benefit</label>
+                             <label for="myBenefit">My Benefit</label>
+                        </span>
+                        <span>
                             <input type="radio" name="accountMng" id="myTicket" class="miniBtn">
                             <label for="myTicket">My Ticket</label>
-                        </form>
-                    </div>
-                    <div id="mainContentTitleIcon">
-                    </div>
+                        </span>
+                    </form>
                 </div>
+                <span id="signOut" class="off"></span>
+            </div>                  
 
-                <div id="mainCal">
-                    <div id="tableBox">
-                        <template id="optionalOn">
-                            <span class="optionalBox">
-                                <ul class="optionalInfo">
-                                    <span class="boxSpan">
-                                        <li class="infoKey"> Name </li>
-                                    </span>
-                                    <span>
-                                        <li id="userName" class="infoValue"></li>
-                                    </span>
-                                </ul>
-                                <ul class="optionalInfo">
-                                    <span class="boxSpan">
-                                        <li class="infoKey"> Date of birth </li>
-                                    </span>
-                                    <span>
-                                        <li id="userDob" class="infoValue"></li>
-                                    </span>
-                                </ul>
-                                <ul class="optionalInfo">
-                                    <span class="boxSpan">
-                                        <li class="infoKey"> Gender </li>
-                                    </span>
-                                    <span>
-                                        <li id="userGender" class="infoValue"></li>
-                                    </span>
-                                </ul>
-                                <ul class="optionalInfo">
-                                    <span class="boxSpan">
-                                        <li class="infoKey"> Mobile </li>
-                                    </span>
-                                    <span>
-                                        <li id="userMobile" class="infoValue"></li>
-                                    </span>
-                                </ul>
-                                <ul class="optionalInfo">
-                                    <span class="boxSpan">
-                                        <li class="infoKey"> Address </li>
-                                    </span>
-                                    <span>
-                                        <li id="userAddress" class="infoValue"></li>
-                                    </span>
-                                </ul>
-                            </span>
-                        </template>
+            <div id="mainContent">
+                <div class="picBlank"></div>
+                <div class="picBlankBack"></div>
+                <div class="picBlankBackPic"></div>
 
-
+                <div class="inputBox">
+                    <span class="requiredBox">
+                        <h1 style="font-family: 'korFontBold' !important;"> My page </h1>
+                        <ul class="requiredInfo">
+                            <li class="infoKey"> ID : </li>
+                            <li id="userID" class="infoValue requiredValue"></li>
+                        </ul>
+                        <ul class="requiredInfo">
+                            <li class="infoKey"> Nickname : </li>
+                            <li id="userNickName" class="infoValue requiredValue"></li>
+                        </ul>
+                        <ul class="requiredInfo">
+                            <li class="infoKey"> JoinDate : </li>
+                            <li id="userDoj" class="infoValue requiredValue"></li>
+                        </ul>
+                        <ul class="requiredInfo">
+                            <li class="infoKey"> Level : </li>
+                            <li id="userLv" class="infoValue requiredValue"></li>
+                        </ul>
                         <template id="prevent">
                             <div id="insertInfo">
                                 <li>
                                     <input type="checkbox" name="insertBtn" id="insertCheck">
-                                    <label for="insertCheck" id="insertBtn">선택정보 입력</label>
+                                    <label for="insertCheck" id="insertBtn"></label>
                                 </li>
                             </div>
                         </template>
+                    </span>
 
+                    <div id="tableBox">
+                        <template id="optionalOn">
+                            <span class="optionalBox">
+                                <ul class="optionalInfo">
+                                    <li class="infoKey"> Name </li>
+                                    <li id="userName" class="infoValue"></li>
+                                </ul>
+                                <ul class="optionalInfo">
+                                    <li class="infoKey"> Date of birth </li>
+                                    <li id="userDob" class="infoValue"></li>
+                                </ul>
+                                <ul class="optionalInfo">
+                                    <li class="infoKey"> Gender </li>
+                                    <li id="userGender" class="infoValue"></li>
+                                </ul>
+                                <ul class="optionalInfo">
+                                    <li class="infoKey"> Mobile </li>
+                                    <li id="userMobile" class="infoValue"></li>
+                                </ul>
+                                <ul class="optionalInfo">
+                                    <li class="infoKey"> Address </li>
+                                    <li id="userAddress" class="infoValue"></li>
+                                </ul>
+                            </span>
+                        </template>
+    
                         <template id="optionalOff">
                             <form method="post" action="/" id="userOptionFrm" class="optionalBox">
+            <!-- leftBox -->
                                 <div id="leftBox">
                                     <ul class="optionIdBox optionBox">
-                                        <span class="optionBoxSpan">
-                                            <li class="infoKey"> Name </li>
-                                        </span>
-
-                                        <li class="userNameBox">
-                                            <input type="text" id="userNameInput" class="infoValue">
-                                        </li>
+                                        <li class="infoKey title"> Name </li>
+                                        <li><input type="text" id="userNameInput" class="infoValue box"  placeholder="이름을 입력하세요"></li>
                                     </ul>
                                     <ul class="optionDobBox optionBox">
-                                        <span class="optionBoxSpan">
-                                            <li class="infoKey"> Date of birth </li>
-                                        </span>
+                                        <li class="infoKey title"> Date of birth </li>
                                         <li class="dobBox">
-                                            <span>
-                                                <input type="text" id="userDob01" class="userDob infoValue"
-                                                    placeholder="YYYY">
-                                            </span>
-                                            <span>
-                                                <input type="text" id="userDob02" class="userDob infoValue"
-                                                    placeholder="MM">
-                                            </span>
-                                            <span>
-                                                <input type="text" id="userDob03" class="userDob infoValue"
-                                                    placeholder="DD">
-                                            </span>
+                                            <input type="text" id="userDob01" class="userDob infoValue"
+                                                placeholder="YYYY">
+                                            <input type="text" id="userDob02" class="userDob infoValue"
+                                                placeholder="MM">
+                                            <input type="text" id="userDob03" class="userDob infoValue"
+                                                placeholder="DD">
                                         </li>
                                     </ul>
                                     <ul class="optionGenderBox optionBox">
                                         <span class="optionBoxSpan">
-                                            <li class="infoKey"> Gender </li>
+                                            <li class="infoKey title"> Gender </li>
                                         </span>
                                         <li class="genderBox">
                                             <span>
@@ -198,29 +146,22 @@
                                         </li>
                                     </ul>
                                 </div>
+    
+                <!-- rigntBox -->
                                 <div id="rightBox">
                                     <ul class="optionMobileBox optionBox">
                                         <span class="optionBoxSpan">
-                                            <li class="infoKey"> Mobile </li>
+                                            <li class="infoKey title"> Mobile </li>
                                         </span>
                                         <li class="mobileBox">
-                                            <span>
-                                                <input type="text" id="userMobile01" class="userMobile infoValue"
-                                                    placeholder="010">
-                                            </span>
-                                            <span>
-                                                <input type="text" id="userMobile02" class="userMobile infoValue"
-                                                    placeholder="1234">
-                                            </span>
-                                            <span>
-                                                <input type="text" id="userMobile03" class="userMobile infoValue"
-                                                    placeholder="5678">
-                                            </span>
+                                            <input type="text" id="userMobile01" class="userMobile infoValue" placeholder="010">
+                                            <input type="text" id="userMobile02" class="userMobile infoValue" placeholder="1234">
+                                            <input type="text" id="userMobile03" class="userMobile infoValue" placeholder="5678">
                                         </li>
                                     </ul>
                                     <ul class="optionAddressBox optionBox">
                                         <span class="optionBoxSpan">
-                                            <li class="infoKey"> Address </li>
+                                            <li class="infoKey title"> Address </li>
                                         </span>
                                         <li class="userAddressBox">
                                             <input type="text" id="keyAddress" class="infoValue">
@@ -234,12 +175,15 @@
                             </form>
                         </template>
                     </div>
-
                 </div>
-                {% include "footer.html" %}
+
             </div>
         </div>
+        {% include "footer.html" %}
     </div>
 </body>
 
 </html>
+
+
+<!-- <button id="createEventBtn">+ 포인트 구매 </button> -->
