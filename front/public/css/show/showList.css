@@ -19,6 +19,7 @@
 #wrap{
     /* overflow: hidden; */
     margin: 0 auto;
+    position: relative;
 }
 
 /* 헤더 #header */
@@ -123,7 +124,7 @@ a{
 #writeBtn {
     display: flex;
     justify-content: flex-end;
-    margin: 15px 3px 0px 0px;
+    margin: 15px 3px 40px 0px;
     height: 40px;
 }
 
@@ -137,4 +138,15 @@ a{
     border: none;
     background: #465D59;
     box-sizing: border-box;
+}
+#footer{
+    margin-top: 40px;
+    width: 328px;
+    margin-top: 20px;
+    /* background: brown; */
+    margin-left: 30px;
+    font-size: 15px;
+    border-right: 1px solid #A8BEBF;
+    opacity: 50%;
+    bottom:-50px;
 }
