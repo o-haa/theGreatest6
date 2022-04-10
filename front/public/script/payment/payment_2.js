@@ -57,7 +57,8 @@ async function init() {
     } catch (e) {
         console.log('/getpersonalinfo', e.message)
     }
-
+  
+ 
     //좌석 및 가격 정보
     // 결제 정보 및 결제 상세 정보
     const fee = document.querySelector('#fee');
