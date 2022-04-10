@@ -20,10 +20,8 @@ async function init(e) {
         console.log('error')
     }
 
-    console.log('aaaaaaaa')
+
     const res = await axios.post('showUpload')
-    console.log('출력 : ',res)
-    console.log('bbbbbbbb')
     
     year_month.innerHTML = `${calMonth} ${year}`
     const template = document.querySelector('.bigCard')

@@ -82,7 +82,6 @@ async function init() {
                     case 0: v.show_xrated = '청소년 불가'
                             break;
                 }
-
                 show_category = v.show_category
                 show_xrated = v.show_xrated
                 show_date_open = makeDate(v.show_date_open) //예매일
@@ -94,7 +93,7 @@ async function init() {
                 showYear = show_date[0]
                 showMonth = show_date[1]
                 showDate = show_date[2]
-
+                
                 tdElements[i].innerHTML = show_category
                 tdElements[i+1].innerHTML = show_xrated
                 tdElements[i+2].innerHTML = v.show_title
@@ -119,10 +118,12 @@ async function init() {
             try {
                 const getPersonalInfo = await axios.post(`http://localhost:4001/account/management/myinfo`, data)
                 if(getPersonalInfo.data.errno == 1) throw new Error('유저 선택 정보 없음');
-                location.href = '/book/book/book_1'
+                // location.href = `/book/book/book_1/${showIdx}`
+                window.open ("/book/book/book_1/${showIdx}","mywin","menubar=1,resizable=0,width=750,height=450");
             } catch (e) {
                 alert('선택 정보를 입력 후 다시 시도해주세요')
-                location.href='/account/management/mybenefit'
+                window.open ("/account/management/myinfo","mywin","menubar=1,resizable=0,width=800,height=500");
+                // location.href='/account/management/mybenefit'
                 console.log(e.message)
             }
         }
