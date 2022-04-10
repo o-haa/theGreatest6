@@ -14,18 +14,8 @@
         {% include "nav.html" %}
         <div id="join">
             <div id="join_info">
-                <div><span id="wuserNickname"></span>님 환영합니다.</div>
-                <div><p>가입하신 정보를 확인해주세요.</p></div>
-                <table>
-                    <tr>
-                        <td>ID</td>
-                        <td id="userId"></td>
-                    </tr>
-                    <tr>
-                        <td>Nickname</td>
-                        <td id="userNickname"></td>
-                    </tr>
-                </table> 
+                <div> 환영합니다.</div>
+                
                 <div id="notice">
                     <p>🩰 NOTICE 🩰</p>
                     <div id="notice_content">
@@ -35,12 +25,13 @@
                     </div>
                 </div>
                 <div id="button">
-                    <button><a href="/member/signin">Login 바로가기</a></button>
+                    <button><a href="/account/member/signin">Login 바로가기</a></button>
                 </div>       
             </div>
         </div>
-        {% include "footer.html" %}
+       
     </div>
+    {% include "footer.html" %}
 </body>
 </html>
     
