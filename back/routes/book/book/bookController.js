@@ -33,6 +33,7 @@ exports.insertBookInfo = async (req, res) => {
     };
     const { seatIdx, showIdx, userIdx, bookNum } = req.body;
     const prepare = [seatIdx, showIdx, new String(userIdx), bookNum];
+    console.log(prepare)
     try {
         const [result] = await pool.execute('/insertBookInfo', prepare);
         response = {

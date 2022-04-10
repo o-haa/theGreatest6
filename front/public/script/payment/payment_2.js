@@ -51,7 +51,6 @@ async function init() {
         const userPersonallInfo = await axios.post('http://localhost:4001/book/payment/getpersonalinfo', data);
         if (userPersonallInfo.data.errno === 1) throw new Error('선택 정보 미입력');
         const userInfo = userPersonallInfo.data.result
-        console.log(userPersonallInfo.data)
         customer.innerHTML = userInfo.u_name
         mobile.innerHTML = userInfo.u_mobile
 
@@ -74,7 +73,6 @@ async function init() {
         let ticketprice = seat.book_seat_price
         ticketPrice.innerHTML = seat.book_seat_price
         fee.innerHTML = ticketprice*0.05
-        if (pointOut ==undefined) pointOut = 0;
         totalPrice.innerHTML = `${ticketprice*1.05 - pointOut} [포인트 차감]`
 
     } catch (e) {
