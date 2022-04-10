@@ -11,11 +11,13 @@ async function init() {
     
     const catListB = document.querySelector('.beforeBox > .catList')
     const catListA = document.querySelector('.afterBox > .catList')
-    const temp = document.querySelector('template')
+    const tempB = document.querySelector('.tempB')//수정전
+    const tempA = document.querySelector('.tempA')//수정후
     const responseGet = await axios.post('categorymgt')
 
     //리스트를 만들 자료 resCat
-    let resCat = responseGet.data 
+    let resCat = responseGet.data
+    console.log(resCat) 
     makebefore(resCat, catListB)
     makeafter()
 
@@ -23,19 +25,19 @@ async function init() {
     let cats = [];
     let id = 0;
 
-    //수정 전 리스트
-    function makebefore(resCat, catList){
-        resCat.forEach(v=>{
-            const clone = document.importNode(temp.content,true)
+    //카테고리 갯수만큼 만드는 수정 전 리스트
+    function makebefore(res, list){
+        res.forEach(v=>{
+            const clone = document.importNode(tempB.content,true)
             const catName = clone.querySelector('.catName')
             catName.innerHTML = `${v.show_category}`
-            const del = clone.querySelector('button')
+            const del = clone.querySelector('.delBtn')
             del.addEventListener('click',catDelet)
-            catList.append(clone)
+            list.append(clone)
         })
     }
 
-    //수정 후 리스트
+    // //수정 후 리스트
     function makeafter(){
         makebefore(resCat, catListA)
         const catLi = document.querySelectorAll('.afterBox > .catList > li')
@@ -43,11 +45,12 @@ async function init() {
             catLi[i].addEventListener('dblclick',(e)=>{
                 const etarget = e.target //<div class="className"></>
                 const einput = e.target.innerHTML //ballet   
-                const catInput = document.createElement('input')
-                catInput.value = einput
-                catInput.classList.add('edit-input'); //class에 추가
-                catLi[i].innerHTML = '<input class="edit-input">'+'</input>'
-                catLi[i].addEventListener('keypress', catModify)
+                console.log(einput)
+    //             const catInput = document.createElement('input')
+    //             catInput.value = einput
+    //             catInput.classList.add('edit-input'); //class에 추가
+    //             catLi[i].innerHTML = '<input class="edit-input">'+'</input>'
+    //             catLi[i].addEventListener('keypress', catModify)
             })
             console.log(i)
         }

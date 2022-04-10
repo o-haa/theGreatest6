@@ -36,6 +36,11 @@ async function init() {
         tdElement[i+4].innerText = v.user_level
         tdElement[i+5].innerText = v.user_active
 
+        tdElement[i+2].addEventListener('click',goToBenefit)
+        function goToBenefit(){
+            window.location.href="http://localhost/account/management/mybenefit"
+        }
+
         const level = clone.querySelector('#level')
         let levelArr = ['1','2','3']
         levelArr.forEach(v=>{
