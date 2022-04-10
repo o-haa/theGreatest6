@@ -1,11 +1,12 @@
 const pool = require('../../../db');
 const sql = require('../../../SQL/queries.js')
-let response = {
-    result: {},
-    errno: 1
-};
+
 
 exports.book_1 = async (req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { showIdx } = req.params
     const prepare = [ showIdx ]
     try{
@@ -26,9 +27,12 @@ exports.book_1 = async (req,res) => {
 }
 
 exports.insertBookInfo = async (req, res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { seatIdx, showIdx, userIdx, bookNum } = req.body;
-    const prepare = [seatIdx, showIdx, userIdx, bookNum];
-    console.log(prepare);
+    const prepare = [seatIdx, showIdx, new String(userIdx), bookNum];
     try {
         const [result] = await pool.execute('/insertBookInfo', prepare);
         response = {
@@ -46,6 +50,10 @@ exports.insertBookInfo = async (req, res) => {
 }
 
 exports.seatInfo = async (req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     try{
         const result = await pool.execute(sql.seatInfo)
         response = {
@@ -59,9 +67,12 @@ exports.seatInfo = async (req,res) => {
 }
 
 exports.seatflaginfo = async (req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { seatIdx } = req.body;
     const prepare = [ seatIdx ];
-    console.log(seatIdx);
     try{
         const result = await pool.execute(sql.seatFlagInfo,prepare);
         response = {

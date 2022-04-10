@@ -74,6 +74,7 @@ async function init() {
         let ticketprice = seat.book_seat_price
         ticketPrice.innerHTML = seat.book_seat_price
         fee.innerHTML = ticketprice*0.05
+        if (pointOut ==undefined) pointOut = 0;
         totalPrice.innerHTML = `${ticketprice*1.05 - pointOut} [포인트 차감]`
 
     } catch (e) {
@@ -93,9 +94,8 @@ async function init() {
             userIdx,
             bookNum,
         }
-        console.log(data)
         try{
-            const inserBookInfo = await axios.post('/insertbookinfo',data)
+            const inserBookInfo = await axios.post('http://localhost:4001/book/book/insertbookinfo',data)
             console.log(inserBookInfo.data)
         } catch (e) {
             console.log('/payment_2 insertbookinfo',e.message)
