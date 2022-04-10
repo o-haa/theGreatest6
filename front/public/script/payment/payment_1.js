@@ -1,4 +1,4 @@
-let seatIdx ;
+let seatIdx;
 let accountIdx;
 let point;
 let pointNet;
@@ -11,7 +11,7 @@ async function init() {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.withCredentials = true;
 
-    const [,,,,rowIdx,numberIdx,showIdx] = location.pathname.split('/')
+    const [, , , , rowIdx, numberIdx, showIdx] = location.pathname.split('/')
 
 
     const userInfo = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
@@ -23,7 +23,7 @@ async function init() {
     let usePoint = document.querySelector('#usePoint');
     const use = document.querySelector('#use');
 
-    answer.forEach(v =>v.addEventListener('click', clickHandler));
+    answer.forEach(v => v.addEventListener('click', clickHandler));
 
     //클릭 시 포인트 사용 여부 체크
     function clickHandler() {
@@ -35,13 +35,13 @@ async function init() {
     }
 
     //클릭 시 포인트 조회
-    pointCheckBtn.addEventListener('click',pointCheckBtnhandler);
-    async function pointCheckBtnhandler(){
+    pointCheckBtn.addEventListener('click', pointCheckBtnhandler);
+    async function pointCheckBtnhandler() {
         const usablePoint = document.querySelector('#usablePoint');
         const data = {
             userIdx: user.user_idx
         };
-        const response = await axios.post('/checkPoint',data);
+        const response = await axios.post('/checkPoint', data);
         pointNet = response.data.result.point_net;
         usablePoint.innerHTML = pointNet;
     }
@@ -64,12 +64,12 @@ async function init() {
 
 
 
-//입금액
-    use.addEventListener('click',usePointHandler)
+    //입금액
+    use.addEventListener('click', usePointHandler)
 
-    function usePointHandler(){
+    function usePointHandler() {
         point = usePoint.value
-        ticketPrice.innerHTML = seatPrice-point;
+        ticketPrice.innerHTML = seatPrice - point;
     }
 
 
@@ -79,7 +79,7 @@ async function init() {
     getDeadLine()   //마감기한
 
 
-//넥스트 버튼
+    //넥스트 버튼
     const next = document.querySelector('#next')
     next.addEventListener('click', moveToPayment_2Hanlder)
 
@@ -123,7 +123,7 @@ async function getbankInfo() {
 }
 
 //마감 기한
-const getDeadLine = _=>{
+const getDeadLine = _ => {
     const date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth() + 1;

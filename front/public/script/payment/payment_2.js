@@ -10,7 +10,7 @@ async function init() {
 
     const userInfo = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     user = userInfo.data.result.user;
-    userIdx= user.user_idx;
+    userIdx = user.user_idx;
 
     //예매 버튼
     const book = document.querySelector('#book')
@@ -70,8 +70,8 @@ async function init() {
         bookSeat.innerHTML = `1층 ${seat.book_seat_row}열 ${seat.book_seat_number}번 `
         let ticketprice = seat.book_seat_price
         ticketPrice.innerHTML = seat.book_seat_price
-        fee.innerHTML = ticketprice*0.05
-        totalPrice.innerHTML = `${ticketprice*1.05 - pointOut} [포인트 차감]`
+        fee.innerHTML = ticketprice * 0.05
+        totalPrice.innerHTML = `${ticketprice * 1.05 - pointOut} [포인트 차감]`
 
     } catch (e) {
         console.log('/payment_2 getseatinfo', e)
@@ -80,21 +80,21 @@ async function init() {
     getbankInfo()
 
 
-    book.addEventListener('click',bookHandler)
+    book.addEventListener('click', bookHandler)
 
     //예매 db
-    async function bookHandler(){
+    async function bookHandler() {
         const data = {
             seatIdx,
             showIdx,
             userIdx,
             bookNum,
         }
-        try{
-            const inserBookInfo = await axios.post('http://localhost:4001/book/book/insertbookinfo',data)
+        try {
+            const inserBookInfo = await axios.post('http://localhost:4001/book/book/insertbookinfo', data)
             console.log(inserBookInfo.data)
         } catch (e) {
-            console.log('/payment_2 insertbookinfo',e.message)
+            console.log('/payment_2 insertbookinfo', e.message)
         }
 
     }
