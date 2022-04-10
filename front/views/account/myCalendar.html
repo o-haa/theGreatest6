@@ -16,81 +16,62 @@
         {% include "nav.html" %}
         <div id="content">
             <div id="calContent">
-                <div id="userBadge">
-                    <span id="userLevel"></span>
-                    <span id="userName"></span>
-                    <span id="signOut"></span>
-                </div>
-                <div class="profilBox">
-                    <div class="makeScedule off">
-                        <div>
-                            <select class="sMonth"></select>
-                            <select class="sDate"></select>   
-                            <select class="sHour"></select>  
-                            <input type="text">
-                        </div>
-                    </div>
-                    <button class="makeBtn">스케쥴 만들기</button>
-                </div>
-                 
-                <!-- 소형 캘린더 -->
-                <div id="calSmall">
-                    <div class="cal_box_small">
-                        <div class="cal_nav_small">
-                            <div class="year-month_small"></div>
-                            <div class="btnBoxSmall">
-                                <a href="javascript:;" class="btnLeft_small"><</a>
-                                <a href="javascript:;" class="btnRight_small">></a>
-                            </div>
-                        </div>
-       
-                        <div class="cal_day_small">
-                            <div class="days_small">
-                                <div class="day_small sun">SUN</div>
-                                <div class="day_small">MON</div>
-                                <div class="day_small">TUE</div>
-                                <div class="day_small">WED</div>
-                                <div class="day_small">THU</div>
-                                <div class="day_small">FRI</div>
-                                <div class="day_small sat">SAT</div>
-                            </div>
-                            <ul class="dates_small"></ul>
-                        </div>
-                    </div>
-                           
-                    <template class="cal_temp_small">
-                        <li>
-                            <button class="date_small"></button>
-                            <div class="dot_small">
-                                <span class="dotAdmin_small"></span>
-                                <span class="dotCustomer_small"></span>
-                            </div>
-                        </li>
-                    </template>    
-                </div>
-       
-                <!-- 위클리 카드 -->
-                <div id="monthly">
-                    <div id="monthlyTitle">Monthly</div>
-                    <div id="monthTitleSmall"></div>
-                    <div id="menuSmall">
-                        <template class="monthlyTemp">
-                            <div class="monthlyCard">
-                                <div id="pic"></div>
-                                <div class="news">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
-
-            <div id="mainContent">
-                <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
+                <h1 class="title" style="font-family: 'korFontBold' !important;">이달의 공연 목록</h1>
                 
-                <!-- 타이틀 캘린더 -->
+               <!-- 소형 캘린더 -->
+               <div id="calSmall">
+                   <div class="cal_box_small">
+                       <div class="cal_nav_small">
+                           <div class="year-month_small"></div>
+                           <div class="btnBoxSmall">
+                               <a href="javascript:;" class="btnLeft_small"><</a>
+                               <a href="javascript:;" class="btnRight_small">></a>
+                           </div>
+                       </div>
+
+                       <div class="cal_day_small">
+                           <div class="days_small">
+                               <div class="day_small sun">SUN</div>
+                               <div class="day_small">MON</div>
+                               <div class="day_small">TUE</div>
+                               <div class="day_small">WED</div>
+                               <div class="day_small">THU</div>
+                               <div class="day_small">FRI</div>
+                               <div class="day_small sat">SAT</div>
+                           </div>
+                           <ul class="dates_small"></ul>
+                       </div>
+                   </div>
+                          
+                   <template class="cal_temp_small">
+                       <li>
+                           <button class="date_small"></button>
+                           <div class="dot_small">
+                               <span class="dotAdmin_small"></span>
+                               <span class="dotCustomer_small"></span>
+                           </div>
+                       </li>
+                   </template>    
+               </div>
+      
+               <!-- 위클리 카드 -->
+               <div id="monthly">
+                   <div id="monthlyTitle">Monthly</div>
+                   <div id="monthTitleSmall">MAR</div>
+                   <div id="menuSmall">
+                       <div class="monthlyCard">
+                           <div id="pic1"></div>
+                           <div class="news">
+                               <span>뮤지컬 : THE MUSE (더 뮤즈)</span>
+                               <span>예매 시작일 : 3월 12일</span>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+            <!-- <div id="mainContent">
+                <h1 style="font-family: 'korFontBold' !important;">캘린더</h1>
                 <div id="mainContentTitle">
                     <div id="mainContentTitleMonth">
                         <span class="year-month"></span>
@@ -101,17 +82,6 @@
                             <img src="/img/icon/icon_next_2x.png" id="next_arrow">
                         </button>
                     </div>
-                    <!-- <div id="mainContentTitleIcon">
-                        <button class="miniBtn" id="listBtn">
-                            <img src="/img/icon/icon_list_2x.png" id="list">
-                        </button>
-                        <button class="miniBtn" id="listGrid">
-                            <img src="/img/icon/icon_grid_2x.png" id="grid">
-                        </button>
-                        <button class="miniBtn" id="listCalendar">
-                            <img src="/img/icon/icon_cal_2x.png" id="calBtn">
-                        </button>
-                    </div> -->
                 </div>
 
                 <div id="mainCal">
@@ -140,7 +110,7 @@
                         </li>
                     </template>    
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </body>
