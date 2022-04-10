@@ -17,9 +17,10 @@
 }
 
 #wrap{
-    /* overflow: hidden; */
+    overflow-x: hidden;
     margin: 0 auto;
     position: relative;
+
 }
 
 /* 헤더 #header */
