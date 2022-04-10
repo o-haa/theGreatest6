@@ -1,3 +1,5 @@
+// const pool = require("../../../../back/db");
+
 document.addEventListener('DOMContentLoaded', init);
 
 let response = {
@@ -11,13 +13,12 @@ async function init() {
     
     const catListB = document.querySelector('.beforeBox > .catList')
     const catListA = document.querySelector('.afterBox > .catList')
-    const tempB = document.querySelector('.tempB')//수정전
-    const tempA = document.querySelector('.tempA')//수정후
+    const temp = document.querySelector('template')
     const responseGet = await axios.post('categorymgt')
 
     //리스트를 만들 자료 resCat
-    let resCat = responseGet.data
-    console.log(resCat) 
+    let resCat = responseGet.data 
+    console.log('data 가져오기',resCat)
     makebefore(resCat, catListB)
     makeafter()
 
@@ -25,72 +26,108 @@ async function init() {
     let cats = [];
     let id = 0;
 
-    //카테고리 갯수만큼 만드는 수정 전 리스트
-    function makebefore(res, list){
-        res.forEach(v=>{
-            const clone = document.importNode(tempB.content,true)
+    //수정 전 리스트
+    function makebefore(resCat, catList){
+        resCat.forEach(v=>{
+            const clone = document.importNode(temp.content,true)
             const catName = clone.querySelector('.catName')
             catName.innerHTML = `${v.show_category}`
-            const del = clone.querySelector('.delBtn')
+            const del = clone.querySelector('button')
             del.addEventListener('click',catDelet)
-            list.append(clone)
+            catList.append(clone)
         })
     }
 
-    // //수정 후 리스트
+
+    let inputFlag = false
+
+    //수정 후 리스트
     function makeafter(){
         makebefore(resCat, catListA)
         const catLi = document.querySelectorAll('.afterBox > .catList > li')
-        for(let i=2; i<catLi.length; i++){
-            catLi[i].addEventListener('dblclick',(e)=>{
-                const etarget = e.target //<div class="className"></>
-                const einput = e.target.innerHTML //ballet   
-                console.log(einput)
-    //             const catInput = document.createElement('input')
-    //             catInput.value = einput
-    //             catInput.classList.add('edit-input'); //class에 추가
-    //             catLi[i].innerHTML = '<input class="edit-input">'+'</input>'
-    //             catLi[i].addEventListener('keypress', catModify)
-            })
-            console.log(i)
-        }
+        catLi.forEach(v=>{
+            v.addEventListener('dblclick',(e)=>{
+                inputFlag = true
+                const etarget = e.target
+                const einput = e.target.value
+                const idx = etarget.getAttribute('value')//value 값 가져오기                
+                const catInput = document.createElement('input')//input 생성
+                catInput.value = einput //입력한 값을 저장
+                catInput.classList.add('edit-input'); //class에 추가
+
+                console.log(v)
+                const checkbox = v.querySelector('.checkbox')
+                const catName = v.querySelector('.catName')
+                const delBtn = v.querySelector('.delBtn')
+                checkbox.setAttribute("class","off")
+                catName.setAttribute("class","off")
+                delBtn.setAttribute("class","off")
+                v.append(catInput)
+                v.addEventListener('keypress', catModify) 
+
+                async function catModify(e){
+                    if(e.key === 'Enter') {
+                        const catInput = document.querySelector('.edit-input')
+                        console.log(catInput.value)
+                        const orig = catName.innerHTML
+                        catName.innerHTML = catInput.value
+                        const value = catInput.value
+
+                        option = {
+                            value,
+                            orig,
+                        }
+                        const responseModify = await axios.post('/categorymodify',option)
+
+                        catInput.remove()
+                        checkbox.setAttribute("class","checkbox")
+                        catName.setAttribute("class","catName")
+                        delBtn.setAttribute("class","delBtn")
+                    }
+                }
+            })        
+        })
     }
+
+    // document.addEventListener('click',function(e){
+    //     if(inputFlag == true){ //입력 상태일때
+    //         const inputBox = document.querySelector('input')
+    //         if(e.target.id != 'inputBox'){ //e.target이 input이 아니면
+    //             nav.classList.remove('input');
+    //             return gnbSlide = false;
+    //         }
+    //     }
+    // })
+
 
     newCat.addEventListener("keydown",catAdd)
 
-    function catAdd(e){
+    async function catAdd(e){
         const ul = document.querySelector('.afterBox > .catList')
         if(e.key === 'Enter'){
             const newCat = document.querySelector('.newCat')
             const clone = document.importNode(temp.content,true)
             const catName = clone.querySelector('.catName')
             catName.innerHTML = newCat.value
+            result = newCat.value
+            option ={result}
+            const responseAdd = await axios.post('/categoryadd',option)
             ul.appendChild(clone)
             newCat.innerHTML=''
-        }
-    }
-    
-    function catModify(e){
-        if(e.key === 'Enter') {
-            const checkbox = document.querySelector('.checkbox')
-            const catName = document.querySelector('.catName')
-            const delBtn = document.querySelector('.delBtn')
-            catName.innerHTML = `${e.target.value}`
-            const parent = e.target.parentNode
-            e.target.parentNode.innerHTML=''
-            parent.append(checkbox)
-            parent.append(catName)
-            parent.append(delBtn)
-        }else{
-            
+            catName.setAttribute("value",`${responseAdd.data.insertId}`)
+            console.log(responseAdd.data.insertId)
         }
     }
 
     const delBtn = document.querySelector('.delBtn')
     delBtn.addEventListener('click',catDelet)
 
-    function catDelet(e){
+    async function catDelet(e){
         const delt = e.target.parentNode
+        const catName = delt.querySelector('.catName')
+        result = catName.innerHTML
+        option = {result}
+        const responseDel = await axios.post('/categorydel',option)
         delt.remove()
         const catLi = document.querySelectorAll('.afterBox > .catList > li')
         console.log(catLi)
@@ -100,16 +137,7 @@ async function init() {
     btnFin.addEventListener('click',submitHandelr)
     
     async function submitHandelr(){
-        const catLi = document.querySelectorAll('.afterBox > .catList > li > .catName')
-        const arr = []
-        let j
-        for(let i=0; i<catLi.length; i++){
-            arr.push(catLi[i].innerHTML)
-            console.log(catLi[i].innerHTML)
-        }
-        console.log('arr ----> ',arr)
-        //sql을 바꿀 코드
-        const response = await axios.post('categorysave',arr)
-        console.log(response)
+        window.location.href="http://localhost:3001/admin/show/categorymgt"
     }
 }
+
