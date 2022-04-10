@@ -244,6 +244,7 @@ async function init() {
         }
     }
 
+    let cmtidx
     async function updateHandler(e) {
         const uidx = e.target.parentNode.querySelector('input[id=uidx]').value;
         if (user.user_idx != uidx) {
@@ -257,7 +258,7 @@ async function init() {
             commentContent.appendChild(msgBox);
             throw new Error('댓글 작성자 아님');
         }
-        const cmtidx = e.target.parentNode.querySelector('input[id=cidx]').value;
+        cmtidx = e.target.parentNode.querySelector('input[id=cidx]').value;
 
         const commentInput = document.querySelector('#commentInput');
         const clone = document.importNode(commentInput.content, true);
@@ -267,21 +268,20 @@ async function init() {
 
 
         Frm.addEventListener('submit', commentSubmitHandler);
+    }
 
-        async function commentSubmitHandler(e) {
-            e.preventDefault();
-            const updateComment = (e.target[0]).value;
-            const data = {
-                updateComment,
-            };
-            try {
-                const response = await axios.post(`/commentListUp/${cmtidx}`, data);
-                console.log(response)
-                // if (response.data.errno !== 0) throw new Error;
-                location.href = `/board/community/view/${bIdx}`;
-            } catch (e) {
-                console.log('/commentlistUp', e.message);
-            }
+    async function commentSubmitHandler(e) {
+        e.preventDefault();
+        const updateComment = (e.target[0]).value;
+        const data = {
+            updateComment,
+        };
+        console.log(data)
+        try {
+            const response = await axios.post(`/commentListUp/${cmtidx}`, data);
+            location.href = `/board/community/view/${bIdx}`;
+        } catch (e) {
+            console.log('/commentlistUp', e.message);
         }
     }
     CommentList();
