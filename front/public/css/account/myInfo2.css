@@ -7,11 +7,10 @@
 
 
 #wrap{
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 0 auto;
+    margin-bottom: 20px;
 }
-
-
 /* 헤더 #header */
 
 /* 본문 #content */
@@ -45,10 +44,6 @@
     line-height: 60%; 
 }
 
-#wrap{
-    /* overflow: hidden; */
-    margin: 0 auto;
-}
 /* 헤더 */
 /* 본문 왼쪽 달력 박스  : calContent */
 #content > #calContent{
@@ -62,6 +57,7 @@
     white-space: nowrap;
     overflow: auto;
     box-sizing: border-box;
+    font-family:'MADE';
 }
 
 .pickbox{
@@ -72,12 +68,12 @@
     box-sizing: border-box;
 }
 .profileImg{
-    margin-top: 30px;
-    width: 350px;
-    height: 350px;
+    /* margin-top: 30px; */
+    width: 260px;
+    height: 260px;
     border-radius: 100%;
     background: brown;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     position: relative;
     border: 11px solid #fff;
     background-image: url('../../img/poster/musical.png');
@@ -87,7 +83,7 @@
 }
 .picBlankBackPic{
     width: 100%;
-    height: 300px;
+    height: 240px;
     left: 19px;
     top: 90px;
     background: #465D58;
@@ -101,16 +97,17 @@
 
 #userName{
     display: block;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
+    margin-bottom: 5px;
 }
 .userNick{
     display: block;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
 }
 .line{
-    margin: 15px 0;
+    margin: 20px 0;
     border-bottom: 1px solid black;
 } 
 
@@ -120,7 +117,7 @@
 }
 #mainContent > .picBlank{
     /* background: blue; */
-    height: 280px;
+    height: 240px;
 }
 #menuBox > #itemBox{
     display: flex;
@@ -132,7 +129,7 @@
 }
 #menuBox > #itemBox > span > label{
     width:100%;
-    height: 70px;
+    height: 50px;
     margin-top: 12px;
     border-radius: 10px;
     /* text-align: center; */
@@ -140,46 +137,47 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 38px;
+    font-size: 33px;
     border: 1px solid #465D59;
     color: #465D59;
+    font-family:'MADE';
 }
 #menuBox > #itemBox > span > label:hover{
     background: #465D59;
     color: #fff;
-}
-
-h1{
-    margin-top: 50px;
-    margin-bottom: 50px;
+    font-family:'MADE';
 }
 
 .inputBox{
     display: flex;
+    font-family:'MADE';
+}
+h1{
+    margin-top: 60px;
+    margin-bottom: 20px;
 }
 .inputBox > .requiredBox{
-    margin-right: 100px;
+    margin-right: 60px;
 }
 .inputBox > .requiredBox > .requiredInfo {
     width: 100%;
-    height:100px;
+    height:80px;
     display: flex;
     align-items: center;
 }
 .inputBox > .requiredBox > .requiredInfo >li{
     padding: 10px 15px;
-    font-size: 30px;
-    margin-bottom: 10px;
+    font-size: 20px;
     box-sizing: border-box;
 }
 .inputBox > .requiredBox > .requiredInfo >li:first-child{
-    width: 180px;
+    width: 130px;
     margin-right: 10px;
     border-radius: 10px;
     background: #A8BEBF;
 }
 .inputBox > .requiredBox > .requiredInfo >li:last-child{
-    width: 380px;
+    width: 280px;
     margin-right: 10px;
     border-bottom: 1px solid #465D59;
     opacity: 80%;
@@ -208,32 +206,48 @@ h1{
 }
 #insertInfo > li > label{
     /* margin-top: 28px; */
-    width: 700px;
-    height: 600px;
+    width: 550px;
+    height: 500px;
     border-radius: 10px;
-    bottom: -10px;
+    bottom: -100px;
     right: 0;
     background: #fff;
     z-index: 100;
     display: inline-block;
     position: absolute;
 }
+.announce{
+    display: inline-block;
+    margin-top: 30px;
+    font-size: 13px;
+    color:red;
+    opacity: 70%;
+}
+.announce1{
+    display: inline-block;
+    font-size: 13px;
+    color:red;
+    opacity: 70%;
+}
 
 #tableBox{
     /* padding: 10px 15px; */
-    margin-top: 150px;
-    font-size: 30px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 50px;
     box-sizing: border-box;
+    font-family:'MADE';
+}
+#tableBox > h1{
+    font-size: 35px;
 }
 .optionBox{
     display: flex;
     height: 55px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 .title{
-    width: 180px;
-    height: 100%;
+    width: 140px;
+    height: 40px;
     margin-right: 20px;
     border-radius: 10px;
     background: #A8BEBF;
@@ -242,16 +256,16 @@ h1{
 }
 .optionBox > li > input{
     display: flex;
-    height: 50px;
+    height: 40px;
 }
 .box{
     display: inline-block;
     justify-content: center;
     align-items: center;
-    width: 388px;
+    width: 300px;
     height: 50px;  
     margin-right: 15px;
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
     color:#465D58;
     border-bottom: 1px solid #465D59;
@@ -262,10 +276,10 @@ h1{
 .dobBox > input{
     display: inline-block;
     align-items: center;
-    width: 120px;
+    width: 90px;
     height: 50px;  
-    margin-right: 15px;
-    font-size: 30px;
+    margin-right: 20px;
+    font-size: 20px;
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
@@ -282,14 +296,16 @@ h1{
 }
 .genderBox > span > .labelGender01, .labelGender02{
     display: inline-block;
-    width: 188px;
-    height: 50px;  
+    width: 150px;
+    height: 38px;  
     border-radius: 10px;
     margin-right: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid #465D59;
+    box-sizing: border-box;
+    margin-bottom: 16px;
 } 
 .genderBox > span > .labelGender01:hover, .labelGender02:hover{
     background: #465D58;
@@ -307,10 +323,10 @@ h1{
     display: inline-block;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    width: 90px;
     height: 50px;  
-    margin-right: 15px;
-    font-size: 30px;
+    margin-right: 20px;
+    font-size: 20px;
     text-align: center;
     color:#465D58;
     border-bottom: 1px solid #465D59;
@@ -319,16 +335,17 @@ h1{
     display: flex;
 }
 .userAddressBox > .infoValue:first-child{
-    height: 50px;
-    width: 270px;
+    height: 40px;
+    width: 200px;
     margin-right: 20px;
     border-bottom: 1px solid #465D59;
+    box-sizing: border-box;
 }
 .userAddressBox > .infoValue:last-child{
-    height: 50px;
+    height: 40px;
     width: 100px;
     border-radius: 10px;
-    font-size: 20px;
+    font-size: 17px;
     text-align: center;
     border: 1px solid #465D59;
     background: none;
@@ -345,13 +362,24 @@ h1{
     border: 1px solid #465D58;
     background: none;
     font-size: 30px;
-    color:#465D58
+    color:#465D58;
+    bottom: 0;
 }
 .submitBox > input:hover{
     background: #465D58;
     color: #fff;
 }
 
+#footer{
+    margin-top: 40px;
+    width: 328px;
+    margin-top: 20px;
+    /* background: brown; */
+    margin-left: 30px;
+    font-size: 15px;
+    border-right: 1px solid #A8BEBF;
+    opacity: 50%;
+}
 .off{
     display: none;
 }
