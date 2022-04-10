@@ -53,14 +53,24 @@ async function init() {
     })
 
 
-    // const btnLeft = mainContent.querySelector('.miniBtnL')
-    // const btnRight = mainContent.querySelector('.miniBtnR')
+    //좌우이동 버튼, 연.월 버튼
+    const btnLeft = document.querySelector('.btnLeft_small')
+    const btnRight = document.querySelector('.btnRight_small')
+    const prev_arrow = document.querySelector('#prev_arrow')
+    const next_arrow = document.querySelector('#next_arrow')
+
     const homeBtn = document.querySelector('#home');
     const aboutBtn = document.querySelector('#about');
     const listBtn = document.querySelector('#listBtn')
     const listGrid = document.querySelector('#listGrid')
     const listCalendar = document.querySelector('#listCalendar')
 
+
+    btnLeft.addEventListener('click', btnLeftHandler)
+    prev_arrow.addEventListener('click',btnLeftHandler)
+    btnRight.addEventListener('click', btnRightHandler)
+    next_arrow.addEventListener('click',btnRightHandler)
+    
     homeBtn.addEventListener('click', moveHome)
     aboutBtn.addEventListener('click', moveAbout)
     listBtn.addEventListener('click', listBtnHandler)
