@@ -171,11 +171,12 @@
 
 #signOut {
     background: #a5a5a5;
-    padding: 3px 5px;
+    padding: 7px 14px;
     box-sizing: border-box;
     border-radius: 10px;
-    margin-left: 18%;
+    margin-left: 33.5%;
     color:#465D59;
+    font-size: 20px;
 }
 
 

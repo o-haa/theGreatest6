@@ -52,12 +52,13 @@ async function init() {
 
         userLevel.innerHTML = user.user_level;
         userName.innerHTML = user.user_nickname;
-        signOut.innerHTML = 'sign out';
+        signOut.innerHTML = 'Sign Out';
 
         signOut.addEventListener('click',signOutHandler);
         async function signOutHandler(){
             const response = await axios.post('http://localhost:3001/account/member/destroycookie',null);
             console.log(response.data);
+            location.href='/';
         }
 
 

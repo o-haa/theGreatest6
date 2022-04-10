@@ -55,11 +55,10 @@ body{
 
 /* 메인메뉴바 시작 */
 #nav > ul {
-    width:10%;
+    width:40%;
     height: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
 }
 #nav > ul > li {

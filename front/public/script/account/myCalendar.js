@@ -4,6 +4,26 @@ async function init(e) {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+    const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+    user = response.data.result.user;
+
+    //유저 정보 불러와서 렌더하기
+    const userLevel = document.querySelector('#userLevel');
+    const userName = document.querySelector('#userName');
+    const signOut = document.querySelector('#signOut');
+
+    userLevel.innerHTML = user.user_level;
+    userName.innerHTML = user.user_nickname;
+    signOut.innerHTML = 'Sign Out';
+
+    signOut.addEventListener('click',signOutHandler);
+    async function signOutHandler(){
+        const response = await axios.post('http://localhost:3001/account/member/destroycookie',null);
+        console.log(response.data);
+        location.href="/"
+    }
+
+
     const mainContent = document.querySelector('#mainContent')
     let dates = document.querySelector('.dates')
     let template = document.querySelector('.cal_temp')
