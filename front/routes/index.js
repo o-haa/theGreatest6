@@ -12,7 +12,7 @@ const chatRouter = require('./chat');
 const bookRouter = require('./book');
 
 router.get('/', mainController);
-router.use('/board',boardRouter);
+router.use('/board',auth, boardRouter);
 router.use('/show', showRouter);
 router.use('/account',accountRouter);
 router.use('/admin',adminRouter);
