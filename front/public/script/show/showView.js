@@ -105,6 +105,81 @@ async function init() {
                 tdElements[i+8].innerHTML = v.show_director
                 tdElements[i+9].innerHTML = v.show_company
                 tdElements[i+10].innerHTML = v.show_content
+                const wrap = document.querySelector('.wrap')
+
+                if(v.show_title.includes('박열')){
+                    img.classList.add('park');
+                    wrap.classList.add('park');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else if(v.show_title.includes('더데빌')){
+                    img.classList.add('devil');
+                    wrap.classList.add('devil');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else if(v.show_title.includes('사랑의 끝')){
+                    img.classList.add('end');
+                    wrap.classList.add('end');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else if(v.show_title.includes('더모먼트')){
+                    img.classList.add('moment');
+                    wrap.classList.add('moment');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else if(v.show_title.includes('라이온킹')){
+                    img.classList.add('lionkiing');
+                    wrap.classList.add('lionking');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else if(v.show_title.includes('돈키호테')){
+                    img.classList.add('donkey');
+                    wrap.classList.add('donkey');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else if(v.show_title.includes('라보엠')){
+                    img.classList.add('laboem');
+                    wrap.classList.add('laboem');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }else{
+                    img.classList.add('default');
+                    wrap.classList.add('default');
+                    img.addEventListener('mouseover',()=>{
+                        info.innerHTML=content
+                    })
+                    img.addEventListener('click',()=>{
+                        window.location.href=`http://localhost:3001/show/program/showview/${idx}`
+                    })
+                }
             })
         }
 

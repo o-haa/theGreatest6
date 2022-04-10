@@ -36,7 +36,6 @@ body {
     position: absolute;
     content: "";
     opacity: 0.9;
-    
 }
 /* 헤더 */
 
@@ -107,26 +106,50 @@ body {
     height: 100%;
     border-radius: 20px;
 }
-.first{
+.park{
     background-image: url("../../img/poster/park.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
 }
-.sec{
+.devil{
     background-image: url("../../img/poster/devil.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
 }
-.thrd{
+.end{
     background-image: url("../../img/poster/end.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
 }
-.four{
+.moment{
     background-image: url("../../img/poster/moment.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.lionking{
+    background-image: url("../../img/poster/lionking.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.donkey{
+    background-image: url("../../img/poster/ballet.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.laboem{
+    background-image: url("../../img/poster/laboem.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+.default{
+    background-image: url("../../img/poster/classic.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
