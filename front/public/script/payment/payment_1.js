@@ -1,3 +1,7 @@
+let seatIdx ;
+let accountIdx;
+let point;
+
 document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
@@ -5,12 +9,17 @@ async function init() {
     axios.defaults.headers.post['Content-Type'] = 'application/json';
     axios.defaults.withCredentials = true;
 
+    const [,,,,rowIdx,numberIdx,showIdx] = location.pathname.split('/')
+
+
     const userInfo = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = userInfo.data.result;
 
     const answer = document.querySelectorAll('.answer input');
     const yes = document.querySelector('#yes');
     const pointCheckBox = document.querySelector('#pointCheckBox');
+    let usePoint = document.querySelector('#usePoint');
+    const use = document.querySelector('#use');
 
     answer.forEach(v =>v.addEventListener('click', clickHandler));
 
@@ -33,37 +42,57 @@ async function init() {
         const response = await axios.post('/checkPoint',data);
         const point = response.data.result.point_net;
         usablePoint.innerHTML = point;
-
     }
 
-    //입금 계좌 정보
-    const bank = document.querySelector('#bank')
-    getbankInfo()
 
-
-
-
-    //티켓 가격 및 입금 마감 기한
-    const ticketPrice = document.querySelector('#ticketPrice')
+    // 입금액 가져오기
+    let ticketPrice = document.querySelector('#ticketPrice')
     try {
-        // const response = await axios.post('/payment_1',)
+        const data = {
+            rowIdx,
+            numberIdx
+        }
+        const getPrice = await axios.post('/getSpecificSeat', data)
+        seatIdx = getPrice.data.result.book_seat_idx
+        seatPrice = getPrice.data.result.book_seat_price
+        ticketPrice.innerHTML = seatPrice;
     } catch (e) {
-        console.log('/payment_1',e.message)
+        console.log('getPrice', e.message)
     }
-    ticketPrice.innerHTML = '1000'
-    getDeadLine()
-    
 
 
+
+//입금액
+    use.addEventListener('click',usePointHandler)
+
+    function usePointHandler(){
+        point = usePoint.value
+        ticketPrice.innerHTML = seatPrice-point;
+    }
+
+
+    //결제 수단 입력
+    let bank = document.querySelector('#bank')
+    getbankInfo()     //선택 가능한 계좌 정보
+    getDeadLine()   //마감기한
+
+
+
+
+
+//넥스트 버튼
     const next = document.querySelector('#next')
     next.addEventListener('click',moveToPayment_2Hanlder)
 
     function moveToPayment_2Hanlder(){
-        location.href='/book/payment/payment_2'
+        const bankIdx = bank.value
+        console.log(point)
+        location.href = `/book/payment/payment_2/${seatIdx}/${showIdx}/${bankIdx}/${point}`
     }
 }
 
 
+///은행 정보 클릭
 async function getbankInfo() {
     try {
         const bankInfo = await axios.post('/getFullBankInfo', null)
@@ -72,17 +101,16 @@ async function getbankInfo() {
         let option
         await account.forEach(v => {
             option = document.createElement('option')
-            option.value = v.bank_account;
+            option.value = v.bank_idx;
             option.innerHTML = v.bank_account;
             bank.appendChild(option);
         })
-
     } catch (e) {
         console.log('/payment_1 getbankinfo', e.message)
     }
 }
 
-
+//마감 기한
 const getDeadLine = _=>{
     const date = new Date();
     const year = date.getFullYear();

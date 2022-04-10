@@ -9,25 +9,35 @@ async function init() {
     const { user } = userInfo.data.result;
 
 
-// 예매 정보 1
+//${seatIdx}/${showIdx}/${bankIdx}/${point}
+    const [,,,,seatIdx,showIdx,bankIdx,pointOut] = location.pathname.split('/')
+    console.log(seatIdx,showIdx,bankIdx,pointOut)
+
+    // 예매 정보 1 관련 변수
     const bookNumber = document.querySelector('#bookNumber')
     const showPlace = document.querySelector('#showPlace')
     const showDate = document.querySelector('#showDate')
+    const showTitle = document.querySelector('#showTitle')
     const bookSeat = document.querySelector('#bookSeat')
 
+    //예매 번호
     bookNumber.innerHTML = `T${Date.now()}`
+
+    //예매정보 1 - 공연 정보
     try {
-        data = {
-            showIdx
-        }
-        const showInfo = axios.post(`http://localhost:4001/show/program/showview${showIdx}`)
-        console.log(showInfo)
+        const showInfo = await axios.post(`http://localhost:4001/book/book/book_1/${showIdx}`)
+        const show = showInfo.data.result
+        showPlace.innerHTML = show.show_place
+        showDate.innerHTML = show.show_date
+        showTitle.innerHTML = show.show_title
+
+
     } catch (e) {
         console.log('/showInfo', e.message)
     }
 
 
-//예매 정보 2 - 예매자 정보
+    //예매 정보 2 - 예매자 정보
     const customer = document.querySelector('#customer')
     const mobile = document.querySelector('#mobile')
 
@@ -39,6 +49,7 @@ async function init() {
         const userInfo = userPersonallInfo.data.result
 
         if (userInfo.errno === 1) throw new Error('선택 정보 미입력')
+        console.log(userInfo.u_mobile)
         customer.innerHTML = userInfo.u_name
         mobile.innerHTML = userInfo.u_mobile
 
@@ -48,6 +59,15 @@ async function init() {
         // location.href ='/account/management/myinfo'
     }
 
+    //좌석 및 가격 정보
+    try{
+        const seatInfo = await axios.post(`http://localhost:4001/book/payment/getspecificseatfromidx/${seatIdx}`);
+        const seat = seatInfo.data.result
+        bookSeat.innerHTML = seat
+
+    } catch(e){
+        console.log('/payment_2 getseatinfo',e.message)
+    }
 
 
 // 결제 정보 및 결제 상세 정보

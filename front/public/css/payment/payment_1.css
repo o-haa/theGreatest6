@@ -108,6 +108,7 @@ table{
 }
 
 #pointCheckBox{
+    height: 55%;
     display: none;
 }
 
@@ -125,4 +126,14 @@ table{
     /* background: white; */
     font-size: 20px;
     padding-left: 10px;
+}
+
+#usePoint{
+    background: white;
+    border: 1px solid black;
+    margin-left: 20px;
+    width: 80px;
+    height: 25px;
+    padding: 10px;
+    box-sizing: border-box;
 }

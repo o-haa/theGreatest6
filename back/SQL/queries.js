@@ -231,8 +231,6 @@ VALUES(?,?,?,?,?,?)`,
     //     WHERE c.board_idx = ?
     //      `,
 
-
-
     // commentRDelete: 'DELETE FROM comment WHERE cmt_idx = ? ',
     // commentRUp: 'UPDATE comment SET cmt_content=? WHERE cmt_idx = ?',
     
@@ -301,14 +299,17 @@ VALUES(?,?,?,?,?,?)`,
  
 
 
-    selectBookInfo: `SELECT s.show_category_idx, s.show_title, s.show_xrated, s.show_company, o.show_date, o.show_place
+    book_1: `SELECT c.show_category, s.show_idx,s.show_category_idx, s.show_title, s.show_xrated, s.show_company, DATE_FORMAT(o.show_date, '%Y-%m-%d %h:%i') AS show_date, o.show_place
     FROM shows AS s
-    LEFT OUTER JOIN s_option AS o
-    ON s.show_idx = o.shows_idx
-    WHERE s.show_idx
+    INNER JOIN s_option AS o
+    ON s.show_idx = o.shows_idx AND s.show_idx = ?
+    INNER JOIN s_category AS c
+    ON c.show_category_idx = s.show_category_idx
     `,
 
-    InsertBookInfo: `INSERT INTO `,
+    seatInfo: `SELECT * from book_seat`,
+    seatFlagInfo: `SELECT * from book_seat WHERE booK_seat_idx = ?`,
+
 
     
     //payment
@@ -321,5 +322,9 @@ VALUES(?,?,?,?,?,?)`,
 
     getBankInfo: `SELECT * from bank WHERE bank_idx =?`,
 
-    getSeatInfo: `SELECT * from book_seat`
+    getSeatInfo: `SELECT * from book_seat`,
+
+    getSpecificSeat: `SELECT * from book_seat WHERE book_seat_row = ? AND book_seat_number = ?`,
+    getSpecificSeatFromIdx: `SELECT * from book_seat WHERE book_seat_idx = ?`
+
     }
