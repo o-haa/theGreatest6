@@ -86,6 +86,7 @@
 /* 제목 줄 */
 tr:first-child{
     height: 40px;
+    border-bottom: 1px solid #465D59;
 }
 th{
     height: 40px;
