@@ -71,16 +71,35 @@
     justify-content: center;
     box-sizing: border-box;
 }
-
 .profileImg{
-    width: 380px;
-    height: 380px;
+    margin-top: 30px;
+    width: 350px;
+    height: 350px;
     border-radius: 100%;
     background: brown;
     margin-bottom: 15px;
+    position: relative;
+    border: 11px solid #fff;
+    background-image: url('../../img/poster/musical.png');
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: cover;
+}
+.picBlankBackPic{
+    width: 100%;
+    height: 300px;
+    left: 19px;
+    top: 90px;
+    background: #465D58;
+    position: absolute;
+    z-index: -2;
+    background-image: url('../../img/poster/broadway.png');
+    background-repeat: repeat-x;
+    background-position: center;
+    background-size: cover;
 }
 
-.userId{
+#userName{
     display: block;
     font-size: 50px;
     text-align: center;
@@ -99,6 +118,10 @@
     width: 100%;
     box-sizing: border-box;
 }
+#mainContent > .picBlank{
+    /* background: blue; */
+    height: 280px;
+}
 #menuBox > #itemBox{
     display: flex;
     flex-direction: column;
@@ -108,14 +131,15 @@
     display: none;
 }
 #menuBox > #itemBox > span > label{
-    display: inline-block;
     width:100%;
     height: 70px;
     margin-top: 12px;
     border-radius: 10px;
     /* text-align: center; */
+    display: inline-block;
     display: flex;
     justify-content: center;
+    align-items: center;
     font-size: 38px;
     border: 1px solid #465D59;
     color: #465D59;
@@ -125,37 +149,42 @@
     color: #fff;
 }
 
-#mainContent > .requiredBox > .requiredInfo {
+h1{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.inputBox{
+    display: flex;
+}
+.inputBox > .requiredBox{
+    margin-right: 100px;
+}
+.inputBox > .requiredBox > .requiredInfo {
     width: 100%;
     height:100px;
     display: flex;
     align-items: center;
 }
-#mainContent > .requiredBox > .requiredInfo >li{
+.inputBox > .requiredBox > .requiredInfo >li{
     padding: 10px 15px;
     font-size: 30px;
     margin-bottom: 10px;
     box-sizing: border-box;
 }
-#mainContent > .requiredBox > .requiredInfo >li:first-child{
+.inputBox > .requiredBox > .requiredInfo >li:first-child{
     width: 180px;
-    margin-right: 10px;
-}
-#mainContent > .requiredBox > .requiredInfo >li:last-child{
-    width: 500px;
     margin-right: 10px;
     border-radius: 10px;
     background: #A8BEBF;
+}
+.inputBox > .requiredBox > .requiredInfo >li:last-child{
+    width: 380px;
+    margin-right: 10px;
+    border-bottom: 1px solid #465D59;
     opacity: 80%;
 }
 
-
-
-
-#content > #calContent > #userBadge > #userName{
-    color: #465D58;
-    font-size: 39px;
-}
 
 #calContent > #userBadge > #signOut{
     border-radius: 5px;
@@ -170,8 +199,154 @@
 #content > #mainContent > #mainCal {
     width: 85%;
     height: 70%;
-    /* border: 3px solid #E3E7EA; */
     margin: 50px 0 0 35px;
     border-radius: 20px;
     /* background: #465D58; */
+}
+#insertInfo > li > input{
+    display: none;
+}
+#insertInfo > li > label{
+    /* margin-top: 28px; */
+    width: 300px;
+    height: 160px;
+    border-radius: 10px;
+    /* background: blue; */
+    z-index: 100;
+    display: inline-block;
+    
+
+}
+
+#tableBox{
+    /* padding: 10px 15px; */
+    font-size: 30px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.optionBox{
+    display: flex;
+    height: 55px;
+    margin-bottom: 25px;
+}
+.title{
+    width: 180px;
+    height: 100%;
+    margin-right: 20px;
+    border-radius: 10px;
+    background: #A8BEBF;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.optionBox > li > input{
+    display: flex;
+    height: 50px;
+}
+.box{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 388px;
+    height: 50px;  
+    margin-right: 15px;
+    font-size: 30px;
+    text-align: center;
+    color:#465D58;
+    border-bottom: 1px solid #465D59;
+}
+.dobBox{
+    display: flex;
+}
+.dobBox > input{
+    display: inline-block;
+    align-items: center;
+    width: 120px;
+    height: 50px;  
+    margin-right: 15px;
+    font-size: 30px;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    color:#465D58;
+    border-bottom: 1px solid #465D59;
+}
+.genderBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.genderBox > span > input{
+    display: none;
+}
+.genderBox > span > .labelGender01, .labelGender02{
+    display: inline-block;
+    width: 188px;
+    height: 50px;  
+    border-radius: 10px;
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #465D59;
+} 
+.genderBox > span > .labelGender01:hover, .labelGender02:hover{
+    background: #465D58;
+    color: #fff;
+}
+
+
+.mobileBox{
+    display: flex; 
+}
+.mobileBox > input{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;  
+    margin-right: 15px;
+    font-size: 30px;
+    text-align: center;
+    color:#465D58;
+    border-bottom: 1px solid #465D59;
+}
+.userAddressBox{
+    display: flex;
+}
+.userAddressBox > .infoValue:first-child{
+    height: 50px;
+    width: 270px;
+    margin-right: 20px;
+    border-bottom: 1px solid #465D59;
+}
+.userAddressBox > .infoValue:last-child{
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid #465D59;
+    background: none;
+}
+.userAddressBox > .infoValue:last-child:hover{
+    background: #465D58;
+    color: #fff;
+}
+
+.submitBox > input{
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid #465D58;
+    background: none;
+    font-size: 30px;
+    color:#465D58
+}
+.submitBox > input:hover{
+    background: #465D58;
+    color: #fff;
+}
+
+.off{
+    display: none;
 }
