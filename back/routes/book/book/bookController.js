@@ -32,10 +32,10 @@ exports.insertBookInfo = async (req, res) => {
         errno: 1
     };
     const { seatIdx, showIdx, userIdx, bookNum } = req.body;
-    const prepare = [seatIdx, showIdx, new String(userIdx), bookNum];
+    const prepare = [seatIdx, showIdx, userIdx, bookNum];
     console.log(prepare)
     try {
-        const [result] = await pool.execute('/insertBookInfo', prepare);
+        const [result] = await pool.execute(sql.insertBookInfo, prepare);
         response = {
             ...response,
             result: {
