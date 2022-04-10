@@ -57,7 +57,7 @@ async function init() {
     } catch (e) {
         console.log('/getpersonalinfo', e.message)
         alert('선택 정보를 입력해주세요')
-        // location.href ='/account/management/myinfo'
+        location.href ='/account/management/myinfo'
     }
 
     //좌석 및 가격 정보

@@ -92,7 +92,7 @@ async function init() {
                     ticketPrice.innerHTML = seatPrice;
                     throw new Error('가용 포인트 부족')
                 }
-                // location.href = `/book/payment/payment_2/${seatIdx}/${showIdx}/${bankIdx}/${point}`
+                location.href = `/book/payment/payment_2/${seatIdx}/${showIdx}/${bankIdx}/${point}`
             } else {
                 if (point == undefined) point = 0;
             }
