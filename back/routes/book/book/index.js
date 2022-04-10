@@ -4,10 +4,14 @@ const bookController = require('./bookController')
 
 //예매정보 확인
 router.post('/book_1/:showIdx', bookController.book_1)
+
 //예매 정보 입력
-router.post('/insertbookinfo', bookController.InsertBookInfo)
+router.post('/insertbookinfo', bookController.insertBookInfo)
+
 //좌석 정보 확인
 router.post('/seatinfo', bookController.seatInfo)
+
 //좌석 정보 입력
+
 
 module.exports = router;

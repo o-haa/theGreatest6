@@ -325,6 +325,9 @@ VALUES(?,?,?,?,?,?)`,
     getSeatInfo: `SELECT * from book_seat`,
 
     getSpecificSeat: `SELECT * from book_seat WHERE book_seat_row = ? AND book_seat_number = ?`,
-    getSpecificSeatFromIdx: `SELECT * from book_seat WHERE book_seat_idx = ?`
+    getSpecificSeatFromIdx: `SELECT * from book_seat WHERE book_seat_idx = ?`,
+    insertBookInfo: `INSERT INTO book (book_seat_idx, show_idx, user_idx, book_number) VALUES (?, ?, ?, ?)`
 
     }
+
+
