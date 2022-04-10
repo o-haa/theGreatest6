@@ -75,14 +75,14 @@ async function init() {
             tdElement[5].setAttribute("class","off")
             tdElement[6].setAttribute("class","")
             tdElement[7].setAttribute("class","")
-            tdElement[8].setAttribute("class","")
+            tdElement[8].setAttribute("class","") //포인트관리 버튼위치
             tdElement[9].setAttribute("class","off")
             tdElement[10].setAttribute("class","")
             btnPoint.setAttribute("class","point")
 
             tdElement[8].addEventListener('click',goToBenefit)
             function goToBenefit(){
-                window.location.href="http://localhost/account/management/mybenefit"
+                window.location.href="http://localhost:3001/account/management/mybenefit"
             }
         }
 
