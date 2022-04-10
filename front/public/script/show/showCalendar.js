@@ -13,14 +13,10 @@ async function init(e) {
     let dotAdmin = clone.querySelector('.btnAdmin') //admin 일정
     let dotCumstomer = clone.querySelector('.btnCustomer') //user 일정
 
-    //클릭한 좌표 찾기
-    const cal_day = document.querySelector('.cal_day')
-    cal_day.addEventListener('click',cal_dayHandler)
-
-    function cal_dayHandler(event){
-        let alert = event.target
-        console.log(alert)
-    }
+    const year_month_small = document.querySelector('.year-month_small')
+    const year_month = document.querySelector('.year-month')
+    // year_month_small.innerHTML = `${calMonth} ${year}`
+    // year_month.innerHTML = `${calMonth} ${year}`
 
     //오늘의 정보를 알려주는 함수
     let today = new Date()

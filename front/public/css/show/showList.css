@@ -17,8 +17,10 @@
 }
 
 #wrap{
-    /* overflow: hidden; */
+    overflow-x: hidden;
     margin: 0 auto;
+    position: relative;
+
 }
 
 /* 헤더 #header */
@@ -26,36 +28,6 @@
 /* 본문 #content */
 /* 본문 왼쪽 달력 박스  : #content > #calContent */
 /* 본문 오른쪽 박스  : #content > #mainContent */
-
-/* 무엇이든 물어보세요 검색창 */
-#content > #mainContent > #listSearchBox{
-    width: 100%;
-    height: 57px;
-    margin: 60px 0px;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    border-bottom: 1px solid #A8BEBF;
-}
-/* 돋보기 아이콘 */
-#content > #mainContent > #listSearchBox > .line-icon{
-    width: 28px;
-    height: 28px;
-}
-/* 검색 입력창 */
-#mainContent > #listSearchBox > #listSearchForm > #listSearchInput{
-    height: 100%;
-    width:230%;
-    margin-left: 16px;
-    padding: 0px 10px 0px 0px;
-    box-sizing: border-box;
-    font-size: 33px;
-    color: #465D59;
-}
-#mainContent > #listSearchBox > #listSearchForm > #listSearchInput::placeholder{
-    color: #A8BEBF;
-    font-family: 'basicMid';
-}
 
 /* 목록 전환 버튼 리스트 or 앨범형 or 달력형 */
 #mainContent > #listEventBox{
@@ -77,11 +49,40 @@
     box-sizing: border-box;
 }
 
+/* 무엇이든 물어보세요 검색창 */
+#content > #mainContent > #listSearchBox{
+    width: 100%;
+    height: 57px;
+    margin: 60px 0px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid #A8BEBF;
+}
+/* 돋보기 아이콘 */
+#content > #mainContent > #listSearchBox > .line-icon{
+    width: 28px;
+    height: 28px;
+}
+/* 검색 입력창 */
+#mainContent > #listSearchBox > #listSearchForm > #listSearchInput{
+    height: 100%;
+    width:200%;
+    margin-left: 16px;
+    padding: 0px 10px 0px 0px;
+    box-sizing: border-box;
+    font-size: 33px;
+    color: #465D59;
+}
+#mainContent > #listSearchBox > #listSearchForm > #listSearchInput::placeholder{
+    color: #A8BEBF;
+    font-family: 'basicMid';
+}
+
 /* 리스트 테이블 높이지정하기 (footer) */
 .showListHeight{
     height: 68%;
 }
-
 /* 리스트 테이블 */
 #mainContent > .showListHeight > .listTable{
     width: 100%;
@@ -124,7 +125,7 @@ a{
 #writeBtn {
     display: flex;
     justify-content: flex-end;
-    margin: 15px 3px 0px 0px;
+    margin: 15px 3px 40px 0px;
     height: 40px;
 }
 
@@ -138,4 +139,15 @@ a{
     border: none;
     background: #465D59;
     box-sizing: border-box;
+}
+#footer{
+    margin-top: 40px;
+    width: 328px;
+    margin-top: 20px;
+    /* background: brown; */
+    margin-left: 30px;
+    font-size: 15px;
+    border-right: 1px solid #A8BEBF;
+    opacity: 50%;
+    bottom:-50px;
 }

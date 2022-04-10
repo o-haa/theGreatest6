@@ -11,8 +11,10 @@
     이 순서대로 작성하기 때문에 만약 여백이 먼저 작성되었다면 가로세로 값은 없다는 뜻이에요!
 */
 
-
-
+/* 글을 쓸 레벨이 되지 않으면 글쓰기 버튼을 숨기는 클래스 */
+.notAllow{
+    display: none;
+}
 
 #wrap{
     /* overflow: hidden; */
@@ -51,11 +53,10 @@
     line-height: 60%; 
 }
 
-/* 보기 형태 선택 아이콘 : 리스트 or 앨범 or 캘린더 버튼 */
+/* 목록 전환 버튼 리스트 or 앨범형 or 달력형 */
 #content > #mainContent > #mainContentTitle > #mainContentTitleIcon {
     display: flex;
 }
-
 
 .miniBtn {
     width: 25px;
@@ -76,7 +77,6 @@
     border-radius: 3px;
     border: 1px solid #080C31;
     box-sizing: border-box;
-    cursor: pointer;
 }
 .miniBtnR {
     width: 25px;
@@ -87,108 +87,120 @@
     border-radius: 3px;
     border: 1px solid #080C31;
     box-sizing: border-box;
-    cursor: pointer;
 }
 
 .miniBtn > img{
     width: 22px;
     height: 22px;
-    cursor: pointer;
 }
 .miniBtnL > img{
     width: 22px;
     height: 22px;
-    cursor: pointer;
 }
 .miniBtnR > img{
     width: 22px;
     height: 22px;
-    cursor: pointer;
 }
 
-/* 카드 컨텐츠 박스 */
-#content > #mainContent > #scrollBox{
-    width:100%;
-    white-space: nowrap;
+/* 여기까지 showCard와 동일
+타이틀 h1의 margin-bottom만 다름. (line 28)*/
+
+#mainContent > #scrollBox{
+    height: 320px;
+    margin-bottom: 20px;
     overflow: auto;
 }
-/* 카드 컨텐츠 ul list */
-#content > #mainContent > #scrollBox > .ulCard {
-    height: 380px;
+#mainContent > #scrollBox > ul{
+    white-space: nowrap;
+    width: 2000px;
+    height: 100%;
+    display: flex;
 }
-
-.ulCard > li {
-    width: 250px;
-    height: 350px;
-    padding-top:10px;
-    margin-right:20px;
-    display: inline-block;
-    box-sizing: border-box;
-    box-shadow: 0px 10px 10px #dcdcdc;
-    border-radius: 25px;
+#mainContent > #scrollBox > ul > li{
+    /* background: #465D59; */
+    width: 260px;
+    height: 100%;
+    margin-right: 15px;
 }
-
-/* 카드 개별 상세정보 보기 */
-.ulCard > li > .imgBox{
+#mainContent > #scrollBox > ul > li > .imgBox{
     width: 100%;
     height: 100%;
-    border-radius: 25px;
+    border-radius: 20px;
 }
 
-.first{
-    background-image: url('/img/poster/park.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50%;
-}
-.sec{
-    background-image: url('/img/poster/devil.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50%;
-}
-.thrd{
-    background-image: url('/img/poster/end.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50%;
-}
-.four{
-    background-image: url('/img/poster/moment.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50%;
+#mainContent > .infoCard{
+    height: 200px;
+    display: flex;
+    position: relative;
 }
 
-#content > #mainContent > .infoCard{
-    width: 96%;
-    height: 130px;
-    padding:20px;
-    border: 1.5px solid #A8BEBF; 
-    border-radius: 10px; 
-    display: flex; 
-    align-items: flex-end;
-}
-.infoCard > #info{
-    width: 80%;
+#info{
+    width: 100%;
     height: 100%;
-    padding: 0 10px;
+    padding:20px 30px;
     box-sizing: border-box;
+    font-size: 20px;
+    /* white-space: nowrap; */
+    overflow: auto;
+    border: 1px solid #A8BEBF;
+    border-radius: 13px;
 }
-.infoCard > #bookBtn{
-    text-align: center;
-    height: 50px;
-    width: 20%;
-    padding: 5px 20px 5px 20px;
-    /* box-sizing: border-box; */
-    color: #fff;
-    font-size: 16px;
-    border-radius: 6px;
-    border: none;
-    background: #465D59;
-    box-sizing: border-box;
+#bookBtn{
+    width:50px;
+    height: 30px;
+    margin: 0 20px 20px 0px;
+    right:0;
+    bottom:0;
+    float: right;
+    border: 1px solid #080C31;
+    position: absolute;
 }
 
-a:link, :active, :visited{
-    color: white;
+.park{
+    background-image: url('../../img/poster/park.jpeg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.end{
+    background-image: url('../../img/poster/end.jpeg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.moment{
+    background-image: url('../../img/poster/moment.jpeg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.laboem{
+    background-image: url('../../img/poster/laboem.jpeg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.lionkiing{
+    background-image: url('../../img/poster/lionking.jpg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.donkey{
+    background-image: url('../../img/poster/ballet.jpeg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.devil{
+    background-image: url('../../img/poster/devil.jpeg');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+.default{
+    background-image: url('../../img/poster/classic.png');
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
 }

@@ -75,11 +75,10 @@ UPDATE book_seat SET book_seat_row = 3 WHERE book_seat_price = 50000;
 
 
 
-INSERT INTO u_mobile (u_mobile1, u_mobile2, u_mobile3, user_idx) VALUES (010,5555,5555, 148);
+INSERT INTO u_mobile (u_mobile1, u_mobile2, u_mobile3, user_idx) VALUES (010,5555,5555, 130);
 INSERT INTO u_address (u_add_region1, u_add_region2, u_add_region3, u_add_road, u_add_bd_name,u_add_bd_no, u_add_zipcode, u_add_name, u_add_detail, user_idx)
-VALUES ('서울','강동구','천호동','천호대로', '금복빌딩', '995', 05248, '서울 강동구 천호대로 995', '3층', 148);
+VALUES ('서울','강동구','천호동','천호대로', '금복빌딩', '995', 05248, '서울 강동구 천호대로 995', '3층', 130);
 
-INSERT INTO u_persoanl (user_idx,u_name,u_dob,u_gender,u_mobile_idx,u_address_idx) VALUES (148,'김졸림',2000-01-01,0,23,21);
 
 
 INSERT INTO s_category(show_category_idx,show_category) VALUES (1, 'classic');
@@ -87,3 +86,5 @@ INSERT INTO s_category(show_category_idx,show_category) VALUES (2, 'musical');
 INSERT INTO s_category(show_category_idx,show_category) VALUES (3, 'opera');
 INSERT INTO s_category(show_category_idx,show_category) VALUES (4, 'ballet');
 INSERT INTO s_category(show_category_idx,show_category) VALUES (5, 'Etc');
+
+INSERT INTO u_personal (user_idx,u_name,u_dob,u_gender,u_mobile_idx,u_address_idx) VALUES (129,'김졸림',now(),0,23,21);

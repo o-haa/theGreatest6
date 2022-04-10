@@ -108,8 +108,13 @@ exports.showList = async (req, res) => {
 
 }
 
-exports.showCard = (req, res) => {
-    const response = 'hello'
+exports.showCard = async (req, res) => {
+    const sql = `SELECT show_idx, show_title, show_date_open, show_content FROM shows`
+    const [result] = await pool.execute(sql)
+    response = {
+        result,
+        error: 0,
+    }
     res.json(response)
 }
 

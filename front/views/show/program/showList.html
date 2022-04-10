@@ -58,22 +58,28 @@
                    <div id="monthlyTitle">Monthly</div>
                    <div id="monthTitleSmall">MAR</div>
                    <div id="menuSmall">
-                       <div class="monthlyCard">
-                           <div id="pic1"></div>
-                           <div class="news">
-                               <span>뮤지컬 : THE MUSE (더 뮤즈)</span>
-                               <span>예매 시작일 : 3월 12일</span>
-                           </div>
-                       </div>
-                   </div>
-               </div>
+                        <div class="monthlyCard">
+                            <div id="pic1"></div>
+                            <div class="news">
+                            <span>뮤지컬 : THE DEVIL (더데빌)</span>
+                            <span>예매 시작일 : 5월 4일</span>
+                            </div>
+                            </div>
+                                <div class="monthlyCard">
+                                    <div id="pic2"></div>
+                                    <div class="news">
+                                        <span>뮤지컬 : 라이온킹</span>
+                                        <span>예매 시작일 : 5월 5일</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   
+            
            </div>
             
             <div id="mainContent">
-
-                <h1 style="font-family: 'korFontBold' !important;">이달의 공연 소식</h1> 
-
-                <!-- 리스트 검색창 -->
+                <h1 style="font-family: 'korFontBold' !important;">이달의 공연 소식</h1>
                 <div id="listSearchBox">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="line-icon" id="searchIcon">
                         <path d="M22.3 21.2l-5.7-5.7c1.2-1.5 2-3.4 2-5.5 0-4.7-3.8-8.5-8.5-8.5S1.5 5.3 1.5 10s3.8 8.5 8.5 8.5c2.1 0 4-.8 5.5-2l5.7 5.7c.1.1.3.2.5.2s.4-.1.5-.2c.4-.2.4-.7.1-1zM3 10c0-3.9 3.2-7 7-7s7 3.2 7 7-3.2 7-7 7-7-3.1-7-7z" fill="#A8BEBF"></path>
@@ -97,9 +103,7 @@
                     </div>
                 </div>
 
-                <!-- 리스트 테이블 시작 -->
                 <div class="showListHeight">
-
                     <table class="listTable">
                         <thead>
                             <tr>
@@ -114,7 +118,7 @@
                         <tbody>
                         </tbody>
                     </table>
-    
+
                     <template id="showList_row">
                         <tr>
                             <td>{show_idx}</td>
@@ -129,8 +133,16 @@
                         <a href='/show/program/showwrite'>글쓰기</a>
                     </div>
                 </div>
-               {% include "footer.html" %}
-
+            </div>
+        </div>
+        <div id="footer">
+            <div id="leftFooter">
+                <p>서울특별시 강동구 천호대로 995 금복빌딩 3,4층</p>
+                <p>copyrightⓒ2022 Art6. All rights Reserved.</p>
+            </div>
+            <div id="rightFooter">
+                <p>Captain <span>Jihyun Kim</span> Crew <span>Hyunjin Lee  Haeun Oh</span></p>
+                <p>GitHub <a href="https://github.com/yellow-w/theGreatest6"> theGreatest6</span></p>
             </div>
         </div>
     </div>
