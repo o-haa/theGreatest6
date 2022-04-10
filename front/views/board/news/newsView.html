@@ -40,9 +40,9 @@
                 </div>
             </div>
             <div id="button" class="newsButton">
-                <button><a href = "/board/news/list" class="list">List</a></button>
-            
                 <button id="update" class="update"></button>
+
+                <button><a href = "/board/news/list" class="list">List</a></button>
                 
                 <form method = "post" action = "/board/news/delete" id="deleteFrm">
                     <input type="hidden" name = "idx" value=`req.params`>
