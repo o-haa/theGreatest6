@@ -270,7 +270,6 @@ async function init(e) {
         flagAdmin.forEach(v=>{
             let show_idx = v.show_idx
             let show_title = v.show_title
-            console.log('넌 대체 뭘까',v)
             let dayString = ((new Date(v.show_date)).toLocaleDateString())
 
 
