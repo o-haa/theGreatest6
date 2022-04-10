@@ -9,7 +9,7 @@
     <link href="/css/board/boardView.css" rel="stylesheet" type="text/css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
-<body>
+<body id="newsbody">
     <div id="wrap">
         {% include "nav.html" %}
             <div id="label">
@@ -33,7 +33,7 @@
                     <td id="hit"></td>
                 </tr>
             </table>
-            <div id="viewContent">
+            <div id="viewContent" class="newsView">
                 <div id="bContent"></div>
                 <div id="img">
                     <!-- <img src="" id="src"> -->
