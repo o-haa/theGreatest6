@@ -4,7 +4,6 @@
 
 body{
     zoom:100%;
-    font-size: 18px;
 }
 #label {
     width: 80%;
@@ -17,7 +16,7 @@ body{
     padding: 7px 14px;
     box-sizing: border-box;
     background: #f4d3aa;
-    font-size:18px;
+    font-size:25px;
     
 }
 
@@ -28,6 +27,7 @@ form {
     box-sizing: border-box;
     border:1px dotted #f4d3aa;
     border-radius: 20px;
+    font-size:25px;
 }
 
 table {
@@ -43,7 +43,7 @@ td:nth-child(1){
 }
 
 select{
-    font-size: 16px;
+    font-size: 23px;
     border:1px solid #f4d3aa;
 }
 
@@ -52,7 +52,10 @@ input{
     padding:0.5%;
     box-sizing: border-box;
     border-bottom: 1px solid #f4d3aa;
+    font-size: 25px;
 }
+
+
 
 textarea{
     border:1px solid #f4d3aa;
@@ -60,6 +63,7 @@ textarea{
     height:200px;
     padding:0.5%;
     box-sizing: border-box;
+    font-size: 25px;
 }
 
 #communityFile {
@@ -79,6 +83,7 @@ textarea{
     box-sizing: border-box;
     background: #f4d3aa;
     border-radius: 10px;
+    color:#000;
     
 }
 
@@ -93,7 +98,7 @@ textarea{
     padding: 4px 10px;
     box-sizing: border-box;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 25px;
     background-color:#f4d3aa;
 }
 
@@ -104,7 +109,7 @@ textarea{
 }
 
 .fileName p {
-    font-size: 16px;
+    font-size: 25px;
     border-bottom: 1px solid #f4d3aa;
     padding-top:5px;
     box-sizing: border-box;
