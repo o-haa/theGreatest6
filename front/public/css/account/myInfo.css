@@ -130,9 +130,19 @@
     font-size: 39px;
 }
 
+#signOut {
+    background: #a5a5a5;
+    padding: 7px 14px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-left: 33.5%;
+    color:#465D59;
+    font-size: 20px;
+}
 
 
-#calContent > #userBadge > #signOut{
+
+/* #calContent > #userBadge > #signOut{
     border-radius: 5px;
     font-size: 35px;
     text-align: center;
@@ -140,7 +150,7 @@
     background: #465D59;
     display: inline-block;
     box-sizing: border-box;
-}
+} */
 
 
 /* 여기까지 showCard와 동일

@@ -127,3 +127,11 @@ td{
 .off{
     display: none;
 }
+
+button{
+    cursor: pointer;
+}
+
+select{
+    cursor: pointer;
+}
