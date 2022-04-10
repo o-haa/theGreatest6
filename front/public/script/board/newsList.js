@@ -5,6 +5,15 @@ async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/board/news';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+    const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+    const { user } = response1.data.result;
+    const admin = user.user_id
+    
+    if( admin !== 'admin@gmail.com'){
+        const button = document.querySelector('#box')
+        button.innerHTML = ""
+    }
+
     const checks = document.querySelectorAll('#category ul li input');
     const checked = document.querySelectorAll('#category ul li input:checked');
     const prepare = [];

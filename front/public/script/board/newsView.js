@@ -9,7 +9,8 @@ async function init() {
     const response1 = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
     const { user } = response1.data.result;
     const user_nickname = user.user_nickname;
-    console.log(user)
+    const admin = user.user_id
+
 
     const [, , , , idx] = location.pathname.split('/');
     console.log(idx)
@@ -20,12 +21,17 @@ async function init() {
     const content = document.querySelector('#bContent');
     const hit = document.querySelector('#hit');
 
-    const upElement = document.querySelector('#update');
-    const aElement = document.createElement('a');
-    aElement.href = `/board/news/update/` + `${idx}`;
-    aElement.innerHTML = 'Edit';
-    upElement.appendChild(aElement);
-
+    if( admin !== 'admin@gmail.com'){
+        const deleteBtn = document.querySelector('#deleteFrm')
+        deleteBtn.innerHTML = ""
+    }else{
+        const upElement = document.querySelector('#update');
+        const aElement = document.createElement('a');
+        aElement.href = `/board/news/update/` + `${idx}`;
+        aElement.innerHTML = 'Edit';
+        upElement.appendChild(aElement);
+    }
+    
     const response = await axios.post(`/view/${idx}`, {
         withCredentials: true,
     });
