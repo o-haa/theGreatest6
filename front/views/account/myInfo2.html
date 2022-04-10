@@ -56,7 +56,7 @@
 
                 <div class="inputBox">
                     <span class="requiredBox">
-                        <h1 style="font-family: 'korFontBold' !important;"> My page </h1>
+                        <h1> My page </h1>
                         <ul class="requiredInfo">
                             <li class="infoKey"> ID : </li>
                             <li id="userID" class="infoValue requiredValue"></li>
@@ -73,6 +73,8 @@
                             <li class="infoKey"> Level : </li>
                             <li id="userLv" class="infoValue requiredValue"></li>
                         </ul>
+                        <span class="announce"> * 추가 정보를 입력하시면 더욱 편리한 티켓배송 서비스를 제공드릴 수 있습니다.</span>
+                        <span class="announce1"> * 더욱 편한 서비스를 원하시면 오른쪽 빈 공란을 클릭해주세요.</span>
                         <template id="prevent">
                             <div id="insertInfo">
                                 <li>
@@ -82,8 +84,9 @@
                             </div>
                         </template>
                     </span>
-
+                    
                     <div id="tableBox">
+                        <h1> Add Info </h1>
                         <template id="optionalOn">
                             <span class="optionalBox">
                                 <ul class="optionalInfo">
@@ -179,7 +182,16 @@
 
             </div>
         </div>
-        {% include "footer.html" %}
+        <div id="footer">
+            <div id="leftFooter">
+                <p>서울특별시 강동구 천호대로 995 금복빌딩 3,4층</p>
+                <p>copyrightⓒ2022 Art6. All rights Reserved.</p>
+            </div>
+            <div id="rightFooter">
+                <p>Captain <span>Jihyun Kim</span> Crew <span>Hyunjin Lee  Haeun Oh</span></p>
+                <p>GitHub <a href="https://github.com/yellow-w/theGreatest6"> theGreatest6</span></p>
+            </div>
+        </div>
     </div>
 </body>
 

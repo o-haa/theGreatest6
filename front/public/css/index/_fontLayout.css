@@ -62,7 +62,7 @@ body{
 같은 계열 폰트끼리 묶어놨습니다!
 */
 @font-face {
-    font-family: '';
+    font-family: 'N';
     src: url('../../font/NanumSquare_acL.ttf') format('truetype');
 }
 @font-face {
