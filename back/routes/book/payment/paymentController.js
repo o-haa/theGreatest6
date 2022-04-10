@@ -24,8 +24,10 @@ exports.getFullBankInfo = async (req,res) => {
 
 //선택 결제 수단 불러오기
 exports.getBankInfo = async (req,res) => {
+    const { bankIdx } = req.params
+    const prepare = [ bankIdx ]
     try{
-        const [result] = await pool.execute(sql.getBankInfo);
+        const [[ result ]] = await pool.execute(sql.getBankInfo,prepare);
         response = {
             ...response,
             result,
@@ -64,8 +66,8 @@ exports.getPersonalInfo = async(req,res) => {
     const { userIdx } = req.body;
     const prepare = [ userIdx ];
     try{
-        const [[ result ]] = await pool.execute(sql.getPersonalInfo, prepare);
-        if(result==false) throw new Error('/정보 미등록');
+        const [ result ] = await pool.execute(sql.getPersonalInfo, prepare);
+        if(result.user_idx==null) throw new Error('/정보 미등록');
         response = {
             ...response,
             result: {
@@ -101,14 +103,13 @@ exports.getSpecificSeat = async (req,res) => {
 
 exports.getSpecificSeatFromIdx = async (req,res) =>{
     try{
-        const seatIdx = req.params
+        const { seatIdx } = req.params
         const prepare = [ seatIdx ]
         const [[ result ]] = await pool.execute(sql.getSpecificSeatFromIdx,prepare)
         response = {
             result,
             errno:0
         }
-        console.log(response)
     } catch (e) {
         console.log(e.message)
     }
