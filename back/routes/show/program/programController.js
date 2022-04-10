@@ -49,47 +49,47 @@ exports.showWrite = async (req, res) => {
 
         const prespareShow = [title, categoryIdx, xratedIdx, showCompany, showDirector, timestampTicket, showContent]
 
-        try {
-            //쇼 필수 정보 삽입
-            const [resultShow] = await pool.execute(sql.showWrite, prespareShow)
-            let insertShowId = resultShow.insertId
+        // try {
+        //     //쇼 필수 정보 삽입
+        //     const [resultShow] = await pool.execute(sql.showWrite, prespareShow)
+        //     let insertShowId = resultShow.insertId
 
-            //쇼 옵션 정보 삽입
-            const prespareOption = [insertShowId, timestampShow, place, showCast1, showCast2]
-            const [resultOption] = await pool.execute(sql.showOption, prespareOption)
-            let insertOptionId = resultOption.insertId
+        //     //쇼 옵션 정보 삽입
+        //     const prespareOption = [insertShowId, timestampShow, place, showCast1, showCast2]
+        //     const [resultOption] = await pool.execute(sql.showOption, prespareOption)
+        //     let insertOptionId = resultOption.insertId
 
-            const fileOriginalname = req.file.originalname;
-            const fileStoredname = req.file.filename;
-            const fileSize = req.file.size;
-            const fileDate = new Date();
-            const fileDltF = '0'; //이건 무슨 값이지
-            const fileSql = `INSERT INTO s_file (
-                                            show_idx,
-                                            file_originalname,
-                                            file_storedname,
-                                            file_size,
-                                            file_date,
-                                            file_dlt_flag
-                                            )
-                                    VALUES(?,?,?,?,?,?)`;
-            const filePrepare = [insertShowId, fileOriginalname, fileStoredname, fileSize, fileDate, fileDltF];
+        //     const fileOriginalname = req.file.originalname;
+        //     const fileStoredname = req.file.filename;
+        //     const fileSize = req.file.size;
+        //     const fileDate = new Date();
+        //     const fileDltF = '0'; //이건 무슨 값이지
+        //     const fileSql = `INSERT INTO s_file (
+        //                                     show_idx,
+        //                                     file_originalname,
+        //                                     file_storedname,
+        //                                     file_size,
+        //                                     file_date,
+        //                                     file_dlt_flag
+        //                                     )
+        //                             VALUES(?,?,?,?,?,?)`;
+        //     const filePrepare = [insertShowId, fileOriginalname, fileStoredname, fileSize, fileDate, fileDltF];
 
-            if (req.file.size > 0) {
-                const [resultFile] = await pool.execute(fileSql, filePrepare);
+        //     if (req.file.size > 0) {
+        //         const [resultFile] = await pool.execute(fileSql, filePrepare);
 
-                response = {
-                    result: {
-                        insertShowId,
-                        insertOptionId
-                    },
-                    errno: 0
-                }
-            }
-            res.json(response)
-        } catch (e) {
-            console.log('/showwrite', e)
-        }
+        //         response = {
+        //             result: {
+        //                 insertShowId,
+        //                 insertOptionId
+        //             },
+        //             errno: 0
+        //         }
+        //     }
+        //     res.json(response)
+        // } catch (e) {
+        //     console.log('/showwrite', e)
+        // }
     }
 
 exports.showList = async (req, res) => {

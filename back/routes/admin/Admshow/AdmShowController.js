@@ -17,9 +17,12 @@ exports.showMgt = (req,res) =>{
 exports.categoryAdd = async (req,res)=>{
     const add = req.body
     console.log('back add : ',add.result)
+
     let prepare = [add.result]
     let sql = `INSERT INTO s_category(show_category) VALUES(?)`
+
     const [result] = await pool.execute(sql,prepare)
+    
     console.log('결과 : ',result)
     res.json(result)
 }

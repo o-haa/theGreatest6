@@ -110,8 +110,10 @@ async function init() {
             const catName = clone.querySelector('.catName')
             catName.innerHTML = newCat.value
             result = newCat.value
+
             option ={result}
             const responseAdd = await axios.post('/categoryadd',option)
+            
             ul.appendChild(clone)
             newCat.innerHTML=''
             catName.setAttribute("value",`${responseAdd.data.insertId}`)
