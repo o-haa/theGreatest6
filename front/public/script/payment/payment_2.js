@@ -1,4 +1,5 @@
 let [, , , , seatIdx, showIdx, bankIdx, pointOut] = location.pathname.split('/')
+let user;
 
 document.addEventListener('DOMContentLoaded', init);
 
@@ -8,7 +9,11 @@ async function init() {
     axios.defaults.withCredentials = true;
 
     const userInfo = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
-    const { user } = userInfo.data.result;
+    user = userInfo.data.result.user;
+    userIdx= user.user_idx;
+
+    //예매 버튼
+    const book = document.querySelector('#book')
 
     // 예매 정보 1 관련 변수
     const bookNumber = document.querySelector('#bookNumber')
@@ -18,7 +23,8 @@ async function init() {
     const bookSeat = document.querySelector('#bookSeat')
 
     //예매 번호
-    bookNumber.innerHTML = `T${Date.now()}`
+    const bookNum = `T${Date.now()}`
+    bookNumber.innerHTML = bookNum
 
     //예매정보 1 - 공연 정보
     try {
@@ -39,20 +45,20 @@ async function init() {
     const mobile = document.querySelector('#mobile')
 
     const data = {
-        userIdx: user.user_idx
+        userIdx
     };
     try {
         const userPersonallInfo = await axios.post('http://localhost:4001/book/payment/getpersonalinfo', data);
         if (userPersonallInfo.data.errno === 1) throw new Error('선택 정보 미입력');
         const userInfo = userPersonallInfo.data.result
-        console.log(userInfo.u_mobile)
+        console.log(userPersonallInfo.data)
         customer.innerHTML = userInfo.u_name
         mobile.innerHTML = userInfo.u_mobile
 
     } catch (e) {
         console.log('/getpersonalinfo', e.message)
         alert('선택 정보를 입력해주세요')
-        location.href ='/account/management/myinfo'
+        // location.href ='/account/management/myinfo'
     }
 
     //좌석 및 가격 정보
@@ -75,6 +81,28 @@ async function init() {
     getDeadLine()
     getbankInfo()
 
+
+    book.addEventListener('click',bookHandler)
+
+    //예매 db
+    async function bookHandler(){
+        const data = {
+            seatIdx,
+            showIdx,
+            userIdx,
+            bookNum,
+        }
+        console.log(data)
+        try{
+            const inserBookInfo = await axios.post('/insertbookinfo',data)
+            console.log(inserBookInfo.data)
+        } catch (e) {
+            console.log('/payment_2 insertbookinfo',e.message)
+        }
+
+    }
+
+
 }
 
 
@@ -93,7 +121,6 @@ const getDeadLine = _ => {
 async function getbankInfo() {
     try {
         const bankInfo = await axios.post(`/getBankInfo/${bankIdx}`)
-        console.log(bankInfo.data)
         const account = bankInfo.data.result.bank_account;
         const number = bankInfo.data.result.bank_number;
         bankAccount.innerHTML = `${account}: ${number}`

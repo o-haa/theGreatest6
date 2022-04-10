@@ -1,13 +1,13 @@
 const pool = require('../../../db');
 const sql = require('../../../SQL/queries.js');
-let response = {
-    result: {},
-    errno: 1
-};
 
 
 //결제 수단 정보 불러오기
 exports.getFullBankInfo = async (req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     try{
         const [result] = await pool.execute(sql.getFullBankInfo);
         response = {
@@ -24,6 +24,10 @@ exports.getFullBankInfo = async (req,res) => {
 
 //선택 결제 수단 불러오기
 exports.getBankInfo = async (req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { bankIdx } = req.params
     const prepare = [ bankIdx ]
     try{
@@ -42,6 +46,10 @@ exports.getBankInfo = async (req,res) => {
 
 
 exports.checkPoint = async(req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { userIdx } = req.body;
     const prepare = [ userIdx ];
     try{
@@ -63,6 +71,10 @@ exports.checkPoint = async(req,res) => {
 
 // 개인정보 조회
 exports.getPersonalInfo = async(req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { userIdx } = req.body;
     const prepare = [ userIdx ];
     try{
@@ -86,6 +98,10 @@ exports.getPersonalInfo = async(req,res) => {
 
 //포인트 사용하기
 exports.getSpecificSeat = async (req,res) => {
+    let response = {
+        result: {},
+        errno: 1
+    };
     const { rowIdx, numberIdx } = req.body;
     prepare = [ rowIdx, numberIdx ];
     try{
@@ -102,6 +118,10 @@ exports.getSpecificSeat = async (req,res) => {
 
 
 exports.getSpecificSeatFromIdx = async (req,res) =>{
+    let response = {
+        result: {},
+        errno: 1
+    };
     try{
         const { seatIdx } = req.params
         const prepare = [ seatIdx ]

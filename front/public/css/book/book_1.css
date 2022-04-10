@@ -84,10 +84,11 @@ body{
     padding-top: 5px;
     font-size: 20px;
     background: none;
+    bottom: 10px;
 }
 
 .msg{
-    padding: 3px;
+    /* padding: 3px; */
     display: none;
     color: brown;
     font-size: 15px;
