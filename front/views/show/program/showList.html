@@ -105,35 +105,36 @@
                 </div>
 
                 <!-- 리스트 테이블 시작 -->
-                <table class="listTable">
-                    <thead>
-                        <tr>
-                            <th>글번호</th>
-                            <th>분류</th>
-                            <th>제한</th>
-                            <th>제목</th>
-                            <th>작성자</th>
-                        </tr>
-                    </thead>
+                <div class="showListHeight">
+                    <table class="listTable">
+                        <thead>
+                            <tr>
+                                <th>글번호</th>
+                                <th>분류</th>
+                                <th>제한</th>
+                                <th>제목</th>
+                                <th>작성자</th>
+                            </tr>
+                        </thead>
+        
+                        <tbody>
+                        </tbody>
+                    </table>
     
-                    <tbody>
-                    </tbody>
-                </table>
-
-                <template id="showList_row">
-                    <tr>
-                        <td>{show_idx}</td>
-                        <td>{show_category_idx}</td>
-                        <td>{show_xrated}</td>
-                        <td>{show_title}</td>
-                        <td>관리자</td>
-                    </tr>
-                </template>
-
-                <div id="writeBtn">
-                    <a href='/show/program/showwrite'>글쓰기</a>
+                    <template id="showList_row">
+                        <tr>
+                            <td>{show_idx}</td>
+                            <td>{show_category_idx}</td>
+                            <td>{show_xrated}</td>
+                            <td>{show_title}</td>
+                            <td>관리자</td>
+                        </tr>
+                    </template>
+    
+                    <div id="writeBtn">
+                        <a href='/show/program/showwrite'>글쓰기</a>
+                    </div>
                 </div>
-               </script>
                {% include "footer.html" %}
             </div>
         </div>

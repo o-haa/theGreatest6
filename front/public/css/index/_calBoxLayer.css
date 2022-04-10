@@ -18,7 +18,8 @@
         같은 높이임.
     */
     padding: 23px 33px 33px 33px;
-    height: 1800px;
+    /* height: 1800px; */
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;

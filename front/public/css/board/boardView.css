@@ -4,7 +4,12 @@
 
 body{
     zoom:100%;
-    padding-bottom: 500px;
+    padding-bottom: 300px;
+}
+
+#newsbody{
+    zoom:100%;
+    padding-bottom:0;
 }
 
 
@@ -20,14 +25,14 @@ body{
     padding: 7px 14px;
     box-sizing: border-box;
     background: #f4d3aa;
-    font-size:18px;
+    font-size:25px;
     
 }
 
 table{
     width:80%;
     margin:0.5% auto;
-    /* font-size:18px; */
+    font-size:25px;
     border-spacing: 0 5px;
 }
 
@@ -47,6 +52,10 @@ th{
     padding:8px 14px;
     box-sizing: border-box;
     text-align: center;
+}
+
+.newsView{
+    height: 300px !important;
 }
 
 .newsViewTable{
@@ -74,12 +83,12 @@ th:nth-child(4){
 
 
 #eye {
-    width:18px;
-    height: 18px;
+    width:25px;
+    height: 25px;
 }
 
 #eye img{
-    width: 20px;
+    width: 25px;
     padding:1px;
     padding-top: 5px;
     box-sizing: border-box;
@@ -87,7 +96,7 @@ th:nth-child(4){
 }
 
 .newsEye img{
-    width: 20px;
+    width: 25px;
     padding:1px;
     padding-top: 5px;
     box-sizing: border-box;
@@ -100,7 +109,7 @@ th:nth-child(6){
 }
 
 .like {
-    font-size: 25px;
+    font-size: 28px;
 	-webkit-animation: like 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 	        animation: like 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
@@ -143,7 +152,7 @@ th:nth-child(6){
     font-size:17px;
     padding:7px 14px;
     box-sizing: border-box;
-    font-size:18px;
+    font-size:25px;
     border:dotted 1px #fff;
 }
 
@@ -152,7 +161,7 @@ th:nth-child(6){
     margin:3% auto 0 auto;
     height:200px;
     border-bottom:1px solid #eee;
-    font-size:18px;
+    font-size:25px;
 }
 
 #img{
@@ -177,7 +186,7 @@ th:nth-child(6){
 #button button a{
     padding: 7px 12px;
     color: #fff !important;
-    font-size: 16px;
+    font-size: 25px;
     border: 1px dotted #fff;
     background: #64cbe6;
     border-radius: 20px;
@@ -186,10 +195,15 @@ th:nth-child(6){
 .delete{
     padding: 7px 12px;
     color: #fff !important;
-    font-size: 16px;
+    font-size: 25px;
     border: 1px dotted #fff;
     background: #64cbe6;
     border-radius: 20px;
+}
+
+.newsButton{
+    padding-bottom: 5%;
+    box-sizing: border-box;
 }
 
 .newsButton button a{
@@ -202,15 +216,17 @@ th:nth-child(6){
 
 #commentBox {
     width:100%;
+    height: auto;
     margin: 0 auto;
     margin-top:2%;
     padding: 1%;
     box-sizing: border-box;
+    font-size: 25px;
 }
 
 #hello {
     width:40%;
-    font-size:16px;
+    font-size:25px;
     padding:0.3% 0;
     box-sizing: border-box;
     border-bottom: 1px solid #465d59;
@@ -220,7 +236,7 @@ th:nth-child(6){
 .commentSubmit {
     color: #465d59 !important;
     padding: 5px 10px;
-    font-size: 13px;
+    font-size: 20px;
     border-radius: 10px;
     box-sizing: border-box;
     text-align: end;
@@ -252,12 +268,13 @@ th:nth-child(6){
 
 .commentRow li:nth-child(2){
     margin-top:0.5%;
-    font-size: 14px;
+    font-size: 20px;
    
 }
 
 .commentID{
     color:#465d59;
+    font-size: 23px;
 }
 
 details{
@@ -265,16 +282,16 @@ details{
     height: 30px;
     margin:0 auto;
     margin-top: 2%;
-    padding-left: 1%;
-    box-sizing: border-box;
+    padding: 7px;
+    /* box-sizing: border-box; */
     background: #a8bebf;
     border-radius: 10px;
     
 }
 
 details summary{
-    line-height: 30px;
-    font-size:18px;
+    /* line-height: 30px; */
+    font-size:25px;
 }
 
 

@@ -63,9 +63,6 @@ exports.showUserImg = async (req,res) => {
 }
 
 exports.insertUserImg = async (req, res) => {
-    console.log(req.file)
-    console.log(req.body)
-
     const { originalname, filename, size, encoding, mimetype } = req.file
     const prepare = [originalname, filename, size]
     console.log(prepare)

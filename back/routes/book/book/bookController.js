@@ -25,15 +25,24 @@ exports.book_1 = async (req,res) => {
     res.json(response)
 }
 
-exports.InsertBookInfo = async (req,res) => {
-    const prepare = [ ]
-
-    try{
-        const [ result ] = await pool.execute( '/insertBookInfo', prepare)
-
+exports.insertBookInfo = async (req, res) => {
+    const { seatIdx, showIdx, userIdx, bookNum } = req.body;
+    const prepare = [seatIdx, showIdx, userIdx, bookNum];
+    console.log(prepare);
+    try {
+        const [result] = await pool.execute('/insertBookInfo', prepare);
+        response = {
+            ...response,
+            result: {
+                affectedRows: result.affectedRows,
+                inserId: result.insertId
+            },
+        };
+        console.log(result)
     } catch (e) {
-
+        console.log('/insertbookinfo ', e.message)
     }
+    res.json(response)
 }
 
 exports.seatInfo = async (req,res) => {
