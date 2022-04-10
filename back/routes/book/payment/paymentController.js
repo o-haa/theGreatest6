@@ -78,7 +78,7 @@ exports.getPersonalInfo = async(req,res) => {
     const { userIdx } = req.body;
     const prepare = [ userIdx ];
     try{
-        const [ result ] = await pool.execute(sql.getPersonalInfo, prepare);
+        const [[ result ]] = await pool.execute(sql.getPersonalInfo, prepare);
         if(result.user_idx==null) throw new Error('/정보 미등록');
         response = {
             ...response,
