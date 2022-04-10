@@ -1,8 +1,20 @@
 document.addEventListener('DOMContentLoaded', init)
+let user;
 
 async function init() {
     axios.defaults.baseURL = 'http://localhost:4001/show/program/';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.withCredentials = true;
+
+
+    //user_idx 가져오기 위해 사용
+    try{
+        const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
+        user = response.data.result.user;
+    } catch (e){
+        console.log('/showview getuserinfo',e.message)
+    }
+
 
     const img = document.querySelector('.img')
     const summaryTextBox = document.querySelector('.summaryTextBox')
@@ -36,10 +48,9 @@ async function init() {
 
     }
 
-    let [,,,,idx] = location.pathname.split('/')
-    console.log('show_idx : ',idx)
+    let [,,,,showIdx] = location.pathname.split('/')
     try{
-        const response = await axios.post(`showview/${idx}`)
+        const response = await axios.post(`showview/${showIdx}`)
         let showResult = response.data.result
         
         const thElements = document.querySelectorAll('.title')
@@ -101,8 +112,19 @@ async function init() {
         const bookBtn = document.querySelector('#book')
         bookBtn.addEventListener('click', bookBtnHandler)
 
-        async function bookBtnHandler(){
-            location.href=`/book/book/book_1/${idx}`
+        async function bookBtnHandler() {
+            const data = {
+                userIdx: user.user_idx
+            }
+            try {
+                const getPersonalInfo = await axios.post(`http://localhost:4001/account/management/myinfo`, data)
+                if(getPersonalInfo.data.errno == 1) throw new Error('유저 선택 정보 없음');
+                location.href = '/book/book/book_1'
+            } catch (e) {
+                alert('선택 정보를 입력 후 다시 시도해주세요')
+                location.href='/account/management/mybenefit'
+                console.log(e.message)
+            }
         }
 
 
@@ -123,11 +145,11 @@ async function init() {
         async function leftBtnHandler(){
             console.log('left')
             try{
-                if(idx==1||showResult===none) throw new Error('이전 값 없음')
-                idx = idx.replace(idx,String(parseInt(idx)-1))
-                location.href = `./${idx}`
+                if(showIdx==1||showResult===none) throw new Error('이전 값 없음')
+                showIdx = showIdx.replace(showIdx,String(parseInt(showIdx)-1))
+                location.href = `./${showIdx}`
             } catch(e){
-                console.log(idx)
+                console.log(showIdx)
                 alert("마지막 카드입니다.")
             }
         }
@@ -135,19 +157,18 @@ async function init() {
         async function rightBtnHandler(){
             try{
                 //한정된 카드 정할시 사용
-                // if(parseInt(idx)==4) throw new Error('다음 값 없음')
-                if(showResult===none||idx===none) throw new Error('다음 값 없음')
-                idx = idx.replace(idx,String(parseInt(idx)+1))
-                location.href = `./${idx}`
+                // if(parseInt(showIdx)==4) throw new Error('다음 값 없음')
+                if(showResult===none||showIdx===none) throw new Error('다음 값 없음')
+                showIdx = showIdx.replace(showIdx,String(parseInt(showIdx)+1))
+                location.href = `./${showIdx}`
             } catch(e){
-                console.log(idx)
                 alert("마지막 카드입니다.")
             }
         }
 
         async function modifyBtnHandler(){
             try{
-                location.href = `http://localhost:3001/show/program/showmodify/${idx}`
+                location.href = `http://localhost:3001/show/program/showmodify/${showIdx}`
             }
             catch(e){
                 console.log('/showmodify',e.message)
@@ -159,11 +180,11 @@ async function init() {
                 let deleteConfirm = confirm('정말 삭제하시겠습니까? 삭제 후 게시글은 다시 복구할 수 없습니다.')
                 if(deleteConfirm!==true) throw new Error('삭제 취소')
                 location.href = `http://localhost:3001/show/program/showlist`
-                const response = await axios.post(`showdelete/${idx}`)
+                const response = await axios.post(`showdelete/${showIdx}`)
             }
             catch(e){
                 console.log('게시글 삭제 취소')
-                location.href = `http://localhost:3001/show/program/showview/${idx}`
+                location.href = `http://localhost:3001/show/program/showview/${showIdx}`
             }
         }
 
