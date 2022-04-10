@@ -27,7 +27,7 @@ exports.getUserInfo = async (req,res) => {
 }
 
 exports.myInfo = (req, res) => {
-    res.render('./account/myInfo');
+    res.render('./account/myInfo2');
 }
 
 exports.myTicket = (req, res) => {
