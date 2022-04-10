@@ -150,8 +150,8 @@
 }
 
 h1{
-    margin-top: 60px;
-    margin-bottom: 60px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .inputBox{
@@ -208,18 +208,20 @@ h1{
 }
 #insertInfo > li > label{
     /* margin-top: 28px; */
-    width: 300px;
-    height: 160px;
+    width: 700px;
+    height: 600px;
     border-radius: 10px;
-    /* background: blue; */
+    bottom: -10px;
+    right: 0;
+    background: #fff;
     z-index: 100;
     display: inline-block;
-    
-
+    position: absolute;
 }
 
 #tableBox{
     /* padding: 10px 15px; */
+    margin-top: 150px;
     font-size: 30px;
     margin-bottom: 10px;
     box-sizing: border-box;
@@ -293,7 +295,10 @@ h1{
     background: #465D58;
     color: #fff;
 }
-
+.genderBox > span > input[type="radio"]:checked+label{
+    background: #465D58;
+    color: #fff;
+} 
 
 .mobileBox{
     display: flex; 
