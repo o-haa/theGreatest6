@@ -166,5 +166,5 @@ button{
 }
 
 .off{
-display: block;
+    display: none;
 }

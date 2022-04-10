@@ -59,24 +59,24 @@ exports.showWrite = async (req, res) => {
             const [resultOption] = await pool.execute(sql.showOption, prespareOption)
             let insertOptionId = resultOption.insertId
 
-            const fileOriginalname = req.file.originalname;
-            const fileStoredname = req.file.filename;
-            const fileSize = req.file.size;
-            const fileDate = new Date();
-            const fileDltF = '0'; //이건 무슨 값이지
-            const fileSql = `INSERT INTO s_file (
-                                            show_idx,
-                                            file_originalname,
-                                            file_storedname,
-                                            file_size,
-                                            file_date,
-                                            file_dlt_flag
-                                            )
-                                    VALUES(?,?,?,?,?,?)`;
-            const filePrepare = [insertShowId, fileOriginalname, fileStoredname, fileSize, fileDate, fileDltF];
+        //     const fileOriginalname = req.file.originalname;
+        //     const fileStoredname = req.file.filename;
+        //     const fileSize = req.file.size;
+        //     const fileDate = new Date();
+        //     const fileDltF = '0'; //이건 무슨 값이지
+        //     const fileSql = `INSERT INTO s_file (
+        //                                     show_idx,
+        //                                     file_originalname,
+        //                                     file_storedname,
+        //                                     file_size,
+        //                                     file_date,
+        //                                     file_dlt_flag
+        //                                     )
+        //                             VALUES(?,?,?,?,?,?)`;
+        //     const filePrepare = [insertShowId, fileOriginalname, fileStoredname, fileSize, fileDate, fileDltF];
 
-            if (req.file.size > 0) {
-                const [resultFile] = await pool.execute(fileSql, filePrepare);
+            // if (req.file.size > 0) {
+                // const [resultFile] = await pool.execute(fileSql, filePrepare);
 
                 response = {
                     result: {
@@ -85,7 +85,7 @@ exports.showWrite = async (req, res) => {
                     },
                     errno: 0
                 }
-            }
+            // }
             res.json(response)
         } catch (e) {
             console.log('/showwrite', e)
