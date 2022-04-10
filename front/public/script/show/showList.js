@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', init)
 
 async function init() {
 
-    // //관리자 레벨 2가 아닐경우 작성불가
+    //관리자 레벨 2가 아닐경우 작성불가
     // const resinfo = await axios.post('http://localhost:3001/account/management/getuserinfo',null)
     // const userinfo = resinfo.data.result.user
     // if(userinfo.user_level>2){

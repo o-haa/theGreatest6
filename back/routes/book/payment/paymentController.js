@@ -37,6 +37,8 @@ exports.getBankInfo = async (req,res) => {
     res.json(response);
 }
 
+
+
 exports.checkPoint = async(req,res) => {
     const { userIdx } = req.body;
     const prepare = [ userIdx ];
@@ -81,15 +83,34 @@ exports.getPersonalInfo = async(req,res) => {
 
 
 //포인트 사용하기
-exports.usePoint = (req,res) => {
+exports.getSpecificSeat = async (req,res) => {
+    const { rowIdx, numberIdx } = req.body;
+    prepare = [ rowIdx, numberIdx ];
     try{
-        // const result =
-
+        const [[ result ]] = await pool.execute(sql.getSpecificSeat, prepare);
         response = {
-            result: {},
-            errno: 1
+            result,
+            errno: 0
         };
     } catch (e) {
-
+        console.log('/getspecificseat',e.message);
     }
+    res.json(response);
+}
+
+
+exports.getSpecificSeatFromIdx = async (req,res) =>{
+    try{
+        const seatIdx = req.params
+        const prepare = [ seatIdx ]
+        const [[ result ]] = await pool.execute(sql.getSpecificSeatFromIdx,prepare)
+        response = {
+            result,
+            errno:0
+        }
+        console.log(response)
+    } catch (e) {
+        console.log(e.message)
+    }
+    res.json(response)
 }

@@ -11,39 +11,10 @@ async function init() {
     //템플릿
     const maincal = document.querySelector('#maincal');
     const tableBox = document.querySelector('#tableBox');
-    const requiredOn = document.querySelector('#requiredOn');  //필수 정보
     const whiteBlock = document.querySelector('#prevent');   //블로킹
     const userOptionFrm = document.querySelector('#optionalOff');    //유저 선택 정보 없는 경우
     const optionalBox = document.querySelector('#optionalOn');  //유저 선택 정보 있는 경우
 
-    // const userImgFrm = document.querySelector('#userImgFrm')
-    // userImgFrm.addEventListener('submit',userImgSubmitHandler)
-    // const imgBox = document.querySelector('#imgBox')
-    // const imgElement = document.createElement('img')
-    // imgElement.src = 'http://localhost:4001/uploads/u_uploads/IMG_0928_1649388930111.JPG'
-    // imgBox.appendChild(imgElement)
-
-
-    async function userImgSubmitHandler(e) {
-        e.preventDefault();
-        
-        const userImg = document.querySelector('#userImg')
-        let formData = new FormData(userImgFrm);
-        formData.append('upload',userImg)
-        
-        const data = {
-            userIdx: user.user_idx,
-            formData
-        }
-
-        try {
-            const insertImg = await axios.post( '/insertUserImg', data )
-        }
-        catch (e) {
-            console.log('/myinfo userImg',e.message)
-        }
-    }
-    
 
 
     const checked = document.querySelectorAll('#itemBox input');
@@ -73,11 +44,8 @@ async function init() {
     }
 
 
-    // const tableBox = document.querySelector('#tableBox')
-    // const requiredOn = document.querySelector('#requiredOn')
-    const requiredClone = document.importNode(requiredOn.content, true);
-    const requiredInfo = requiredClone.querySelectorAll('.infoValue');
-    tableBox.appendChild(requiredClone);
+
+    const requiredInfo = document.querySelectorAll('.infoValue');
     try {
         //유저 필수 정보 렌더하기 위해 가져오기 ok
         const response = await axios.post('http://localhost:3001/account/management/getuserinfo', null);
